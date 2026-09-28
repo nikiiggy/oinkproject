@@ -558,7 +558,7 @@
         .faq-title-static i { color: var(--card-cyan); font-size: 0.85rem; }
         .faq-desc-static { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
 
-        /* Testimonials */
+        /* TESTIMONIALS STYLES BARU */
         .testi-card {
             background: #ffffff;
             border: 1px solid #efe8e1;
@@ -571,12 +571,37 @@
 
         .testi-card:hover { border-color: var(--card-cyan); transform: translateY(-2px); }
         .testi-user-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-        .testi-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--card-yellow); }
         .testi-user-info { flex: 1; }
         .testi-name { font-size: 0.85rem; font-weight: 800; color: var(--text-main); }
         .testi-stars { color: #f59e0b; font-size: 0.72rem; }
-        .testi-text { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 8px; }
-        .testi-badge-proof { font-size: 0.72rem; font-weight: 800; color: var(--card-cyan); }
+        .testi-text { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px; }
+
+        /* Tata letak tombol & foto sebelah kanan */
+        .testi-bottom-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .testi-badge-proof {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--card-cyan);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .testi-thumb-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+            background: #f1f5f9;
+            flex-shrink: 0;
+        }
 
         /* MODAL CAROUSEL / SLIDER STYLES */
         .modal-overlay {
@@ -926,7 +951,12 @@
                     </div>
                     <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;">Klik ulasan di bawah untuk melihat bukti tangkapan layar chat asli!</p>
                     
-                    <div id="testimonialsContainer"></div>
+                    <div id="testimonialsContainer">
+                        <div class="loading-msg">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 8px; display: block; color: var(--card-cyan);"></i>
+                            Memuat testimoni...
+                        </div>
+                    </div>
                 </article>
 
                 <article class="section-card">
@@ -1002,9 +1032,11 @@
         // GOOGLE SHEETS CSV URLS
         const SERVICES_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSlsGyu7iUeP92Q1NlLV_Qfa0lIcY-mljREp7wX4RiiBv0b4umDY76YEy1kQ_zwldfWTWJucnJfRyR/pub?gid=1684071153&single=true&output=csv';
         const PORTFOLIO_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSlsGyu7iUeP92Q1NlLV_Qfa0lIcY-mljREp7wX4RiiBv0b4umDY76YEy1kQ_zwldfWTWJucnJfRyR/pub?gid=1276446965&single=true&output=csv';
+        const TESTIMONIAL_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSlsGyu7iUeP92Q1NlLV_Qfa0lIcY-mljREp7wX4RiiBv0b4umDY76YEy1kQ_zwldfWTWJucnJfRyR/pub?gid=824196110&single=true&output=csv';
 
         let fetchedServicesData = [];
         let fetchedPortfolioData = [];
+        let fetchedTestimonialData = [];
         let currentSlideIndex = 0;
         let totalSlidesCount = 0;
 
@@ -1014,12 +1046,9 @@
         function formatRupiah(val) {
             if (!val) return '-';
             let strVal = val.toString().trim();
-            
-            // Hapus karakter selain angka
             let cleanNumber = strVal.replace(/[^0-9]/g, '');
-            if (!cleanNumber) return strVal; // Kembalikan teks asli jika bukan angka penuh
+            if (!cleanNumber) return strVal;
 
-            // Beri titik per 3 digit
             let formatted = cleanNumber.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
             return 'Rp ' + formatted;
         }
@@ -1083,11 +1112,11 @@
                     obj[header] = values[index] || '';
                 });
                 return obj;
-            }).filter(item => item !== null && (item.nama || item.kategori));
+            }).filter(item => item !== null && (item.nama || item.kategori || item.testimoni || item.teks));
         }
 
         /* ==========================================================================
-           4. SERVICES TAB INTEGRATION (POSTINGAN BARU DI ATAS + FORMAT RUPIAH)
+           4. SERVICES TAB INTEGRATION
            ========================================================================== */
         async function fetchServicesFromGoogleSheets() {
             const container = document.getElementById('servicesGalleryContainer');
@@ -1126,7 +1155,6 @@
                 const thumbImgRaw = srv.foto1 || srv.foto2 || '';
                 const thumbImage = convertGoogleDriveUrl(thumbImgRaw) || 'https://picsum.photos/500/500';
                 
-                // Format Harga & Estimasi
                 const formattedPrice = srv.harga ? formatRupiah(srv.harga) : null;
 
                 card.innerHTML = `
@@ -1171,9 +1199,16 @@
 
             const formattedPrice = srv.harga ? formatRupiah(srv.harga) : '-';
 
-            document.getElementById('modalCategory').innerText = 'Katalog Layanan';
+            const catBadge = document.getElementById('modalCategory');
+            catBadge.style.display = 'inline-block';
+            catBadge.innerText = 'Katalog Layanan';
+
             document.getElementById('modalTitle').innerText = srv.nama;
-            document.getElementById('modalSubtitle').innerText = `Harga mulai: ${formattedPrice} | Estimasi pengerjaan: ${srv.estimasi || '-'}`;
+            
+            const subtitle = document.getElementById('modalSubtitle');
+            subtitle.style.display = 'block';
+            subtitle.innerText = `Harga mulai: ${formattedPrice} | Estimasi pengerjaan: ${srv.estimasi || '-'}`;
+
             document.getElementById('modalBody').innerText = srv.deskripsi || '';
 
             const waBtn = document.getElementById('modalWaBtn');
@@ -1275,9 +1310,16 @@
 
             setupModalSlider(images, item.nama);
 
-            document.getElementById('modalCategory').innerText = item.kategori || 'Portofolio';
+            const catBadge = document.getElementById('modalCategory');
+            catBadge.style.display = 'inline-block';
+            catBadge.innerText = item.kategori || 'Portofolio';
+
             document.getElementById('modalTitle').innerText = item.nama;
-            document.getElementById('modalSubtitle').innerText = 'Hasil Karya Pengerjaan';
+            
+            const subtitle = document.getElementById('modalSubtitle');
+            subtitle.style.display = 'block';
+            subtitle.innerText = 'Hasil Karya Pengerjaan';
+
             document.getElementById('modalBody').innerText = `Sampel karya ${item.nama} oleh tim Oink Project. Hasil pengerjaan cepat, rapi, dan transparan.`;
 
             const waBtn = document.getElementById('modalWaBtn');
@@ -1288,7 +1330,87 @@
         }
 
         /* ==========================================================================
-           6. MODAL CAROUSEL / SLIDER LOGIC
+           6. GOOGLE SHEETS TESTIMONIALS INTEGRATION
+           ========================================================================== */
+        async function fetchTestimonialsFromGoogleSheets() {
+            const container = document.getElementById('testimonialsContainer');
+            try {
+                const response = await fetch(TESTIMONIAL_SHEET_URL);
+                const csvText = await response.text();
+
+                fetchedTestimonialData = parseCSV(csvText).reverse();
+
+                if (fetchedTestimonialData.length === 0) {
+                    container.innerHTML = '<div class="no-results-msg">Belum ada testimoni.</div>';
+                    return;
+                }
+
+                renderTestimonials(fetchedTestimonialData);
+            } catch (error) {
+                console.error('Error fetching Testimonials:', error);
+                container.innerHTML = '<div class="no-results-msg"><i class="fas fa-exclamation-triangle" style="font-size: 1.5rem; margin-bottom: 6px; display: block; color: var(--card-coral);"></i>Gagal memuat testimoni dari Google Sheets.</div>';
+            }
+        }
+
+        function renderTestimonials(items) {
+            const container = document.getElementById('testimonialsContainer');
+            container.innerHTML = '';
+
+            items.forEach(t => {
+                const card = document.createElement('div');
+                card.className = 'testi-card';
+                
+                const clientName = t.nama || 'Klien Oink Project';
+                const clientText = t.testimoni || t.teks || 'Layanan memuaskan dan pengerjaan tepat waktu!';
+                const rawImg = t.foto1 || t.foto || '';
+                const proofImg = convertGoogleDriveUrl(rawImg) || 'https://picsum.photos/500/500';
+
+                card.onclick = () => openTestimonialModal({
+                    name: clientName,
+                    text: clientText,
+                    img: proofImg
+                });
+
+                card.innerHTML = `
+                    <div class="testi-user-row">
+                        <div class="testi-user-info">
+                            <div class="testi-name">${clientName}</div>
+                            <div class="testi-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testi-text">"${clientText}"</p>
+                    <div class="testi-bottom-row">
+                        <span class="testi-badge-proof">
+                            <i class="fas fa-receipt"></i> Lihat Bukti Chat WA <i class="fas fa-chevron-right"></i>
+                        </span>
+                        <img src="${proofImg}" alt="Bukti ${clientName}" class="testi-thumb-img" onerror="this.src='https://picsum.photos/500/500'">
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function openTestimonialModal(data) {
+            setupModalSlider([data.img], data.name);
+
+            // Sembunyikan kategori & subtitle khusus testimoni
+            document.getElementById('modalCategory').style.display = 'none';
+            document.getElementById('modalSubtitle').style.display = 'none';
+
+            document.getElementById('modalTitle').innerText = data.name;
+            document.getElementById('modalBody').innerText = data.text;
+
+            const waBtn = document.getElementById('modalWaBtn');
+            const waMsg = encodeURIComponent(`Halo Admin Oink Project, saya mau order tugas juga seperti testimoni dari Kak ${data.name}`);
+            waBtn.href = `https://wa.me/6285155091238?text=${waMsg}`;
+
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        /* ==========================================================================
+           7. MODAL CAROUSEL / SLIDER LOGIC
            ========================================================================== */
         function setupModalSlider(imagesArray, title) {
             const track = document.getElementById('modalSliderTrack');
@@ -1351,56 +1473,6 @@
             const dots = document.querySelectorAll('.slider-dots .dot');
             dots.forEach((dot, idx) => {
                 dot.classList.toggle('active', idx === currentSlideIndex);
-            });
-        }
-
-        /* ==========================================================================
-           7. STATIC TESTIMONIALS DATA
-           ========================================================================== */
-        const testimonialData = [
-            {
-                name: 'Mawar (Nama Samaran)',
-                avatar: 'https://picsum.photos/id/64/150/150',
-                text: '"Aku ga perlu repot kerjain, dan dapet nilai bagus"',
-                proofImg: 'https://i.ibb.co.com/7J6T6GxY/testimoni-01.webp',
-                waText: 'Halo%20Admin%20Oink%20Project,%20saya%20mau%20order%20tugas%20koding%20juga'
-            },
-            {
-                name: 'Mawar (Nama Samaran)',
-                avatar: 'https://picsum.photos/id/64/150/150',
-                text: '"Aku ga perlu repot kerjain, dan dapet nilai bagus"',
-                proofImg: 'https://i.ibb.co.com/HfCjXWfM/testimoni-02.webp',
-                waText: 'Halo%20Admin%20Oink%20Project,%20saya%20mau%20order%20tugas%20koding%20juga'
-            }
-        ];
-
-        function renderTestimonials() {
-            const container = document.getElementById('testimonialsContainer');
-            container.innerHTML = '';
-            testimonialData.forEach(t => {
-                const card = document.createElement('div');
-                card.className = 'testi-card';
-                card.onclick = () => openModalCustom({
-                    category: 'Bukti Chat WhatsApp',
-                    title: `Bukti Chat: ${t.name}`,
-                    subtitle: 'Testimoni Pengerjaan',
-                    images: [t.proofImg],
-                    body: `Tangkapan layar kepuasan dari ${t.name}.`,
-                    waText: t.waText
-                });
-
-                card.innerHTML = `
-                    <div class="testi-user-row">
-                        <img src="${t.avatar}" alt="${t.name}" class="testi-avatar">
-                        <div class="testi-user-info">
-                            <div class="testi-name">${t.name}</div>
-                            <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        </div>
-                    </div>
-                    <p class="testi-text">${t.text}</p>
-                    <span class="testi-badge-proof"><i class="fas fa-receipt"></i> Lihat Bukti Chat WA <i class="fas fa-chevron-right"></i></span>
-                `;
-                container.appendChild(card);
             });
         }
 
@@ -1508,20 +1580,6 @@
         /* ==========================================================================
            9. COMMON APP LOGIC
            ========================================================================== */
-        function openModalCustom(data) {
-            setupModalSlider(data.images || [], data.title);
-
-            document.getElementById('modalCategory').innerText = data.category;
-            document.getElementById('modalTitle').innerText = data.title;
-            document.getElementById('modalSubtitle').innerText = data.subtitle;
-            document.getElementById('modalBody').innerText = data.body;
-
-            const waBtn = document.getElementById('modalWaBtn');
-            waBtn.href = `https://wa.me/6285155091238?text=${data.waText}`;
-
-            document.getElementById('modalOverlay').classList.add('active');
-        }
-
         function closeModal() {
             document.getElementById('modalOverlay').classList.remove('active');
         }
@@ -1553,7 +1611,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             fetchServicesFromGoogleSheets();
             fetchPortfolioFromGoogleSheets();
-            renderTestimonials();
+            fetchTestimonialsFromGoogleSheets();
             renderDualLineChart();
         });
     </script>
