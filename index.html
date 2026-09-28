@@ -222,7 +222,7 @@
             color: var(--text-main);
         }
 
-        /* Profile Banner Card (Background Gambar & Rata Kiri) */
+        /* Profile Banner Card */
         .profile-card {
             background: linear-gradient(135deg, rgba(5, 187, 192, 0.85), rgba(17, 24, 39, 0.75)), 
                         url('https://i.ibb.co.com/g1pGhgk/FASILITAS-TOKO-01-21.webp') center/cover no-repeat;
@@ -558,49 +558,55 @@
         .faq-title-static i { color: var(--card-cyan); font-size: 0.85rem; }
         .faq-desc-static { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
 
-        /* TESTIMONIALS STYLES BARU */
+        /* TESTIMONIALS STYLES BARU (FOTO 1:1 DI KANAN FULL) */
         .testi-card {
             background: #ffffff;
             border: 1px solid #efe8e1;
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius-md);
             padding: 14px;
             margin-bottom: 12px;
             cursor: pointer;
             transition: var(--transition);
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            gap: 12px;
+            overflow: hidden;
         }
 
         .testi-card:hover { border-color: var(--card-cyan); transform: translateY(-2px); }
-        .testi-user-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-        .testi-user-info { flex: 1; }
-        .testi-name { font-size: 0.85rem; font-weight: 800; color: var(--text-main); }
-        .testi-stars { color: #f59e0b; font-size: 0.72rem; }
-        .testi-text { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px; }
 
-        /* Tata letak tombol & foto sebelah kanan */
-        .testi-bottom-row {
+        .testi-content-left {
+            flex: 1;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: space-between;
-            gap: 10px;
         }
+
+        .testi-name { font-size: 0.88rem; font-weight: 800; color: var(--text-main); margin-bottom: 2px; }
+        .testi-stars { color: #f59e0b; font-size: 0.72rem; margin-bottom: 6px; }
+        .testi-text { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px; }
 
         .testi-badge-proof {
             font-size: 0.72rem;
             font-weight: 800;
             color: var(--card-cyan);
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 6px;
         }
 
+        /* Foto Testimoni Rasio 1:1 Full di Sisi Kanan */
         .testi-thumb-img {
-            width: 42px;
-            height: 42px;
-            border-radius: 8px;
+            width: 84px;
+            height: 84px;
+            aspect-ratio: 1 / 1;
+            border-radius: var(--radius-sm);
             object-fit: cover;
             border: 1px solid var(--border-color);
             background: #f1f5f9;
             flex-shrink: 0;
+            align-self: center;
         }
 
         /* MODAL CAROUSEL / SLIDER STYLES */
@@ -807,7 +813,7 @@
         <main>
             <!-- 1. TAB UTAMA -->
             <section id="main-tab" class="tab-content active">
-                <!-- Profile Banner Card (Background Foto & Teks Rata Kiri) -->
+                <!-- Profile Banner Card -->
                 <article class="profile-card">
                     <div class="avatar-box">
                         <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Profile">
@@ -1027,7 +1033,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC, GOOGLE DRIVE CONVERTER, & CAROUSEL SLIDER -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
         // GOOGLE SHEETS CSV URLS
         const SERVICES_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSlsGyu7iUeP92Q1NlLV_Qfa0lIcY-mljREp7wX4RiiBv0b4umDY76YEy1kQ_zwldfWTWJucnJfRyR/pub?gid=1684071153&single=true&output=csv';
@@ -1041,7 +1047,7 @@
         let totalSlidesCount = 0;
 
         /* ==========================================================================
-           1. HELPER: FORMAT ANGKA MENJADI FORMAT RUPIAH (TITIK PER 3 DIGIT)
+           1. HELPER: FORMAT ANGKA MENJADI FORMAT RUPIAH
            ========================================================================== */
         function formatRupiah(val) {
             if (!val) return '-';
@@ -1061,10 +1067,12 @@
             url = url.trim();
             if (!url) return '';
 
+            // Jika hanya berisi ID Google Drive
             if (/^[a-zA-Z0-9_-]{25,50}$/.test(url)) {
                 return `https://lh3.googleusercontent.com/d/${url}`;
             }
 
+            // Ekstrak ID dari URL Google Drive penuh
             const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || 
                           url.match(/id=([a-zA-Z0-9_-]+)/) ||
                           url.match(/file\/d\/([a-zA-Z0-9_-]+)/);
@@ -1112,7 +1120,7 @@
                     obj[header] = values[index] || '';
                 });
                 return obj;
-            }).filter(item => item !== null && (item.nama || item.kategori || item.testimoni || item.teks));
+            }).filter(item => item !== null && (item.nama || item.kategori || item.testimoni || item.teks || item.foto1));
         }
 
         /* ==========================================================================
@@ -1153,12 +1161,12 @@
                 card.onclick = () => openServiceModal(srv);
 
                 const thumbImgRaw = srv.foto1 || srv.foto2 || '';
-                const thumbImage = convertGoogleDriveUrl(thumbImgRaw) || 'https://picsum.photos/500/500';
+                const thumbImage = convertGoogleDriveUrl(thumbImgRaw);
                 
                 const formattedPrice = srv.harga ? formatRupiah(srv.harga) : null;
 
                 card.innerHTML = `
-                    <img src="${thumbImage}" alt="${srv.nama}" class="service-gallery-img" loading="lazy" onerror="this.src='https://picsum.photos/500/500'">
+                    ${thumbImage ? `<img src="${thumbImage}" alt="${srv.nama}" class="service-gallery-img" loading="lazy">` : ''}
                     <div class="service-gallery-info">
                         <h3 class="service-gallery-title">${srv.nama}</h3>
                         <div class="pills-group">
@@ -1194,7 +1202,8 @@
             const images = [
                 convertGoogleDriveUrl(srv.foto1),
                 convertGoogleDriveUrl(srv.foto2)
-            ];
+            ].filter(Boolean);
+
             setupModalSlider(images, srv.nama);
 
             const formattedPrice = srv.harga ? formatRupiah(srv.harga) : '-';
@@ -1219,7 +1228,7 @@
         }
 
         /* ==========================================================================
-           5. PORTFOLIO TAB INTEGRATION
+           5. PORTFOLIO TAB INTEGRATION (TEKS BUTTON: Order Sekarang!)
            ========================================================================== */
         async function fetchPortfolioFromGoogleSheets() {
             const container = document.getElementById('portfolioGalleryContainer');
@@ -1285,15 +1294,15 @@
                 card.onclick = () => openPortfolioModal(item);
 
                 const rawThumb = item.foto1 || item.foto2 || item.foto3 || '';
-                const thumbImg = convertGoogleDriveUrl(rawThumb) || 'https://picsum.photos/500/500';
+                const thumbImg = convertGoogleDriveUrl(rawThumb);
 
                 card.innerHTML = `
-                    <img src="${thumbImg}" alt="${item.nama}" class="gallery-img" loading="lazy" onerror="this.src='https://picsum.photos/500/500'">
+                    ${thumbImg ? `<img src="${thumbImg}" alt="${item.nama}" class="gallery-img" loading="lazy">` : ''}
                     <div class="gallery-info">
-                        <span class="pill-tag pill-cat" style="align-self: flex-start;">${item.kategori || 'Portofolio'}</span>
+                        ${item.kategori ? `<span class="pill-tag pill-cat" style="align-self: flex-start;">${item.kategori}</span>` : ''}
                         <h3 class="gallery-title">${item.nama}</h3>
                         <button class="btn-gallery-cta">
-                            <i class="fab fa-whatsapp"></i> Order Mirip Ini
+                            <i class="fab fa-whatsapp"></i> Order Sekarang!
                         </button>
                     </div>
                 `;
@@ -1306,13 +1315,17 @@
                 convertGoogleDriveUrl(item.foto1),
                 convertGoogleDriveUrl(item.foto2),
                 convertGoogleDriveUrl(item.foto3)
-            ];
+            ].filter(Boolean);
 
             setupModalSlider(images, item.nama);
 
             const catBadge = document.getElementById('modalCategory');
-            catBadge.style.display = 'inline-block';
-            catBadge.innerText = item.kategori || 'Portofolio';
+            if (item.kategori) {
+                catBadge.style.display = 'inline-block';
+                catBadge.innerText = item.kategori;
+            } else {
+                catBadge.style.display = 'none';
+            }
 
             document.getElementById('modalTitle').innerText = item.nama;
             
@@ -1320,7 +1333,7 @@
             subtitle.style.display = 'block';
             subtitle.innerText = 'Hasil Karya Pengerjaan';
 
-            document.getElementById('modalBody').innerText = `Sampel karya ${item.nama} oleh tim Oink Project. Hasil pengerjaan cepat, rapi, dan transparan.`;
+            document.getElementById('modalBody').innerText = `Hasil karya ${item.nama} oleh tim Oink Project.`;
 
             const waBtn = document.getElementById('modalWaBtn');
             const waMsg = encodeURIComponent(`Halo Admin Oink Project, saya mau order karya seperti di portofolio: ${item.nama}`);
@@ -1330,7 +1343,7 @@
         }
 
         /* ==========================================================================
-           6. GOOGLE SHEETS TESTIMONIALS INTEGRATION
+           6. GOOGLE SHEETS TESTIMONIALS INTEGRATION (FOTO KANAN 1:1 FULL)
            ========================================================================== */
         async function fetchTestimonialsFromGoogleSheets() {
             const container = document.getElementById('testimonialsContainer');
@@ -1361,9 +1374,9 @@
                 card.className = 'testi-card';
                 
                 const clientName = t.nama || 'Klien Oink Project';
-                const clientText = t.testimoni || t.teks || 'Layanan memuaskan dan pengerjaan tepat waktu!';
+                const clientText = t.testimoni || t.teks || '';
                 const rawImg = t.foto1 || t.foto || '';
-                const proofImg = convertGoogleDriveUrl(rawImg) || 'https://picsum.photos/500/500';
+                const proofImg = convertGoogleDriveUrl(rawImg);
 
                 card.onclick = () => openTestimonialModal({
                     name: clientName,
@@ -1372,30 +1385,29 @@
                 });
 
                 card.innerHTML = `
-                    <div class="testi-user-row">
-                        <div class="testi-user-info">
+                    <div class="testi-content-left">
+                        <div>
                             <div class="testi-name">${clientName}</div>
                             <div class="testi-stars">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </div>
+                            <p class="testi-text">"${clientText}"</p>
                         </div>
-                    </div>
-                    <p class="testi-text">"${clientText}"</p>
-                    <div class="testi-bottom-row">
                         <span class="testi-badge-proof">
                             <i class="fas fa-receipt"></i> Lihat Bukti Chat WA <i class="fas fa-chevron-right"></i>
                         </span>
-                        <img src="${proofImg}" alt="Bukti ${clientName}" class="testi-thumb-img" onerror="this.src='https://picsum.photos/500/500'">
                     </div>
+                    ${proofImg ? `<img src="${proofImg}" alt="Bukti ${clientName}" class="testi-thumb-img">` : ''}
                 `;
                 container.appendChild(card);
             });
         }
 
         function openTestimonialModal(data) {
-            setupModalSlider([data.img], data.name);
+            const images = data.img ? [data.img] : [];
+            setupModalSlider(images, data.name);
 
-            // Sembunyikan kategori & subtitle khusus testimoni
+            // Sembunyikan kategori & subtitle khusus modal testimoni
             document.getElementById('modalCategory').style.display = 'none';
             document.getElementById('modalSubtitle').style.display = 'none';
 
@@ -1417,20 +1429,27 @@
             const dotsContainer = document.getElementById('sliderDots');
             const btnPrev = document.getElementById('sliderBtnPrev');
             const btnNext = document.getElementById('sliderBtnNext');
+            const sliderBox = document.getElementById('modalSliderContainer');
 
             track.innerHTML = '';
             dotsContainer.innerHTML = '';
             currentSlideIndex = 0;
 
             const validImages = imagesArray.filter(img => img && img.trim() !== '');
-            if (validImages.length === 0) validImages.push('https://picsum.photos/500/500');
+
+            if (validImages.length === 0) {
+                sliderBox.style.display = 'none';
+                return;
+            } else {
+                sliderBox.style.display = 'block';
+            }
 
             totalSlidesCount = validImages.length;
 
             validImages.forEach((imgUrl, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'slide-item';
-                slide.innerHTML = `<img src="${imgUrl}" alt="${title}" onerror="this.src='https://picsum.photos/500/500'">`;
+                slide.innerHTML = `<img src="${imgUrl}" alt="${title}">`;
                 track.appendChild(slide);
 
                 if (totalSlidesCount > 1) {
