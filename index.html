@@ -449,26 +449,22 @@
             line-height: 1.3;
         }
 
-        .pills-group { display: flex; flex-direction: column; gap: 4px; }
-        .pill-tag { font-size: 0.65rem; font-weight: 800; padding: 4px 8px; border-radius: 20px; display: inline-flex; align-items: center; gap: 4px; width: fit-content; }
-        .pill-price { background: #e6f8f8; color: var(--card-cyan); }
-        .pill-time { background: #fff3d6; color: #d97706; }
-        .pill-cat { background: #f1f5f9; color: var(--text-muted); border: 1px solid var(--border-color); }
-
         .btn-service-cta, .btn-gallery-cta {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
             width: 100%;
-            padding: 8px;
+            padding: 10px 8px;
             background: var(--card-cyan);
             color: #ffffff;
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             font-weight: 800;
             border-radius: var(--radius-sm);
             border: none;
             transition: var(--transition);
+            text-align: center;
+            line-height: 1.3;
         }
 
         .btn-gallery-cta { background: var(--wa-color); }
@@ -558,7 +554,7 @@
         .faq-title-static i { color: var(--card-cyan); font-size: 0.85rem; }
         .faq-desc-static { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
 
-        /* TESTIMONIALS STYLES BARU (FOTO 1:1 DI KANAN FULL) */
+        /* TESTIMONIALS STYLES (FOTO KANAN 1:1 FULL) */
         .testi-card {
             background: #ffffff;
             border: 1px solid #efe8e1;
@@ -596,7 +592,6 @@
             gap: 6px;
         }
 
-        /* Foto Testimoni Rasio 1:1 Full di Sisi Kanan */
         .testi-thumb-img {
             width: 84px;
             height: 84px;
@@ -953,7 +948,7 @@
             <section id="info-tab" class="tab-content">
                 <article class="section-card">
                     <div class="section-header">
-                        <h2>Apa Kata Customer?</h2>
+                        <h2>Apa Kata Klien?</h2>
                     </div>
                     <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;">Klik ulasan di bawah untuk melihat bukti tangkapan layar chat asli!</p>
                     
@@ -1047,45 +1042,53 @@
         let totalSlidesCount = 0;
 
         /* ==========================================================================
-           1. HELPER: FORMAT ANGKA MENJADI FORMAT RUPIAH
-           ========================================================================== */
-        function formatRupiah(val) {
-            if (!val) return '-';
-            let strVal = val.toString().trim();
-            let cleanNumber = strVal.replace(/[^0-9]/g, '');
-            if (!cleanNumber) return strVal;
-
-            let formatted = cleanNumber.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-            return 'Rp ' + formatted;
-        }
-
-        /* ==========================================================================
-           2. AUTOMATIC GOOGLE DRIVE TO DIRECT CDN LINK CONVERTER
+           1. AUTOMATIC GOOGLE DRIVE TO DIRECT CDN LINK CONVERTER
            ========================================================================== */
         function convertGoogleDriveUrl(url) {
             if (!url || typeof url !== 'string') return '';
             url = url.trim();
             if (!url) return '';
 
-            // Jika hanya berisi ID Google Drive
+            let fileId = '';
+
+            // Jika hanya berupa ID Google Drive murni
             if (/^[a-zA-Z0-9_-]{25,50}$/.test(url)) {
-                return `https://lh3.googleusercontent.com/d/${url}`;
+                fileId = url;
+            } else {
+                // Ekstrak ID dari URL Google Drive penuh (file/d/ID/view, open?id=ID, uc?id=ID, dll)
+                const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || 
+                              url.match(/id=([a-zA-Z0-9_-]+)/) ||
+                              url.match(/file\/d\/([a-zA-Z0-9_-]+)/);
+                if (match && match[1]) {
+                    fileId = match[1];
+                }
             }
 
-            // Ekstrak ID dari URL Google Drive penuh
-            const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || 
-                          url.match(/id=([a-zA-Z0-9_-]+)/) ||
-                          url.match(/file\/d\/([a-zA-Z0-9_-]+)/);
-
-            if (match && match[1]) {
-                return `https://lh3.googleusercontent.com/d/${match[1]}`;
+            if (fileId) {
+                return `https://lh3.googleusercontent.com/d/${fileId}`;
             }
 
             return url;
         }
 
+        /* Fallback jika CDN lh3 bermasalah saat memuat gambar */
+        function handleImgError(imgEl, rawUrl) {
+            if (!rawUrl) return;
+            const match = rawUrl.match(/\/d\/([a-zA-Z0-9_-]+)/) || rawUrl.match(/id=([a-zA-Z0-9_-]+)/);
+            if (match && match[1]) {
+                const id = match[1];
+                if (!imgEl.dataset.tried1) {
+                    imgEl.dataset.tried1 = 'true';
+                    imgEl.src = `https://drive.google.com/thumbnail?id=${id}&sz=w800`;
+                } else if (!imgEl.dataset.tried2) {
+                    imgEl.dataset.tried2 = 'true';
+                    imgEl.src = `https://drive.google.com/uc?export=view&id=${id}`;
+                }
+            }
+        }
+
         /* ==========================================================================
-           3. CSV PARSER LOGIC
+           2. CSV PARSER LOGIC
            ========================================================================== */
         function parseCSV(text) {
             const lines = text.trim().split(/\r\n|\n/);
@@ -1124,7 +1127,7 @@
         }
 
         /* ==========================================================================
-           4. SERVICES TAB INTEGRATION
+           3. SERVICES TAB INTEGRATION (TANPA HARGA/ESTIMASI & BUTTON DENGAN DESKRIPSI)
            ========================================================================== */
         async function fetchServicesFromGoogleSheets() {
             const container = document.getElementById('servicesGalleryContainer');
@@ -1162,19 +1165,14 @@
 
                 const thumbImgRaw = srv.foto1 || srv.foto2 || '';
                 const thumbImage = convertGoogleDriveUrl(thumbImgRaw);
-                
-                const formattedPrice = srv.harga ? formatRupiah(srv.harga) : null;
+                const btnLabel = srv.deskripsi ? srv.deskripsi : 'Lihat Detail';
 
                 card.innerHTML = `
-                    ${thumbImage ? `<img src="${thumbImage}" alt="${srv.nama}" class="service-gallery-img" loading="lazy">` : ''}
+                    ${thumbImage ? `<img src="${thumbImage}" alt="${srv.nama}" class="service-gallery-img" loading="lazy" onerror="handleImgError(this, '${thumbImgRaw}')">` : ''}
                     <div class="service-gallery-info">
                         <h3 class="service-gallery-title">${srv.nama}</h3>
-                        <div class="pills-group">
-                            ${formattedPrice ? `<span class="pill-tag pill-price">Harga mulai ${formattedPrice}</span>` : ''}
-                            ${srv.estimasi ? `<span class="pill-tag pill-time"><i class="far fa-clock"></i> Estimasi pengerjaan ${srv.estimasi}</span>` : ''}
-                        </div>
                         <button class="btn-service-cta">
-                            <i class="fas fa-eye"></i> Detail
+                            ${btnLabel}
                         </button>
                     </div>
                 `;
@@ -1204,20 +1202,12 @@
                 convertGoogleDriveUrl(srv.foto2)
             ].filter(Boolean);
 
-            setupModalSlider(images, srv.nama);
+            setupModalSlider(images, srv.nama, [srv.foto1, srv.foto2]);
 
-            const formattedPrice = srv.harga ? formatRupiah(srv.harga) : '-';
-
-            const catBadge = document.getElementById('modalCategory');
-            catBadge.style.display = 'inline-block';
-            catBadge.innerText = 'Katalog Layanan';
+            document.getElementById('modalCategory').style.display = 'none';
+            document.getElementById('modalSubtitle').style.display = 'none';
 
             document.getElementById('modalTitle').innerText = srv.nama;
-            
-            const subtitle = document.getElementById('modalSubtitle');
-            subtitle.style.display = 'block';
-            subtitle.innerText = `Harga mulai: ${formattedPrice} | Estimasi pengerjaan: ${srv.estimasi || '-'}`;
-
             document.getElementById('modalBody').innerText = srv.deskripsi || '';
 
             const waBtn = document.getElementById('modalWaBtn');
@@ -1228,7 +1218,7 @@
         }
 
         /* ==========================================================================
-           5. PORTFOLIO TAB INTEGRATION (TEKS BUTTON: Order Sekarang!)
+           4. PORTFOLIO TAB INTEGRATION
            ========================================================================== */
         async function fetchPortfolioFromGoogleSheets() {
             const container = document.getElementById('portfolioGalleryContainer');
@@ -1297,7 +1287,7 @@
                 const thumbImg = convertGoogleDriveUrl(rawThumb);
 
                 card.innerHTML = `
-                    ${thumbImg ? `<img src="${thumbImg}" alt="${item.nama}" class="gallery-img" loading="lazy">` : ''}
+                    ${thumbImg ? `<img src="${thumbImg}" alt="${item.nama}" class="gallery-img" loading="lazy" onerror="handleImgError(this, '${rawThumb}')">` : ''}
                     <div class="gallery-info">
                         ${item.kategori ? `<span class="pill-tag pill-cat" style="align-self: flex-start;">${item.kategori}</span>` : ''}
                         <h3 class="gallery-title">${item.nama}</h3>
@@ -1311,13 +1301,10 @@
         }
 
         function openPortfolioModal(item) {
-            const images = [
-                convertGoogleDriveUrl(item.foto1),
-                convertGoogleDriveUrl(item.foto2),
-                convertGoogleDriveUrl(item.foto3)
-            ].filter(Boolean);
+            const rawImages = [item.foto1, item.foto2, item.foto3].filter(Boolean);
+            const images = rawImages.map(convertGoogleDriveUrl).filter(Boolean);
 
-            setupModalSlider(images, item.nama);
+            setupModalSlider(images, item.nama, rawImages);
 
             const catBadge = document.getElementById('modalCategory');
             if (item.kategori) {
@@ -1330,8 +1317,7 @@
             document.getElementById('modalTitle').innerText = item.nama;
             
             const subtitle = document.getElementById('modalSubtitle');
-            subtitle.style.display = 'block';
-            subtitle.innerText = 'Hasil Karya Pengerjaan';
+            subtitle.style.display = 'none';
 
             document.getElementById('modalBody').innerText = `Hasil karya ${item.nama} oleh tim Oink Project.`;
 
@@ -1343,7 +1329,7 @@
         }
 
         /* ==========================================================================
-           6. GOOGLE SHEETS TESTIMONIALS INTEGRATION (FOTO KANAN 1:1 FULL)
+           5. GOOGLE SHEETS TESTIMONIALS INTEGRATION (FOTO KANAN 1:1 FULL)
            ========================================================================== */
         async function fetchTestimonialsFromGoogleSheets() {
             const container = document.getElementById('testimonialsContainer');
@@ -1381,7 +1367,8 @@
                 card.onclick = () => openTestimonialModal({
                     name: clientName,
                     text: clientText,
-                    img: proofImg
+                    img: proofImg,
+                    rawImg: rawImg
                 });
 
                 card.innerHTML = `
@@ -1397,7 +1384,7 @@
                             <i class="fas fa-receipt"></i> Lihat Bukti Chat WA <i class="fas fa-chevron-right"></i>
                         </span>
                     </div>
-                    ${proofImg ? `<img src="${proofImg}" alt="Bukti ${clientName}" class="testi-thumb-img">` : ''}
+                    ${proofImg ? `<img src="${proofImg}" alt="Bukti ${clientName}" class="testi-thumb-img" onerror="handleImgError(this, '${rawImg}')">` : ''}
                 `;
                 container.appendChild(card);
             });
@@ -1405,9 +1392,9 @@
 
         function openTestimonialModal(data) {
             const images = data.img ? [data.img] : [];
-            setupModalSlider(images, data.name);
+            const rawImages = data.rawImg ? [data.rawImg] : [];
+            setupModalSlider(images, data.name, rawImages);
 
-            // Sembunyikan kategori & subtitle khusus modal testimoni
             document.getElementById('modalCategory').style.display = 'none';
             document.getElementById('modalSubtitle').style.display = 'none';
 
@@ -1422,9 +1409,9 @@
         }
 
         /* ==========================================================================
-           7. MODAL CAROUSEL / SLIDER LOGIC
+           6. MODAL CAROUSEL / SLIDER LOGIC
            ========================================================================== */
-        function setupModalSlider(imagesArray, title) {
+        function setupModalSlider(imagesArray, title, rawImagesArray = []) {
             const track = document.getElementById('modalSliderTrack');
             const dotsContainer = document.getElementById('sliderDots');
             const btnPrev = document.getElementById('sliderBtnPrev');
@@ -1447,9 +1434,10 @@
             totalSlidesCount = validImages.length;
 
             validImages.forEach((imgUrl, index) => {
+                const rawUrl = rawImagesArray[index] || '';
                 const slide = document.createElement('div');
                 slide.className = 'slide-item';
-                slide.innerHTML = `<img src="${imgUrl}" alt="${title}">`;
+                slide.innerHTML = `<img src="${imgUrl}" alt="${title}" onerror="handleImgError(this, '${rawUrl}')">`;
                 track.appendChild(slide);
 
                 if (totalSlidesCount > 1) {
@@ -1496,7 +1484,7 @@
         }
 
         /* ==========================================================================
-           8. DUAL LINE CHART (2025 VS 2026)
+           7. DUAL LINE CHART (2025 VS 2026)
            ========================================================================== */
         const monthsList = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
         const data2025 = [ { month: 'Jan', val: 22 }, { month: 'Feb', val: 24 }, { month: 'Mar', val: 20 }, { month: 'Apr', val: 28 }, { month: 'Mei', val: 27 }, { month: 'Jun', val: 53 }, { month: 'Jul', val: 27 }, { month: 'Ags', val: 20 }, { month: 'Sep', val: 40 }, { month: 'Okt', val: 47 }, { month: 'Nov', val: 45 }, { month: 'Des', val: 38 } ];
@@ -1597,7 +1585,7 @@
         }
 
         /* ==========================================================================
-           9. COMMON APP LOGIC
+           8. COMMON APP LOGIC
            ========================================================================== */
         function closeModal() {
             document.getElementById('modalOverlay').classList.remove('active');
