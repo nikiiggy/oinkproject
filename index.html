@@ -6,18 +6,18 @@
     
     <!-- SEO Meta Tags -->
     <title>Oink Project - Jasa Joki Tugas Akademik, Mengecilkan PPT, Skripsi & Koding</title>
-    <meta name="description" content="Joki tugas DKV, desain grafis dan pemrograman website. Cepat & Amanah. 24JAM">
-    <meta name="keywords" content="joki tugas, joki tugas DKV, joki desain, desain grafis">
+    <meta name="description" content="Joki tugas DKV, bisnis digital, digital marketing dan desain grafis. Fast response 24 Jam.">
+    <meta name="keywords" content="joki tugas, joki tugas DKV, joki desain, desain grafis, oink project">
     <meta name="author" content="Oink Project">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph / Social Media SEO -->
     <meta property="og:title" content="Oink Project - Joki Tugas DKV">
-    <meta property="og:description" content="Joki tugas DKV, desain grafis dan pemrograman website. Cepat & Amanah. 24JAM">
+    <meta property="og:description" content="Joki tugas DKV, bisnis digital, digital marketing dan desain grafis. Fast response 24 Jam.">
     <meta property="og:type" content="website">
 
     <!-- Google Fonts & FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -77,14 +77,14 @@
             box-shadow: var(--shadow-md);
             display: flex;
             flex-direction: column;
-            padding-bottom: 30px;
+            padding: 20px 16px 30px 16px;
+            gap: 16px;
         }
 
         @media (min-width: 481px) {
             .container {
                 border-radius: var(--radius-lg);
-                min-height: 90vh;
-                overflow: hidden;
+                min-height: auto;
                 border: 2px solid #e2dad1;
             }
         }
@@ -94,12 +94,11 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 20px;
+            padding: 12px 16px;
             background: var(--card-white);
-            border-bottom: 2px solid #efe8e1;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
         }
 
         .brand-logo-nav {
@@ -151,62 +150,12 @@
 
         .btn-icon:hover { border-color: var(--accent); color: var(--accent); }
 
-        /* Tabs Header */
-        .tabs-header {
-            display: flex;
-            background: var(--card-white);
-            padding: 4px 16px 0 16px;
-            border-bottom: 2px solid #efe8e1;
-            gap: 8px;
-        }
-
-        .tab-btn {
-            flex: 1;
-            background: none;
-            border: none;
-            font-size: 0.9rem;
-            font-weight: 800;
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: 12px 0;
-            position: relative;
-            transition: var(--transition);
-            text-align: center;
-        }
-
-        .tab-btn.active { color: var(--accent); }
-
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--accent);
-            border-radius: 3px 3px 0 0;
-        }
-
-        .tab-content {
-            display: none;
-            padding: 20px 16px;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .tab-content.active { display: block; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .section-card {
             background: var(--card-white);
             border-radius: var(--radius-md);
             padding: 20px;
             border: 1px solid #efe8e1;
             box-shadow: var(--shadow-sm);
-            margin-bottom: 16px;
         }
 
         .section-header {
@@ -216,7 +165,7 @@
             margin-bottom: 14px;
         }
 
-        .section-header h2, .section-header h3 {
+        .section-header h2 {
             font-size: 1.1rem;
             font-weight: 800;
             color: var(--text-main);
@@ -231,7 +180,6 @@
             color: #ffffff;
             text-align: left;
             box-shadow: 0 8px 20px rgba(5, 187, 192, 0.25);
-            margin-bottom: 16px;
             position: relative;
             overflow: hidden;
         }
@@ -267,11 +215,12 @@
         .verified-badge { font-size: 1.1rem; color: #ffc425; }
 
         .profile-card p.tagline {
-            font-size: 0.85rem;
+            font-size: 0.83rem;
             opacity: 0.95;
-            line-height: 1.4;
-            max-width: 340px;
+            line-height: 1.5;
+            max-width: 380px;
             margin: 0 0 16px 0;
+            font-weight: 500;
         }
 
         .stats-row {
@@ -289,6 +238,62 @@
         .stat-val { font-size: 0.95rem; font-weight: 800; }
         .stat-lbl { font-size: 0.68rem; opacity: 0.9; text-transform: uppercase; }
 
+        /* PROMO PRICE CARD (BESAR) */
+        .promo-price-card {
+            background: var(--card-white);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            text-align: center;
+            border: 2px solid var(--card-cyan);
+            box-shadow: 0 8px 20px rgba(5, 187, 192, 0.15);
+        }
+
+        .promo-text {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: lowercase;
+            letter-spacing: -0.2px;
+            margin-bottom: 4px;
+        }
+
+        .promo-price-huge {
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: var(--card-coral);
+            line-height: 1;
+            letter-spacing: -1.5px;
+        }
+
+        .promo-price-huge span {
+            font-size: 1.4rem;
+            vertical-align: super;
+            font-weight: 800;
+            margin-right: 2px;
+        }
+
+        /* WA Main CTA Button */
+        .btn-wa-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 18px 20px;
+            background: var(--wa-color);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1rem;
+            border-radius: var(--radius-md);
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-wa-cta:hover { background: var(--wa-hover); transform: translateY(-2px); }
+
         /* MULTI-LINE CHART STYLES */
         .chart-card {
             background: #ffffff;
@@ -296,7 +301,6 @@
             padding: 18px 16px;
             border: 1px solid #efe8e1;
             box-shadow: var(--shadow-sm);
-            margin-bottom: 16px;
         }
 
         .chart-header {
@@ -342,172 +346,91 @@
             z-index: 10;
         }
 
-        /* WA Main CTA Button */
-        .btn-wa-cta {
+        /* DETAIL KEAHLIAN & SPESIALISASI CARD */
+        .info-detail-card {
+            background: #ffffff;
+            border-radius: var(--radius-md);
+            padding: 20px;
+            border: 1px solid #efe8e1;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .info-block-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .info-block-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--card-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 16px 20px;
-            background: var(--wa-color);
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 0.95rem;
-            border-radius: var(--radius-md);
-            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-            margin-bottom: 16px;
+            gap: 6px;
         }
 
-        .btn-wa-cta:hover { background: var(--wa-hover); transform: translateY(-2px); }
-
-        /* SEARCH BAR */
-        .search-box-wrapper {
-            position: relative;
-            margin-bottom: 14px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 16px 12px 42px;
-            border-radius: var(--radius-sm);
-            border: 2px solid #efe8e1;
-            background: #fffdfa;
+        .info-block-desc {
             font-size: 0.88rem;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-main);
-            outline: none;
-            transition: var(--transition);
+            line-height: 1.4;
         }
 
-        .search-input:focus {
-            border-color: var(--card-cyan);
-            background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(5, 187, 192, 0.15);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
+        .sub-desc {
+            font-size: 0.78rem;
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-weight: 600;
         }
 
-        /* MODEL GALLERY UNTUK LAYANAN & PORTOFOLIO */
-        .services-gallery-grid, .gallery-grid {
+        /* APPS PILLS BADGES */
+        .app-tags-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .app-pill {
+            background: #f1f5f9;
+            color: #334155;
+            font-size: 0.73rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* WORK LIST GRID */
+        .work-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 10px;
+            margin-top: 4px;
         }
 
-        .service-gallery-card, .gallery-card {
+        .work-item-box {
             background: #fffdfa;
             border: 1px solid #efe8e1;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: var(--transition);
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
+            border-radius: var(--radius-sm);
+            padding: 10px;
         }
 
-        .service-gallery-card:hover, .gallery-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--card-cyan);
-            box-shadow: var(--shadow-md);
-        }
-
-        .service-gallery-img, .gallery-img {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            display: block;
-            background: #f1f5f9;
-        }
-
-        .service-gallery-info, .gallery-info {
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
-
-        .service-gallery-title, .gallery-title {
-            font-size: 0.88rem;
+        .work-item-title {
+            font-size: 0.82rem;
             font-weight: 800;
             color: var(--text-main);
-            line-height: 1.3;
+            margin-bottom: 2px;
         }
 
-        .btn-service-cta, .btn-gallery-cta {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            width: 100%;
-            padding: 10px 8px;
-            background: var(--card-cyan);
-            color: #ffffff;
-            font-size: 0.75rem;
-            font-weight: 800;
-            border-radius: var(--radius-sm);
-            border: none;
-            transition: var(--transition);
-            text-align: center;
-            line-height: 1.3;
-        }
-
-        .btn-gallery-cta { background: var(--wa-color); }
-
-        /* CATEGORY FILTER TAG BUTTONS (PORTOFOLIO) */
-        .category-tags-container {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            margin-bottom: 14px;
-            scrollbar-width: none;
-        }
-
-        .category-tags-container::-webkit-scrollbar { display: none; }
-
-        .tag-filter-btn {
-            white-space: nowrap;
-            padding: 7px 14px;
-            border-radius: 20px;
-            border: 1.5px solid var(--border-color);
-            background: #fffdfa;
-            font-size: 0.75rem;
-            font-weight: 800;
+        .work-item-sub {
+            font-size: 0.72rem;
             color: var(--text-muted);
-            cursor: pointer;
-            transition: var(--transition);
-            flex-shrink: 0;
-        }
-
-        .tag-filter-btn.active {
-            background: var(--card-cyan);
-            color: #ffffff;
-            border-color: var(--card-cyan);
-            box-shadow: 0 4px 10px rgba(5, 187, 192, 0.25);
-        }
-
-        .loading-msg, .no-results-msg {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 30px 10px;
-            color: var(--text-muted);
-            font-size: 0.88rem;
             font-weight: 600;
         }
 
@@ -540,223 +463,6 @@
 
         .social-card i { font-size: 1.3rem; }
         .social-card span { font-size: 0.68rem; font-weight: 700; }
-
-        /* FAQ Static */
-        .faq-item-static {
-            border: 1px solid #efe8e1;
-            border-radius: var(--radius-sm);
-            margin-bottom: 12px;
-            padding: 14px;
-            background: #fffdfa;
-        }
-
-        .faq-title-static { font-size: 0.88rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-        .faq-title-static i { color: var(--card-cyan); font-size: 0.85rem; }
-        .faq-desc-static { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
-
-        /* TESTIMONIALS STYLES (FOTO KANAN 1:1 FULL) */
-        .testi-card {
-            background: #ffffff;
-            border: 1px solid #efe8e1;
-            border-radius: var(--radius-md);
-            padding: 14px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: stretch;
-            justify-content: space-between;
-            gap: 12px;
-            overflow: hidden;
-        }
-
-        .testi-card:hover { border-color: var(--card-cyan); transform: translateY(-2px); }
-
-        .testi-content-left {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .testi-name { font-size: 0.88rem; font-weight: 800; color: var(--text-main); margin-bottom: 2px; }
-        .testi-stars { color: #f59e0b; font-size: 0.72rem; margin-bottom: 6px; }
-        .testi-text { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px; }
-
-        .testi-badge-proof {
-            font-size: 0.72rem;
-            font-weight: 800;
-            color: var(--card-cyan);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .testi-thumb-img {
-            width: 84px;
-            height: 84px;
-            aspect-ratio: 1 / 1;
-            border-radius: var(--radius-sm);
-            object-fit: cover;
-            border: 1px solid var(--border-color);
-            background: #f1f5f9;
-            flex-shrink: 0;
-            align-self: center;
-        }
-
-        /* MODAL CAROUSEL / SLIDER STYLES */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(17, 24, 39, 0.65);
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            padding: 20px;
-        }
-
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-
-        .modal-container {
-            background: #ffffff;
-            width: 100%;
-            max-width: 420px;
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            transform: scale(0.95);
-            transition: var(--transition);
-            max-height: 85vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal-overlay.active .modal-container { transform: scale(1); }
-
-        .modal-close {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            z-index: 20;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
-
-        /* Carousel Outer Box */
-        .slider-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-            margin-bottom: 14px;
-            background: #f1f5f9;
-            border: 1px solid var(--border-color);
-        }
-
-        .slider-track {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .slide-item {
-            min-width: 100%;
-            height: 100%;
-        }
-
-        .slide-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Nav Buttons (Next/Prev) */
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 32px;
-            height: 32px;
-            background: rgba(255, 255, 255, 0.85);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 0.8rem;
-            color: var(--text-main);
-            z-index: 10;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
-        .slider-btn.prev { left: 8px; }
-        .slider-btn.next { right: 8px; }
-
-        /* Indicators (Dots) */
-        .slider-dots {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 6px;
-            z-index: 10;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
-            transition: var(--transition);
-        }
-
-        .dot.active {
-            background: var(--card-cyan);
-            width: 16px;
-            border-radius: 10px;
-        }
-
-        .category-badge { display: inline-block; background: #e6f8f8; color: var(--card-cyan); font-size: 0.7rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; margin-bottom: 8px; text-transform: uppercase; }
-        .modal-title { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; }
-        .modal-subtitle { font-size: 0.82rem; color: var(--text-muted); font-weight: 600; margin-bottom: 12px; }
-        .modal-body { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; white-space: pre-line; margin-bottom: 16px; }
-
-        .btn-modal-wa {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 12px;
-            background: var(--wa-color);
-            color: white;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 0.88rem;
-            border-radius: var(--radius-sm);
-        }
 
         .toast {
             position: fixed;
@@ -798,691 +504,174 @@
             </div>
         </header>
 
-        <!-- Navigation Tabs Header -->
-        <nav class="tabs-header">
-            <button class="tab-btn active" onclick="switchTab('main')">Home</button>
-            <button class="tab-btn" onclick="switchTab('gallery')">Portfolio</button>
-            <button class="tab-btn" onclick="switchTab('info')">FAQ & Info</button>
-        </nav>
-
-        <main>
-            <!-- 1. TAB UTAMA -->
-            <section id="main-tab" class="tab-content active">
-                <!-- Profile Banner Card -->
-                <article class="profile-card">
-                    <div class="avatar-box">
-                        <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Profile">
-                    </div>
-                    <h1>Oink Project <i class="fas fa-check-circle verified-badge"></i></h1>
-                    <p class="tagline">Joki tugas DKV, desain grafis dan pemrograman website, Terpercaya. Cepat, Murah, Rapi, & Amanah. 24 JAM</p>
-                    
-                    <div class="stats-row">
-                        <div class="stat-item">
-                            <div class="stat-val">661+</div>
-                            <div class="stat-lbl">Tugas Selesai</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-val">100%</div>
-                            <div class="stat-lbl">Terselesaikan</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-val">24/7</div>
-                            <div class="stat-lbl">Fast Respon</div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- DUAL LINE CHART -->
-                <article class="chart-card">
-                    <div class="chart-header">
-                        <div>
-                            <div class="chart-title">Statistik Tugas Selesai</div>
-                            <div class="chart-subtitle">Perbandingan Bulanan 2025 vs 2026</div>
-                        </div>
-                        <div class="chart-legend">
-                            <div class="legend-item"><span class="legend-color c2025"></span> 2025</div>
-                            <div class="legend-item"><span class="legend-color c2026"></span> 2026</div>
-                        </div>
-                    </div>
-
-                    <div class="chart-display-container">
-                        <div id="chartTooltip" class="chart-tooltip">0 Tugas</div>
-                        <svg class="line-svg" id="lineChartSvg" viewBox="0 0 360 160">
-                            <defs>
-                                <linearGradient id="grad2025" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stop-color="#05bbc0" stop-opacity="0.25"/>
-                                    <stop offset="100%" stop-color="#05bbc0" stop-opacity="0.0"/>
-                                </linearGradient>
-                                <linearGradient id="grad2026" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stop-color="#22c55e" stop-opacity="0.25"/>
-                                    <stop offset="100%" stop-color="#22c55e" stop-opacity="0.0"/>
-                                </linearGradient>
-                            </defs>
-                            
-                            <g id="gridLinesGroup"></g>
-                            <path id="area2025" fill="url(#grad2025)" d="" />
-                            <path id="area2026" fill="url(#grad2026)" d="" />
-                            <path id="line2025" fill="none" stroke="#05bbc0" stroke-width="3" stroke-linecap="round" d="" />
-                            <path id="line2026" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" d="" />
-                            <g id="dots2025"></g>
-                            <g id="dots2026"></g>
-                            <g id="monthLabelsSvgGroup"></g>
-                        </svg>
-                    </div>
-                </article>
-
-                <!-- WhatsApp Direct CTA Button -->
-                <a href="https://wa.me/6285155091238?text=Halo%20Admin%20Oink%20Project,%20saya%20mau%20konsultasi%20tugas" target="_blank" class="btn-wa-cta">
-                    <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i>
-                    <span>Hai Kak, Chat aku disini via Whatsapp!!</span>
-                </a>
-
-                <!-- Social Media Block -->
-                <article class="section-card">
-                    <div class="section-header">
-                        <h2>Follow aku kak!</h2>
-                    </div>
-                    <div class="social-grid">
-                        <a href="https://www.instagram.com/oink.project" target="_blank" class="social-card instagram">
-                            <i class="fab fa-instagram"></i>
-                            <span>Instagram</span>
-                        </a>
-                        <a href="https://www.tiktok.com/@oink.project" target="_blank" class="social-card tiktok">
-                            <i class="fab fa-tiktok"></i>
-                            <span>TikTok</span>
-                        </a>
-                        <a href="https://x.com/oinkproject" target="_blank" class="social-card x-twitter">
-                            <i class="fab fa-x-twitter"></i>
-                            <span>X / Twitter</span>
-                        </a>
-                        <a href="http://youtube.com/@oinkproject" target="_blank" class="social-card youtube">
-                            <i class="fab fa-youtube"></i>
-                            <span>YouTube</span>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- KATALOG LAYANAN (TERINTEGRASI DENGAN GOOGLE SHEETS) -->
-                <article class="section-card">
-                    <div class="section-header">
-                        <h2>Yang bisa aku kerjain</h2>
-                    </div>
-
-                    <div class="search-box-wrapper">
-                        <i class="fas fa-magnifying-glass search-icon"></i>
-                        <input type="text" id="serviceSearchInput" class="search-input" placeholder="Cari layanan (misal: kecilin ppt, skripsi)..." oninput="filterServices()">
-                    </div>
-
-                    <div class="services-gallery-grid" id="servicesGalleryContainer">
-                        <div class="loading-msg">
-                            <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 8px; display: block; color: var(--card-cyan);"></i>
-                            Memuat layanan dari Google Sheets...
-                        </div>
-                    </div>
-                </article>
-            </section>
-
-            <!-- 2. TAB GALERI PORTFOLIO (GOOGLESHEET + CATEGORY TAG FILTERS) -->
-            <section id="gallery-tab" class="tab-content">
-                <article class="section-card">
-                    <div class="section-header">
-                        <h2>Portofolio Pengerjaan</h2>
-                    </div>
-                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Hasil karya pengerjaan tugas oleh Oink Project. Klik kartu untuk melihat detail sampel!</p>
-                    
-                    <!-- Tag Category Buttons (Dynamic) -->
-                    <div class="category-tags-container" id="portfolioTagsContainer">
-                        <button class="tag-filter-btn active" onclick="filterPortfolioByTag('Semua', this)">Semua</button>
-                    </div>
-
-                    <div class="gallery-grid" id="portfolioGalleryContainer">
-                        <div class="loading-msg">
-                            <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 8px; display: block; color: var(--card-cyan);"></i>
-                            Memuat portofolio...
-                        </div>
-                    </div>
-                </article>
-            </section>
-
-            <!-- 3. TAB FAQ & TESTIMONI -->
-            <section id="info-tab" class="tab-content">
-                <article class="section-card">
-                    <div class="section-header">
-                        <h2>Apa Kata Klien?</h2>
-                    </div>
-                    <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;">Klik ulasan di bawah untuk melihat bukti tangkapan layar chat asli!</p>
-                    
-                    <div id="testimonialsContainer">
-                        <div class="loading-msg">
-                            <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 8px; display: block; color: var(--card-cyan);"></i>
-                            Memuat testimoni...
-                        </div>
-                    </div>
-                </article>
-
-                <article class="section-card">
-                    <div class="section-header">
-                        <h2>Pertanyaan Umum (FAQ)</h2>
-                    </div>
-                    
-                    <div class="faq-item-static">
-                        <div class="faq-title-static">
-                            <i class="fas fa-circle-question"></i>
-                            <h3>Apakah identitas pemesan dijamin aman?</h3>
-                        </div>
-                        <div class="faq-desc-static">
-                            Ya, 100% aman dan rahasia. Data pribadi serta kampus pemesan tidak akan pernah dipublikasikan atau dibagikan ke pihak mana pun.
-                        </div>
-                    </div>
-
-                    <div class="faq-item-static">
-                        <div class="faq-title-static">
-                            <i class="fas fa-circle-question"></i>
-                            <h3>Bagaimana jika ada revisi?</h3>
-                        </div>
-                        <div class="faq-desc-static">
-                            Oink Project memberikan Garansi Revisi Gratis selama sesuai dengan instruksi atau brief awal pengerjaan yang diberikan.
-                        </div>
-                    </div>
-
-                    <div class="faq-item-static">
-                        <div class="faq-title-static">
-                            <i class="fas fa-circle-question"></i>
-                            <h3>Sistem pembayarannya bagaimana?</h3>
-                        </div>
-                        <div class="faq-desc-static">
-                            Pembayaran bisa dilakukan melalui Transfer Bank (BCA/BRI/Mandiri) maupun e-Wallet (Dana, OVO, ShopeePay, GoPay). Bisa DP 50% terlebih dahulu.
-                        </div>
-                    </div>
-                </article>
-            </section>
-        </main>
-    </div>
-
-    <!-- MODAL POPUP SLIDER / CAROUSEL -->
-    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOuterClick(event)">
-        <div class="modal-container">
-            <button class="modal-close" onclick="closeModal()" aria-label="Tutup"><i class="fas fa-times"></i></button>
-            
-            <!-- SLIDER BOX -->
-            <div class="slider-container" id="modalSliderContainer">
-                <div class="slider-track" id="modalSliderTrack"></div>
+        <main style="display: flex; flex-direction: column; gap: 16px;">
+            <!-- Profile Banner Card -->
+            <article class="profile-card">
+                <div class="avatar-box">
+                    <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Profile">
+                </div>
+                <h1>Oink Project <i class="fas fa-check-circle verified-badge"></i></h1>
+                <p class="tagline">🐣. . business area — here i exist as a trusted and fast response 🪄 design service since 2013. fret not, i'll be open 24 hours daily ⏰✨</p>
                 
-                <!-- Buttons Slider -->
-                <button class="slider-btn prev" id="sliderBtnPrev" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-                <button class="slider-btn next" id="sliderBtnNext" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
-                
-                <!-- Dots Indikator -->
-                <div class="slider-dots" id="sliderDots"></div>
-            </div>
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-val">661+</div>
+                        <div class="stat-lbl">Tugas Selesai</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-val">100%</div>
+                        <div class="stat-lbl">Terselesaikan</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-val">24/7</div>
+                        <div class="stat-lbl">Fast Respon</div>
+                    </div>
+                </div>
+            </article>
 
-            <div id="modalCategory" class="category-badge">Category</div>
-            <h3 class="modal-title" id="modalTitle">Title</h3>
-            <div class="modal-subtitle" id="modalSubtitle">Subtitle</div>
-            <div class="modal-body" id="modalBody">Description text...</div>
+            <!-- TULISAN HARGA PROMO (DI ATAS BUTTON WA) -->
+            <article class="promo-price-card">
+                <div class="promo-text">semua joki start harga</div>
+                <div class="promo-price-huge"><span>Rp</span>35.000</div>
+            </article>
 
-            <a id="modalWaBtn" href="#" target="_blank" class="btn-modal-wa">
-                <i class="fab fa-whatsapp"></i>
-                <span>Chat aku kakk!</span>
+            <!-- WhatsApp Direct CTA Button (DI ATAS STATISTIK) -->
+            <a href="https://wa.me/6285155091238?text=Halo%20Admin%20Oink%20Project,%20saya%20mau%20konsultasi%20tugas" target="_blank" class="btn-wa-cta">
+                <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i>
+                <span>Hai Kak, Chat aku disini via Whatsapp!!</span>
             </a>
-        </div>
+
+            <!-- DUAL LINE CHART (STATISTIK) -->
+            <article class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Statistik Tugas Selesai</div>
+                        <div class="chart-subtitle">Perbandingan Bulanan 2025 vs 2026</div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item"><span class="legend-color c2025"></span> 2025</div>
+                        <div class="legend-item"><span class="legend-color c2026"></span> 2026</div>
+                    </div>
+                </div>
+
+                <div class="chart-display-container">
+                    <div id="chartTooltip" class="chart-tooltip">0 Tugas</div>
+                    <svg class="line-svg" id="lineChartSvg" viewBox="0 0 360 160">
+                        <defs>
+                            <linearGradient id="grad2025" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#05bbc0" stop-opacity="0.25"/>
+                                <stop offset="100%" stop-color="#05bbc0" stop-opacity="0.0"/>
+                            </linearGradient>
+                            <linearGradient id="grad2026" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#22c55e" stop-opacity="0.25"/>
+                                <stop offset="100%" stop-color="#22c55e" stop-opacity="0.0"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <g id="gridLinesGroup"></g>
+                        <path id="area2025" fill="url(#grad2025)" d="" />
+                        <path id="area2026" fill="url(#grad2026)" d="" />
+                        <path id="line2025" fill="none" stroke="#05bbc0" stroke-width="3" stroke-linecap="round" d="" />
+                        <path id="line2026" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" d="" />
+                        <g id="dots2025"></g>
+                        <g id="dots2026"></g>
+                        <g id="monthLabelsSvgGroup"></g>
+                    </svg>
+                </div>
+            </article>
+
+            <!-- SPESIALISASI, APLIKASI & YANG BISA DIKERJAKAN (DI BAWAH STATISTIK) -->
+            <article class="info-detail-card">
+                <!-- Spesialisasi -->
+                <div class="info-block-item">
+                    <div class="info-block-title">
+                        <i class="fas fa-star"></i> Spesialisasi
+                    </div>
+                    <div class="info-block-desc">
+                        Joki tugas DKV, Bisnis Digital, & Digital Marketing
+                    </div>
+                </div>
+
+                <!-- Aplikasi yang digunakan -->
+                <div class="info-block-item">
+                    <div class="info-block-title">
+                        <i class="fas fa-laptop-code"></i> Aplikasi yang Digunakan
+                    </div>
+                    <div class="app-tags-wrapper">
+                        <span class="app-pill">Adobe Illustrator</span>
+                        <span class="app-pill">Adobe Photoshop</span>
+                        <span class="app-pill">Adobe Flash</span>
+                        <span class="app-pill">Adobe After Effect</span>
+                        <span class="app-pill">Corel Draw</span>
+                        <span class="app-pill">3D SketchUp</span>
+                    </div>
+                </div>
+
+                <!-- Yang bisa dikerjakan -->
+                <div class="info-block-item">
+                    <div class="info-block-title">
+                        <i class="fas fa-layer-group"></i> Yang Bisa Aku Kerjakan
+                    </div>
+                    <div class="work-grid">
+                        <div class="work-item-box">
+                            <div class="work-item-title">Poster</div>
+                            <div class="work-item-sub">Infografis, Isometric</div>
+                        </div>
+                        <div class="work-item-box">
+                            <div class="work-item-title">Booklet</div>
+                            <div class="work-item-sub">GSM, Zine, Portfolio</div>
+                        </div>
+                        <div class="work-item-box">
+                            <div class="work-item-title">Jasa Edit</div>
+                            <div class="work-item-sub">Foto & Dokumen</div>
+                        </div>
+                        <div class="work-item-box">
+                            <div class="work-item-title">Edit Video</div>
+                            <div class="work-item-sub">Premiere, After Effect</div>
+                        </div>
+                        <div class="work-item-box">
+                            <div class="work-item-title">Kemasan</div>
+                            <div class="work-item-sub">Desain & 3D Visual</div>
+                        </div>
+                        <div class="work-item-box">
+                            <div class="work-item-title">Logo</div>
+                            <div class="work-item-sub">Branding & Symbol</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Social Media Block -->
+            <article class="section-card">
+                <div class="section-header">
+                    <h2>Follow aku kak!</h2>
+                </div>
+                <div class="social-grid">
+                    <a href="https://www.instagram.com/oink.project" target="_blank" class="social-card instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@oink.project" target="_blank" class="social-card tiktok">
+                        <i class="fab fa-tiktok"></i>
+                        <span>TikTok</span>
+                    </a>
+                    <a href="https://x.com/oinkproject" target="_blank" class="social-card x-twitter">
+                        <i class="fab fa-x-twitter"></i>
+                        <span>X / Twitter</span>
+                    </a>
+                    <a href="http://youtube.com/@oinkproject" target="_blank" class="social-card youtube">
+                        <i class="fab fa-youtube"></i>
+                        <span>YouTube</span>
+                    </a>
+                </div>
+            </article>
+        </main>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // GOOGLE SHEETS CSV URLS
-        const SERVICES_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSlsGyu7iUeP92Q1NlLV_Qfa0lIcY-mljREp7wX4RiiBv0b4umDY76YEy1kQ_zwldfWTWJucnJfRyR/pub?gid=1684071153&single=true&output=csv';
-        const PORTFOLIO_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSlsGyu7iUeP92Q1NlLV_Qfa0lIcY-mljREp7wX4RiiBv0b4umDY76YEy1kQ_zwldfWTWJucnJfRyR/pub?gid=1276446965&single=true&output=csv';
-        const TESTIMONIAL_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSlsGyu7iUeP92Q1NlLV_Qfa0lIcY-mljREp7wX4RiiBv0b4umDY76YEy1kQ_zwldfWTWJucnJfRyR/pub?gid=824196110&single=true&output=csv';
-
-        let fetchedServicesData = [];
-        let fetchedPortfolioData = [];
-        let fetchedTestimonialData = [];
-        let currentSlideIndex = 0;
-        let totalSlidesCount = 0;
-
         /* ==========================================================================
-           1. AUTOMATIC GOOGLE DRIVE TO DIRECT CDN LINK CONVERTER (RINGAN: s300)
-           ========================================================================== */
-        function convertGoogleDriveUrl(url) {
-            if (!url || typeof url !== 'string') return '';
-            url = url.trim();
-            if (!url) return '';
-
-            let fileId = '';
-
-            // Jika hanya berupa ID Google Drive murni
-            if (/^[a-zA-Z0-9_-]{25,50}$/.test(url)) {
-                fileId = url;
-            } else {
-                // Ekstrak ID dari URL Google Drive penuh
-                const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || 
-                              url.match(/id=([a-zA-Z0-9_-]+)/) ||
-                              url.match(/file\/d\/([a-zA-Z0-9_-]+)/);
-                if (match && match[1]) {
-                    fileId = match[1];
-                }
-            }
-
-            if (fileId) {
-                // Menggunakan format CDN Google Drive s300 agar sangat ringan & cepat
-                return `https://drive.google.com/thumbnail?id=${fileId}&sz=w300`;
-            }
-
-            return url;
-        }
-
-        /* Fallback jika CDN thumbnail bermasalah */
-        function handleImgError(imgEl, rawUrl) {
-            if (!rawUrl) return;
-            const match = rawUrl.match(/\/d\/([a-zA-Z0-9_-]+)/) || rawUrl.match(/id=([a-zA-Z0-9_-]+)/);
-            if (match && match[1]) {
-                const id = match[1];
-                if (!imgEl.dataset.tried) {
-                    imgEl.dataset.tried = 'true';
-                    imgEl.src = `https://lh3.googleusercontent.com/d/${id}=s300`;
-                }
-            }
-        }
-
-        /* ==========================================================================
-           2. CSV PARSER LOGIC
-           ========================================================================== */
-        function parseCSV(text) {
-            const lines = text.trim().split(/\r\n|\n/);
-            if (lines.length < 2) return [];
-
-            const splitRow = (row) => {
-                const result = [];
-                let insideQuote = false;
-                let entry = '';
-                for (let i = 0; i < row.length; i++) {
-                    const char = row[i];
-                    if (char === '"' || char === "'") {
-                        insideQuote = !insideQuote;
-                    } else if (char === ',' && !insideQuote) {
-                        result.push(entry.trim().replace(/^["']|["']$/g, ''));
-                        entry = '';
-                    } else {
-                        entry += char;
-                    }
-                }
-                result.push(entry.trim().replace(/^["']|["']$/g, ''));
-                return result;
-            };
-
-            const headers = splitRow(lines[0]).map(h => h.toLowerCase());
-            
-            return lines.slice(1).map(line => {
-                if (!line.trim()) return null;
-                const values = splitRow(line);
-                const obj = {};
-                headers.forEach((header, index) => {
-                    obj[header] = values[index] || '';
-                });
-                return obj;
-            }).filter(item => item !== null && (item.nama || item.kategori || item.testimoni || item.teks || item.foto1));
-        }
-
-        /* ==========================================================================
-           3. SERVICES TAB INTEGRATION
-           ========================================================================== */
-        async function fetchServicesFromGoogleSheets() {
-            const container = document.getElementById('servicesGalleryContainer');
-            try {
-                const response = await fetch(SERVICES_SHEET_URL);
-                const csvText = await response.text();
-                
-                fetchedServicesData = parseCSV(csvText).reverse();
-
-                if (fetchedServicesData.length === 0) {
-                    container.innerHTML = '<div class="no-results-msg">Belum ada layanan di Google Sheets.</div>';
-                    return;
-                }
-
-                renderServices(fetchedServicesData);
-            } catch (error) {
-                console.error('Error fetching Services:', error);
-                container.innerHTML = '<div class="no-results-msg"><i class="fas fa-exclamation-triangle" style="font-size: 1.5rem; margin-bottom: 6px; display: block; color: var(--card-coral);"></i>Gagal memuat data Layanan dari Google Sheets.</div>';
-            }
-        }
-
-        function renderServices(items) {
-            const container = document.getElementById('servicesGalleryContainer');
-            container.innerHTML = '';
-
-            if (items.length === 0) {
-                container.innerHTML = '<div class="no-results-msg"><i class="fas fa-circle-exclamation" style="font-size: 1.5rem; margin-bottom: 6px; display: block;"></i>Layanan tidak ditemukan.</div>';
-                return;
-            }
-
-            items.forEach(srv => {
-                const card = document.createElement('div');
-                card.className = 'service-gallery-card';
-                card.onclick = () => openServiceModal(srv);
-
-                const thumbImgRaw = srv.foto1 || srv.foto2 || '';
-                const thumbImage = convertGoogleDriveUrl(thumbImgRaw);
-                const btnLabel = srv.deskripsi ? srv.deskripsi : 'Lihat Detail';
-
-                card.innerHTML = `
-                    ${thumbImage ? `<img src="${thumbImage}" alt="${srv.nama}" class="service-gallery-img" loading="lazy" onerror="handleImgError(this, '${thumbImgRaw}')">` : ''}
-                    <div class="service-gallery-info">
-                        <h3 class="service-gallery-title">${srv.nama}</h3>
-                        <button class="btn-service-cta">
-                            ${btnLabel}
-                        </button>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function filterServices() {
-            const query = document.getElementById('serviceSearchInput').value.toLowerCase().trim();
-            if (!query) {
-                renderServices(fetchedServicesData);
-                return;
-            }
-
-            const filtered = fetchedServicesData.filter(srv => {
-                const matchName = srv.nama ? srv.nama.toLowerCase().includes(query) : false;
-                const matchDesc = srv.deskripsi ? srv.deskripsi.toLowerCase().includes(query) : false;
-                return matchName || matchDesc;
-            });
-
-            renderServices(filtered);
-        }
-
-        function openServiceModal(srv) {
-            const images = [
-                convertGoogleDriveUrl(srv.foto1),
-                convertGoogleDriveUrl(srv.foto2)
-            ].filter(Boolean);
-
-            setupModalSlider(images, srv.nama, [srv.foto1, srv.foto2]);
-
-            document.getElementById('modalCategory').style.display = 'none';
-            document.getElementById('modalSubtitle').style.display = 'none';
-
-            document.getElementById('modalTitle').innerText = srv.nama;
-            document.getElementById('modalBody').innerText = srv.deskripsi || '';
-
-            const waBtn = document.getElementById('modalWaBtn');
-            const waMsg = encodeURIComponent(`Halo Admin Oink Project, saya mau pesan layanan: ${srv.nama}`);
-            waBtn.href = `https://wa.me/6285155091238?text=${waMsg}`;
-
-            document.getElementById('modalOverlay').classList.add('active');
-        }
-
-        /* ==========================================================================
-           4. PORTFOLIO TAB INTEGRATION
-           ========================================================================== */
-        async function fetchPortfolioFromGoogleSheets() {
-            const container = document.getElementById('portfolioGalleryContainer');
-            try {
-                const response = await fetch(PORTFOLIO_SHEET_URL);
-                const csvText = await response.text();
-
-                fetchedPortfolioData = parseCSV(csvText).reverse();
-
-                if (fetchedPortfolioData.length === 0) {
-                    container.innerHTML = '<div class="no-results-msg">Belum ada portofolio di Google Sheets.</div>';
-                    return;
-                }
-
-                generatePortfolioCategoryTags(fetchedPortfolioData);
-                renderPortfolio(fetchedPortfolioData);
-            } catch (error) {
-                console.error('Error fetching Portfolio:', error);
-                container.innerHTML = '<div class="no-results-msg"><i class="fas fa-exclamation-triangle" style="font-size: 1.5rem; margin-bottom: 6px; display: block; color: var(--card-coral);"></i>Gagal memuat data Portofolio dari Google Sheets.</div>';
-            }
-        }
-
-        function generatePortfolioCategoryTags(data) {
-            const tagsContainer = document.getElementById('portfolioTagsContainer');
-            const categoriesSet = new Set();
-
-            data.forEach(item => {
-                if (item.kategori && item.kategori.trim()) {
-                    categoriesSet.add(item.kategori.trim());
-                }
-            });
-
-            tagsContainer.innerHTML = `<button class="tag-filter-btn active" onclick="filterPortfolioByTag('Semua', this)">Semua</button>`;
-            categoriesSet.forEach(cat => {
-                tagsContainer.innerHTML += `<button class="tag-filter-btn" onclick="filterPortfolioByTag('${cat}', this)">${cat}</button>`;
-            });
-        }
-
-        function filterPortfolioByTag(selectedTag, btnElement) {
-            document.querySelectorAll('#portfolioTagsContainer .tag-filter-btn').forEach(b => b.classList.remove('active'));
-            if(btnElement) btnElement.classList.add('active');
-
-            if (selectedTag === 'Semua') {
-                renderPortfolio(fetchedPortfolioData);
-            } else {
-                const filtered = fetchedPortfolioData.filter(item => item.kategori && item.kategori.trim().toLowerCase() === selectedTag.toLowerCase());
-                renderPortfolio(filtered);
-            }
-        }
-
-        function renderPortfolio(items) {
-            const container = document.getElementById('portfolioGalleryContainer');
-            container.innerHTML = '';
-
-            if (items.length === 0) {
-                container.innerHTML = '<div class="no-results-msg">Tidak ada portofolio dalam kategori ini.</div>';
-                return;
-            }
-
-            items.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'gallery-card';
-                card.onclick = () => openPortfolioModal(item);
-
-                const rawThumb = item.foto1 || item.foto2 || item.foto3 || '';
-                const thumbImg = convertGoogleDriveUrl(rawThumb);
-
-                card.innerHTML = `
-                    ${thumbImg ? `<img src="${thumbImg}" alt="${item.nama}" class="gallery-img" loading="lazy" onerror="handleImgError(this, '${rawThumb}')">` : ''}
-                    <div class="gallery-info">
-                        ${item.kategori ? `<span class="pill-tag pill-cat" style="align-self: flex-start;">${item.kategori}</span>` : ''}
-                        <h3 class="gallery-title">${item.nama}</h3>
-                        <button class="btn-gallery-cta">
-                            <i class="fab fa-whatsapp"></i> Order Sekarang!
-                        </button>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function openPortfolioModal(item) {
-            const rawImages = [item.foto1, item.foto2, item.foto3].filter(Boolean);
-            const images = rawImages.map(convertGoogleDriveUrl).filter(Boolean);
-
-            setupModalSlider(images, item.nama, rawImages);
-
-            const catBadge = document.getElementById('modalCategory');
-            if (item.kategori) {
-                catBadge.style.display = 'inline-block';
-                catBadge.innerText = item.kategori;
-            } else {
-                catBadge.style.display = 'none';
-            }
-
-            document.getElementById('modalTitle').innerText = item.nama;
-            
-            const subtitle = document.getElementById('modalSubtitle');
-            subtitle.style.display = 'none';
-
-            document.getElementById('modalBody').innerText = `Hasil karya ${item.nama} oleh tim Oink Project.`;
-
-            const waBtn = document.getElementById('modalWaBtn');
-            const waMsg = encodeURIComponent(`Halo Admin Oink Project, saya mau order karya seperti di portofolio: ${item.nama}`);
-            waBtn.href = `https://wa.me/6285155091238?text=${waMsg}`;
-
-            document.getElementById('modalOverlay').classList.add('active');
-        }
-
-        /* ==========================================================================
-           5. GOOGLE SHEETS TESTIMONIALS INTEGRATION
-           ========================================================================== */
-        async function fetchTestimonialsFromGoogleSheets() {
-            const container = document.getElementById('testimonialsContainer');
-            try {
-                const response = await fetch(TESTIMONIAL_SHEET_URL);
-                const csvText = await response.text();
-
-                fetchedTestimonialData = parseCSV(csvText).reverse();
-
-                if (fetchedTestimonialData.length === 0) {
-                    container.innerHTML = '<div class="no-results-msg">Belum ada testimoni.</div>';
-                    return;
-                }
-
-                renderTestimonials(fetchedTestimonialData);
-            } catch (error) {
-                console.error('Error fetching Testimonials:', error);
-                container.innerHTML = '<div class="no-results-msg"><i class="fas fa-exclamation-triangle" style="font-size: 1.5rem; margin-bottom: 6px; display: block; color: var(--card-coral);"></i>Gagal memuat testimoni dari Google Sheets.</div>';
-            }
-        }
-
-        function renderTestimonials(items) {
-            const container = document.getElementById('testimonialsContainer');
-            container.innerHTML = '';
-
-            items.forEach(t => {
-                const card = document.createElement('div');
-                card.className = 'testi-card';
-                
-                const clientName = t.nama || 'Klien Oink Project';
-                const clientText = t.testimoni || t.teks || '';
-                const rawImg = t.foto1 || t.foto || '';
-                const proofImg = convertGoogleDriveUrl(rawImg);
-
-                card.onclick = () => openTestimonialModal({
-                    name: clientName,
-                    text: clientText,
-                    img: proofImg,
-                    rawImg: rawImg
-                });
-
-                card.innerHTML = `
-                    <div class="testi-content-left">
-                        <div>
-                            <div class="testi-name">${clientName}</div>
-                            <div class="testi-stars">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            </div>
-                            <p class="testi-text">"${clientText}"</p>
-                        </div>
-                        <span class="testi-badge-proof">
-                            <i class="fas fa-receipt"></i> Lihat Bukti Chat WA <i class="fas fa-chevron-right"></i>
-                        </span>
-                    </div>
-                    ${proofImg ? `<img src="${proofImg}" alt="Bukti ${clientName}" class="testi-thumb-img" onerror="handleImgError(this, '${rawImg}')">` : ''}
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function openTestimonialModal(data) {
-            const images = data.img ? [data.img] : [];
-            const rawImages = data.rawImg ? [data.rawImg] : [];
-            setupModalSlider(images, data.name, rawImages);
-
-            document.getElementById('modalCategory').style.display = 'none';
-            document.getElementById('modalSubtitle').style.display = 'none';
-
-            document.getElementById('modalTitle').innerText = data.name;
-            document.getElementById('modalBody').innerText = data.text;
-
-            const waBtn = document.getElementById('modalWaBtn');
-            const waMsg = encodeURIComponent(`Halo Admin Oink Project, saya mau order tugas juga seperti testimoni dari Kak ${data.name}`);
-            waBtn.href = `https://wa.me/6285155091238?text=${waMsg}`;
-
-            document.getElementById('modalOverlay').classList.add('active');
-        }
-
-        /* ==========================================================================
-           6. MODAL CAROUSEL / SLIDER LOGIC
-           ========================================================================== */
-        function setupModalSlider(imagesArray, title, rawImagesArray = []) {
-            const track = document.getElementById('modalSliderTrack');
-            const dotsContainer = document.getElementById('sliderDots');
-            const btnPrev = document.getElementById('sliderBtnPrev');
-            const btnNext = document.getElementById('sliderBtnNext');
-            const sliderBox = document.getElementById('modalSliderContainer');
-
-            track.innerHTML = '';
-            dotsContainer.innerHTML = '';
-            currentSlideIndex = 0;
-
-            const validImages = imagesArray.filter(img => img && img.trim() !== '');
-
-            if (validImages.length === 0) {
-                sliderBox.style.display = 'none';
-                return;
-            } else {
-                sliderBox.style.display = 'block';
-            }
-
-            totalSlidesCount = validImages.length;
-
-            validImages.forEach((imgUrl, index) => {
-                const rawUrl = rawImagesArray[index] || '';
-                const slide = document.createElement('div');
-                slide.className = 'slide-item';
-                slide.innerHTML = `<img src="${imgUrl}" alt="${title}" onerror="handleImgError(this, '${rawUrl}')">`;
-                track.appendChild(slide);
-
-                if (totalSlidesCount > 1) {
-                    const dot = document.createElement('div');
-                    dot.className = `dot ${index === 0 ? 'active' : ''}`;
-                    dot.onclick = () => goToSlide(index);
-                    dotsContainer.appendChild(dot);
-                }
-            });
-
-            if (totalSlidesCount > 1) {
-                btnPrev.style.display = 'flex';
-                btnNext.style.display = 'flex';
-                dotsContainer.style.display = 'flex';
-            } else {
-                btnPrev.style.display = 'none';
-                btnNext.style.display = 'none';
-                dotsContainer.style.display = 'none';
-            }
-
-            updateSliderPosition();
-        }
-
-        function moveSlide(direction) {
-            currentSlideIndex += direction;
-            if (currentSlideIndex < 0) currentSlideIndex = totalSlidesCount - 1;
-            if (currentSlideIndex >= totalSlidesCount) currentSlideIndex = 0;
-            updateSliderPosition();
-        }
-
-        function goToSlide(index) {
-            currentSlideIndex = index;
-            updateSliderPosition();
-        }
-
-        function updateSliderPosition() {
-            const track = document.getElementById('modalSliderTrack');
-            track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
-
-            const dots = document.querySelectorAll('.slider-dots .dot');
-            dots.forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === currentSlideIndex);
-            });
-        }
-
-        /* ==========================================================================
-           7. DUAL LINE CHART (2025 VS 2026)
+           DUAL LINE CHART (2025 VS 2026)
            ========================================================================== */
         const monthsList = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
         const data2025 = [ { month: 'Jan', val: 22 }, { month: 'Feb', val: 24 }, { month: 'Mar', val: 20 }, { month: 'Apr', val: 28 }, { month: 'Mei', val: 27 }, { month: 'Jun', val: 53 }, { month: 'Jul', val: 27 }, { month: 'Ags', val: 20 }, { month: 'Sep', val: 40 }, { month: 'Okt', val: 47 }, { month: 'Nov', val: 45 }, { month: 'Des', val: 38 } ];
@@ -1583,27 +772,8 @@
         }
 
         /* ==========================================================================
-           8. COMMON APP LOGIC
+           COMMON APP LOGIC
            ========================================================================== */
-        function closeModal() {
-            document.getElementById('modalOverlay').classList.remove('active');
-        }
-
-        function closeModalOnOuterClick(e) {
-            if (e.target.id === 'modalOverlay') closeModal();
-        }
-
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-            const targetTab = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.getAttribute('onclick').includes(tabName));
-            if(targetTab) targetTab.classList.add('active');
-
-            document.getElementById(tabName + '-tab').classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
         function copyShareLink() {
             navigator.clipboard.writeText(window.location.href).then(() => {
                 const toast = document.getElementById('toast');
@@ -1614,9 +784,6 @@
 
         // Initial Load App
         document.addEventListener('DOMContentLoaded', () => {
-            fetchServicesFromGoogleSheets();
-            fetchPortfolioFromGoogleSheets();
-            fetchTestimonialsFromGoogleSheets();
             renderDualLineChart();
         });
     </script>
