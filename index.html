@@ -16,40 +16,6 @@
     <meta property="og:description" content="Layanan akademik terpercaya: Bimbingan Skripsi, Kompres PPT, Makalah, & Tugas Koding. Fast Response 24/7.">
     <meta property="og:type" content="website">
 
-    <!-- Structured Data Google Search (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Oink Project",
-      "description": "Layanan pendampingan & pengerjaan tugas akademik, bimbingan skripsi, kompres PPT, dan pemrograman web.",
-      "url": "https://oinkproject.com",
-      "priceRange": "Rp25.000 - Rp500.000",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Katalog Layanan Akademik",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Jasa Mengecilkan Ukuran PPT & Desain Presentasi",
-              "description": "Jasa kompres ukuran file PPT agar ringan tanpa merusak kualitas visual dan layout presentasi."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Bimbingan Skripsi & Proposal",
-              "description": "Bimbingan Bab 1-5, olah data SPSS, SmartPLS, dan persiapan sidang skripsi."
-            }
-          }
-        ]
-      }
-    }
-    </script>
-    
     <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -147,15 +113,20 @@
         .brand-icon {
             width: 36px;
             height: 36px;
-            background: var(--card-cyan);
-            color: #ffffff;
             border-radius: 50%;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            font-size: 1.1rem;
             box-shadow: 0 3px 8px rgba(5, 187, 192, 0.3);
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+        }
+
+        .brand-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .brand-name {
@@ -251,40 +222,46 @@
             color: var(--text-main);
         }
 
-        /* Profile Banner Card */
+        /* Profile Banner Card (Background Gambar & Rata Kiri) */
         .profile-card {
-            background: var(--card-cyan);
+            background: linear-gradient(135deg, rgba(5, 187, 192, 0.85), rgba(17, 24, 39, 0.75)), 
+                        url('https://i.ibb.co.com/g1pGhgk/FASILITAS-TOKO-01-21.webp') center/cover no-repeat;
             border-radius: var(--radius-lg);
             padding: 24px 20px;
             color: #ffffff;
-            text-align: center;
+            text-align: left; /* Teks Rata Kiri */
             box-shadow: 0 8px 20px rgba(5, 187, 192, 0.25);
             margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
         }
 
         .avatar-box {
             width: 76px;
             height: 76px;
             background: #ffffff;
-            color: var(--card-cyan);
             border-radius: 50%;
-            margin: 0 auto 12px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            font-weight: 800;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 0 0 14px 0; /* Margin Kiri 0 */
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border: 2px solid #ffffff;
+        }
+
+        .avatar-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .profile-card h1 {
             font-size: 1.5rem;
             font-weight: 800;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 6px;
+            justify-content: flex-start; /* Alignment Kiri */
+            gap: 8px;
         }
 
         .verified-badge { font-size: 1.1rem; color: #ffc425; }
@@ -293,24 +270,26 @@
             font-size: 0.85rem;
             opacity: 0.95;
             line-height: 1.4;
-            max-width: 320px;
-            margin: 0 auto 16px auto;
+            max-width: 340px;
+            margin: 0 0 16px 0; /* Margin Kiri 0 */
         }
 
         .stats-row {
             display: flex;
-            justify-content: center;
-            gap: 16px;
-            background: rgba(0, 0, 0, 0.12);
-            padding: 10px 16px;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(6px);
+            padding: 12px 18px;
             border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        .stat-item { text-align: center; }
+        .stat-item { text-align: left; }
         .stat-val { font-size: 0.95rem; font-weight: 800; }
         .stat-lbl { font-size: 0.68rem; opacity: 0.9; text-transform: uppercase; }
 
-        /* MULTI-LINE CHART STYLES PRESISI */
+        /* MULTI-LINE CHART STYLES */
         .chart-card {
             background: #ffffff;
             border-radius: var(--radius-md);
@@ -386,7 +365,7 @@
 
         .btn-wa-cta:hover { background: var(--wa-hover); transform: translateY(-2px); }
 
-        /* SEARCH BAR COMPONENT */
+        /* SEARCH BAR */
         .search-box-wrapper {
             position: relative;
             margin-bottom: 14px;
@@ -420,14 +399,14 @@
             font-size: 0.95rem;
         }
 
-        /* MODEL GALLERY UNTUK LAYANAN (GRID 2 KOLOM) */
-        .services-gallery-grid {
+        /* MODEL GALLERY UNTUK LAYANAN & PORTOFOLIO */
+        .services-gallery-grid, .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
         }
 
-        .service-gallery-card {
+        .service-gallery-card, .gallery-card {
             background: #fffdfa;
             border: 1px solid #efe8e1;
             border-radius: var(--radius-md);
@@ -440,13 +419,13 @@
             box-shadow: var(--shadow-sm);
         }
 
-        .service-gallery-card:hover {
+        .service-gallery-card:hover, .gallery-card:hover {
             transform: translateY(-3px);
             border-color: var(--card-cyan);
             box-shadow: var(--shadow-md);
         }
 
-        .service-gallery-img {
+        .service-gallery-img, .gallery-img {
             width: 100%;
             aspect-ratio: 1 / 1;
             object-fit: cover;
@@ -454,7 +433,7 @@
             background: #f1f5f9;
         }
 
-        .service-gallery-info {
+        .service-gallery-info, .gallery-info {
             padding: 12px;
             display: flex;
             flex-direction: column;
@@ -463,7 +442,7 @@
             justify-content: space-between;
         }
 
-        .service-gallery-title {
+        .service-gallery-title, .gallery-title {
             font-size: 0.88rem;
             font-weight: 800;
             color: var(--text-main);
@@ -474,8 +453,9 @@
         .pill-tag { font-size: 0.65rem; font-weight: 800; padding: 3px 8px; border-radius: 20px; }
         .pill-price { background: #e6f8f8; color: var(--card-cyan); }
         .pill-time { background: #fff3d6; color: #d97706; }
+        .pill-cat { background: #f1f5f9; color: var(--text-muted); border: 1px solid var(--border-color); }
 
-        .btn-service-cta {
+        .btn-service-cta, .btn-gallery-cta {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -491,12 +471,47 @@
             transition: var(--transition);
         }
 
-        .no-results-msg {
+        .btn-gallery-cta { background: var(--wa-color); }
+
+        /* CATEGORY FILTER TAG BUTTONS (PORTOFOLIO) */
+        .category-tags-container {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+            scrollbar-width: none;
+        }
+
+        .category-tags-container::-webkit-scrollbar { display: none; }
+
+        .tag-filter-btn {
+            white-space: nowrap;
+            padding: 7px 14px;
+            border-radius: 20px;
+            border: 1.5px solid var(--border-color);
+            background: #fffdfa;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .tag-filter-btn.active {
+            background: var(--card-cyan);
+            color: #ffffff;
+            border-color: var(--card-cyan);
+            box-shadow: 0 4px 10px rgba(5, 187, 192, 0.25);
+        }
+
+        .loading-msg, .no-results-msg {
             grid-column: 1 / -1;
             text-align: center;
-            padding: 24px 10px;
+            padding: 30px 10px;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             font-weight: 600;
         }
 
@@ -529,41 +544,6 @@
 
         .social-card i { font-size: 1.3rem; }
         .social-card span { font-size: 0.68rem; font-weight: 700; }
-
-        /* Gallery Grid Portofolio */
-        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-
-        .gallery-card {
-            background: var(--card-white);
-            border-radius: var(--radius-md);
-            border: 1px solid #efe8e1;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .gallery-card:hover { transform: translateY(-3px); border-color: var(--card-cyan); }
-        .gallery-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
-        .gallery-info { padding: 12px; display: flex; flex-direction: column; gap: 8px; flex-grow: 1; justify-content: space-between; }
-        .gallery-title { font-size: 0.85rem; font-weight: 800; color: var(--text-main); }
-
-        .btn-gallery-cta {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            width: 100%;
-            padding: 8px;
-            background: var(--wa-color);
-            color: #ffffff;
-            font-size: 0.72rem;
-            font-weight: 800;
-            border-radius: var(--radius-sm);
-            border: none;
-        }
 
         /* FAQ Static */
         .faq-item-static {
@@ -598,7 +578,7 @@
         .testi-text { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 8px; }
         .testi-badge-proof { font-size: 0.72rem; font-weight: 800; color: var(--card-cyan); }
 
-        /* Modal Overlay */
+        /* MODAL CAROUSEL / SLIDER STYLES */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -641,17 +621,21 @@
             width: 34px;
             height: 34px;
             border-radius: 50%;
-            background: #f1f5f9;
-            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--border-color);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-muted);
             font-size: 0.9rem;
+            z-index: 20;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
-        .modal-img-wrapper {
+        /* Carousel Outer Box */
+        .slider-container {
+            position: relative;
             width: 100%;
             aspect-ratio: 1 / 1;
             border-radius: var(--radius-sm);
@@ -661,7 +645,73 @@
             border: 1px solid var(--border-color);
         }
 
-        .modal-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .slider-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .slide-item {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .slide-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Nav Buttons (Next/Prev) */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--text-main);
+            z-index: 10;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .slider-btn.prev { left: 8px; }
+        .slider-btn.next { right: 8px; }
+
+        /* Indicators (Dots) */
+        .slider-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background: var(--card-cyan);
+            width: 16px;
+            border-radius: 10px;
+        }
+
         .category-badge { display: inline-block; background: #e6f8f8; color: var(--card-cyan); font-size: 0.7rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; margin-bottom: 8px; text-transform: uppercase; }
         .modal-title { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; }
         .modal-subtitle { font-size: 0.82rem; color: var(--text-muted); font-weight: 600; margin-bottom: 12px; }
@@ -710,7 +760,9 @@
         <!-- Top Navigation Bar Header -->
         <header class="nav-bar">
             <a href="#" class="brand-logo-nav" aria-label="Oink Project Home">
-                <div class="brand-icon">O</div>
+                <div class="brand-icon">
+                    <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Logo">
+                </div>
                 <span class="brand-name">Oink Project</span>
             </a>
             <div class="nav-actions">
@@ -728,12 +780,12 @@
         </nav>
 
         <main>
-            <!-- 1. TAB UTAMA (HOME & LAYANAN SEO GALLERY) -->
+            <!-- 1. TAB UTAMA -->
             <section id="main-tab" class="tab-content active">
-                <!-- Profile Banner Card -->
+                <!-- Profile Banner Card (Background Foto & Teks Rata Kiri) -->
                 <article class="profile-card">
                     <div class="avatar-box">
-                        <i class="fas fa-piggy-bank"></i>
+                        <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Profile">
                     </div>
                     <h1>Oink Project <i class="fas fa-check-circle verified-badge"></i></h1>
                     <p class="tagline">Partner Pendampingan & Joki Tugas Akademik Terpercaya. Cepat, Murah, Rapih, & Amanah.</p>
@@ -754,7 +806,7 @@
                     </div>
                 </article>
 
-                <!-- DUAL LINE CHART (2025 vs 2026) -->
+                <!-- DUAL LINE CHART -->
                 <article class="chart-card">
                     <div class="chart-header">
                         <div>
@@ -824,54 +876,59 @@
                     </div>
                 </article>
 
-                <!-- KATALOG LAYANAN MODEL GALLERY + SEARCH BAR (SEO OPTIMIZED) -->
+                <!-- KATALOG LAYANAN (TERINTEGRASI DENGAN GOOGLE SHEETS) -->
                 <article class="section-card">
                     <div class="section-header">
                         <h2>Katalog Layanan Akademik</h2>
                     </div>
 
-                    <!-- Search Bar untuk cari layanan spesifik (ex: kecilin ppt) -->
                     <div class="search-box-wrapper">
                         <i class="fas fa-magnifying-glass search-icon"></i>
-                        <input type="text" id="serviceSearchInput" class="search-input" placeholder="Cari layanan (misal: kecilin ppt, skripsi, koding)..." oninput="filterServices()">
+                        <input type="text" id="serviceSearchInput" class="search-input" placeholder="Cari layanan (misal: kecilin ppt, skripsi)..." oninput="filterServices()">
                     </div>
 
-                    <!-- Dynamic Service Gallery Grid (Di-render dari JavaScript) -->
                     <div class="services-gallery-grid" id="servicesGalleryContainer">
-                        <!-- Dynamic Content Rendered Here -->
+                        <div class="loading-msg">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 8px; display: block; color: var(--card-cyan);"></i>
+                            Memuat layanan dari Google Sheets...
+                        </div>
                     </div>
                 </article>
             </section>
 
-            <!-- 2. TAB GALERI PORTFOLIO -->
+            <!-- 2. TAB GALERI PORTFOLIO (GOOGLESHEET + CATEGORY TAG FILTERS) -->
             <section id="gallery-tab" class="tab-content">
                 <article class="section-card">
                     <div class="section-header">
                         <h2>Portofolio Pengerjaan</h2>
                     </div>
-                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px;">Hasil karya pengerjaan tugas oleh tim Oink Project. Klik kartu untuk melihat detail sampel!</p>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Hasil karya pengerjaan tugas oleh tim Oink Project. Klik kartu untuk melihat detail sampel!</p>
                     
+                    <!-- Tag Category Buttons (Dynamic) -->
+                    <div class="category-tags-container" id="portfolioTagsContainer">
+                        <button class="tag-filter-btn active" onclick="filterPortfolioByTag('Semua', this)">Semua</button>
+                    </div>
+
                     <div class="gallery-grid" id="portfolioGalleryContainer">
-                        <!-- Dynamic Portfolio Items Rendered Here -->
+                        <div class="loading-msg">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 8px; display: block; color: var(--card-cyan);"></i>
+                            Memuat portofolio...
+                        </div>
                     </div>
                 </article>
             </section>
 
             <!-- 3. TAB FAQ & TESTIMONI -->
             <section id="info-tab" class="tab-content">
-                <!-- Testimoni -->
                 <article class="section-card">
                     <div class="section-header">
                         <h2>Apa Kata Klien?</h2>
                     </div>
                     <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;">Klik ulasan di bawah untuk melihat bukti tangkapan layar chat asli!</p>
                     
-                    <div id="testimonialsContainer">
-                        <!-- Dynamic Testimonials Rendered Here -->
-                    </div>
+                    <div id="testimonialsContainer"></div>
                 </article>
 
-                <!-- FAQ Static (SEO Friendly) -->
                 <article class="section-card">
                     <div class="section-header">
                         <h2>Pertanyaan Umum (FAQ)</h2>
@@ -911,13 +968,21 @@
         </main>
     </div>
 
-    <!-- MODAL POPUP CONTAINER -->
+    <!-- MODAL POPUP SLIDER / CAROUSEL -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOuterClick(event)">
         <div class="modal-container">
             <button class="modal-close" onclick="closeModal()" aria-label="Tutup"><i class="fas fa-times"></i></button>
             
-            <div class="modal-img-wrapper">
-                <img id="modalImg" class="modal-img" src="" alt="Detail Gambar">
+            <!-- SLIDER BOX -->
+            <div class="slider-container" id="modalSliderContainer">
+                <div class="slider-track" id="modalSliderTrack"></div>
+                
+                <!-- Buttons Slider -->
+                <button class="slider-btn prev" id="sliderBtnPrev" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next" id="sliderBtnNext" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
+                
+                <!-- Dots Indikator -->
+                <div class="slider-dots" id="sliderDots"></div>
             </div>
 
             <div id="modalCategory" class="category-badge">Category</div>
@@ -932,151 +997,126 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT DATA & APP LOGIC -->
+    <!-- JAVASCRIPT LOGIC, GOOGLE DRIVE CONVERTER, & CAROUSEL SLIDER -->
     <script>
-        /* ==========================================================================
-           1. DATA STORE (TEMPAT UPDATE KONTEN DENGAN MUDAH & CEPAT)
-           Kamu cukup edit/tambah objek di bawah ini untuk menambah layanan baru!
-           ========================================================================== */
-        const SITE_DATA = {
-            // Katalog Layanan (Model Gallery + Keywords Search SEO)
-            services: [
-                {
-                    id: 'service-ppt-kompres',
-                    title: 'Jasa Mengecilkan PPT & Redesain',
-                    category: 'Desain Visual',
-                    price: 'Rp 25k',
-                    time: '1 Hari',
-                    image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=500&h=500&q=80',
-                    keywords: ['kecilin ppt', 'kompres ppt', 'ukuran ppt', 'desain ppt', 'powerpoint', 'slide', 'kecilkan file'],
-                    description: '• Jasa kompres ukuran file PPT/PowerPoint agar ringan di bawah batas MB tanpa merusak kualitas visual.\n• Penataan ulang layout slide presentasi agar rapi, estetis, dan profesional.\n• Cocok untuk pengumpulan tugas kampus atau seminar.',
-                    waText: 'Halo%20Admin%20Oink%20Project,%20saya%20mau%20jasa%20mengecilkan%20ukuran%20file%20PPT'
-                },
-                {
-                    id: 'service-skripsi',
-                    title: 'Bimbingan Skripsi & Proposal',
-                    category: 'Layanan Akademik',
-                    price: 'Rp 150k',
-                    time: '3-7 Hari',
-                    image: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=500&h=500&q=80',
-                    keywords: ['skripsi', 'proposal', 'bimbingan', 'bab 1', 'bab 2', 'bab 3', 'bab 4', 'bab 5', 'spss', 'olah data', 'ta'],
-                    description: '• Pembuatan Bab 1 - Bab 5 Skripsi & Thesis.\n• Pengolahan Data Kuantitatif (SPSS/SmartPLS/EViews) & Kualitatif.\n• Pendampingan persiapan materi sidang & garansi revisi.',
-                    waText: 'Halo%20Admin%20Oink%20Project,%20saya%20ingin%20konsultasi%20Bimbingan%20Skripsi'
-                },
-                {
-                    id: 'service-makalah',
-                    title: 'Makalah, Jurnal & Essay',
-                    category: 'Layanan Utama',
-                    price: 'Rp 35k',
-                    time: '1-2 Hari',
-                    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=500&h=500&q=80',
-                    keywords: ['makalah', 'jurnal', 'essay', 'esai', 'turnitin', 'paper', 'tugas tulisan', 'tugas kuliah'],
-                    description: '• Format rapi sesuai pedoman kampus (APA/IEEE/MLA).\n• Dilengkapi footnote, daftar pustaka, & struktur standar.\n• Cek Turnitin bebas plagiasi & gratis revisi.',
-                    waText: 'Halo%20Admin%20Oink%20Project,%20saya%20ingin%20pesan%20layanan%20Makalah/Jurnal'
-                },
-                {
-                    id: 'service-coding',
-                    title: 'Tugas Koding & Website',
-                    category: 'IT & Solution',
-                    price: 'Rp 50k',
-                    time: '1-3 Hari',
-                    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&h=500&q=80',
-                    keywords: ['coding', 'koding', 'website', 'html', 'css', 'javascript', 'php', 'python', 'java', 'web'],
-                    description: '• Bahasa: HTML/CSS/JS, PHP, Python, Java, C++, Laravel.\n• Full Source Code + Penjelasan logika program.\n• Bebas konsultasi running code sampai bisa.',
-                    waText: 'Halo%20Admin%20Oink%20Project,%20saya%20mau%20bantu%20tugas%20Koding/Pemrograman'
-                }
-            ],
+        // GOOGLE SHEETS CSV URLS
+        const SERVICES_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSlsGyu7iUeP92Q1NlLV_Qfa0lIcY-mljREp7wX4RiiBv0b4umDY76YEy1kQ_zwldfWTWJucnJfRyR/pub?gid=1684071153&single=true&output=csv';
+        const PORTFOLIO_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSlsGyu7iUeP92Q1NlLV_Qfa0lIcY-mljREp7wX4RiiBv0b4umDY76YEy1kQ_zwldfWTWJucnJfRyR/pub?gid=1276446965&single=true&output=csv';
 
-            // Portfolio Items
-            portfolio: [
-                {
-                    id: 'work-1',
-                    title: 'Makalah Hukum Bisnis & Etika',
-                    category: 'Portofolio Sample',
-                    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=500&h=500&q=80',
-                    description: 'Sampel pengerjaan makalah Hukum Bisnis mahasiswa semester 4 lengkap dengan daftar pustaka gaya APA dan skor Turnitin di bawah 15%.',
-                    waText: 'Halo%20Admin%20Oink%20Project,%20saya%20mau%20pesan%20tugas%20seperti%20Makalah%20Hukum%20Bisnis'
-                },
-                {
-                    id: 'work-2',
-                    title: 'Aplikasi Web Responsive HTML/CSS',
-                    category: 'Portofolio Sample',
-                    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&h=500&q=80',
-                    description: 'Sampel proyek tugas akhir koding pemrograman web responsif dengan fitur formulir validasi serta tampilan mobile-friendly.',
-                    waText: 'Halo%20Admin%20Oink%20Project,%20saya%20mau%20pesan%20tugas%20seperti%20Aplikasi%20Web'
-                },
-                {
-                    id: 'work-3',
-                    title: 'Slide PPT Animatif Sidang TA',
-                    category: 'Portofolio Sample',
-                    image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=500&h=500&q=80',
-                    description: 'Sampel desain slide presentasi estetis untuk ujian sidang skripsi dengan ringkasan poin-poin penting dan kompres ukuran file.',
-                    waText: 'Halo%20Admin%20Oink%20Project,%20saya%20mau%20pesan%20tugas%20seperti%20PPT%20Sidang'
-                },
-                {
-                    id: 'work-4',
-                    title: 'Pengolahan Data SPSS Bab 4',
-                    category: 'Portofolio Sample',
-                    image: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=500&h=500&q=80',
-                    description: 'Sampel olah data statistik SPSS 26 mencakup Uji Validitas, Reliabilitas, Uji Asumsi Klasik, serta interpretasi pembahasan Bab 4.',
-                    waText: 'Halo%20Admin%20Oink%20Project,%20saya%20mau%20pesan%20tugas%20seperti%20Olah%20Data%20SPSS'
-                }
-            ],
-
-            // Testimonials
-            testimonials: [
-                {
-                    id: 'proof-1',
-                    name: 'Rian Prasetya',
-                    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-                    text: '"Pengerjaan koding Python super cepat! Adminnya ramah dan diajarin sampai paham cara runningnya."',
-                    proofImg: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&h=600&q=80',
-                    waText: 'Halo%20Admin%20Oink%20Project,%20saya%20mau%20order%20tugas%20koding%20juga'
-                },
-                {
-                    id: 'proof-2',
-                    name: 'Siti Aminah',
-                    avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80',
-                    text: '"Makalah kilat selesai tidak sampai 24 jam. Turnitin aman bebas plagiasi. PPT juga dikecilkan rapi bgt!"',
-                    proofImg: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&w=600&h=600&q=80',
-                    waText: 'Halo%20Admin%20Oink%20Project,%20saya%20mau%20order%20makalah%20kilat'
-                }
-            ]
-        };
+        let fetchedServicesData = [];
+        let fetchedPortfolioData = [];
+        let currentSlideIndex = 0;
+        let totalSlidesCount = 0;
 
         /* ==========================================================================
-           2. DYNAMIC UI RENDERERS
+           1. AUTOMATIC GOOGLE DRIVE TO DIRECT CDN LINK CONVERTER
            ========================================================================== */
-        
-        // Render Service Gallery Items
-        function renderServices(itemsToRender) {
+        function convertGoogleDriveUrl(url) {
+            if (!url || typeof url !== 'string') return '';
+            url = url.trim();
+            if (!url) return '';
+
+            if (/^[a-zA-Z0-9_-]{25,50}$/.test(url)) {
+                return `https://lh3.googleusercontent.com/d/${url}`;
+            }
+
+            const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || 
+                          url.match(/id=([a-zA-Z0-9_-]+)/) ||
+                          url.match(/file\/d\/([a-zA-Z0-9_-]+)/);
+
+            if (match && match[1]) {
+                return `https://lh3.googleusercontent.com/d/${match[1]}`;
+            }
+
+            return url;
+        }
+
+        /* ==========================================================================
+           2. CSV PARSER LOGIC
+           ========================================================================== */
+        function parseCSV(text) {
+            const lines = text.trim().split(/\r\n|\n/);
+            if (lines.length < 2) return [];
+
+            const splitRow = (row) => {
+                const result = [];
+                let insideQuote = false;
+                let entry = '';
+                for (let i = 0; i < row.length; i++) {
+                    const char = row[i];
+                    if (char === '"' || char === "'") {
+                        insideQuote = !insideQuote;
+                    } else if (char === ',' && !insideQuote) {
+                        result.push(entry.trim().replace(/^["']|["']$/g, ''));
+                        entry = '';
+                    } else {
+                        entry += char;
+                    }
+                }
+                result.push(entry.trim().replace(/^["']|["']$/g, ''));
+                return result;
+            };
+
+            const headers = splitRow(lines[0]).map(h => h.toLowerCase());
+            
+            return lines.slice(1).map(line => {
+                if (!line.trim()) return null;
+                const values = splitRow(line);
+                const obj = {};
+                headers.forEach((header, index) => {
+                    obj[header] = values[index] || '';
+                });
+                return obj;
+            }).filter(item => item !== null && (item.nama || item.kategori));
+        }
+
+        /* ==========================================================================
+           3. SERVICES TAB INTEGRATION (POSTINGAN BARU DI ATAS)
+           ========================================================================== */
+        async function fetchServicesFromGoogleSheets() {
+            const container = document.getElementById('servicesGalleryContainer');
+            try {
+                const response = await fetch(SERVICES_SHEET_URL);
+                const csvText = await response.text();
+                
+                fetchedServicesData = parseCSV(csvText).reverse();
+
+                if (fetchedServicesData.length === 0) {
+                    container.innerHTML = '<div class="no-results-msg">Belum ada layanan di Google Sheets.</div>';
+                    return;
+                }
+
+                renderServices(fetchedServicesData);
+            } catch (error) {
+                console.error('Error fetching Services:', error);
+                container.innerHTML = '<div class="no-results-msg"><i class="fas fa-exclamation-triangle" style="font-size: 1.5rem; margin-bottom: 6px; display: block; color: var(--card-coral);"></i>Gagal memuat data Layanan dari Google Sheets.</div>';
+            }
+        }
+
+        function renderServices(items) {
             const container = document.getElementById('servicesGalleryContainer');
             container.innerHTML = '';
 
-            if (itemsToRender.length === 0) {
-                container.innerHTML = '<div class="no-results-msg"><i class="fas fa-circle-exclamation" style="font-size: 1.5rem; margin-bottom: 6px; display: block;"></i>Layanan tidak ditemukan. Coba kata kunci lain seperti "skripsi" atau "ppt".</div>';
+            if (items.length === 0) {
+                container.innerHTML = '<div class="no-results-msg"><i class="fas fa-circle-exclamation" style="font-size: 1.5rem; margin-bottom: 6px; display: block;"></i>Layanan tidak ditemukan.</div>';
                 return;
             }
 
-            itemsToRender.forEach(srv => {
+            items.forEach(srv => {
                 const card = document.createElement('div');
                 card.className = 'service-gallery-card';
-                card.onclick = () => openModalCustom({
-                    category: srv.category,
-                    title: srv.title,
-                    subtitle: `Estimasi: ${srv.time} | Harga: ${srv.price}`,
-                    image: srv.image,
-                    body: srv.description,
-                    waText: srv.waText
-                });
+                card.onclick = () => openServiceModal(srv);
+
+                const thumbImgRaw = srv.foto1 || srv.foto2 || '';
+                const thumbImage = convertGoogleDriveUrl(thumbImgRaw) || 'https://picsum.photos/500/500';
 
                 card.innerHTML = `
-                    <img src="${srv.image}" alt="${srv.title}" class="service-gallery-img" loading="lazy">
+                    <img src="${thumbImage}" alt="${srv.nama}" class="service-gallery-img" loading="lazy" onerror="this.src='https://picsum.photos/500/500'">
                     <div class="service-gallery-info">
-                        <h3 class="service-gallery-title">${srv.title}</h3>
+                        <h3 class="service-gallery-title">${srv.nama}</h3>
                         <div class="pills-group">
-                            <span class="pill-tag pill-price">${srv.price}</span>
-                            <span class="pill-tag pill-time"><i class="far fa-clock"></i> ${srv.time}</span>
+                            ${srv.harga ? `<span class="pill-tag pill-price">${srv.harga}</span>` : ''}
+                            ${srv.estimasi ? `<span class="pill-tag pill-time"><i class="far fa-clock"></i> ${srv.estimasi}</span>` : ''}
                         </div>
                         <button class="btn-service-cta">
                             <i class="fas fa-eye"></i> Detail
@@ -1087,46 +1127,115 @@
             });
         }
 
-        // Live Search Filter Logic
         function filterServices() {
             const query = document.getElementById('serviceSearchInput').value.toLowerCase().trim();
             if (!query) {
-                renderServices(SITE_DATA.services);
+                renderServices(fetchedServicesData);
                 return;
             }
 
-            const filtered = SITE_DATA.services.filter(srv => {
-                const matchTitle = srv.title.toLowerCase().includes(query);
-                const matchCat = srv.category.toLowerCase().includes(query);
-                const matchDesc = srv.description.toLowerCase().includes(query);
-                const matchKw = srv.keywords.some(kw => kw.toLowerCase().includes(query));
-                return matchTitle || matchCat || matchDesc || matchKw;
+            const filtered = fetchedServicesData.filter(srv => {
+                const matchName = srv.nama ? srv.nama.toLowerCase().includes(query) : false;
+                const matchDesc = srv.deskripsi ? srv.deskripsi.toLowerCase().includes(query) : false;
+                return matchName || matchDesc;
             });
 
             renderServices(filtered);
         }
 
-        // Render Portfolio Items
-        function renderPortfolio() {
+        function openServiceModal(srv) {
+            const images = [
+                convertGoogleDriveUrl(srv.foto1),
+                convertGoogleDriveUrl(srv.foto2)
+            ];
+            setupModalSlider(images, srv.nama);
+
+            document.getElementById('modalCategory').innerText = 'Katalog Layanan';
+            document.getElementById('modalTitle').innerText = srv.nama;
+            document.getElementById('modalSubtitle').innerText = `Estimasi: ${srv.estimasi || '-'} | Harga: ${srv.harga || '-'}`;
+            document.getElementById('modalBody').innerText = srv.deskripsi || '';
+
+            const waBtn = document.getElementById('modalWaBtn');
+            const waMsg = encodeURIComponent(`Halo Admin Oink Project, saya mau pesan layanan: ${srv.nama}`);
+            waBtn.href = `https://wa.me/6285155091238?text=${waMsg}`;
+
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        /* ==========================================================================
+           4. PORTFOLIO TAB INTEGRATION (POSTINGAN BARU DI ATAS)
+           ========================================================================== */
+        async function fetchPortfolioFromGoogleSheets() {
+            const container = document.getElementById('portfolioGalleryContainer');
+            try {
+                const response = await fetch(PORTFOLIO_SHEET_URL);
+                const csvText = await response.text();
+
+                fetchedPortfolioData = parseCSV(csvText).reverse();
+
+                if (fetchedPortfolioData.length === 0) {
+                    container.innerHTML = '<div class="no-results-msg">Belum ada portofolio di Google Sheets.</div>';
+                    return;
+                }
+
+                generatePortfolioCategoryTags(fetchedPortfolioData);
+                renderPortfolio(fetchedPortfolioData);
+            } catch (error) {
+                console.error('Error fetching Portfolio:', error);
+                container.innerHTML = '<div class="no-results-msg"><i class="fas fa-exclamation-triangle" style="font-size: 1.5rem; margin-bottom: 6px; display: block; color: var(--card-coral);"></i>Gagal memuat data Portofolio dari Google Sheets.</div>';
+            }
+        }
+
+        function generatePortfolioCategoryTags(data) {
+            const tagsContainer = document.getElementById('portfolioTagsContainer');
+            const categoriesSet = new Set();
+
+            data.forEach(item => {
+                if (item.kategori && item.kategori.trim()) {
+                    categoriesSet.add(item.kategori.trim());
+                }
+            });
+
+            tagsContainer.innerHTML = `<button class="tag-filter-btn active" onclick="filterPortfolioByTag('Semua', this)">Semua</button>`;
+            categoriesSet.forEach(cat => {
+                tagsContainer.innerHTML += `<button class="tag-filter-btn" onclick="filterPortfolioByTag('${cat}', this)">${cat}</button>`;
+            });
+        }
+
+        function filterPortfolioByTag(selectedTag, btnElement) {
+            document.querySelectorAll('#portfolioTagsContainer .tag-filter-btn').forEach(b => b.classList.remove('active'));
+            if(btnElement) btnElement.classList.add('active');
+
+            if (selectedTag === 'Semua') {
+                renderPortfolio(fetchedPortfolioData);
+            } else {
+                const filtered = fetchedPortfolioData.filter(item => item.kategori && item.kategori.trim().toLowerCase() === selectedTag.toLowerCase());
+                renderPortfolio(filtered);
+            }
+        }
+
+        function renderPortfolio(items) {
             const container = document.getElementById('portfolioGalleryContainer');
             container.innerHTML = '';
 
-            SITE_DATA.portfolio.forEach(item => {
+            if (items.length === 0) {
+                container.innerHTML = '<div class="no-results-msg">Tidak ada portofolio dalam kategori ini.</div>';
+                return;
+            }
+
+            items.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'gallery-card';
-                card.onclick = () => openModalCustom({
-                    category: item.category,
-                    title: item.title,
-                    subtitle: 'Detail Hasil Pengerjaan',
-                    image: item.image,
-                    body: item.description,
-                    waText: item.waText
-                });
+                card.onclick = () => openPortfolioModal(item);
+
+                const rawThumb = item.foto1 || item.foto2 || item.foto3 || '';
+                const thumbImg = convertGoogleDriveUrl(rawThumb) || 'https://picsum.photos/500/500';
 
                 card.innerHTML = `
-                    <img src="${item.image}" alt="${item.title}" class="gallery-img" loading="lazy">
+                    <img src="${thumbImg}" alt="${item.nama}" class="gallery-img" loading="lazy" onerror="this.src='https://picsum.photos/500/500'">
                     <div class="gallery-info">
-                        <h3 class="gallery-title">${item.title}</h3>
+                        <span class="pill-tag pill-cat" style="align-self: flex-start;">${item.kategori || 'Portofolio'}</span>
+                        <h3 class="gallery-title">${item.nama}</h3>
                         <button class="btn-gallery-cta">
                             <i class="fab fa-whatsapp"></i> Order Mirip Ini
                         </button>
@@ -1136,20 +1245,119 @@
             });
         }
 
-        // Render Testimonials
+        function openPortfolioModal(item) {
+            const images = [
+                convertGoogleDriveUrl(item.foto1),
+                convertGoogleDriveUrl(item.foto2),
+                convertGoogleDriveUrl(item.foto3)
+            ];
+
+            setupModalSlider(images, item.nama);
+
+            document.getElementById('modalCategory').innerText = item.kategori || 'Portofolio';
+            document.getElementById('modalTitle').innerText = item.nama;
+            document.getElementById('modalSubtitle').innerText = 'Hasil Karya Pengerjaan';
+            document.getElementById('modalBody').innerText = `Sampel karya ${item.nama} oleh tim Oink Project. Hasil pengerjaan cepat, rapi, dan transparan.`;
+
+            const waBtn = document.getElementById('modalWaBtn');
+            const waMsg = encodeURIComponent(`Halo Admin Oink Project, saya mau order karya seperti di portofolio: ${item.nama}`);
+            waBtn.href = `https://wa.me/6285155091238?text=${waMsg}`;
+
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        /* ==========================================================================
+           5. MODAL CAROUSEL / SLIDER LOGIC
+           ========================================================================== */
+        function setupModalSlider(imagesArray, title) {
+            const track = document.getElementById('modalSliderTrack');
+            const dotsContainer = document.getElementById('sliderDots');
+            const btnPrev = document.getElementById('sliderBtnPrev');
+            const btnNext = document.getElementById('sliderBtnNext');
+
+            track.innerHTML = '';
+            dotsContainer.innerHTML = '';
+            currentSlideIndex = 0;
+
+            const validImages = imagesArray.filter(img => img && img.trim() !== '');
+            if (validImages.length === 0) validImages.push('https://picsum.photos/500/500');
+
+            totalSlidesCount = validImages.length;
+
+            validImages.forEach((imgUrl, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'slide-item';
+                slide.innerHTML = `<img src="${imgUrl}" alt="${title}" onerror="this.src='https://picsum.photos/500/500'">`;
+                track.appendChild(slide);
+
+                if (totalSlidesCount > 1) {
+                    const dot = document.createElement('div');
+                    dot.className = `dot ${index === 0 ? 'active' : ''}`;
+                    dot.onclick = () => goToSlide(index);
+                    dotsContainer.appendChild(dot);
+                }
+            });
+
+            if (totalSlidesCount > 1) {
+                btnPrev.style.display = 'flex';
+                btnNext.style.display = 'flex';
+                dotsContainer.style.display = 'flex';
+            } else {
+                btnPrev.style.display = 'none';
+                btnNext.style.display = 'none';
+                dotsContainer.style.display = 'none';
+            }
+
+            updateSliderPosition();
+        }
+
+        function moveSlide(direction) {
+            currentSlideIndex += direction;
+            if (currentSlideIndex < 0) currentSlideIndex = totalSlidesCount - 1;
+            if (currentSlideIndex >= totalSlidesCount) currentSlideIndex = 0;
+            updateSliderPosition();
+        }
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            updateSliderPosition();
+        }
+
+        function updateSliderPosition() {
+            const track = document.getElementById('modalSliderTrack');
+            track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+
+            const dots = document.querySelectorAll('.slider-dots .dot');
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentSlideIndex);
+            });
+        }
+
+        /* ==========================================================================
+           6. STATIC TESTIMONIALS DATA
+           ========================================================================== */
+        const testimonialData = [
+            {
+                name: 'Rian Prasetya',
+                avatar: 'https://picsum.photos/id/64/150/150',
+                text: '"Pengerjaan koding Python super cepat! Adminnya ramah dan diajarin sampai paham."',
+                proofImg: 'https://picsum.photos/id/60/600/600',
+                waText: 'Halo%20Admin%20Oink%20Project,%20saya%20mau%20order%20tugas%20koding%20juga'
+            }
+        ];
+
         function renderTestimonials() {
             const container = document.getElementById('testimonialsContainer');
             container.innerHTML = '';
-
-            SITE_DATA.testimonials.forEach(t => {
+            testimonialData.forEach(t => {
                 const card = document.createElement('div');
                 card.className = 'testi-card';
                 card.onclick = () => openModalCustom({
                     category: 'Bukti Chat WhatsApp',
                     title: `Bukti Chat: ${t.name}`,
                     subtitle: 'Testimoni Pengerjaan',
-                    image: t.proofImg,
-                    body: `Tangkapan layar kepuasan dari ${t.name}. Pengerjaan cepat, rapi, dan transparan.`,
+                    images: [t.proofImg],
+                    body: `Tangkapan layar kepuasan dari ${t.name}.`,
                     waText: t.waText
                 });
 
@@ -1169,22 +1377,11 @@
         }
 
         /* ==========================================================================
-           3. DUAL LINE CHART (2025 VS 2026)
+           7. DUAL LINE CHART (2025 VS 2026)
            ========================================================================== */
         const monthsList = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
-
-        const data2025 = [
-            { month: 'Jan', val: 22 }, { month: 'Feb', val: 24 }, { month: 'Mar', val: 20 },
-            { month: 'Apr', val: 28 }, { month: 'Mei', val: 27 }, { month: 'Jun', val: 53 },
-            { month: 'Jul', val: 27 }, { month: 'Ags', val: 20 }, { month: 'Sep', val: 40 },
-            { month: 'Okt', val: 47 }, { month: 'Nov', val: 45 }, { month: 'Des', val: 38 }
-        ];
-
-        const data2026 = [
-            { month: 'Jan', val: 30 }, { month: 'Feb', val: 19 }, { month: 'Mar', val: 5 },
-            { month: 'Apr', val: 59 }, { month: 'Mei', val: 62 }, { month: 'Jun', val: 54 },
-            { month: 'Jul', val: 25 }, { month: 'Ags', val: 16 }
-        ];
+        const data2025 = [ { month: 'Jan', val: 22 }, { month: 'Feb', val: 24 }, { month: 'Mar', val: 20 }, { month: 'Apr', val: 28 }, { month: 'Mei', val: 27 }, { month: 'Jun', val: 53 }, { month: 'Jul', val: 27 }, { month: 'Ags', val: 20 }, { month: 'Sep', val: 40 }, { month: 'Okt', val: 47 }, { month: 'Nov', val: 45 }, { month: 'Des', val: 38 } ];
+        const data2026 = [ { month: 'Jan', val: 30 }, { month: 'Feb', val: 19 }, { month: 'Mar', val: 5 }, { month: 'Apr', val: 59 }, { month: 'Mei', val: 62 }, { month: 'Jun', val: 54 }, { month: 'Jul', val: 25 }, { month: 'Ags', val: 16 } ];
 
         function renderDualLineChart() {
             const maxVal = 70;
@@ -1218,7 +1415,6 @@
                 return pathD;
             };
 
-            // Vertical Gridlines
             const gridGroup = document.getElementById('gridLinesGroup');
             gridGroup.innerHTML = '';
             monthsList.forEach((m, i) => {
@@ -1232,7 +1428,6 @@
                 gridGroup.appendChild(line);
             });
 
-            // Paths
             const path2025D = buildPathD(pts2025);
             document.getElementById('line2025').setAttribute('d', path2025D);
             document.getElementById('area2025').setAttribute('d', `${path2025D} L ${pts2025[pts2025.length - 1].x} ${chartBottom} L ${pts2025[0].x} ${chartBottom} Z`);
@@ -1241,7 +1436,6 @@
             document.getElementById('line2026').setAttribute('d', path2026D);
             document.getElementById('area2026').setAttribute('d', `${path2026D} L ${pts2026[pts2026.length - 1].x} ${chartBottom} L ${pts2026[0].x} ${chartBottom} Z`);
 
-            // Interactive Dots
             const tooltip = document.getElementById('chartTooltip');
 
             const drawDots = (pts, year, className, groupContainerId) => {
@@ -1270,7 +1464,6 @@
             drawDots(pts2025, '2025', 'dot-2025', 'dots2025');
             drawDots(pts2026, '2026', 'dot-2026', 'dots2026');
 
-            // Month Labels in SVG
             const monthGroup = document.getElementById('monthLabelsSvgGroup');
             monthGroup.innerHTML = '';
             monthsList.forEach((m, i) => {
@@ -1285,14 +1478,15 @@
         }
 
         /* ==========================================================================
-           4. MODALS & COMMON APP LOGIC
+           8. COMMON APP LOGIC
            ========================================================================== */
         function openModalCustom(data) {
+            setupModalSlider(data.images || [], data.title);
+
             document.getElementById('modalCategory').innerText = data.category;
             document.getElementById('modalTitle').innerText = data.title;
             document.getElementById('modalSubtitle').innerText = data.subtitle;
             document.getElementById('modalBody').innerText = data.body;
-            document.getElementById('modalImg').src = data.image;
 
             const waBtn = document.getElementById('modalWaBtn');
             waBtn.href = `https://wa.me/6285155091238?text=${data.waText}`;
@@ -1327,10 +1521,10 @@
             });
         }
 
-        // Initialize App
+        // Initial Load App
         document.addEventListener('DOMContentLoaded', () => {
-            renderServices(SITE_DATA.services);
-            renderPortfolio();
+            fetchServicesFromGoogleSheets();
+            fetchPortfolioFromGoogleSheets();
             renderTestimonials();
             renderDualLineChart();
         });
