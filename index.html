@@ -1042,7 +1042,7 @@
         let totalSlidesCount = 0;
 
         /* ==========================================================================
-           1. AUTOMATIC GOOGLE DRIVE TO DIRECT CDN LINK CONVERTER
+           1. AUTOMATIC GOOGLE DRIVE TO DIRECT CDN LINK CONVERTER (RINGAN: s300)
            ========================================================================== */
         function convertGoogleDriveUrl(url) {
             if (!url || typeof url !== 'string') return '';
@@ -1055,7 +1055,7 @@
             if (/^[a-zA-Z0-9_-]{25,50}$/.test(url)) {
                 fileId = url;
             } else {
-                // Ekstrak ID dari URL Google Drive penuh (file/d/ID/view, open?id=ID, uc?id=ID, dll)
+                // Ekstrak ID dari URL Google Drive penuh
                 const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || 
                               url.match(/id=([a-zA-Z0-9_-]+)/) ||
                               url.match(/file\/d\/([a-zA-Z0-9_-]+)/);
@@ -1065,24 +1065,22 @@
             }
 
             if (fileId) {
-                return `https://lh3.googleusercontent.com/d/${fileId}`;
+                // Menggunakan format CDN Google Drive s300 agar sangat ringan & cepat
+                return `https://drive.google.com/thumbnail?id=${fileId}&sz=w300`;
             }
 
             return url;
         }
 
-        /* Fallback jika CDN lh3 bermasalah saat memuat gambar */
+        /* Fallback jika CDN thumbnail bermasalah */
         function handleImgError(imgEl, rawUrl) {
             if (!rawUrl) return;
             const match = rawUrl.match(/\/d\/([a-zA-Z0-9_-]+)/) || rawUrl.match(/id=([a-zA-Z0-9_-]+)/);
             if (match && match[1]) {
                 const id = match[1];
-                if (!imgEl.dataset.tried1) {
-                    imgEl.dataset.tried1 = 'true';
-                    imgEl.src = `https://drive.google.com/thumbnail?id=${id}&sz=w800`;
-                } else if (!imgEl.dataset.tried2) {
-                    imgEl.dataset.tried2 = 'true';
-                    imgEl.src = `https://drive.google.com/uc?export=view&id=${id}`;
+                if (!imgEl.dataset.tried) {
+                    imgEl.dataset.tried = 'true';
+                    imgEl.src = `https://lh3.googleusercontent.com/d/${id}=s300`;
                 }
             }
         }
@@ -1127,7 +1125,7 @@
         }
 
         /* ==========================================================================
-           3. SERVICES TAB INTEGRATION (TANPA HARGA/ESTIMASI & BUTTON DENGAN DESKRIPSI)
+           3. SERVICES TAB INTEGRATION
            ========================================================================== */
         async function fetchServicesFromGoogleSheets() {
             const container = document.getElementById('servicesGalleryContainer');
@@ -1329,7 +1327,7 @@
         }
 
         /* ==========================================================================
-           5. GOOGLE SHEETS TESTIMONIALS INTEGRATION (FOTO KANAN 1:1 FULL)
+           5. GOOGLE SHEETS TESTIMONIALS INTEGRATION
            ========================================================================== */
         async function fetchTestimonialsFromGoogleSheets() {
             const container = document.getElementById('testimonialsContainer');
