@@ -219,7 +219,7 @@
         /* Profile Banner Card */
         .profile-card {
             background: linear-gradient(135deg, rgba(5, 187, 192, 0.85), rgba(17, 24, 39, 0.75)), 
-                        url('https://oinkproject.my.id/images/001.webp') center/cover no-repeat;
+                        url('https://i.ibb.co.com/g1pGhgk/FASILITAS-TOKO-01-21.webp') center/cover no-repeat;
             border-radius: var(--radius-lg);
             padding: 24px 20px;
             color: #ffffff;
@@ -482,15 +482,15 @@
             display: block;
         }
 
-        /* LIGHTBOX MODAL IMAGE VIEWER */
+        /* LIGHTBOX MODAL IMAGE VIEWER - REVISED CLOSE BUTTON LOCATION */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(17, 24, 39, 0.85);
-            backdrop-filter: blur(4px);
+            background: rgba(17, 24, 39, 0.9);
+            backdrop-filter: blur(6px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -498,18 +498,22 @@
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
-            padding: 20px;
+            padding: 16px;
         }
 
         .modal-overlay.active { opacity: 1; visibility: visible; }
 
         .modal-box-img {
-            max-width: 90%;
+            max-width: 95%;
             max-height: 85vh;
             border-radius: var(--radius-md);
             overflow: hidden;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal-box-img img {
@@ -517,26 +521,34 @@
             max-height: 85vh;
             object-fit: contain;
             display: block;
-            border-radius: var(--radius-md);
         }
 
+        /* Pindah tombol close ke dalam modal box agar tidak terpotong layar mobile */
         .modal-close-btn {
             position: absolute;
-            top: -15px;
-            right: -15px;
-            width: 36px;
-            height: 36px;
+            top: 12px;
+            right: 12px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            background: #ffffff;
-            color: var(--text-main);
-            border: none;
+            background: rgba(17, 24, 39, 0.75);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            z-index: 10;
+            font-size: 1.1rem;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 20;
+            transition: var(--transition);
+        }
+
+        .modal-close-btn:hover {
+            background: var(--card-coral);
+            border-color: var(--card-coral);
+            transform: scale(1.05);
         }
 
         .toast {
@@ -568,7 +580,7 @@
         <header class="nav-bar">
             <a href="#" class="brand-logo-nav" aria-label="Oink Project Home">
                 <div class="brand-icon">
-                    <img src="https://oinkproject.my.id/images/001.webp" alt="Oink Project Logo" onerror="this.src='https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp'">
+                    <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Logo">
                 </div>
                 <span class="brand-name">Oink Project</span>
             </a>
@@ -591,7 +603,7 @@
                 <!-- Profile Banner Card -->
                 <article class="profile-card">
                     <div class="avatar-box">
-                        <img src="https://oinkproject.my.id/images/001.webp" alt="Oink Project Profile" onerror="this.src='https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp'">
+                        <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Profile">
                     </div>
                     <h1>Oink Project <i class="fas fa-check-circle verified-badge"></i></h1>
                     <p class="tagline">🐣. . business area — here i exist as a trusted and fast response 🪄 design service since 2013. fret not, i'll be open 24 hours daily ⏰✨</p>
@@ -725,7 +737,7 @@
     <!-- LIGHTBOX IMAGE VIEWER MODAL -->
     <div class="modal-overlay" id="imageModalOverlay" onclick="closeImageModal()">
         <div class="modal-box-img" onclick="event.stopPropagation()">
-            <button class="modal-close-btn" onclick="closeImageModal()"><i class="fas fa-times"></i></button>
+            <button class="modal-close-btn" onclick="closeImageModal()" aria-label="Tutup Preview"><i class="fas fa-times"></i></button>
             <img id="modalPreviewImage" src="" alt="Preview Service Oink Project">
         </div>
     </div>
