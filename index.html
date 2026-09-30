@@ -150,6 +150,51 @@
 
         .btn-icon:hover { border-color: var(--accent); color: var(--accent); }
 
+        /* TAB NAVIGATION HEADER */
+        .tabs-header {
+            display: flex;
+            background: var(--card-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 4px;
+            gap: 6px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 10px 0;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .tab-btn.active {
+            background: var(--card-cyan);
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(5, 187, 192, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .section-card {
             background: var(--card-white);
             border-radius: var(--radius-md);
@@ -174,7 +219,7 @@
         /* Profile Banner Card */
         .profile-card {
             background: linear-gradient(135deg, rgba(5, 187, 192, 0.85), rgba(17, 24, 39, 0.75)), 
-                        url('https://i.ibb.co.com/g1pGhgk/FASILITAS-TOKO-01-21.webp') center/cover no-repeat;
+                        url('https://oinkproject.my.id/images/001.webp') center/cover no-repeat;
             border-radius: var(--radius-lg);
             padding: 24px 20px;
             color: #ffffff;
@@ -294,58 +339,6 @@
 
         .btn-wa-cta:hover { background: var(--wa-hover); transform: translateY(-2px); }
 
-        /* MULTI-LINE CHART STYLES */
-        .chart-card {
-            background: #ffffff;
-            border-radius: var(--radius-md);
-            padding: 18px 16px;
-            border: 1px solid #efe8e1;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .chart-title { font-size: 0.95rem; font-weight: 800; color: var(--text-main); }
-        .chart-subtitle { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
-
-        .chart-legend { display: flex; align-items: center; gap: 12px; }
-        .legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.7rem; font-weight: 800; color: var(--text-main); }
-        .legend-color { width: 10px; height: 10px; border-radius: 50%; }
-        .legend-color.c2025 { background: var(--card-cyan); }
-        .legend-color.c2026 { background: var(--card-green); }
-
-        .chart-display-container { position: relative; width: 100%; height: 165px; margin-top: 6px; }
-        .line-svg { width: 100%; height: 100%; overflow: visible; }
-        .grid-line { stroke: #f1f5f9; stroke-width: 1.5; stroke-dasharray: 3 3; }
-
-        .dot-2025 { fill: #ffffff; stroke: var(--card-cyan); stroke-width: 2.5; cursor: pointer; transition: var(--transition); }
-        .dot-2025:hover { r: 5.5; fill: var(--card-cyan); }
-        .dot-2026 { fill: #ffffff; stroke: var(--card-green); stroke-width: 2.5; cursor: pointer; transition: var(--transition); }
-        .dot-2026:hover { r: 5.5; fill: var(--card-green); }
-
-        .chart-month-text { font-size: 11px; font-weight: 700; fill: #64748b; text-anchor: middle; }
-
-        .chart-tooltip {
-            position: absolute;
-            top: -6px;
-            right: 0;
-            background: var(--dark-card);
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 4px 8px;
-            border-radius: 6px;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.2s;
-            z-index: 10;
-        }
-
         /* DETAIL KEAHLIAN & SPESIALISASI CARD */
         .info-detail-card {
             background: #ffffff;
@@ -380,12 +373,6 @@
             font-weight: 700;
             color: var(--text-main);
             line-height: 1.4;
-        }
-
-        .sub-desc {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            font-weight: 600;
         }
 
         /* APPS PILLS BADGES */
@@ -464,6 +451,94 @@
         .social-card i { font-size: 1.3rem; }
         .social-card span { font-size: 0.68rem; font-weight: 700; }
 
+        /* TAB SERVICE: GALERI 2 GRID PORTRAIT (1080x1440 HASIL RASIO 3:4) */
+        .service-portrait-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .service-portrait-card {
+            aspect-ratio: 3 / 4; /* Rasio 1080 x 1440 px Portrait */
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: #e2e8f0;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .service-portrait-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--card-cyan);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-portrait-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* LIGHTBOX MODAL IMAGE VIEWER */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            padding: 20px;
+        }
+
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+
+        .modal-box-img {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .modal-box-img img {
+            width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            display: block;
+            border-radius: var(--radius-md);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #ffffff;
+            color: var(--text-main);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
         .toast {
             position: fixed;
             top: 20px;
@@ -493,7 +568,7 @@
         <header class="nav-bar">
             <a href="#" class="brand-logo-nav" aria-label="Oink Project Home">
                 <div class="brand-icon">
-                    <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Logo">
+                    <img src="https://oinkproject.my.id/images/001.webp" alt="Oink Project Logo" onerror="this.src='https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp'">
                 </div>
                 <span class="brand-name">Oink Project</span>
             </a>
@@ -504,275 +579,219 @@
             </div>
         </header>
 
+        <!-- TAB NAVIGATION (HOME & SERVICE) -->
+        <nav class="tabs-header">
+            <button class="tab-btn active" onclick="switchTab('home-tab', this)">Home</button>
+            <button class="tab-btn" onclick="switchTab('service-tab', this)">Service</button>
+        </nav>
+
         <main style="display: flex; flex-direction: column; gap: 16px;">
-            <!-- Profile Banner Card -->
-            <article class="profile-card">
-                <div class="avatar-box">
-                    <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Profile">
-                </div>
-                <h1>Oink Project <i class="fas fa-check-circle verified-badge"></i></h1>
-                <p class="tagline">🐣. . business area — here i exist as a trusted and fast response 🪄 design service since 2013. fret not, i'll be open 24 hours daily ⏰✨</p>
-                
-                <div class="stats-row">
-                    <div class="stat-item">
-                        <div class="stat-val">661+</div>
-                        <div class="stat-lbl">Tugas Selesai</div>
+            <!-- 1. TAB HOME CONTENT -->
+            <div id="home-tab" class="tab-content active">
+                <!-- Profile Banner Card -->
+                <article class="profile-card">
+                    <div class="avatar-box">
+                        <img src="https://oinkproject.my.id/images/001.webp" alt="Oink Project Profile" onerror="this.src='https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp'">
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-val">100%</div>
-                        <div class="stat-lbl">Terselesaikan</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-val">24/7</div>
-                        <div class="stat-lbl">Fast Respon</div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- TULISAN HARGA PROMO (DI ATAS BUTTON WA) -->
-            <article class="promo-price-card">
-                <div class="promo-text">semua joki start harga</div>
-                <div class="promo-price-huge"><span>Rp</span>35.000</div>
-            </article>
-
-            <!-- WhatsApp Direct CTA Button (DI ATAS STATISTIK) -->
-            <a href="https://wa.me/6285155091238?text=Halo%20Admin%20Oink%20Project,%20saya%20mau%20konsultasi%20tugas" target="_blank" class="btn-wa-cta">
-                <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i>
-                <span>Hai Kak, Chat aku disini via Whatsapp!!</span>
-            </a>
-
-            <!-- DUAL LINE CHART (STATISTIK) -->
-            <article class="chart-card">
-                <div class="chart-header">
-                    <div>
-                        <div class="chart-title">Statistik Tugas Selesai</div>
-                        <div class="chart-subtitle">Perbandingan Bulanan 2025 vs 2026</div>
-                    </div>
-                    <div class="chart-legend">
-                        <div class="legend-item"><span class="legend-color c2025"></span> 2025</div>
-                        <div class="legend-item"><span class="legend-color c2026"></span> 2026</div>
-                    </div>
-                </div>
-
-                <div class="chart-display-container">
-                    <div id="chartTooltip" class="chart-tooltip">0 Tugas</div>
-                    <svg class="line-svg" id="lineChartSvg" viewBox="0 0 360 160">
-                        <defs>
-                            <linearGradient id="grad2025" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#05bbc0" stop-opacity="0.25"/>
-                                <stop offset="100%" stop-color="#05bbc0" stop-opacity="0.0"/>
-                            </linearGradient>
-                            <linearGradient id="grad2026" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#22c55e" stop-opacity="0.25"/>
-                                <stop offset="100%" stop-color="#22c55e" stop-opacity="0.0"/>
-                            </linearGradient>
-                        </defs>
-                        
-                        <g id="gridLinesGroup"></g>
-                        <path id="area2025" fill="url(#grad2025)" d="" />
-                        <path id="area2026" fill="url(#grad2026)" d="" />
-                        <path id="line2025" fill="none" stroke="#05bbc0" stroke-width="3" stroke-linecap="round" d="" />
-                        <path id="line2026" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" d="" />
-                        <g id="dots2025"></g>
-                        <g id="dots2026"></g>
-                        <g id="monthLabelsSvgGroup"></g>
-                    </svg>
-                </div>
-            </article>
-
-            <!-- SPESIALISASI, APLIKASI & YANG BISA DIKERJAKAN (DI BAWAH STATISTIK) -->
-            <article class="info-detail-card">
-                <!-- Spesialisasi -->
-                <div class="info-block-item">
-                    <div class="info-block-title">
-                        <i class="fas fa-star"></i> Spesialisasi
-                    </div>
-                    <div class="info-block-desc">
-                        Joki tugas DKV, Bisnis Digital, & Digital Marketing
-                    </div>
-                </div>
-
-                <!-- Aplikasi yang digunakan -->
-                <div class="info-block-item">
-                    <div class="info-block-title">
-                        <i class="fas fa-laptop-code"></i> Aplikasi yang Digunakan
-                    </div>
-                    <div class="app-tags-wrapper">
-                        <span class="app-pill">Adobe Illustrator</span>
-                        <span class="app-pill">Adobe Photoshop</span>
-                        <span class="app-pill">Adobe Flash</span>
-                        <span class="app-pill">Adobe After Effect</span>
-                        <span class="app-pill">Corel Draw</span>
-                        <span class="app-pill">3D SketchUp</span>
-                    </div>
-                </div>
-
-                <!-- Yang bisa dikerjakan -->
-                <div class="info-block-item">
-                    <div class="info-block-title">
-                        <i class="fas fa-layer-group"></i> Yang Bisa Aku Kerjakan
-                    </div>
-                    <div class="work-grid">
-                        <div class="work-item-box">
-                            <div class="work-item-title">Poster</div>
-                            <div class="work-item-sub">Infografis, Isometric</div>
+                    <h1>Oink Project <i class="fas fa-check-circle verified-badge"></i></h1>
+                    <p class="tagline">🐣. . business area — here i exist as a trusted and fast response 🪄 design service since 2013. fret not, i'll be open 24 hours daily ⏰✨</p>
+                    
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <div class="stat-val">661+</div>
+                            <div class="stat-lbl">Tugas Selesai</div>
                         </div>
-                        <div class="work-item-box">
-                            <div class="work-item-title">Booklet</div>
-                            <div class="work-item-sub">GSM, Zine, Portfolio</div>
+                        <div class="stat-item">
+                            <div class="stat-val">100%</div>
+                            <div class="stat-lbl">Terselesaikan</div>
                         </div>
-                        <div class="work-item-box">
-                            <div class="work-item-title">Jasa Edit</div>
-                            <div class="work-item-sub">Foto & Dokumen</div>
-                        </div>
-                        <div class="work-item-box">
-                            <div class="work-item-title">Edit Video</div>
-                            <div class="work-item-sub">Premiere, After Effect</div>
-                        </div>
-                        <div class="work-item-box">
-                            <div class="work-item-title">Kemasan</div>
-                            <div class="work-item-sub">Desain & 3D Visual</div>
-                        </div>
-                        <div class="work-item-box">
-                            <div class="work-item-title">Logo</div>
-                            <div class="work-item-sub">Branding & Symbol</div>
+                        <div class="stat-item">
+                            <div class="stat-val">24/7</div>
+                            <div class="stat-lbl">Fast Respon</div>
                         </div>
                     </div>
-                </div>
-            </article>
+                </article>
 
-            <!-- Social Media Block -->
-            <article class="section-card">
-                <div class="section-header">
-                    <h2>Follow aku kak!</h2>
-                </div>
-                <div class="social-grid">
-                    <a href="https://www.instagram.com/oink.project" target="_blank" class="social-card instagram">
-                        <i class="fab fa-instagram"></i>
-                        <span>Instagram</span>
-                    </a>
-                    <a href="https://www.tiktok.com/@oink.project" target="_blank" class="social-card tiktok">
-                        <i class="fab fa-tiktok"></i>
-                        <span>TikTok</span>
-                    </a>
-                    <a href="https://x.com/oinkproject" target="_blank" class="social-card x-twitter">
-                        <i class="fab fa-x-twitter"></i>
-                        <span>X / Twitter</span>
-                    </a>
-                    <a href="http://youtube.com/@oinkproject" target="_blank" class="social-card youtube">
-                        <i class="fab fa-youtube"></i>
-                        <span>YouTube</span>
-                    </a>
-                </div>
-            </article>
+                <!-- TULISAN HARGA PROMO (DI ATAS BUTTON WA) -->
+                <article class="promo-price-card">
+                    <div class="promo-text">semua joki start harga</div>
+                    <div class="promo-price-huge"><span>Rp</span>35.000</div>
+                </article>
+
+                <!-- WhatsApp Direct CTA Button -->
+                <a href="https://wa.me/6285155091238?text=Halo%20Admin%20Oink%20Project,%20saya%20mau%20konsultasi%20tugas" target="_blank" class="btn-wa-cta">
+                    <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i>
+                    <span>Hai Kak, Chat aku disini via Whatsapp!!</span>
+                </a>
+
+                <!-- SPESIALISASI, APLIKASI & YANG BISA DIKERJAKAN -->
+                <article class="info-detail-card">
+                    <!-- Spesialisasi -->
+                    <div class="info-block-item">
+                        <div class="info-block-title">
+                            <i class="fas fa-star"></i> Spesialisasi
+                        </div>
+                        <div class="info-block-desc">
+                            Joki tugas DKV, Bisnis Digital, & Digital Marketing
+                        </div>
+                    </div>
+
+                    <!-- Aplikasi yang digunakan -->
+                    <div class="info-block-item">
+                        <div class="info-block-title">
+                            <i class="fas fa-laptop-code"></i> Aplikasi yang Digunakan
+                        </div>
+                        <div class="app-tags-wrapper">
+                            <span class="app-pill">Adobe Illustrator</span>
+                            <span class="app-pill">Adobe Photoshop</span>
+                            <span class="app-pill">Adobe Flash</span>
+                            <span class="app-pill">Adobe After Effect</span>
+                            <span class="app-pill">Corel Draw</span>
+                            <span class="app-pill">3D SketchUp</span>
+                        </div>
+                    </div>
+
+                    <!-- Yang bisa dikerjakan -->
+                    <div class="info-block-item">
+                        <div class="info-block-title">
+                            <i class="fas fa-layer-group"></i> Yang Bisa Aku Kerjakan
+                        </div>
+                        <div class="work-grid">
+                            <div class="work-item-box">
+                                <div class="work-item-title">Poster</div>
+                                <div class="work-item-sub">Infografis, Isometric</div>
+                            </div>
+                            <div class="work-item-box">
+                                <div class="work-item-title">Booklet</div>
+                                <div class="work-item-sub">GSM, Zine, Portfolio</div>
+                            </div>
+                            <div class="work-item-box">
+                                <div class="work-item-title">Jasa Edit</div>
+                                <div class="work-item-sub">Foto & Dokumen</div>
+                            </div>
+                            <div class="work-item-box">
+                                <div class="work-item-title">Edit Video</div>
+                                <div class="work-item-sub">Premiere, After Effect</div>
+                            </div>
+                            <div class="work-item-box">
+                                <div class="work-item-title">Kemasan</div>
+                                <div class="work-item-sub">Desain & 3D Visual</div>
+                            </div>
+                            <div class="work-item-box">
+                                <div class="work-item-title">Logo</div>
+                                <div class="work-item-sub">Branding & Symbol</div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Social Media Block -->
+                <article class="section-card">
+                    <div class="section-header">
+                        <h2>Follow aku kak!</h2>
+                    </div>
+                    <div class="social-grid">
+                        <a href="https://www.instagram.com/oink.project" target="_blank" class="social-card instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://www.tiktok.com/@oink.project" target="_blank" class="social-card tiktok">
+                            <i class="fab fa-tiktok"></i>
+                            <span>TikTok</span>
+                        </a>
+                        <a href="https://x.com/oinkproject" target="_blank" class="social-card x-twitter">
+                            <i class="fab fa-x-twitter"></i>
+                            <span>X / Twitter</span>
+                        </a>
+                        <a href="http://youtube.com/@oinkproject" target="_blank" class="social-card youtube">
+                            <i class="fab fa-youtube"></i>
+                            <span>YouTube</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- 2. TAB SERVICE CONTENT (GALERI 2 GRID PORTRAIT DARI GITHUB DOMAIN) -->
+            <div id="service-tab" class="tab-content">
+                <article class="section-card">
+                    <div class="service-portrait-grid" id="servicePortraitContainer">
+                        <!-- Foto dimasukkan otomatis via JavaScript -->
+                    </div>
+                </article>
+            </div>
         </main>
+    </div>
+
+    <!-- LIGHTBOX IMAGE VIEWER MODAL -->
+    <div class="modal-overlay" id="imageModalOverlay" onclick="closeImageModal()">
+        <div class="modal-box-img" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeImageModal()"><i class="fas fa-times"></i></button>
+            <img id="modalPreviewImage" src="" alt="Preview Service Oink Project">
+        </div>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
+        // DOMAIN BASE PATH GITHUB PRIBADI KAMU
+        const GITHUB_IMAGE_BASE_URL = 'https://oinkproject.my.id/images/';
+
+        // DAFTAR NAMA FOTO WEBP DI FOLDER IMAGES GITHUB
+        const serviceImagesList = [
+            '001.webp', '002.webp', '003.webp', '004.webp', 
+            '005.webp', '006.webp', '007.webp', '008.webp', 
+            '009.webp', '010.webp', '011.webp', '012.webp'
+        ];
+
         /* ==========================================================================
-           DUAL LINE CHART (2025 VS 2026)
+           1. TAB SWITCHING LOGIC
            ========================================================================== */
-        const monthsList = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
-        const data2025 = [ { month: 'Jan', val: 22 }, { month: 'Feb', val: 24 }, { month: 'Mar', val: 20 }, { month: 'Apr', val: 28 }, { month: 'Mei', val: 27 }, { month: 'Jun', val: 53 }, { month: 'Jul', val: 27 }, { month: 'Ags', val: 20 }, { month: 'Sep', val: 40 }, { month: 'Okt', val: 47 }, { month: 'Nov', val: 45 }, { month: 'Des', val: 38 } ];
-        const data2026 = [ { month: 'Jan', val: 30 }, { month: 'Feb', val: 19 }, { month: 'Mar', val: 5 }, { month: 'Apr', val: 59 }, { month: 'Mei', val: 62 }, { month: 'Jun', val: 54 }, { month: 'Jul', val: 25 }, { month: 'Ags', val: 16 } ];
+        function switchTab(tabId, btnElement) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
-        function renderDualLineChart() {
-            const maxVal = 70;
-            const svgWidth = 360;
-            const paddingX = 20;
-            const chartTop = 15;
-            const chartBottom = 125;
-            const labelY = 150;
+            if (btnElement) btnElement.classList.add('active');
+            const targetContent = document.getElementById(tabId);
+            if (targetContent) targetContent.classList.add('active');
 
-            const stepX = (svgWidth - paddingX * 2) / (monthsList.length - 1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-            const getPoints = (dataset) => dataset.map((item, index) => ({
-                x: paddingX + index * stepX,
-                y: chartBottom - (item.val / maxVal) * (chartBottom - chartTop),
-                val: item.val,
-                month: item.month
-            }));
+        /* ==========================================================================
+           2. RENDER SERVICE GALERI PORTRAIT (2-GRID) DARI FOLDER GITHUB
+           ========================================================================== */
+        function renderServiceImages() {
+            const container = document.getElementById('servicePortraitContainer');
+            container.innerHTML = '';
 
-            const pts2025 = getPoints(data2025);
-            const pts2026 = getPoints(data2026);
+            serviceImagesList.forEach(fileName => {
+                const imgFullUrl = `${GITHUB_IMAGE_BASE_URL}${fileName}`;
+                
+                const card = document.createElement('div');
+                card.className = 'service-portrait-card';
+                card.onclick = () => openImageModal(imgFullUrl);
 
-            const buildPathD = (pts) => {
-                let pathD = `M ${pts[0].x} ${pts[0].y}`;
-                for (let i = 0; i < pts.length - 1; i++) {
-                    const p0 = pts[i];
-                    const p1 = pts[i + 1];
-                    const cpX1 = p0.x + (p1.x - p0.x) / 2;
-                    const cpX2 = p0.x + (p1.x - p0.x) / 2;
-                    pathD += ` C ${cpX1} ${p0.y}, ${cpX2} ${p1.y}, ${p1.x} ${p1.y}`;
-                }
-                return pathD;
-            };
-
-            const gridGroup = document.getElementById('gridLinesGroup');
-            gridGroup.innerHTML = '';
-            monthsList.forEach((m, i) => {
-                const x = paddingX + i * stepX;
-                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                line.setAttribute('x1', x);
-                line.setAttribute('y1', chartTop);
-                line.setAttribute('x2', x);
-                line.setAttribute('y2', chartBottom + 5);
-                line.setAttribute('class', 'grid-line');
-                gridGroup.appendChild(line);
-            });
-
-            const path2025D = buildPathD(pts2025);
-            document.getElementById('line2025').setAttribute('d', path2025D);
-            document.getElementById('area2025').setAttribute('d', `${path2025D} L ${pts2025[pts2025.length - 1].x} ${chartBottom} L ${pts2025[0].x} ${chartBottom} Z`);
-
-            const path2026D = buildPathD(pts2026);
-            document.getElementById('line2026').setAttribute('d', path2026D);
-            document.getElementById('area2026').setAttribute('d', `${path2026D} L ${pts2026[pts2026.length - 1].x} ${chartBottom} L ${pts2026[0].x} ${chartBottom} Z`);
-
-            const tooltip = document.getElementById('chartTooltip');
-
-            const drawDots = (pts, year, className, groupContainerId) => {
-                const group = document.getElementById(groupContainerId);
-                group.innerHTML = '';
-                pts.forEach(p => {
-                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                    circle.setAttribute('cx', p.x);
-                    circle.setAttribute('cy', p.y);
-                    circle.setAttribute('r', '4');
-                    circle.setAttribute('class', className);
-
-                    circle.addEventListener('mouseenter', () => {
-                        tooltip.innerText = `${p.month} ${year}: ${p.val} Tugas`;
-                        tooltip.style.opacity = '1';
-                    });
-
-                    circle.addEventListener('mouseleave', () => {
-                        tooltip.style.opacity = '0';
-                    });
-
-                    group.appendChild(circle);
-                });
-            };
-
-            drawDots(pts2025, '2025', 'dot-2025', 'dots2025');
-            drawDots(pts2026, '2026', 'dot-2026', 'dots2026');
-
-            const monthGroup = document.getElementById('monthLabelsSvgGroup');
-            monthGroup.innerHTML = '';
-            monthsList.forEach((m, i) => {
-                const x = paddingX + i * stepX;
-                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text.setAttribute('x', x);
-                text.setAttribute('y', labelY);
-                text.setAttribute('class', 'chart-month-text');
-                text.textContent = m;
-                monthGroup.appendChild(text);
+                card.innerHTML = `<img src="${imgFullUrl}" alt="Service Oink Project" loading="lazy" onerror="this.parentElement.style.display='none'">`;
+                container.appendChild(card);
             });
         }
 
         /* ==========================================================================
-           COMMON APP LOGIC
+           3. LIGHTBOX IMAGE PREVIEW MODAL
+           ========================================================================== */
+        function openImageModal(imgUrl) {
+            const modal = document.getElementById('imageModalOverlay');
+            const previewImg = document.getElementById('modalPreviewImage');
+            previewImg.src = imgUrl;
+            modal.classList.add('active');
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModalOverlay');
+            modal.classList.remove('active');
+        }
+
+        /* ==========================================================================
+           4. COMMON APP LOGIC
            ========================================================================== */
         function copyShareLink() {
             navigator.clipboard.writeText(window.location.href).then(() => {
@@ -784,7 +803,7 @@
 
         // Initial Load App
         document.addEventListener('DOMContentLoaded', () => {
-            renderDualLineChart();
+            renderServiceImages();
         });
     </script>
 </body>
