@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Portfolio Gallery - Oink Project</title>
+    <meta name="description" content="Portofolio Desain Grafis, DKV, Poster, Branding, Kemasan, dan Edit Video oleh Oink Project.">
+    <meta name="author" content="Oink Project">
+    <meta name="robots" content="index, follow">
+
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #fbf7f4;
+            --container-bg: #f8f3ee;
+            --card-white: #ffffff;
+            --card-coral: #ff5d39;
+            --card-yellow: #ffc425;
+            --card-cyan: #05bbc0; 
+            --card-green: #22c55e;
+            --dark-card: #111827;
+            
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #efe8e1;
+            
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.04);
+            --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.08);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #eae5e0;
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 20px 12px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Container Utama Web PC */
+        .portfolio-wrapper {
+            width: 100%;
+            max-width: 1280px;
+            background: var(--container-bg);
+            border-radius: var(--radius-lg);
+            border: 2px solid #e2dad1;
+            padding: 28px 24px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Header Navigation Bar */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--card-white);
+            padding: 14px 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .brand-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--card-cyan);
+            box-shadow: 0 3px 8px rgba(5, 187, 192, 0.25);
+        }
+
+        .brand-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .brand-info h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .verified-badge {
+            font-size: 0.95rem;
+            color: var(--card-yellow);
+        }
+
+        .brand-info p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .share-btn {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .share-btn:hover {
+            border-color: var(--card-cyan);
+            color: var(--card-cyan);
+            background: rgba(5, 187, 192, 0.05);
+        }
+
+        /* Filter Kategori Bar */
+        .filter-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .filter-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .categories-scroll {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            background: var(--card-white);
+            padding: 12px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cat-btn {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cat-btn:hover {
+            background: #e2e8f0;
+            transform: translateY(-1px);
+        }
+
+        .cat-btn.active {
+            background: var(--card-cyan);
+            color: #ffffff;
+            border-color: var(--card-cyan);
+            box-shadow: 0 4px 12px rgba(5, 187, 192, 0.3);
+        }
+
+        /* GALERI GRID 4 KOLOM PC */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            min-height: 300px;
+        }
+
+        @media (max-width: 1024px) {
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .portfolio-wrapper { padding: 16px 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid { grid-template-columns: repeat(1, 1fr); }
+            body { padding: 0; }
+            .portfolio-wrapper { border-radius: 0; border: none; }
+        }
+
+        /* Kartu Item Portofolio */
+        .portfolio-card {
+            background: var(--card-white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--card-cyan);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-img-wrapper {
+            position: relative;
+            aspect-ratio: 3 / 4;
+            width: 100%;
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .portfolio-card:hover .card-img-wrapper img {
+            transform: scale(1.04);
+        }
+
+        .card-tag-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(4px);
+            color: #ffffff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 2;
+        }
+
+        .play-video-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 93, 57, 0.9);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 2;
+            transition: var(--transition);
+        }
+
+        .portfolio-card:hover .play-video-icon {
+            transform: translate(-50%, -50%) scale(1.15);
+            background: var(--card-coral);
+        }
+
+        .card-info {
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.3;
+        }
+
+        .card-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Pesan Kosong / Loading */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--card-white);
+            border-radius: var(--radius-md);
+            border: 1px dashed var(--border-color);
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .empty-state i {
+            font-size: 2.5rem;
+            color: var(--card-cyan);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* Lightbox Image / Video Preview Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(17, 24, 39, 0.92);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            max-width: 960px;
+            width: 100%;
+            background: var(--card-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            max-height: 85vh;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                flex-direction: column;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+        }
+
+        .modal-media-container {
+            flex: 1.4;
+            background: #0f172a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            min-height: 320px;
+            overflow: hidden;
+        }
+
+        .modal-media-container img {
+            max-width: 100%;
+            max-height: 65vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .modal-media-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 320px;
+            border: none;
+        }
+
+        /* Thumbnails selector inside modal */
+        .modal-thumbs {
+            display: flex;
+            gap: 8px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            justify-content: center;
+            overflow-x: auto;
+        }
+
+        .thumb-item {
+            width: 48px;
+            height: 48px;
+            border-radius: 6px;
+            object-fit: cover;
+            cursor: pointer;
+            opacity: 0.6;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .thumb-item.active {
+            opacity: 1;
+            border-color: var(--card-cyan);
+        }
+
+        .modal-details {
+            flex: 1;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(17, 24, 39, 0.7);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .modal-close-btn:hover {
+            background: var(--card-coral);
+            border-color: var(--card-coral);
+        }
+
+        .btn-order-wa {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px;
+            background: #25d366;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.95rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-order-wa:hover {
+            background: #1eae52;
+            transform: translateY(-2px);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--dark-card);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            transition: var(--transition);
+            z-index: 2000;
+            opacity: 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portfolio-wrapper">
+        <!-- Toast Notification -->
+        <div id="toast" class="toast">Link portofolio berhasil disalin!</div>
+
+        <!-- Header -->
+        <header class="nav-header">
+            <a href="#" class="brand-box">
+                <div class="brand-avatar">
+                    <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Logo">
+                </div>
+                <div class="brand-info">
+                    <h1>Oink Project <i class="fas fa-check-circle verified-badge"></i></h1>
+                    <p>Galeri Karya & Portofolio Resmi</p>
+                </div>
+            </a>
+            <button class="share-btn" onclick="copyCurrentCategoryLink()">
+                <i class="fas fa-share-nodes"></i>
+                <span>Bagikan Link</span>
+            </button>
+        </header>
+
+        <!-- Filter Kategori Dynamic -->
+        <section class="filter-section">
+            <div class="filter-title">
+                <i class="fas fa-filter"></i> Pilih Kategori Portofolio
+            </div>
+            <div class="categories-scroll" id="categoriesContainer">
+                <button class="cat-btn active" onclick="filterGallery('Semua', this)">
+                    <i class="fas fa-border-all"></i> Semua
+                </button>
+                <!-- Kategori Lainnya akan terisi otomatis dari Google Sheet -->
+            </div>
+        </section>
+
+        <!-- Galeri Grid 4 Kolom PC -->
+        <main class="gallery-grid" id="galleryGrid">
+            <div class="empty-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Memuat portofolio dari Google Sheet...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Lightbox Preview (Gambar & Video YouTube) -->
+    <div class="modal-overlay" id="imageModal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-media-container" id="modalMediaContainer">
+                <!-- Preview Foto atau Video YouTube -->
+            </div>
+            <div class="modal-details">
+                <div>
+                    <span id="modalTag" class="card-tag-badge" style="position: relative; top: 0; left: 0; display: inline-block; margin-bottom: 10px;">Poster</span>
+                    <h2 id="modalTitle" class="card-title" style="font-size: 1.3rem; margin-bottom: 6px;">Judul Project</h2>
+                    <p id="modalDesc" class="card-desc" style="font-size: 0.88rem; line-height: 1.5;">Subjudul / Deskripsi Project</p>
+                </div>
+                <a id="modalWaBtn" href="#" target="_blank" class="btn-order-wa">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Pesan Desain Seperti Ini</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxJzVJoMeSTfyJ2erOm2dwf-6xAWJLD_a5s-zAvGmaJ33bOny1xYffztVPoVLhsB6PTn_-Nn2Y-Zy_/pub?gid=0&single=true&output=csv';
+
+        let portfolioItems = [];
+        let currentActiveCategory = "Semua";
+
+        // Helper Ekstraksi ID Video YouTube
+        function getYouTubeEmbedUrl(url) {
+            if (!url) return null;
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}?autoplay=1` : null;
+        }
+
+        function getYouTubeThumbnail(url) {
+            if (!url) return null;
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? `https://img.youtube.com/vi/${match[2]}/hqdefault.jpg` : null;
+        }
+
+        // CSV Parser Handling Quotes & Commas
+        function parseCSV(str) {
+            const arr = [];
+            let quote = false;
+            let col = '';
+            let row = [];
+
+            for (let i = 0; i < str.length; i++) {
+                let cc = str[i];
+                let nc = str[i+1];
+
+                if (cc === '"') {
+                    if (quote && nc === '"') { col += '"'; i++; }
+                    else { quote = !quote; }
+                } else if (cc === ',' && !quote) {
+                    row.push(col.trim());
+                    col = '';
+                } else if ((cc === '\r' || cc === '\n') && !quote) {
+                    if (cc === '\r' && nc === '\n') { i++; }
+                    row.push(col.trim());
+                    if (row.length > 1 || row[0] !== '') arr.push(row);
+                    row = [];
+                    col = '';
+                } else {
+                    col += cc;
+                }
+            }
+            if (col || row.length) {
+                row.push(col.trim());
+                arr.push(row);
+            }
+            return arr;
+        }
+
+        // Fetch & Parse Data Google Sheet
+        async function loadSheetData() {
+            try {
+                const response = await fetch(GOOGLE_SHEET_CSV_URL);
+                const csvText = await response.text();
+                const rows = parseCSV(csvText);
+
+                if (rows.length < 2) {
+                    renderEmpty("Tidak ada data ditemukan di Google Sheet.");
+                    return;
+                }
+
+                const headers = rows[0].map(h => h.toLowerCase().trim());
+                
+                const idxJudul = headers.indexOf('judul');
+                const idxSubjudul = headers.indexOf('subjudul');
+                const idxKategori = headers.indexOf('kategori');
+                const idxVideo = headers.indexOf('video');
+                const idxFoto1 = headers.indexOf('foto1');
+                const idxFoto2 = headers.indexOf('foto2');
+                const idxFoto3 = headers.indexOf('foto3');
+
+                portfolioItems = [];
+                const categoriesSet = new Set();
+
+                for (let i = 1; i < rows.length; i++) {
+                    const r = rows[i];
+                    if (!r || r.length === 0) continue;
+
+                    const judul = r[idxJudul] || 'Project Desain';
+                    const subjudul = r[idxSubjudul] || '';
+                    const kategori = r[idxKategori] || 'Umum';
+                    const video = r[idxVideo] || '';
+                    const foto1 = r[idxFoto1] || '';
+                    const foto2 = r[idxFoto2] || '';
+                    const foto3 = r[idxFoto3] || '';
+
+                    if (kategori) categoriesSet.add(kategori.trim());
+
+                    // Ambil Cover Utama
+                    let coverImage = foto1 || foto2 || foto3;
+                    if (!coverImage && video) {
+                        coverImage = getYouTubeThumbnail(video) || 'https://via.placeholder.com/600x800?text=Video+Project';
+                    }
+
+                    portfolioItems.push({
+                        id: i,
+                        title: judul,
+                        subTitle: subjudul,
+                        category: kategori.trim(),
+                        video: video,
+                        images: [foto1, foto2, foto3].filter(img => img !== ''),
+                        cover: coverImage || 'https://via.placeholder.com/600x800?text=Oink+Project'
+                    });
+                }
+
+                buildCategoryButtons(Array.from(categoriesSet));
+                
+                const urlCat = getCategoryFromURL();
+                if (urlCat) {
+                    filterGallery(urlCat, null);
+                } else {
+                    renderGallery('Semua');
+                }
+
+            } catch (error) {
+                console.error("Gagal memuat Google Sheet:", error);
+                renderEmpty("Gagal memuat data dari Google Sheet. Pastikan link terpublikasi.");
+            }
+        }
+
+        // Render Tombol Kategori Dinamis
+        function buildCategoryButtons(categories) {
+            const container = document.getElementById('categoriesContainer');
+            container.innerHTML = `
+                <button class="cat-btn active" onclick="filterGallery('Semua', this)">
+                    <i class="fas fa-border-all"></i> Semua
+                </button>
+            `;
+
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = 'cat-btn';
+                btn.onclick = (e) => filterGallery(cat, e.target);
+                btn.textContent = cat;
+                container.appendChild(btn);
+            });
+        }
+
+        // Render Galeri Item
+        function renderGallery(filterCategory) {
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = '';
+
+            const filteredData = filterCategory === 'Semua' 
+                ? portfolioItems 
+                : portfolioItems.filter(item => item.category.toLowerCase() === filterCategory.toLowerCase());
+
+            if (filteredData.length === 0) {
+                renderEmpty(`Tidak ada karya untuk kategori "${filterCategory}".`);
+                return;
+            }
+
+            filteredData.forEach(item => {
+                const card = document.createElement('article');
+                card.className = 'portfolio-card';
+                card.onclick = () => openModal(item);
+
+                const hasVideo = item.video && item.video.length > 5;
+
+                card.innerHTML = `
+                    <div class="card-img-wrapper">
+                        <span class="card-tag-badge">${item.category}</span>
+                        ${hasVideo ? '<div class="play-video-icon"><i class="fas fa-play"></i></div>' : ''}
+                        <img src="${item.cover}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x800?text=Oink+Project'">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">${item.title}</h3>
+                        <p class="card-desc">${item.subTitle}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderEmpty(message) {
+            document.getElementById('galleryGrid').innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-folder-open"></i>
+                    <p>${message}</p>
+                </div>`;
+        }
+
+        // Filter Function
+        function filterGallery(categoryName, btnElement) {
+            currentActiveCategory = categoryName;
+
+            const allBtns = document.querySelectorAll('.cat-btn');
+            allBtns.forEach(btn => btn.classList.remove('active'));
+
+            if (btnElement) {
+                btnElement.classList.add('active');
+            } else {
+                allBtns.forEach(btn => {
+                    if (btn.textContent.trim().toLowerCase() === categoryName.toLowerCase()) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+
+            renderGallery(categoryName);
+        }
+
+        // Lightbox Modal Handling
+        function openModal(item) {
+            const container = document.getElementById('modalMediaContainer');
+            container.innerHTML = '';
+
+            const youtubeEmbed = getYouTubeEmbedUrl(item.video);
+
+            if (youtubeEmbed) {
+                container.innerHTML = `<iframe src="${youtubeEmbed}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            } else if (item.images.length > 0) {
+                let mainImgSrc = item.images[0];
+                let thumbsHtml = '';
+
+                if (item.images.length > 1) {
+                    thumbsHtml = `<div class="modal-thumbs">` + 
+                        item.images.map((img, idx) => `<img src="${img}" class="thumb-item ${idx===0?'active':''}" onclick="switchModalImage('${img}', this)">`).join('') +
+                        `</div>`;
+                }
+
+                container.innerHTML = `
+                    <img id="modalMainImg" src="${mainImgSrc}" alt="${item.title}">
+                    ${thumbsHtml}
+                `;
+            } else {
+                container.innerHTML = `<img src="${item.cover}" alt="${item.title}">`;
+            }
+
+            document.getElementById('modalTag').textContent = item.category;
+            document.getElementById('modalTitle').textContent = item.title;
+            document.getElementById('modalDesc').textContent = item.subTitle;
+
+            const waText = encodeURIComponent(`Halo Kak, aku lihat portofolio "${item.title}" (${item.category}) di website Oink Project. Mau tanya-tanya jasanya kak!`);
+            document.getElementById('modalWaBtn').href = `https://wa.me/6285155091238?text=${waText}`;
+
+            document.getElementById('imageModal').classList.add('active');
+        }
+
+        function switchModalImage(imgSrc, thumbEl) {
+            document.getElementById('modalMainImg').src = imgSrc;
+            document.querySelectorAll('.thumb-item').forEach(el => el.classList.remove('active'));
+            thumbEl.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+            document.getElementById('modalMediaContainer').innerHTML = ''; // Stop video playback
+        }
+
+        // Get Category parameter
+        function getCategoryFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const queryCat = urlParams.get('portfolio') || urlParams.get('category');
+            if (queryCat) return queryCat.trim();
+
+            const hash = window.location.hash.replace('#', '').trim();
+            if (hash) return hash;
+
+            return null;
+        }
+
+        function copyCurrentCategoryLink() {
+            const baseUrl = window.location.origin + window.location.pathname;
+            let shareUrl = baseUrl;
+
+            if (currentActiveCategory !== 'Semua') {
+                shareUrl = `${baseUrl}?portfolio=${encodeURIComponent(currentActiveCategory)}`;
+            }
+
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2500);
+            });
+        }
+
+        // Init App
+        document.addEventListener('DOMContentLoaded', loadSheetData);
+    </script>
+</body>
+</html>
