@@ -6,7 +6,7 @@
     
     <!-- SEO Meta Tags -->
     <title>Portfolio Gallery - Oink Project</title>
-    <meta name="description" content="Portofolio Desain Grafis, DKV, Poster, Branding, Kemasan, dan Edit Video oleh Oink Project.">
+    <meta name="description" content="Portofolio Website dan Desain Grafis oleh Oink Project.">
     <meta name="author" content="Oink Project">
     <meta name="robots" content="index, follow">
 
@@ -280,24 +280,6 @@
             z-index: 2;
         }
 
-        .play-video-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 38px;
-            height: 38px;
-            background: rgba(255, 93, 57, 0.9);
-            color: #ffffff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            z-index: 2;
-        }
-
         .card-info {
             padding: 8px 10px;
             display: flex;
@@ -398,12 +380,6 @@
             object-fit: contain;
         }
 
-        .modal-media-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
         .modal-thumbs {
             position: absolute;
             bottom: 0;
@@ -414,6 +390,7 @@
             background: rgba(0, 0, 0, 0.6);
             width: 100%;
             justify-content: center;
+            overflow-x: auto;
         }
 
         .thumb-item {
@@ -424,6 +401,7 @@
             cursor: pointer;
             opacity: 0.6;
             border: 2px solid transparent;
+            flex-shrink: 0;
         }
 
         .thumb-item.active { opacity: 1; border-color: var(--card-cyan); }
@@ -433,6 +411,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            overflow-y: auto;
         }
 
         .modal-close-btn {
@@ -453,6 +432,12 @@
             z-index: 10;
         }
 
+        .btn-action-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
         .btn-order-wa {
             display: flex;
             align-items: center;
@@ -466,6 +451,31 @@
             font-size: 0.88rem;
             border-radius: var(--radius-sm);
             text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-order-wa:hover {
+            background: #1eb856;
+        }
+
+        .btn-demo-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 10px;
+            background: #0284c7;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.82rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-demo-link:hover {
+            background: #0369a1;
         }
 
         .toast {
@@ -516,7 +526,7 @@
         <!-- Fitur Search Bar -->
         <div class="search-box">
             <i class="fas fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" class="search-input" placeholder="Cari karya (poster, logo, video...)" oninput="handleSearch()">
+            <input type="text" id="searchInput" class="search-input" placeholder="Cari karya (website, landing page...)" oninput="handleSearch()">
         </div>
 
         <!-- Filter Kategori Horizontal -->
@@ -539,39 +549,36 @@
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
             <div class="modal-media-container" id="modalMediaContainer">
-                <!-- Preview Foto / YouTube Video -->
+                <!-- Preview Foto -->
             </div>
             <div class="modal-details">
                 <div>
-                    <span id="modalTag" class="card-tag-badge" style="position: relative; top: 0; left: 0; display: inline-block; margin-bottom: 6px;">Poster</span>
+                    <span id="modalTag" class="card-tag-badge" style="position: relative; top: 0; left: 0; display: inline-block; margin-bottom: 6px;">Website</span>
                     <h2 id="modalTitle" class="card-title" style="font-size: 1.1rem; margin-bottom: 4px;">Judul Project</h2>
-                    <p id="modalDesc" class="card-desc" style="font-size: 0.8rem; white-space: normal;">Subjudul / Deskripsi Project</p>
+                    <p id="modalSubTitle" class="card-desc" style="font-size: 0.82rem; font-weight: 700; color: var(--card-cyan); margin-bottom: 6px;">Sub Judul</p>
+                    <p id="modalDesc" class="card-desc" style="font-size: 0.78rem; white-space: normal; line-height: 1.4; color: var(--text-main);">Deskripsi Project</p>
                 </div>
-                <a id="modalWaBtn" href="#" target="_blank" class="btn-order-wa">
-                    <i class="fab fa-whatsapp"></i>
-                    <span>Pesan Desain Seperti Ini</span>
-                </a>
+                
+                <div class="btn-action-group">
+                    <a id="modalDemoBtn" href="#" target="_blank" class="btn-demo-link" style="display: none;">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>Lihat Demo Website</span>
+                    </a>
+                    <a id="modalWaBtn" href="#" target="_blank" class="btn-order-wa">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Pesan Website Seperti Ini</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
         const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxJzVJoMeSTfyJ2erOm2dwf-6xAWJLD_a5s-zAvGmaJ33bOny1xYffztVPoVLhsB6PTn_-Nn2Y-Zy_/pub?gid=0&single=true&output=csv';
+        const WHATSAPP_NUMBER = '6285155091238';
 
         let portfolioItems = [];
         let currentActiveCategory = "Semua";
-
-        function getYouTubeEmbedUrl(url) {
-            if (!url) return null;
-            const match = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/);
-            return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}?autoplay=1` : null;
-        }
-
-        function getYouTubeThumbnail(url) {
-            if (!url) return null;
-            const match = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/);
-            return (match && match[2].length === 11) ? `https://img.youtube.com/vi/${match[2]}/hqdefault.jpg` : null;
-        }
 
         function parseCSV(str) {
             const arr = [];
@@ -606,4 +613,195 @@
                 }
 
                 const headers = rows[0].map(h => h.toLowerCase().trim());
-                const idxJudul = headers.indexOf('
+                
+                // Index mapping kolom spreadsheet
+                const idxJudul = headers.findIndex(h => h.includes('judul') && !h.includes('sub'));
+                const idxSubJudul = headers.findIndex(h => h.includes('sub'));
+                const idxDeskripsi = headers.findIndex(h => h.includes('deskripsi') || h.includes('desc'));
+                const idxFoto = headers.findIndex(h => h.includes('foto') || h.includes('gambar') || h.includes('image'));
+                const idxLinkDemo = headers.findIndex(h => h.includes('demo') || h.includes('link'));
+
+                portfolioItems = rows.slice(1).map((row, index) => {
+                    const judul = idxJudul !== -1 && row[idxJudul] ? row[idxJudul] : 'Project Website';
+                    const subJudul = idxSubJudul !== -1 && row[idxSubJudul] ? row[idxSubJudul] : '';
+                    const deskripsi = idxDeskripsi !== -1 && row[idxDeskripsi] ? row[idxDeskripsi] : '';
+                    
+                    let rawFoto = idxFoto !== -1 && row[idxFoto] ? row[idxFoto] : '';
+                    let photos = rawFoto.split(',').map(img => img.trim()).filter(img => img.length > 0);
+                    if (photos.length === 0) {
+                        photos = ['https://via.placeholder.com/600x800?text=No+Image'];
+                    }
+
+                    const linkDemo = idxLinkDemo !== -1 && row[idxLinkDemo] ? row[idxLinkDemo] : '';
+
+                    return {
+                        id: index,
+                        judul: judul,
+                        subJudul: subJudul,
+                        deskripsi: deskripsi,
+                        photos: photos,
+                        mainPhoto: photos[0],
+                        linkDemo: linkDemo,
+                        kategori: subJudul || 'Website'
+                    };
+                });
+
+                renderCategories();
+                renderGallery(portfolioItems);
+
+            } catch (error) {
+                console.error("Gagal memuat data Google Sheet:", error);
+                renderEmpty("Gagal memuat data portofolio. Pastikan Google Sheet dipublikasikan ke web.");
+            }
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('categoriesContainer');
+            const categories = [...new Set(portfolioItems.map(item => item.subJudul).filter(Boolean))];
+            
+            let html = `<button class="cat-btn active" onclick="filterGallery('Semua', this)">Semua</button>`;
+            categories.forEach(cat => {
+                html += `<button class="cat-btn" onclick="filterGallery('${cat}', this)">${cat}</button>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderGallery(items) {
+            const grid = document.getElementById('galleryGrid');
+            if (items.length === 0) {
+                renderEmpty("Tidak ada portofolio yang cocok.");
+                return;
+            }
+
+            let html = '';
+            items.forEach(item => {
+                html += `
+                    <div class="portfolio-card" onclick="openModal(${item.id})">
+                        <div class="card-img-wrapper">
+                            <span class="card-tag-badge">${item.subJudul || 'Website'}</span>
+                            <img src="${item.mainPhoto}" alt="${item.judul}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x800?text=Image+Error'">
+                        </div>
+                        <div class="card-info">
+                            <h3 class="card-title">${item.judul}</h3>
+                            <p class="card-desc">${item.deskripsi || item.subJudul}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+        }
+
+        function renderEmpty(msg) {
+            document.getElementById('galleryGrid').innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-folder-open"></i>
+                    <p>${msg}</p>
+                </div>
+            `;
+        }
+
+        function filterGallery(category, btn) {
+            currentActiveCategory = category;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            applyFilterAndSearch(category, query);
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            applyFilterAndSearch(currentActiveCategory, query);
+        }
+
+        function applyFilterAndSearch(category, query) {
+            const filtered = portfolioItems.filter(item => {
+                const matchCat = category === "Semua" || item.subJudul === category;
+                const matchQuery = item.judul.toLowerCase().includes(query) || 
+                                   item.subJudul.toLowerCase().includes(query) || 
+                                   item.deskripsi.toLowerCase().includes(query);
+                return matchCat && matchQuery;
+            });
+            renderGallery(filtered);
+        }
+
+        function openModal(id) {
+            const item = portfolioItems.find(p => p.id === id);
+            if (!item) return;
+
+            const mediaContainer = document.getElementById('modalMediaContainer');
+            const tag = document.getElementById('modalTag');
+            const title = document.getElementById('modalTitle');
+            const subTitle = document.getElementById('modalSubTitle');
+            const desc = document.getElementById('modalDesc');
+            const waBtn = document.getElementById('modalWaBtn');
+            const demoBtn = document.getElementById('modalDemoBtn');
+
+            tag.innerText = item.subJudul || 'Website';
+            title.innerText = item.judul;
+            
+            if (item.subJudul) {
+                subTitle.innerText = item.subJudul;
+                subTitle.style.display = 'block';
+            } else {
+                subTitle.style.display = 'none';
+            }
+
+            desc.innerText = item.deskripsi || '-';
+
+            // Main image & gallery thumbnails
+            let mediaHtml = `<img id="mainModalImg" src="${item.photos[0]}" alt="${item.judul}">`;
+            
+            if (item.photos.length > 1) {
+                mediaHtml += `<div class="modal-thumbs">`;
+                item.photos.forEach((photo, idx) => {
+                    mediaHtml += `<img src="${photo}" class="thumb-item ${idx === 0 ? 'active' : ''}" onclick="switchModalImage('${photo}', this)">`;
+                });
+                mediaHtml += `</div>`;
+            }
+            
+            mediaContainer.innerHTML = mediaHtml;
+
+            // WhatsApp CTA dinamis sesuai judul
+            const waText = encodeURIComponent(`kak aku mau order website seperti ${item.judul}`);
+            waBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
+
+            // Link Demo
+            if (item.linkDemo && item.linkDemo.startsWith('http')) {
+                demoBtn.href = item.linkDemo;
+                demoBtn.style.display = 'flex';
+            } else {
+                demoBtn.style.display = 'none';
+            }
+
+            document.getElementById('imageModal').classList.add('active');
+        }
+
+        function switchModalImage(src, thumbEl) {
+            const mainImg = document.getElementById('mainModalImg');
+            if (mainImg) mainImg.src = src;
+            document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+            if (thumbEl) thumbEl.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+
+        function copyCurrentCategoryLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast("Link portofolio berhasil disalin!");
+            });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        document.addEventListener('DOMContentLoaded', loadSheetData);
+    </script>
+</body>
+</html>
