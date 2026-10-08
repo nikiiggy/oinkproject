@@ -873,7 +873,7 @@
            2. HELPER GENERATE LINK WHATSAPP
            ========================================================================== */
         function getWaUrl(imgFileName) {
-            const text = encodeURIComponent(`Halo Admin Oink Project, saya mau pesan/tanya joki desain sesuai contoh gambar ini: ${GITHUB_IMAGE_BASE_URL}${imgFileName}`);
+            const text = encodeURIComponent(`Halo kak, saya mau pesan ini: ${GITHUB_IMAGE_BASE_URL}${imgFileName}`);
             return `https://wa.me/${PHONE_NUMBER}?text=${text}`;
         }
 
@@ -914,7 +914,7 @@
             if(fileName) {
                 waLink.href = getWaUrl(fileName);
             } else {
-                waLink.href = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent('Halo Admin Oink Project, saya mau tanya/konsultasi joki tugas.')}`;
+                waLink.href = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent('Halo kak, saya mau order.')}`;
             }
 
             modal.classList.add('active');
