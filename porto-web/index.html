@@ -22,7 +22,7 @@
             --card-coral: #ff5d39;
             --card-yellow: #ffc425;
             --card-cyan: #05bbc0; 
-            --card-green: #22c55e;
+            --card-green: #25d366;
             --dark-card: #111827;
             
             --text-main: #0f172a;
@@ -30,7 +30,7 @@
             --border-color: #efe8e1;
             
             --radius-lg: 24px;
-            --radius-md: 16px;
+            --radius-md: 18px;
             --radius-sm: 12px;
             
             --shadow-sm: 0 4px 12px rgba(0,0,0,0.04);
@@ -82,7 +82,7 @@
             }
         }
 
-        /* Top Bar Navigation & Tombol Kembali */
+        /* Top Bar Navigation */
         .nav-bar {
             display: flex;
             align-items: center;
@@ -234,7 +234,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: #25d366;
+            background: var(--card-green);
             color: #ffffff;
             font-weight: 800;
             font-size: 0.9rem;
@@ -253,7 +253,7 @@
             transform: translateY(-1px);
         }
 
-        /* Fitur Search Input (Di Bawah Banner Promo) */
+        /* Fitur Search Input */
         .search-box {
             position: relative;
             width: 100%;
@@ -318,19 +318,19 @@
             box-shadow: 0 4px 12px rgba(5, 187, 192, 0.3);
         }
 
-        /* GALERI 2 GRID PORTRAIT MOBILE (Rasio 1080x1440 = 3:4) */
+        /* GALERI 2 GRID FULL POSTER (Sesuai Gambar Sample) */
         .gallery-2grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 14px;
         }
 
         .portfolio-card {
             background: var(--card-white);
             border-radius: var(--radius-md);
             overflow: hidden;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
+            border: 2px solid #ffffff;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
             display: flex;
             flex-direction: column;
             cursor: pointer;
@@ -339,11 +339,11 @@
         }
 
         .portfolio-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--card-cyan);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
         }
 
+        /* Rasio Poster 1080x1440px (3:4) */
         .card-img-wrapper {
             position: relative;
             aspect-ratio: 1080 / 1440;
@@ -359,58 +359,30 @@
             display: block;
         }
 
-        .card-tag-badge {
+        /* Tombol WhatsApp Melayang di Sudut Poster */
+        .card-wa-btn {
             position: absolute;
-            top: 8px;
-            left: 8px;
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(4px);
+            bottom: 10px;
+            right: 10px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--card-green);
             color: #ffffff;
-            font-size: 0.65rem;
-            font-weight: 800;
-            padding: 4px 8px;
-            border-radius: 6px;
-            z-index: 2;
-            letter-spacing: 0.02em;
-        }
-
-        .card-info {
-            padding: 10px 12px 12px;
             display: flex;
-            flex-direction: column;
-            gap: 4px;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+            border: 2px solid #ffffff;
+            transition: var(--transition);
+            z-index: 5;
+            text-decoration: none;
         }
 
-        .card-title {
-            font-size: 0.9rem;
-            font-weight: 800;
-            color: var(--text-main);
-            line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .card-subtitle {
-            font-size: 0.76rem;
-            color: var(--card-cyan);
-            font-weight: 800;
-            line-height: 1.2;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .card-desc {
-            font-size: 0.74rem;
-            color: var(--text-muted);
-            font-weight: 500;
-            line-height: 1.3;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        .card-wa-btn:hover {
+            transform: scale(1.12);
+            background: #1eb856;
         }
 
         /* State Kosong */
@@ -550,7 +522,7 @@
             gap: 8px;
             width: 100%;
             padding: 12px;
-            background: #25d366;
+            background: var(--card-green);
             color: #ffffff;
             font-weight: 800;
             font-size: 0.9rem;
@@ -581,6 +553,21 @@
 
         .btn-demo-link:hover {
             background: #0369a1;
+        }
+
+        .card-tag-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+            color: #ffffff;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 6px;
+            z-index: 2;
+            letter-spacing: 0.02em;
         }
 
         .toast {
@@ -656,7 +643,7 @@
             <button class="cat-btn active" onclick="filterGallery('Semua', this)">Semua</button>
         </div>
 
-        <!-- GALERI 2 GRID PORTRAIT (1080x1440px) -->
+        <!-- GALERI 2 GRID FULL POSTER -->
         <main class="gallery-2grid" id="galleryGrid">
             <div class="empty-state">
                 <i class="fas fa-spinner fa-spin"></i>
@@ -675,9 +662,9 @@
             <div class="modal-details">
                 <div>
                     <span id="modalTag" class="card-tag-badge" style="position: relative; top: 0; left: 0; display: inline-block; margin-bottom: 6px;">Website</span>
-                    <h2 id="modalTitle" class="card-title" style="font-size: 1.15rem; margin-bottom: 4px;">Judul Project</h2>
-                    <p id="modalSubTitle" class="card-subtitle" style="font-size: 0.88rem; margin-bottom: 8px;">Sub Judul</p>
-                    <p id="modalDesc" class="card-desc" style="font-size: 0.82rem; white-space: normal; line-height: 1.45; color: var(--text-main);">Deskripsi Project</p>
+                    <h2 id="modalTitle" style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; color: var(--text-main);">Judul Project</h2>
+                    <p id="modalSubTitle" style="font-size: 0.88rem; font-weight: 800; color: var(--card-cyan); margin-bottom: 8px;">Sub Judul</p>
+                    <p id="modalDesc" style="font-size: 0.82rem; white-space: normal; line-height: 1.45; color: var(--text-muted);">Deskripsi Project</p>
                 </div>
                 
                 <div class="btn-action-group">
@@ -803,16 +790,16 @@
 
             let html = '';
             items.forEach(item => {
+                const waText = encodeURIComponent(`Halo, saya tertarik pesan website seperti: ${item.judul}`);
+                const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
+
                 html += `
                     <div class="portfolio-card" onclick="openModal(${item.id})">
                         <div class="card-img-wrapper">
-                            <span class="card-tag-badge">${item.kategori}</span>
                             <img src="${item.mainPhoto}" alt="${item.judul}" loading="lazy" onerror="this.src='https://via.placeholder.com/1080x1440?text=Image+Error'">
-                        </div>
-                        <div class="card-info">
-                            <h3 class="card-title">${item.judul}</h3>
-                            ${item.subJudul ? `<p class="card-subtitle">${item.subJudul}</p>` : ''}
-                            <p class="card-desc">${item.deskripsi || '-'}</p>
+                            <a href="${waUrl}" target="_blank" onclick="event.stopPropagation()" class="card-wa-btn" title="Pesan via WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
                         </div>
                     </div>
                 `;
