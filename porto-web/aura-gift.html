@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Gift & Hampers — Spesialis Hampers & Gift Box Premium</title>
+
+    <!-- Meta Tags SEO Dummy -->
+    <meta name="description" content="Aura Gift & Hampers — Penyedia hampers eksklusif, custom gift box, duka cita, syukuran, dan corporate bulk order premium.">
+    <meta name="keywords" content="hampers premium, gift box eksklusif, hampers graduation, hampers wedding, corporate gift">
+
+    <!-- Favicon Inisial Gold (AG) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23C5A059'/><text x='50%' y='65%' font-family='Georgia, serif' font-size='50' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'>AG</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Variables & Color Palette (Dipertahankan 100%) */
+        :root {
+            --bg-cream: #FAF7F2;
+            --card-cream: #FFFFFF;
+            --text-dark: #33302E;
+            --text-muted: #66605C;
+            --accent-gold: #C5A059;
+            --accent-sage: #8A9A86;
+            --border-color: #E8E2D9;
+            --wa-green: #25D366;
+            --wa-green-hover: #20ba5a;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background-color: #EAE6DF;
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Mobile Container Layout (Max-width 480px) */
+        .mobile-wrapper {
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--bg-cream);
+            min-height: 100vh;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header Minimalis */
+        header {
+            background-color: var(--card-cream);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .logo span {
+            color: var(--accent-gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 35px 20px 25px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: var(--card-cream);
+            color: var(--accent-sage);
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.25;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-gold);
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+        }
+
+        /* Ikon Logo Sosmed di Hero */
+        .social-hero {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .social-icon-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--card-cream);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            font-size: 18px;
+            color: var(--text-dark);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            transition: var(--transition);
+        }
+
+        .social-icon-btn:hover {
+            color: var(--accent-gold);
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        /* Global WhatsApp Button */
+        .btn-wa {
+            display: block;
+            width: 100%;
+            background-color: var(--wa-green);
+            color: #FFFFFF !important;
+            text-align: center;
+            padding: 13px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+            transition: var(--transition);
+        }
+
+        .btn-wa:hover {
+            background-color: var(--wa-green-hover);
+        }
+
+        /* Section Wrappers */
+        .page-section {
+            padding: 25px 20px;
+        }
+
+        .section-card {
+            background: var(--card-cream);
+            padding: 24px 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            text-align: center;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--accent-gold);
+            font-size: 0.85rem;
+            margin-bottom: 22px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sub-header {
+            color: var(--accent-sage);
+            font-size: 1.05rem;
+            margin-top: 22px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 4px;
+        }
+
+        /* List Tombol PDF Pricelist + Foto 1:1 */
+        .pdf-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .pdf-item-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: var(--bg-cream);
+            padding: 10px 14px 10px 10px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .pdf-item-btn:hover {
+            border-color: var(--accent-gold);
+            background-color: #FFF;
+        }
+
+        /* Thumb Foto Produk 1:1 */
+        .pdf-thumb-1x1 {
+            width: 58px;
+            height: 58px;
+            min-width: 58px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #E8E2D9;
+        }
+
+        .pdf-thumb-1x1 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pdf-text-box {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pdf-title-text {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        .pdf-sub-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .pdf-badge {
+            background-color: var(--accent-gold);
+            color: #FFF;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        /* Testimoni Section */
+        .testi-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .testi-card {
+            background-color: var(--bg-cream);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+
+        .testi-body {
+            padding: 14px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .testi-stars {
+            color: var(--accent-gold);
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+
+        .testi-bought-tag {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--accent-sage);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .testi-text {
+            font-size: 0.82rem;
+            color: var(--text-dark);
+            font-style: italic;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .testi-user {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            border-top: 1px dashed var(--border-color);
+            padding-top: 6px;
+            margin-top: 4px;
+        }
+
+        .testi-user span {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .testi-prod-img-right {
+            width: 100px;
+            min-width: 100px;
+            background-color: #E8E2D9;
+        }
+
+        .testi-prod-img-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* About Us Content */
+        .about-box p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        .about-box ul {
+            font-size: 13px;
+            color: var(--text-muted);
+            padding-left: 18px;
+            margin-bottom: 15px;
+        }
+
+        .about-box li {
+            margin-bottom: 6px;
+        }
+
+        /* FAQ Styling */
+        .faq-item {
+            margin-bottom: 12px;
+            padding: 14px;
+            background-color: var(--bg-cream);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-gold);
+        }
+
+        .faq-question {
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .faq-answer {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            text-align: justify;
+        }
+
+        .faq-answer ul {
+            padding-left: 15px;
+            margin-top: 5px;
+        }
+
+        /* Contact Cards */
+        .contact-card {
+            background-color: var(--bg-cream);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-gold);
+            margin-bottom: 12px;
+        }
+
+        .contact-card h3 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .contact-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .contact-link {
+            color: var(--accent-gold);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .map-box-placeholder {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            margin-top: 10px;
+            background-color: var(--bg-cream);
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .map-box-placeholder i {
+            font-size: 28px;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--text-dark);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 99px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        footer span {
+            color: var(--accent-gold);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-wrapper">
+
+        <!-- Header Minimalis -->
+        <header>
+            <a class="logo" href="#">Aura<span>Gifts</span></a>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <span class="hero-badge">Eksklusif & Personalized</span>
+            <h1>Spesialis Hampers & <br><span>Gift Box Premium</span></h1>
+            <p>Menyampaikan rasa hormat, ucapan selamat, hingga empati terdalam Anda melalui bingkisan eksklusif bermakna.</p>
+            
+            <!-- Tombol WA Hero -->
+            <a class="btn-wa" href="https://wa.me/6285155091238?text=Halo%20Aura%20Gifts,%20saya%20ingin%20konsultasi%20pemesanan%20hampers" target="_blank" rel="noopener">
+                <i class="fa-brands fa-whatsapp"></i> Chat Admin via WhatsApp
+            </a>
+
+            <!-- Ikon Logo Sosmed di Hero -->
+            <div class="social-hero">
+                <a href="#" onclick="showToast('Sosial media dummy'); return false;" class="social-icon-btn" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="#" onclick="showToast('Sosial media dummy'); return false;" class="social-icon-btn" title="TikTok">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+                <a href="#" onclick="showToast('Lokasi peta dummy'); return false;" class="social-icon-btn" title="Google Maps">
+                    <i class="fa-solid fa-location-dot"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- PRICELIST & KATALOG RESMI -->
+        <section class="page-section">
+            <div class="section-card">
+                <h2 class="section-title">Pricelist PDF</h2>
+                <div class="section-subtitle">Pilih Tema & Unduh Katalog</div>
+
+                <div class="pdf-list">
+                    <!-- Tombol PDF 1 -->
+                    <a class="pdf-item-btn" href="#" onclick="showToast('Membuka PDF Sidang & Graduation...'); return false;">
+                        <div class="pdf-thumb-1x1">
+                            <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=200&auto=format&fit=crop&q=80" alt="Edisi Sidang">
+                        </div>
+                        <div class="pdf-text-box">
+                            <div class="pdf-title-text">🎓 Sidang & Graduation</div>
+                            <div class="pdf-sub-text">Hardbox, snack & bouquet</div>
+                        </div>
+                        <span class="pdf-badge">PDF</span>
+                    </a>
+
+                    <!-- Tombol PDF 2 -->
+                    <a class="pdf-item-btn" href="#" onclick="showToast('Membuka PDF Lamaran & Wedding...'); return false;">
+                        <div class="pdf-thumb-1x1">
+                            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200&auto=format&fit=crop&q=80" alt="Edisi Wedding">
+                        </div>
+                        <div class="pdf-text-box">
+                            <div class="pdf-title-text">💍 Lamaran & Wedding</div>
+                            <div class="pdf-sub-text">Gift box & cangkir keramik</div>
+                        </div>
+                        <span class="pdf-badge">PDF</span>
+                    </a>
+
+                    <!-- Tombol PDF 3 -->
+                    <a class="pdf-item-btn" href="#" onclick="showToast('Membuka PDF Duka Cita...'); return false;">
+                        <div class="pdf-thumb-1x1">
+                            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=200&auto=format&fit=crop&q=80" alt="Edisi Duka Cita">
+                        </div>
+                        <div class="pdf-text-box">
+                            <div class="pdf-title-text">🕊️ Duka Cita (Sympathy)</div>
+                            <div class="pdf-sub-text">Teh herbal & cookies premium</div>
+                        </div>
+                        <span class="pdf-badge">PDF</span>
+                    </a>
+
+                    <!-- Tombol PDF 4 -->
+                    <a class="pdf-item-btn" href="#" onclick="showToast('Membuka PDF Syukuran Umroh...'); return false;">
+                        <div class="pdf-thumb-1x1">
+                            <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=200&auto=format&fit=crop&q=80" alt="Edisi Umroh">
+                        </div>
+                        <div class="pdf-text-box">
+                            <div class="pdf-title-text">🕋 Syukuran Umroh & Haji</div>
+                            <div class="pdf-sub-text">Zam-zam, kurma & sajadah</div>
+                        </div>
+                        <span class="pdf-badge">PDF</span>
+                    </a>
+
+                    <!-- Tombol PDF 5 -->
+                    <a class="pdf-item-btn" href="#" onclick="showToast('Membuka PDF Corporate...'); return false;">
+                        <div class="pdf-thumb-1x1">
+                            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=200&auto=format&fit=crop&q=80" alt="Edisi Corporate">
+                        </div>
+                        <div class="pdf-text-box">
+                            <div class="pdf-title-text">🏢 Corporate & Bulk Order</div>
+                            <div class="pdf-sub-text">Custom branding logo instansi</div>
+                        </div>
+                        <span class="pdf-badge">PDF</span>
+                    </a>
+
+                    <!-- Tombol PDF 6 -->
+                    <a class="pdf-item-btn" href="#" onclick="showToast('Membuka PDF Hari Raya...'); return false;">
+                        <div class="pdf-thumb-1x1">
+                            <img src="https://images.unsplash.com/photo-1576867757603-05b134ebc379?w=200&auto=format&fit=crop&q=80" alt="Edisi Hari Raya">
+                        </div>
+                        <div class="pdf-text-box">
+                            <div class="pdf-title-text">🌙 Hari Raya (Raya Edition)</div>
+                            <div class="pdf-sub-text">Edisi dekorasi spesial raya</div>
+                        </div>
+                        <span class="pdf-badge">PDF</span>
+                    </a>
+                </div>
+
+                <a class="btn-wa" href="https://wa.me/6285155091238?text=Halo%20Aura%20Gifts,%20saya%20ingin%20konsultasi%20custom%20pricelist" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-whatsapp"></i> Konsultasi Price List Custom
+                </a>
+            </div>
+        </section>
+
+        <!-- SECTION TESTIMONI -->
+        <section class="page-section">
+            <div class="section-card">
+                <h2 class="section-title">Testimoni</h2>
+                <div class="section-subtitle">Ulasan Asli Pembeli</div>
+
+                <div class="testi-list">
+                    <!-- Testimoni 1 -->
+                    <div class="testi-card">
+                        <div class="testi-body">
+                            <div>
+                                <div class="testi-stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="testi-bought-tag">Beli: Hampers Duka Cita</div>
+                                <div class="testi-text">
+                                    "Hampers duka citanya sangat elegan & menenangkan. Adminnya ramah banget, pengiriman instan langsung sampai tepat waktu."
+                                </div>
+                            </div>
+                            <div class="testi-user">
+                                <span>Kak Sarah M.</span>
+                                <small>Jakarta</small>
+                            </div>
+                        </div>
+                        <div class="testi-prod-img-right">
+                            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&auto=format&fit=crop&q=80" alt="Produk Duka Cita">
+                        </div>
+                    </div>
+
+                    <!-- Testimoni 2 -->
+                    <div class="testi-card">
+                        <div class="testi-body">
+                            <div>
+                                <div class="testi-stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="testi-bought-tag">Beli: Corporate Bulk (80 Pcs)</div>
+                                <div class="testi-text">
+                                    "Pesan 80 pcs hampers corporate untuk event instansi, pengerjaannya sangat rapi, pita & branding logonya eksklusif sekali!"
+                                </div>
+                            </div>
+                            <div class="testi-user">
+                                <span>PT Utama Nusantara</span>
+                                <small>Surabaya</small>
+                            </div>
+                        </div>
+                        <div class="testi-prod-img-right">
+                            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&auto=format&fit=crop&q=80" alt="Produk Corporate">
+                        </div>
+                    </div>
+
+                    <!-- Testimoni 3 -->
+                    <div class="testi-card">
+                        <div class="testi-body">
+                            <div>
+                                <div class="testi-stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="testi-bought-tag">Beli: Hampers Sidang Skripsi</div>
+                                <div class="testi-text">
+                                    "Bagus banget gift box sidang skripsi buat temen! Pitanya manis dan isian snack-nya terkurasi banget. Sukses terus Aura Gifts!"
+                                </div>
+                            </div>
+                            <div class="testi-user">
+                                <span>Dinda P.</span>
+                                <small>Bandung</small>
+                            </div>
+                        </div>
+                        <div class="testi-prod-img-right">
+                            <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&auto=format&fit=crop&q=80" alt="Produk Sidang">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TENTANG KAMI -->
+        <section class="page-section">
+            <div class="section-card about-box">
+                <h2 class="section-title">Tentang Kami</h2>
+                <div class="section-subtitle">Aura Gift & Hampers</div>
+
+                <p>Setiap momen berharga layak dirayakan dengan apresiasi berkesan. <strong>Aura Gifts</strong> hadir sebagai penyedia layanan hampers & gift box eksklusif berkualitas tinggi.</p>
+
+                <p>Kami mengusung konsep <em>elegant, modern, dan simple</em> pada setiap kurasi isian, kemasan, hingga pita akhir.</p>
+
+                <div class="sub-header">Layanan Momen Anda</div>
+                <ul>
+                    <li><strong>Bahagia & Personal:</strong> Lamaran, Wedding, Sidang Skripsi, Ulang Tahun, Hari Raya.</li>
+                    <li><strong>Simpati & Penghormatan:</strong> Duka Cita (Sympathy Gift) & Syukuran Umroh/Haji.</li>
+                    <li><strong>Corporate:</strong> Pemesanan skala besar untuk souvenir instansi & perusahaan.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="page-section">
+            <div class="section-card">
+                <h2 class="section-title">FAQ</h2>
+                <div class="section-subtitle">Pertanyaan Umum</div>
+
+                <div class="sub-header">1. Produk & Custom</div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Apakah menerima pemesanan custom?</div>
+                    <div class="faq-answer">Ya, Anda bisa berkonsultasi untuk menyesuaikan isian hampers, tema warna, pita, hingga kartu ucapan sesuai budget.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Apakah bisa pemesanan skala besar (Bulk Order)?</div>
+                    <div class="faq-answer">Sangat bisa. Kami berpengalaman memproses pesanan 50 hingga 100+ pcs untuk acara perusahaan, event, atau pernikahan.</div>
+                </div>
+
+                <div class="sub-header">2. Pengiriman</div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Ke mana saja jangkauan pengiriman?</div>
+                    <div class="faq-answer">
+                        <ul>
+                            <li><strong>Lokal:</strong> Kurir Express Same Day & Instant.</li>
+                            <li><strong>Nasional:</strong> Ekspedisi/Kargo terpercaya ke seluruh Indonesia.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="sub-header">3. Pemesanan</div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Berapa lama waktu ideal pemesanan?</div>
+                    <div class="faq-answer">Ready stock: H-3 s/d H-1. Bulk order (50-100+ pcs): 2 hingga 4 minggu sebelum acara.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HUBUNGI KAMI -->
+        <section class="page-section">
+            <div class="section-card">
+                <h2 class="section-title">Hubungi Kami</h2>
+                <div class="section-subtitle">Konsultasi & Pemesanan</div>
+
+                <a class="btn-wa" style="margin-bottom: 20px;" href="https://wa.me/6285155091238?text=Halo%20Aura%20Gifts,%20saya%20ingin%20konsultasi%20pemesanan%20hampers" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-whatsapp"></i> Chat Admin via WhatsApp (+62 851-5509-1238)
+                </a>
+
+                <div class="contact-card">
+                    <h3>Workshop & Lokasi</h3>
+                    <p>Pusat Operasional & Galeri Utama</p>
+                    <a class="contact-link" href="#" onclick="showToast('Lokasi galeri dummy'); return false;">
+                        <i class="fa-solid fa-location-dot"></i> Buka Google Maps &rarr;
+                    </a>
+                </div>
+
+                <div class="contact-card" style="border-left-color: var(--accent-sage);">
+                    <h3>Media Sosial</h3>
+                    <p>Instagram: <a class="contact-link" href="#" onclick="showToast('Instagram dummy'); return false;">@auragifts.official</a></p>
+                    <p>TikTok: <a class="contact-link" href="#" onclick="showToast('TikTok dummy'); return false;">@auragifts.official</a></p>
+                </div>
+
+                <div class="sub-header">Peta Lokasi</div>
+                <div class="map-box-placeholder">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <p style="font-weight: 600; font-size: 0.9rem; margin-bottom: 2px;">Lokasi Galeri / Workshop</p>
+                    <p style="font-size: 0.78rem;">Peta Interaktif Demo Portofolio</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 <span>Aura Gift & Hampers</span>. All Rights Reserved.</p>
+        </footer>
+
+    </div>
+
+    <!-- Toast Component -->
+    <div class="toast" id="toast">Notifikasi</div>
+
+    <script>
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2500);
+        }
+    </script>
+</body>
+</html>

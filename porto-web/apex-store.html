@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#2563EB" />
+<title>Apex Store Official – Portfolio Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#2563EB; --red-dark:#1D4ED8; --yellow:#F59E0B; --ink:#16161A;
+  --muted:#6B6B76; --line:#E8E8EE; --bg:#F5F5F8; --card:#fff;
+  --wa:#1FAF54; --map:#E5484D; --admin:#2563EB;
+  --r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#0f0f12;color:var(--ink);display:flex;justify-content:center}
+a{text-decoration:none;color:inherit}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+
+.app{width:100%;max-width:480px;min-height:100vh;background:var(--bg);display:flex;flex-direction:column;position:relative}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,var(--red) 0%,var(--red-dark) 100%);color:#fff;padding:calc(28px + env(safe-area-inset-top,0px)) 20px 48px;text-align:center;border-radius:0 0 32px 32px}
+.logo{width:88px;height:88px;margin:0 auto 14px;border-radius:50%;background:#fff;padding:4px;box-shadow:0 0 0 4px rgba(255,255,255,.25),0 10px 24px rgba(0,0,0,.25)}
+.logo img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:var(--red)}
+.hero h1{font-size:1.45rem;font-weight:800;letter-spacing:.2px}
+.hero h2{font-size:1rem;font-weight:600;color:var(--yellow);margin-top:2px}
+.hero p{font-size:.85rem;line-height:1.55;opacity:.9;margin:12px auto 0;max-width:34ch}
+
+/* Social Media Bar */
+.social-links{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:14px}
+.social-icon{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.15);display:grid;place-items:center;color:#fff;transition:transform .2s, background .2s}
+.social-icon:active{transform:scale(.92);background:rgba(255,255,255,.3)}
+.social-icon svg{width:18px;height:18px;fill:currentColor}
+
+/* Hero Actions */
+.hero-actions{display:flex;flex-direction:column;gap:10px;margin:18px auto 0;max-width:340px;width:100%}
+.cta{display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;font-weight:800;font-size:.9rem;padding:12px 16px;border-radius:999px;box-shadow:0 6px 16px rgba(0,0,0,.2);transition:transform .15s}
+.cta:active{transform:scale(.97)}
+.cta svg{width:20px;height:20px;flex:none}
+
+.action-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn-sub{display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(255,255,255,.18);backdrop-filter:blur(4px);color:#fff;font-weight:700;font-size:.78rem;padding:10px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.3);transition:background .15s, transform .15s}
+.btn-sub:active{transform:scale(.96);background:rgba(255,255,255,.3)}
+.btn-sub svg{width:16px;height:16px;flex:none}
+
+/* Tabs */
+.tabs-wrap{position:sticky;top:16px;z-index:20;margin:-28px 16px 0;padding-top:env(safe-area-inset-top,0px)}
+.tabs{display:flex;background:var(--card);border-radius:16px;padding:5px;box-shadow:0 8px 24px rgba(20,20,40,.14);position:relative}
+.tab{flex:1;padding:12px 0;font-weight:700;font-size:.88rem;color:var(--muted);border-radius:12px;position:relative;z-index:2;transition:color .25s;text-align:center}
+.tab[aria-selected="true"]{color:#fff}
+.pill{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);background:var(--red);border-radius:12px;transition:transform .3s cubic-bezier(.4,.1,.2,1);z-index:1}
+.tabs[data-active="toko"] .pill{transform:translateX(100%)}
+
+.panel{display:none;padding:24px 16px 20px;flex:1}
+.panel.active{display:block}
+.head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+.head h3{font-size:1.1rem;font-weight:800}
+.head span{font-size:.78rem;color:var(--muted);font-weight:600}
+
+/* Slider (Ratio 1080x1440 / 3:4) */
+.slider{position:relative;border-radius:var(--r);overflow:hidden;background:#ddd;box-shadow:0 10px 28px rgba(20,20,40,.16)}
+.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;aspect-ratio:1080/1440}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:center;cursor:zoom-in;background:linear-gradient(160deg,#e9e9ef,#cfcfd9)}
+.slide img{width:100%;height:100%;object-fit:cover;display:block}
+.dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px}
+.dot{height:6px;width:6px;border-radius:3px;background:rgba(255,255,255,.7);transition:all .25s;padding:0}
+.dot[aria-current="true"]{width:22px;background:#fff}
+.arrow{position:absolute;top:50%;translate:0 -50%;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.arrow.prev{left:10px}.arrow.next{right:10px}
+.arrow svg{width:18px;height:18px}
+
+.btn-katalog{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:18px;padding:15px;border-radius:14px;background:var(--ink);color:#fff;font-weight:800;font-size:.95rem;transition:transform .15s}
+.btn-katalog:active{transform:scale(.98)}
+.btn-katalog svg{width:20px;height:20px}
+
+/* Search Box */
+.search-box{display:flex;align-items:center;background:var(--card);border-radius:12px;padding:12px 14px;margin-bottom:18px;box-shadow:0 2px 8px rgba(20,20,40,.04);border:1px solid var(--line);gap:10px}
+.search-box svg{width:18px;height:18px;color:var(--muted);flex:none}
+.search-box input{border:none;background:transparent;outline:none;font:inherit;font-size:.9rem;width:100%;color:var(--ink)}
+.search-box input::placeholder{color:var(--muted)}
+
+/* Branch & Rating */
+.branch{background:var(--card);border-radius:var(--r);padding:16px;margin-bottom:14px;box-shadow:0 4px 16px rgba(20,20,40,.06);border:1px solid var(--line)}
+.branch-top{display:flex;gap:12px;align-items:flex-start}
+.pin{flex:none;width:42px;height:42px;border-radius:12px;background:#EFF6FF;color:var(--red);display:grid;place-items:center}
+.pin svg{width:22px;height:22px}
+.branch h4{font-size:1rem;font-weight:800;color:var(--ink)}
+
+.rating-badge{display:inline-flex;align-items:center;gap:6px;margin-top:4px;background:#FFF8E7;border:1px solid #FFE082;padding:3px 8px;border-radius:20px}
+.rating-stars{display:flex;align-items:center;gap:1.5px}
+.rating-stars svg{width:14px;height:14px}
+.rating-score{font-size:.78rem;font-weight:800;color:#B78103;margin-left:2px}
+.rating-count{font-size:.72rem;color:var(--muted);font-weight:600}
+
+.branch p.addr{font-size:.8rem;line-height:1.5;color:var(--muted);margin-top:6px;word-break:break-word}
+.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.act{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 2px;border-radius:12px;color:#fff;font-size:.72rem;font-weight:700;transition:transform .15s;text-align:center}
+.act:active{transform:scale(.96)}
+.act svg{width:20px;height:20px}
+.act.map{background:var(--map)}.act.wa{background:var(--wa)}.act.admin{background:var(--admin)}
+
+/* Footer */
+.foot{background:var(--yellow);color:#16161A;padding:22px 20px;text-align:center;border-radius:28px 28px 0 0;margin-top:auto}
+.foot p{font-size:.76rem;font-weight:700;line-height:1.5;text-transform:uppercase}
+.foot a{display:inline-block;margin-top:8px;font-size:1.6rem;font-weight:800;letter-spacing:.5px}
+
+/* Toast Notification */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--ink);color:#fff;padding:10px 20px;border-radius:99px;font-size:.82rem;font-weight:600;box-shadow:0 8px 20px rgba(0,0,0,.3);transition:transform .3s cubic-bezier(.175,.885,.32,1.275);z-index:99;pointer-events:none;opacity:0}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* Lightbox */
+.modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.modal img{max-width:100%;max-height:88vh;border-radius:12px}
+.close{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));right:16px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;font-size:1.6rem;line-height:1}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="hero">
+    <div class="logo">
+      <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&auto=format&fit=crop&q=80" alt="Logo Placeholder"/>
+    </div>
+    <h1>APEX STORE OFFICIAL</h1>
+    <h2>Gadget & Lifestyle Hub</h2>
+    <p>Pusat Smartphone, Aksesoris Gadget, dan Produk Elektronik Pilihan. Produk original, garansi resmi, dan pelayanan terpercaya.</p>
+    
+    <!-- Social Media Links -->
+    <div class="social-links">
+      <a class="social-icon" href="#" onclick="showToast('Sosial media dummy'); return false;" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a class="social-icon" href="#" onclick="showToast('Sosial media dummy'); return false;" aria-label="TikTok">
+        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.82.56-1.36 1.52-1.36 2.52-.01 1.02.51 2 1.37 2.55.83.54 1.92.62 2.82.22.95-.41 1.59-1.31 1.68-2.33.02-3.8.01-7.61.01-11.41z"/></svg>
+      </a>
+      <a class="social-icon" href="#" onclick="showToast('Sosial media dummy'); return false;" aria-label="YouTube">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+    </div>
+
+    <!-- Actions Area -->
+    <div class="hero-actions">
+      <a class="cta" href="https://wa.me/6285155091238" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.012c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        WhatsApp CS Central
+      </a>
+      <div class="action-row">
+        <button class="btn-sub" onclick="showToast('Fitur VCF Kontak')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+          Simpan Kontak
+        </button>
+        <button class="btn-sub" id="btnShare">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          Bagikan Link
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="tabs-wrap">
+    <div class="tabs" role="tablist" data-active="home" id="tabs">
+      <span class="pill"></span>
+      <button class="tab" role="tab" aria-selected="true" data-tab="home">Home</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="toko">Toko Cabang</button>
+    </div>
+  </div>
+
+  <!-- HOME PANEL -->
+  <main id="panel-home" class="panel active" role="tabpanel">
+    <div class="head"><h3>Promo Spesial Hari Ini</h3><span id="counter">0 / 0</span></div>
+    <div class="slider">
+      <div class="track" id="track">
+        <!-- Slide promo diisi via JavaScript -->
+      </div>
+      <button class="arrow prev" id="prev" aria-label="Promo sebelumnya"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button class="arrow next" id="next" aria-label="Promo berikutnya"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+      <div class="dots" id="dots"></div>
+    </div>
+
+    <!-- Tombol E-Katalog -->
+    <a href="#" onclick="showToast('Membuka E-Katalog...'); return false;" class="btn-katalog" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 012-2h12v18H6a2 2 0 01-2-2V5z"/><path d="M8 7h6M8 11h6"/></svg>
+      Buka E-Katalog Produk
+    </a>
+  </main>
+
+  <!-- TOKO PANEL -->
+  <main id="panel-toko" class="panel" role="tabpanel">
+    <div class="head"><h3>Lokasi Toko Cabang</h3><span id="branch-count">4 lokasi</span></div>
+    
+    <!-- PENCARIAN -->
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" placeholder="Cari nama cabang, kota, alamat..." autocomplete="off">
+    </div>
+
+    <div id="branches">Memuat daftar lokasi...</div>
+  </main>
+
+  <footer class="foot">
+    <p>Pusat Bantuan & Layanan Pelanggan 24/7</p>
+    <a href="https://wa.me/6285155091238">0851 5509 1238</a>
+  </footer>
+</div>
+
+<div class="modal" id="modal"><button class="close" aria-label="Tutup">&times;</button><img id="modalImg" alt="Promo"></div>
+<div class="toast" id="toast">Tautan berhasil disalin!</div>
+
+<script>
+// Nomor WA Utama
+const WA_NUMBER = "6285155091238";
+
+// Data Static Dummy Toko Cabang (Sepenuhnya Lokal)
+const allBranches = [
+  {
+    name: "Apex Store - Metropolitan Mall",
+    addr: "Jl. Boulevard Utama No. 12, Lantai 1 Unit 4B, Jakarta Selatan",
+    wa: WA_NUMBER,
+    admin: WA_NUMBER,
+    maps: "https://maps.google.com",
+    rating: 4.9,
+    reviews: 1248
+  },
+  {
+    name: "Apex Store - Grand City Hub",
+    addr: "Jl. Pemuda No. 45-47, Kel. Embong Kaliasin, Surabaya Pusat",
+    wa: WA_NUMBER,
+    admin: WA_NUMBER,
+    maps: "https://maps.google.com",
+    rating: 4.8,
+    reviews: 850
+  },
+  {
+    name: "Apex Store - Paskal Point",
+    addr: "Ruko Paskal Hypersquare Blok B No. 18, Kebon Jeruk, Bandung",
+    wa: WA_NUMBER,
+    admin: WA_NUMBER,
+    maps: "https://maps.google.com",
+    rating: 4.7,
+    reviews: 620
+  },
+  {
+    name: "Apex Store - Sidoarjo Square",
+    addr: "Jl. Ahmad Yani No. 88, Pucang, Kab. Sidoarjo, Jawa Timur",
+    wa: WA_NUMBER,
+    admin: WA_NUMBER,
+    maps: "https://maps.google.com",
+    rating: 5.0,
+    reviews: 432
+  }
+];
+
+// Gambar Slider Promo (Placeholder Unsplash 3:4 Aspect Ratio)
+const promoImages = [
+  "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1080&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=1080&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=1080&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1080&auto=format&fit=crop&q=80"
+];
+
+const ic = {
+  pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 10-14 0c0 5.800 7 12 7 12z"/><circle cx="12" cy="10" r="2.500"/></svg>',
+  wa: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.012c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>',
+  starFull: '<svg viewBox="0 0 24 24" fill="#FFB300"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>',
+  starEmpty: '<svg viewBox="0 0 24 24" fill="#E8E8EE"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>'
+};
+
+// Slider Setup
+const track = document.getElementById('track'), dotsEl = document.getElementById('dots'), counter = document.getElementById('counter');
+let cur = 0, timer, slides = [];
+
+function initSlider(imgList) {
+  track.innerHTML = '';
+  dotsEl.innerHTML = '';
+
+  imgList.forEach((src, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    slide.dataset.full = src;
+    slide.innerHTML = `<img loading="lazy" src="${src}" alt="Promo ${i + 1}">`;
+    track.appendChild(slide);
+
+    const d = document.createElement('button');
+    d.className = 'dot';
+    d.setAttribute('aria-label', 'Promo ' + (i + 1));
+    d.onclick = () => go(i);
+    dotsEl.appendChild(d);
+  });
+
+  slides = [...track.children];
+  slides.forEach(s => s.addEventListener('click', () => {
+    modalImg.src = s.dataset.full;
+    modal.classList.add('open');
+  }));
+
+  sync();
+  restart();
+}
+
+function go(i) {
+  if (slides.length === 0) return;
+  cur = (i + slides.length) % slides.length;
+  track.scrollTo({left: cur * track.clientWidth, behavior: 'smooth'});
+  restart();
+}
+
+function sync() {
+  if (slides.length === 0) return;
+  cur = Math.round(track.scrollLeft / track.clientWidth);
+  [...dotsEl.children].forEach((d, i) => d.setAttribute('aria-current', i === cur));
+  counter.textContent = (cur + 1) + ' / ' + slides.length;
+}
+
+track.addEventListener('scroll', () => {
+  clearTimeout(track._t);
+  track._t = setTimeout(sync, 60);
+});
+
+document.getElementById('prev').onclick = () => go(cur - 1);
+document.getElementById('next').onclick = () => go(cur + 1);
+
+function restart() {
+  clearInterval(timer);
+  if(!matchMedia('(prefers-reduced-motion:reduce)').matches && slides.length > 1) {
+    timer = setInterval(() => go(cur + 1), 4500);
+  }
+}
+
+track.addEventListener('pointerdown', () => clearInterval(timer));
+initSlider(promoImages);
+
+/* ===== Toast & Share ===== */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+document.getElementById('btnShare').addEventListener('click', async () => {
+  const shareData = {
+    title: 'Apex Store Official',
+    text: 'Apex Store Official – Retail & Gadget Landing Page',
+    url: window.location.href
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+    } catch (err) {
+      if (err.name !== 'AbortError') copyToClipboard();
+    }
+  } else {
+    copyToClipboard();
+  }
+});
+
+function copyToClipboard() {
+  navigator.clipboard.writeText(window.location.href)
+    .then(() => showToast('Tautan berhasil disalin!'))
+    .catch(() => showToast('Gagal menyalin tautan'));
+}
+
+/* ===== Render Store Branches ===== */
+function renderBranches(data) {
+  const container = document.getElementById('branches');
+  
+  if (data.length === 0) {
+    container.innerHTML = '<p style="text-align:center;color:#666;padding:20px;">Toko cabang tidak ditemukan.</p>';
+    return;
+  }
+
+  container.innerHTML = data.map((b, idx) => {
+    let starsHtml = '';
+    const rating = Math.max(0, Math.min(5, b.rating));
+    const fullStars = Math.floor(rating);
+    const fraction = rating - fullStars;
+    const emptyStars = 5 - Math.ceil(rating);
+
+    for (let i = 0; i < fullStars; i++) starsHtml += ic.starFull;
+
+    if (fraction > 0) {
+      const percent = Math.round(fraction * 100);
+      const gradId = `grad-${idx}`;
+      starsHtml += `
+        <svg viewBox="0 0 24 24">
+          <defs>
+            <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="${percent}%" stop-color="#FFB300" />
+              <stop offset="${percent}%" stop-color="#E8E8EE" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#${gradId})" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+        </svg>
+      `;
+    }
+
+    for (let i = 0; i < emptyStars; i++) starsHtml += ic.starEmpty;
+
+    let ratingBadge = '';
+    if (b.reviews > 0) {
+      const formattedReviews = b.reviews.toLocaleString('id-ID');
+      ratingBadge = `
+        <div class="rating-badge">
+          <div class="rating-stars">${starsHtml}</div>
+          <span class="rating-score">${b.rating.toFixed(1)}</span>
+          <span class="rating-count">(${formattedReviews} Ulasan)</span>
+        </div>
+      `;
+    }
+
+    return `
+      <article class="branch">
+        <div class="branch-top">
+          <div class="pin">${ic.pin}</div>
+          <div>
+            <h4>${b.name}</h4>
+            ${ratingBadge}
+            <p class="addr">${b.addr}</p>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="act map" href="${b.maps}" target="_blank" rel="noopener">${ic.pin}Google Maps</a>
+          <a class="act wa" href="https://wa.me/${b.wa}" target="_blank" rel="noopener">${ic.wa}WA CS</a>
+          <a class="act admin" href="https://wa.me/${b.admin}" target="_blank" rel="noopener">${ic.wa}Admin toko</a>
+        </div>
+      </article>`;
+  }).join('');
+}
+
+// Inisialisasi awal
+document.getElementById('branch-count').textContent = `${allBranches.length} lokasi`;
+renderBranches(allBranches);
+
+/* ===== Filter Pencarian ===== */
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase();
+  const filtered = allBranches.filter(b => 
+    b.name.toLowerCase().includes(query) || 
+    b.addr.toLowerCase().includes(query)
+  );
+  renderBranches(filtered);
+});
+
+/* ===== Tabs Navigation ===== */
+const tabs = document.getElementById('tabs');
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    const name = t.dataset.tab;
+    tabs.dataset.active = name;
+    document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', x === t));
+    document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+});
+
+/* ===== Lightbox Modal ===== */
+const modal = document.getElementById('modal'), modalImg = document.getElementById('modalImg');
+modal.addEventListener('click', () => modal.classList.remove('open'));
+addEventListener('keydown', e => { if (e.key === 'Escape') modal.classList.remove('open'); });
+</script>
+</body>
+</html>

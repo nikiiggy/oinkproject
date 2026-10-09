@@ -464,11 +464,11 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
-            padding: 10px;
+            padding: 11px;
             background: #0284c7;
             color: #ffffff;
             font-weight: 800;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             border-radius: var(--radius-sm);
             text-decoration: none;
             transition: var(--transition);
@@ -532,7 +532,6 @@
         <!-- Filter Kategori Horizontal -->
         <div class="categories-scroll" id="categoriesContainer">
             <button class="cat-btn active" onclick="filterGallery('Semua', this)">Semua</button>
-            <!-- Kategori otomatis dari Google Sheet -->
         </div>
 
         <!-- GALERI 2 GRID PORTRAIT -->
@@ -560,10 +559,12 @@
                 </div>
                 
                 <div class="btn-action-group">
+                    <!-- Tombol 1: Link Demo -->
                     <a id="modalDemoBtn" href="#" target="_blank" class="btn-demo-link" style="display: none;">
                         <i class="fas fa-external-link-alt"></i>
                         <span>Lihat Demo Website</span>
                     </a>
+                    <!-- Tombol 2: Chat WhatsApp -->
                     <a id="modalWaBtn" href="#" target="_blank" class="btn-order-wa">
                         <i class="fab fa-whatsapp"></i>
                         <span>Pesan Website Seperti Ini</span>
@@ -614,8 +615,8 @@
 
                 const headers = rows[0].map(h => h.toLowerCase().trim());
                 
-                // Index mapping kolom spreadsheet
-                const idxJudul = headers.findIndex(h => h.includes('judul') && !h.includes('sub'));
+                // Pembacaan kolom eksplisit: judul, sub judul, deskripsi, foto, link demo
+                const idxJudul = headers.findIndex(h => h === 'judul' || (h.includes('judul') && !h.includes('sub')));
                 const idxSubJudul = headers.findIndex(h => h.includes('sub'));
                 const idxDeskripsi = headers.findIndex(h => h.includes('deskripsi') || h.includes('desc'));
                 const idxFoto = headers.findIndex(h => h.includes('foto') || h.includes('gambar') || h.includes('image'));
@@ -641,8 +642,7 @@
                         deskripsi: deskripsi,
                         photos: photos,
                         mainPhoto: photos[0],
-                        linkDemo: linkDemo,
-                        kategori: subJudul || 'Website'
+                        linkDemo: linkDemo
                     };
                 });
 
@@ -749,7 +749,7 @@
 
             desc.innerText = item.deskripsi || '-';
 
-            // Main image & gallery thumbnails
+            // Preview Gambar & Galeri Thumbnail
             let mediaHtml = `<img id="mainModalImg" src="${item.photos[0]}" alt="${item.judul}">`;
             
             if (item.photos.length > 1) {
@@ -762,17 +762,17 @@
             
             mediaContainer.innerHTML = mediaHtml;
 
-            // WhatsApp CTA dinamis sesuai judul
-            const waText = encodeURIComponent(`kak aku mau order website seperti ${item.judul}`);
-            waBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
-
-            // Link Demo
+            // Tombol 1: Link Demo
             if (item.linkDemo && item.linkDemo.startsWith('http')) {
                 demoBtn.href = item.linkDemo;
                 demoBtn.style.display = 'flex';
             } else {
                 demoBtn.style.display = 'none';
             }
+
+            // Tombol 2: Chat WhatsApp
+            const waText = encodeURIComponent(`Halo, saya tertarik pesan website seperti: ${item.judul}`);
+            waBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 
             document.getElementById('imageModal').classList.add('active');
         }
