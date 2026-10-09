@@ -25,7 +25,7 @@
             --card-green: #22c55e;
             --dark-card: #111827;
             
-            --text-main: #1e293b;
+            --text-main: #0f172a;
             --text-muted: #64748b;
             --border-color: #efe8e1;
             
@@ -71,7 +71,7 @@
             display: flex;
             flex-direction: column;
             padding: 16px;
-            gap: 14px;
+            gap: 16px;
         }
 
         @media (min-width: 481px) {
@@ -87,7 +87,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 14px;
+            padding: 12px 16px;
             background: var(--card-white);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
@@ -103,7 +103,7 @@
             text-decoration: none;
             padding: 8px 12px;
             border-radius: var(--radius-sm);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 800;
             border: 1px solid #e2e8f0;
             transition: var(--transition);
@@ -124,8 +124,8 @@
         }
 
         .brand-icon {
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             overflow: hidden;
             display: flex;
@@ -141,13 +141,14 @@
         }
 
         .brand-name {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
         .btn-icon {
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             border: 1px solid var(--border-color);
             background: #ffffff;
@@ -157,11 +158,102 @@
             justify-content: center;
             cursor: pointer;
             transition: var(--transition);
+            font-size: 0.95rem;
         }
 
         .btn-icon:hover { border-color: var(--card-cyan); color: var(--card-cyan); }
 
-        /* Fitur Search Input */
+        /* Banner Promo sebelum Galeri */
+        .promo-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #ffffff;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .promo-header {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .promo-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+
+        /* Penekanan Harga Rp 45.000 Besar */
+        .promo-price-block {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            margin: 2px 0 4px;
+        }
+
+        .promo-price-prefix {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #cbd5e1;
+        }
+
+        .promo-price-amount {
+            font-size: 1.85rem;
+            font-weight: 900;
+            color: var(--card-yellow);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .promo-subtitle {
+            font-size: 0.78rem;
+            color: #94a3b8;
+            font-weight: 500;
+            line-height: 1.35;
+        }
+
+        .btn-promo-wa {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #25d366;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.9rem;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: var(--transition);
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-promo-wa:hover {
+            background: #1eb856;
+            transform: translateY(-1px);
+        }
+
+        /* Fitur Search Input (Di Bawah Banner Promo) */
         .search-box {
             position: relative;
             width: 100%;
@@ -173,16 +265,16 @@
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .search-input {
             width: 100%;
-            padding: 12px 14px 12px 40px;
+            padding: 13px 14px 13px 42px;
             background: var(--card-white);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--text-main);
             outline: none;
@@ -198,7 +290,7 @@
         /* Filter Kategori Horizontal Scroll */
         .categories-scroll {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             overflow-x: auto;
             padding-bottom: 4px;
             scrollbar-width: none;
@@ -210,9 +302,9 @@
             background: var(--card-white);
             border: 1px solid var(--border-color);
             color: var(--text-muted);
-            padding: 8px 14px;
+            padding: 9px 16px;
             border-radius: 20px;
-            font-size: 0.78rem;
+            font-size: 0.82rem;
             font-weight: 700;
             white-space: nowrap;
             cursor: pointer;
@@ -223,14 +315,14 @@
             background: var(--card-cyan);
             color: #ffffff;
             border-color: var(--card-cyan);
-            box-shadow: 0 4px 10px rgba(5, 187, 192, 0.3);
+            box-shadow: 0 4px 12px rgba(5, 187, 192, 0.3);
         }
 
-        /* GALERI 2 GRID PORTRAIT MOBILE */
+        /* GALERI 2 GRID PORTRAIT MOBILE (Rasio 1080x1440 = 3:4) */
         .gallery-2grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 12px;
         }
 
         .portfolio-card {
@@ -247,15 +339,16 @@
         }
 
         .portfolio-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             border-color: var(--card-cyan);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
 
         .card-img-wrapper {
             position: relative;
-            aspect-ratio: 3 / 4;
+            aspect-ratio: 1080 / 1440;
             width: 100%;
-            background: #e2e8f0;
+            background: #cbd5e1;
             overflow: hidden;
         }
 
@@ -268,30 +361,31 @@
 
         .card-tag-badge {
             position: absolute;
-            top: 6px;
-            left: 6px;
-            background: rgba(17, 24, 39, 0.82);
+            top: 8px;
+            left: 8px;
+            background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(4px);
             color: #ffffff;
-            font-size: 0.62rem;
+            font-size: 0.65rem;
             font-weight: 800;
-            padding: 3px 7px;
+            padding: 4px 8px;
             border-radius: 6px;
             z-index: 2;
+            letter-spacing: 0.02em;
         }
 
         .card-info {
-            padding: 8px 10px;
+            padding: 10px 12px 12px;
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 4px;
         }
 
         .card-title {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 800;
             color: var(--text-main);
-            line-height: 1.25;
+            line-height: 1.3;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             line-clamp: 2;
@@ -300,9 +394,9 @@
         }
 
         .card-subtitle {
-            font-size: 0.7rem;
+            font-size: 0.76rem;
             color: var(--card-cyan);
-            font-weight: 700;
+            font-weight: 800;
             line-height: 1.2;
             white-space: nowrap;
             overflow: hidden;
@@ -310,9 +404,10 @@
         }
 
         .card-desc {
-            font-size: 0.68rem;
+            font-size: 0.74rem;
             color: var(--text-muted);
             font-weight: 500;
+            line-height: 1.3;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -327,14 +422,14 @@
             border-radius: var(--radius-md);
             border: 1px dashed var(--border-color);
             color: var(--text-muted);
-            font-size: 0.82rem;
+            font-size: 0.88rem;
             font-weight: 700;
         }
 
         .empty-state i {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--card-cyan);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: block;
         }
 
@@ -345,7 +440,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(17, 24, 39, 0.92);
+            background: rgba(15, 23, 42, 0.92);
             backdrop-filter: blur(6px);
             display: flex;
             align-items: center;
@@ -374,7 +469,7 @@
 
         .modal-media-container {
             width: 100%;
-            aspect-ratio: 3 / 4;
+            aspect-ratio: 1080 / 1440;
             background: #0f172a;
             display: flex;
             flex-direction: column;
@@ -397,15 +492,15 @@
             display: flex;
             gap: 6px;
             padding: 8px;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.65);
             width: 100%;
             justify-content: center;
             overflow-x: auto;
         }
 
         .thumb-item {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 6px;
             object-fit: cover;
             cursor: pointer;
@@ -417,10 +512,10 @@
         .thumb-item.active { opacity: 1; border-color: var(--card-cyan); }
 
         .modal-details {
-            padding: 16px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
             overflow-y: auto;
         }
 
@@ -428,17 +523,17 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            background: rgba(17, 24, 39, 0.75);
+            background: rgba(15, 23, 42, 0.8);
             color: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             z-index: 10;
         }
 
@@ -458,7 +553,7 @@
             background: #25d366;
             color: #ffffff;
             font-weight: 800;
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             border-radius: var(--radius-sm);
             text-decoration: none;
             transition: var(--transition);
@@ -474,11 +569,11 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
-            padding: 11px;
+            padding: 12px;
             background: #0284c7;
             color: #ffffff;
             font-weight: 800;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             border-radius: var(--radius-sm);
             text-decoration: none;
             transition: var(--transition);
@@ -497,7 +592,7 @@
             color: #ffffff;
             padding: 10px 18px;
             border-radius: 30px;
-            font-size: 0.78rem;
+            font-size: 0.82rem;
             font-weight: 700;
             transition: var(--transition);
             z-index: 2000;
@@ -533,7 +628,24 @@
             </button>
         </header>
 
-        <!-- Fitur Search Bar -->
+        <!-- Banner Promo Sebelum Galeri -->
+        <div class="promo-banner">
+            <div class="promo-header">
+                <span class="promo-label">Penawaran Spesial</span>
+                <div class="promo-title">Bikin Website di Oink Project</div>
+                <div class="promo-price-block">
+                    <span class="promo-price-prefix">Mulai</span>
+                    <span class="promo-price-amount">Rp 45.000</span>
+                </div>
+                <p class="promo-subtitle">Proses cepat, desain terjangkau & siap pakai untuk bisnismu!</p>
+            </div>
+            <a href="https://wa.me/6285155091238?text=Halo%20Oink%20Project,%20saya%20mau%20tanya%20jasa%20pembuatan%20website" target="_blank" class="btn-promo-wa">
+                <i class="fab fa-whatsapp"></i>
+                <span>Konsultasi / Order via WhatsApp</span>
+            </a>
+        </div>
+
+        <!-- Fitur Search Bar (Di Bawah Banner Promo) -->
         <div class="search-box">
             <i class="fas fa-magnifying-glass"></i>
             <input type="text" id="searchInput" class="search-input" placeholder="Cari karya (website, landing page...)" oninput="handleSearch()">
@@ -544,7 +656,7 @@
             <button class="cat-btn active" onclick="filterGallery('Semua', this)">Semua</button>
         </div>
 
-        <!-- GALERI 2 GRID PORTRAIT -->
+        <!-- GALERI 2 GRID PORTRAIT (1080x1440px) -->
         <main class="gallery-2grid" id="galleryGrid">
             <div class="empty-state">
                 <i class="fas fa-spinner fa-spin"></i>
@@ -563,9 +675,9 @@
             <div class="modal-details">
                 <div>
                     <span id="modalTag" class="card-tag-badge" style="position: relative; top: 0; left: 0; display: inline-block; margin-bottom: 6px;">Website</span>
-                    <h2 id="modalTitle" class="card-title" style="font-size: 1.1rem; margin-bottom: 4px;">Judul Project</h2>
-                    <p id="modalSubTitle" class="card-subtitle" style="font-size: 0.85rem; margin-bottom: 6px;">Sub Judul</p>
-                    <p id="modalDesc" class="card-desc" style="font-size: 0.78rem; white-space: normal; line-height: 1.4; color: var(--text-main);">Deskripsi Project</p>
+                    <h2 id="modalTitle" class="card-title" style="font-size: 1.15rem; margin-bottom: 4px;">Judul Project</h2>
+                    <p id="modalSubTitle" class="card-subtitle" style="font-size: 0.88rem; margin-bottom: 8px;">Sub Judul</p>
+                    <p id="modalDesc" class="card-desc" style="font-size: 0.82rem; white-space: normal; line-height: 1.45; color: var(--text-main);">Deskripsi Project</p>
                 </div>
                 
                 <div class="btn-action-group">
@@ -625,7 +737,7 @@
 
                 const headers = rows[0].map(h => h.toLowerCase().trim());
                 
-                // Pemetaan Kolom CSV Baru
+                // Pemetaan Kolom CSV: judul, sub judul, kategori, deskripsi, foto, link demo
                 const idxJudul = headers.findIndex(h => h === 'judul');
                 const idxSubJudul = headers.findIndex(h => h === 'sub judul' || h === 'subjudul');
                 const idxKategori = headers.findIndex(h => h === 'kategori' || h === 'category');
@@ -642,7 +754,7 @@
                     let rawFoto = (idxFoto !== -1 && row[idxFoto]) ? row[idxFoto] : '';
                     let photos = rawFoto.split(',').map(img => img.trim()).filter(img => img.length > 0);
                     if (photos.length === 0) {
-                        photos = ['https://via.placeholder.com/600x800?text=No+Image'];
+                        photos = ['https://via.placeholder.com/1080x1440?text=No+Image'];
                     }
 
                     let linkDemo = (idxLinkDemo !== -1 && row[idxLinkDemo]) ? row[idxLinkDemo].trim() : '';
@@ -695,7 +807,7 @@
                     <div class="portfolio-card" onclick="openModal(${item.id})">
                         <div class="card-img-wrapper">
                             <span class="card-tag-badge">${item.kategori}</span>
-                            <img src="${item.mainPhoto}" alt="${item.judul}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x800?text=Image+Error'">
+                            <img src="${item.mainPhoto}" alt="${item.judul}" loading="lazy" onerror="this.src='https://via.placeholder.com/1080x1440?text=Image+Error'">
                         </div>
                         <div class="card-info">
                             <h3 class="card-title">${item.judul}</h3>
