@@ -704,20 +704,25 @@
 
                 <!-- TULISAN HARGA PROMO (DI ATAS BUTTON WA) -->
                 <article class="promo-price-card">
-                    <div class="promo-text">semua jasa start harga</div>
+                    <div class="promo-text">semua joki start harga</div>
                     <div class="promo-price-huge"><span>Rp</span>35.000</div>
                 </article>
 
                 <!-- WhatsApp Direct CTA Button -->
-                <a href="https://wa.me/6285155091238" target="_blank" class="btn-wa-cta">
+                <a href="https://wa.me/6285155091238?text=Halo%20Admin%20Oink%20Project,%20saya%20mau%20pesan/tanya%20joki%20tugas" target="_blank" class="btn-wa-cta">
                     <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i>
                     <span>Hai Kak, Chat aku disini via Whatsapp!!</span>
                 </a>
 
                 <!-- 2 Button Biru Oink Tambahan (Ukuran Sama Persis) -->
-                <a href="https://oinkproject.my.id/porto-web/" class="btn-blue-cta">
+                <a href="#" class="btn-blue-cta">
                     <i class="fas fa-link" style="font-size: 1.2rem;"></i>
-                    <span>Portfolio Website Undangan</span>
+                    <span>Button Biru 1</span>
+                </a>
+
+                <a href="#" class="btn-blue-cta">
+                    <i class="fas fa-link" style="font-size: 1.2rem;"></i>
+                    <span>Button Biru 2</span>
                 </a>
 
                 <!-- SPESIALISASI, APLIKASI & YANG BISA DIKERJAKAN -->
@@ -728,7 +733,7 @@
                             <i class="fas fa-star"></i> Spesialisasi
                         </div>
                         <div class="info-block-desc">
-                            Joki tugas DKV, Bisnis Digital, Digital Marketing & Website
+                            Joki tugas DKV, Bisnis Digital, & Digital Marketing
                         </div>
                     </div>
 
@@ -834,9 +839,9 @@
             <button class="modal-close-btn" onclick="closeImageModal()" aria-label="Tutup Preview"><i class="fas fa-times"></i></button>
             <img id="modalPreviewImage" src="" alt="Preview Service Oink Project">
             <div class="modal-wa-footer">
-                <a id="modalWaLink" href="#" target="_blank" class="modal-wa-btn">
+                <a id="modalWaLink" href="https://wa.me/6285155091238?text=Halo%20Admin%20Oink%20Project,%20saya%20mau%20pesan/tanya%20joki%20tugas" target="_blank" class="modal-wa-btn">
                     <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i>
-                    <span>Pesan Joki Desain Seperti Ini di WhatsApp</span>
+                    <span>Pesan Joki Desain via WhatsApp</span>
                 </a>
             </div>
         </div>
@@ -870,10 +875,10 @@
         }
 
         /* ==========================================================================
-           2. HELPER GENERATE LINK WHATSAPP
+           2. HELPER GENERATE LINK WHATSAPP (POLOSAN TANPA FILE)
            ========================================================================== */
-        function getWaUrl(imgFileName) {
-            const text = encodeURIComponent(`Halo kak, saya mau pesan ini: ${GITHUB_IMAGE_BASE_URL}${imgFileName}`);
+        function getPlainWaUrl() {
+            const text = encodeURIComponent('Halo Admin Oink Project, saya mau pesan/tanya joki tugas');
             return `https://wa.me/${PHONE_NUMBER}?text=${text}`;
         }
 
@@ -883,14 +888,14 @@
         function renderServiceImages() {
             const container = document.getElementById('servicePortraitContainer');
             container.innerHTML = '';
+            const waUrl = getPlainWaUrl();
 
             serviceImagesList.forEach(fileName => {
                 const imgFullUrl = `${GITHUB_IMAGE_BASE_URL}${fileName}`;
-                const waUrl = getWaUrl(fileName);
                 
                 const card = document.createElement('div');
                 card.className = 'service-portrait-card';
-                card.onclick = () => openImageModal(imgFullUrl, fileName);
+                card.onclick = () => openImageModal(imgFullUrl);
 
                 card.innerHTML = `
                     <img src="${imgFullUrl}" alt="Service Oink Project" loading="lazy" onerror="this.parentElement.style.display='none'">
@@ -905,17 +910,13 @@
         /* ==========================================================================
            4. LIGHTBOX IMAGE PREVIEW MODAL
            ========================================================================== */
-        function openImageModal(imgUrl, fileName) {
+        function openImageModal(imgUrl) {
             const modal = document.getElementById('imageModalOverlay');
             const previewImg = document.getElementById('modalPreviewImage');
             const waLink = document.getElementById('modalWaLink');
 
             previewImg.src = imgUrl;
-            if(fileName) {
-                waLink.href = getWaUrl(fileName);
-            } else {
-                waLink.href = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent('Halo kak, saya mau order.')}`;
-            }
+            waLink.href = getPlainWaUrl();
 
             modal.classList.add('active');
         }
