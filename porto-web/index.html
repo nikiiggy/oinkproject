@@ -299,10 +299,20 @@
             overflow: hidden;
         }
 
+        .card-subtitle {
+            font-size: 0.7rem;
+            color: var(--card-cyan);
+            font-weight: 700;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         .card-desc {
             font-size: 0.68rem;
             color: var(--text-muted);
-            font-weight: 600;
+            font-weight: 500;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -554,7 +564,7 @@
                 <div>
                     <span id="modalTag" class="card-tag-badge" style="position: relative; top: 0; left: 0; display: inline-block; margin-bottom: 6px;">Website</span>
                     <h2 id="modalTitle" class="card-title" style="font-size: 1.1rem; margin-bottom: 4px;">Judul Project</h2>
-                    <p id="modalSubTitle" class="card-desc" style="font-size: 0.82rem; font-weight: 700; color: var(--card-cyan); margin-bottom: 6px;">Sub Judul</p>
+                    <p id="modalSubTitle" class="card-subtitle" style="font-size: 0.85rem; margin-bottom: 6px;">Sub Judul</p>
                     <p id="modalDesc" class="card-desc" style="font-size: 0.78rem; white-space: normal; line-height: 1.4; color: var(--text-main);">Deskripsi Project</p>
                 </div>
                 
@@ -615,30 +625,36 @@
 
                 const headers = rows[0].map(h => h.toLowerCase().trim());
                 
-                // Pembacaan kolom eksplisit: judul, sub judul, deskripsi, foto, link demo
-                const idxJudul = headers.findIndex(h => h === 'judul' || (h.includes('judul') && !h.includes('sub')));
-                const idxSubJudul = headers.findIndex(h => h.includes('sub'));
-                const idxDeskripsi = headers.findIndex(h => h.includes('deskripsi') || h.includes('desc'));
-                const idxFoto = headers.findIndex(h => h.includes('foto') || h.includes('gambar') || h.includes('image'));
-                const idxLinkDemo = headers.findIndex(h => h.includes('demo') || h.includes('link'));
+                // Pemetaan Kolom CSV Baru
+                const idxJudul = headers.findIndex(h => h === 'judul');
+                const idxSubJudul = headers.findIndex(h => h === 'sub judul' || h === 'subjudul');
+                const idxKategori = headers.findIndex(h => h === 'kategori' || h === 'category');
+                const idxDeskripsi = headers.findIndex(h => h === 'deskripsi' || h === 'desc');
+                const idxFoto = headers.findIndex(h => h === 'foto' || h === 'gambar' || h === 'image');
+                const idxLinkDemo = headers.findIndex(h => h === 'link demo' || h === 'demo' || h === 'link');
 
                 portfolioItems = rows.slice(1).map((row, index) => {
-                    const judul = idxJudul !== -1 && row[idxJudul] ? row[idxJudul] : 'Project Website';
-                    const subJudul = idxSubJudul !== -1 && row[idxSubJudul] ? row[idxSubJudul] : '';
-                    const deskripsi = idxDeskripsi !== -1 && row[idxDeskripsi] ? row[idxDeskripsi] : '';
+                    const judul = (idxJudul !== -1 && row[idxJudul]) ? row[idxJudul] : 'Project Website';
+                    const subJudul = (idxSubJudul !== -1 && row[idxSubJudul]) ? row[idxSubJudul] : '';
+                    const kategori = (idxKategori !== -1 && row[idxKategori]) ? row[idxKategori] : 'Website';
+                    const deskripsi = (idxDeskripsi !== -1 && row[idxDeskripsi]) ? row[idxDeskripsi] : '';
                     
-                    let rawFoto = idxFoto !== -1 && row[idxFoto] ? row[idxFoto] : '';
+                    let rawFoto = (idxFoto !== -1 && row[idxFoto]) ? row[idxFoto] : '';
                     let photos = rawFoto.split(',').map(img => img.trim()).filter(img => img.length > 0);
                     if (photos.length === 0) {
                         photos = ['https://via.placeholder.com/600x800?text=No+Image'];
                     }
 
-                    const linkDemo = idxLinkDemo !== -1 && row[idxLinkDemo] ? row[idxLinkDemo] : '';
+                    let linkDemo = (idxLinkDemo !== -1 && row[idxLinkDemo]) ? row[idxLinkDemo].trim() : '';
+                    if (linkDemo && !linkDemo.startsWith('http://') && !linkDemo.startsWith('https://')) {
+                        linkDemo = 'https://' + linkDemo;
+                    }
 
                     return {
                         id: index,
                         judul: judul,
                         subJudul: subJudul,
+                        kategori: kategori,
                         deskripsi: deskripsi,
                         photos: photos,
                         mainPhoto: photos[0],
@@ -657,7 +673,7 @@
 
         function renderCategories() {
             const container = document.getElementById('categoriesContainer');
-            const categories = [...new Set(portfolioItems.map(item => item.subJudul).filter(Boolean))];
+            const categories = [...new Set(portfolioItems.map(item => item.kategori).filter(Boolean))];
             
             let html = `<button class="cat-btn active" onclick="filterGallery('Semua', this)">Semua</button>`;
             categories.forEach(cat => {
@@ -678,12 +694,13 @@
                 html += `
                     <div class="portfolio-card" onclick="openModal(${item.id})">
                         <div class="card-img-wrapper">
-                            <span class="card-tag-badge">${item.subJudul || 'Website'}</span>
+                            <span class="card-tag-badge">${item.kategori}</span>
                             <img src="${item.mainPhoto}" alt="${item.judul}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x800?text=Image+Error'">
                         </div>
                         <div class="card-info">
                             <h3 class="card-title">${item.judul}</h3>
-                            <p class="card-desc">${item.deskripsi || item.subJudul}</p>
+                            ${item.subJudul ? `<p class="card-subtitle">${item.subJudul}</p>` : ''}
+                            <p class="card-desc">${item.deskripsi || '-'}</p>
                         </div>
                     </div>
                 `;
@@ -716,9 +733,10 @@
 
         function applyFilterAndSearch(category, query) {
             const filtered = portfolioItems.filter(item => {
-                const matchCat = category === "Semua" || item.subJudul === category;
+                const matchCat = category === "Semua" || item.kategori === category;
                 const matchQuery = item.judul.toLowerCase().includes(query) || 
                                    item.subJudul.toLowerCase().includes(query) || 
+                                   item.kategori.toLowerCase().includes(query) || 
                                    item.deskripsi.toLowerCase().includes(query);
                 return matchCat && matchQuery;
             });
@@ -737,7 +755,7 @@
             const waBtn = document.getElementById('modalWaBtn');
             const demoBtn = document.getElementById('modalDemoBtn');
 
-            tag.innerText = item.subJudul || 'Website';
+            tag.innerText = item.kategori;
             title.innerText = item.judul;
             
             if (item.subJudul) {
@@ -763,7 +781,7 @@
             mediaContainer.innerHTML = mediaHtml;
 
             // Tombol 1: Link Demo
-            if (item.linkDemo && item.linkDemo.startsWith('http')) {
+            if (item.linkDemo && item.linkDemo.length > 5) {
                 demoBtn.href = item.linkDemo;
                 demoBtn.style.display = 'flex';
             } else {
