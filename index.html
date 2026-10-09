@@ -5,37 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO Meta Tags -->
-    <title>Web Portfolio - Oink Project</title>
-    <meta name="description" content="Portofolio Website dan Desain Grafis oleh Oink Project.">
+    <title>Oink Project - Joki Tugas DKV, Tugas Akhir DKV, Jasa Desain</title>
+    <meta name="description" content="Joki tugas DKV hanya di oink, Terpercaya, Hasil Maksimal, Bisa Nego, Fast response 24 Jam.">
+    <meta name="keywords" content="joki tugas, joki tugas DKV, joki desain, desain grafis, oink project">
     <meta name="author" content="Oink Project">
     <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social Media SEO -->
+    <meta property="og:title" content="Oink Project - Joki Tugas DKV">
+    <meta property="og:description" content="Joki tugas DKV hanya di oink, Terpercaya, Hasil Maksimal, Bisa Nego, Fast response 24 Jam.">
+    <meta property="og:type" content="website">
 
     <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
     <style>
         :root {
-            --bg-color: #eae5e0;
+            --bg-color: #fbf7f4;
             --container-bg: #f8f3ee;
             --card-white: #ffffff;
             --card-coral: #ff5d39;
             --card-yellow: #ffc425;
             --card-cyan: #05bbc0; 
+            --card-cyan-hover: #049ba0;
             --card-green: #22c55e;
             --dark-card: #111827;
             
             --text-main: #1e293b;
             --text-muted: #64748b;
+            --accent: #05bbc0;
+            --wa-color: #25d366;
+            --wa-hover: #1eae52;
             --border-color: #efe8e1;
             
             --radius-lg: 24px;
-            --radius-md: 16px;
+            --radius-md: 18px;
             --radius-sm: 12px;
-            
             --shadow-sm: 0 4px 12px rgba(0,0,0,0.04);
             --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.08);
-            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.25s ease-in-out;
         }
 
         * {
@@ -47,20 +56,19 @@
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: #eae5e0;
             color: var(--text-main);
-            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: flex-start;
+            min-height: 100vh;
             padding: 0;
         }
 
         @media (min-width: 481px) {
-            body { padding: 20px 0; }
+            body { padding: 20px; }
         }
 
-        /* Container Mobile-Based */
         .container {
             width: 100%;
             max-width: 480px;
@@ -70,8 +78,8 @@
             box-shadow: var(--shadow-md);
             display: flex;
             flex-direction: column;
-            padding: 16px;
-            gap: 14px;
+            padding: 20px 16px 30px 16px;
+            gap: 16px;
         }
 
         @media (min-width: 481px) {
@@ -82,55 +90,36 @@
             }
         }
 
-        /* Top Bar Navigation & Tombol Kembali */
+        /* Top Bar Navigation */
         .nav-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 14px;
+            padding: 12px 16px;
             background: var(--card-white);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
             box-shadow: var(--shadow-sm);
         }
 
-        .btn-back-home {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: #f1f5f9;
-            color: var(--text-main);
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: var(--radius-sm);
-            font-size: 0.8rem;
-            font-weight: 800;
-            border: 1px solid #e2e8f0;
-            transition: var(--transition);
-        }
-
-        .btn-back-home:hover {
-            background: var(--card-cyan);
-            color: #ffffff;
-            border-color: var(--card-cyan);
-        }
-
         .brand-logo-nav {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             text-decoration: none;
             color: var(--text-main);
         }
 
         .brand-icon {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 3px 8px rgba(5, 187, 192, 0.3);
+            background: #ffffff;
             border: 1px solid var(--border-color);
         }
 
@@ -141,13 +130,14 @@
         }
 
         .brand-name {
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             font-weight: 800;
+            letter-spacing: -0.3px;
         }
 
         .btn-icon {
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             border: 1px solid var(--border-color);
             background: #ffffff;
@@ -159,183 +149,397 @@
             transition: var(--transition);
         }
 
-        .btn-icon:hover { border-color: var(--card-cyan); color: var(--card-cyan); }
+        .btn-icon:hover { border-color: var(--accent); color: var(--accent); }
 
-        /* Fitur Search Input */
-        .search-box {
-            position: relative;
-            width: 100%;
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 14px 12px 40px;
+        /* TAB NAVIGATION HEADER */
+        .tabs-header {
+            display: flex;
             background: var(--card-white);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-main);
-            outline: none;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-        }
-
-        .search-input:focus {
-            border-color: var(--card-cyan);
-            box-shadow: 0 0 0 3px rgba(5, 187, 192, 0.15);
-        }
-
-        /* Filter Kategori Horizontal Scroll */
-        .categories-scroll {
-            display: flex;
+            padding: 4px;
             gap: 6px;
-            overflow-x: auto;
-            padding-bottom: 4px;
-            scrollbar-width: none;
+            box-shadow: var(--shadow-sm);
         }
 
-        .categories-scroll::-webkit-scrollbar { display: none; }
-
-        .cat-btn {
-            background: var(--card-white);
-            border: 1px solid var(--border-color);
+        .tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 800;
             color: var(--text-muted);
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            white-space: nowrap;
             cursor: pointer;
+            padding: 10px 0;
+            border-radius: var(--radius-sm);
             transition: var(--transition);
+            text-align: center;
         }
 
-        .cat-btn.active {
+        .tab-btn.active {
             background: var(--card-cyan);
             color: #ffffff;
-            border-color: var(--card-cyan);
             box-shadow: 0 4px 10px rgba(5, 187, 192, 0.3);
         }
 
-        /* GALERI 2 GRID PORTRAIT MOBILE */
-        .gallery-2grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+        .tab-content {
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+            animation: fadeIn 0.3s ease;
         }
 
-        .portfolio-card {
+        .tab-content.active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-card {
             background: var(--card-white);
             border-radius: var(--radius-md);
-            overflow: hidden;
-            border: 1px solid var(--border-color);
+            padding: 20px;
+            border: 1px solid #efe8e1;
             box-shadow: var(--shadow-sm);
+        }
+
+        .section-header {
             display: flex;
-            flex-direction: column;
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
         }
 
-        .portfolio-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--card-cyan);
+        .section-header h2 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-main);
         }
 
-        .card-img-wrapper {
+        /* Profile Banner Card */
+        .profile-card {
+            background: linear-gradient(135deg, rgba(5, 187, 192, 0.85), rgba(17, 24, 39, 0.75)), 
+                        url('https://i.ibb.co.com/g1pGhgk/FASILITAS-TOKO-01-21.webp') center/cover no-repeat;
+            border-radius: var(--radius-lg);
+            padding: 24px 20px;
+            color: #ffffff;
+            text-align: left;
+            box-shadow: 0 8px 20px rgba(5, 187, 192, 0.25);
             position: relative;
-            aspect-ratio: 3 / 4;
-            width: 100%;
-            background: #e2e8f0;
             overflow: hidden;
         }
 
-        .card-img-wrapper img {
+        .avatar-box {
+            width: 76px;
+            height: 76px;
+            background: #ffffff;
+            border-radius: 50%;
+            margin: 0 0 14px 0;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border: 2px solid #ffffff;
+        }
+
+        .avatar-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
 
-        .card-tag-badge {
-            position: absolute;
-            top: 6px;
-            left: 6px;
-            background: rgba(17, 24, 39, 0.82);
-            backdrop-filter: blur(4px);
-            color: #ffffff;
-            font-size: 0.62rem;
+        .profile-card h1 {
+            font-size: 1.5rem;
             font-weight: 800;
-            padding: 3px 7px;
-            border-radius: 6px;
-            z-index: 2;
-        }
-
-        .card-info {
-            padding: 8px 10px;
+            margin-bottom: 6px;
             display: flex;
-            flex-direction: column;
-            gap: 2px;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px;
         }
 
-        .card-title {
-            font-size: 0.8rem;
-            font-weight: 800;
-            color: var(--text-main);
-            line-height: 1.25;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+        .verified-badge { font-size: 1.1rem; color: #ffc425; }
+
+        .profile-card p.tagline {
+            font-size: 0.83rem;
+            opacity: 0.95;
+            line-height: 1.5;
+            max-width: 380px;
+            margin: 0 0 16px 0;
+            font-weight: 500;
         }
 
-        .card-desc {
-            font-size: 0.68rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(6px);
+            padding: 12px 18px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        /* State Kosong */
-        .empty-state {
-            grid-column: span 2;
-            text-align: center;
-            padding: 40px 16px;
+        .stat-item { text-align: left; }
+        .stat-val { font-size: 0.95rem; font-weight: 800; }
+        .stat-lbl { font-size: 0.68rem; opacity: 0.9; text-transform: uppercase; }
+
+        /* PROMO PRICE CARD (BESAR) */
+        .promo-price-card {
             background: var(--card-white);
             border-radius: var(--radius-md);
-            border: 1px dashed var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.82rem;
-            font-weight: 700;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid var(--card-cyan);
+            box-shadow: 0 8px 20px rgba(5, 187, 192, 0.15);
         }
 
-        .empty-state i {
-            font-size: 2rem;
+        .promo-text {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: lowercase;
+            letter-spacing: -0.2px;
+            margin-bottom: 4px;
+        }
+
+        .promo-price-huge {
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: var(--card-coral);
+            line-height: 1;
+            letter-spacing: -1.5px;
+        }
+
+        .promo-price-huge span {
+            font-size: 1.4rem;
+            vertical-align: super;
+            font-weight: 800;
+            margin-right: 2px;
+        }
+
+        /* WA Main CTA Button */
+        .btn-wa-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 18px 20px;
+            background: var(--wa-color);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1rem;
+            border-radius: var(--radius-md);
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-wa-cta:hover { background: var(--wa-hover); transform: translateY(-2px); }
+
+        /* Custom Blue Buttons (Oink Theme) */
+        .btn-blue-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 18px 20px;
+            background: var(--card-cyan);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1rem;
+            border-radius: var(--radius-md);
+            box-shadow: 0 6px 18px rgba(5, 187, 192, 0.3);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-blue-cta:hover { background: var(--card-cyan-hover); transform: translateY(-2px); }
+
+        /* DETAIL KEAHLIAN & SPESIALISASI CARD */
+        .info-detail-card {
+            background: #ffffff;
+            border-radius: var(--radius-md);
+            padding: 20px;
+            border: 1px solid #efe8e1;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .info-block-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .info-block-title {
+            font-size: 0.75rem;
+            font-weight: 800;
             color: var(--card-cyan);
-            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-block-desc {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        /* APPS PILLS BADGES */
+        .app-tags-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .app-pill {
+            background: #f1f5f9;
+            color: #334155;
+            font-size: 0.73rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* WORK LIST GRID */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .work-item-box {
+            background: #fffdfa;
+            border: 1px solid #efe8e1;
+            border-radius: var(--radius-sm);
+            padding: 10px;
+        }
+
+        .work-item-title {
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .work-item-sub {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* Social Grid */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .social-card {
+            padding: 12px 8px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .social-card.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .social-card.tiktok { background: #000000; }
+        .social-card.x-twitter { background: #14171a; }
+        .social-card.youtube { background: #ff0000; }
+
+        .social-card i { font-size: 1.3rem; }
+        .social-card span { font-size: 0.68rem; font-weight: 700; }
+
+        /* TAB SERVICE: GALERI 2 GRID PORTRAIT */
+        .service-portrait-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .service-portrait-card {
+            aspect-ratio: 3 / 4; /* Rasio 1080 x 1440 px Portrait */
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: #e2e8f0;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .service-portrait-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--card-cyan);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-portrait-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             display: block;
         }
 
-        /* Lightbox Preview Modal */
+        /* OVERLAY WHATSAPP BUTTON ON GALLERY CARD */
+        .card-wa-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--wa-color);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            text-decoration: none;
+            transition: var(--transition);
+            z-index: 5;
+            border: 2px solid #ffffff;
+        }
+
+        .card-wa-btn:hover {
+            background: var(--wa-hover);
+            transform: scale(1.1);
+        }
+
+        /* LIGHTBOX MODAL IMAGE VIEWER WITH WA CTA */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(17, 24, 39, 0.92);
+            background: rgba(17, 24, 39, 0.9);
             backdrop-filter: blur(6px);
             display: flex;
             align-items: center;
@@ -349,77 +553,33 @@
 
         .modal-overlay.active { opacity: 1; visibility: visible; }
 
-        .modal-content {
-            width: 100%;
-            max-width: 420px;
-            background: var(--card-white);
-            border-radius: var(--radius-lg);
+        .modal-box-img {
+            max-width: 95%;
+            max-height: 88vh;
+            border-radius: var(--radius-md);
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            display: flex;
-            flex-direction: column;
             position: relative;
-            max-height: 90vh;
-        }
-
-        .modal-media-container {
-            width: 100%;
-            aspect-ratio: 3 / 4;
-            background: #0f172a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: #1e293b;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        .modal-media-container img {
+        .modal-box-img img {
             width: 100%;
-            height: 100%;
+            max-height: 75vh;
             object-fit: contain;
-        }
-
-        .modal-thumbs {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            display: flex;
-            gap: 6px;
-            padding: 8px;
-            background: rgba(0, 0, 0, 0.6);
-            width: 100%;
-            justify-content: center;
-            overflow-x: auto;
-        }
-
-        .thumb-item {
-            width: 40px;
-            height: 40px;
-            border-radius: 6px;
-            object-fit: cover;
-            cursor: pointer;
-            opacity: 0.6;
-            border: 2px solid transparent;
-            flex-shrink: 0;
-        }
-
-        .thumb-item.active { opacity: 1; border-color: var(--card-cyan); }
-
-        .modal-details {
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            overflow-y: auto;
+            display: block;
         }
 
         .modal-close-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 32px;
-            height: 32px;
+            top: 12px;
+            right: 12px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             background: rgba(17, 24, 39, 0.75);
             color: #ffffff;
@@ -428,55 +588,46 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
-            z-index: 10;
+            font-size: 1.1rem;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 20;
+            transition: var(--transition);
         }
 
-        .btn-action-group {
+        .modal-close-btn:hover {
+            background: var(--card-coral);
+            border-color: var(--card-coral);
+            transform: scale(1.05);
+        }
+
+        /* WA Action inside Modal */
+        .modal-wa-footer {
+            width: 100%;
+            padding: 12px 16px;
+            background: #0f172a;
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            justify-content: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .btn-order-wa {
+        .modal-wa-btn {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             width: 100%;
-            padding: 12px;
-            background: #25d366;
+            padding: 12px 16px;
+            background: var(--wa-color);
             color: #ffffff;
+            text-decoration: none;
             font-weight: 800;
             font-size: 0.88rem;
             border-radius: var(--radius-sm);
-            text-decoration: none;
             transition: var(--transition);
         }
 
-        .btn-order-wa:hover {
-            background: #1eb856;
-        }
-
-        .btn-demo-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 11px;
-            background: #0284c7;
-            color: #ffffff;
-            font-weight: 800;
-            font-size: 0.85rem;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .btn-demo-link:hover {
-            background: #0369a1;
-        }
+        .modal-wa-btn:hover { background: var(--wa-hover); }
 
         .toast {
             position: fixed;
@@ -484,11 +635,11 @@
             left: 50%;
             transform: translateX(-50%) translateY(-100px);
             background: var(--dark-card);
-            color: #ffffff;
-            padding: 10px 18px;
+            color: white;
+            padding: 10px 20px;
             border-radius: 30px;
-            font-size: 0.78rem;
-            font-weight: 700;
+            font-size: 0.8rem;
+            font-weight: 600;
             transition: var(--transition);
             z-index: 2000;
             opacity: 0;
@@ -501,307 +652,294 @@
 
     <div class="container">
         <!-- Toast Notification -->
-        <div id="toast" class="toast">Link portofolio berhasil disalin!</div>
+        <div id="toast" class="toast">Link berhasil disalin!</div>
 
-        <!-- Top Navigation Bar -->
+        <!-- Top Navigation Bar Header -->
         <header class="nav-bar">
-            <!-- Tombol Kembali ke Home -->
-            <a href="https://oinkproject.my.id/" class="btn-back-home" title="Kembali ke Halaman Utama">
-                <i class="fas fa-arrow-left"></i>
-                <span>Home</span>
-            </a>
-
-            <a href="#" class="brand-logo-nav">
+            <a href="#" class="brand-logo-nav" aria-label="Oink Project Home">
                 <div class="brand-icon">
                     <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Logo">
                 </div>
-                <span class="brand-name">Portfolio</span>
+                <span class="brand-name">Oink Project</span>
             </a>
-
-            <button class="btn-icon" onclick="copyCurrentCategoryLink()" title="Bagikan Link">
-                <i class="fas fa-share-nodes"></i>
-            </button>
+            <div class="nav-actions">
+                <button class="btn-icon" onclick="copyShareLink()" title="Bagikan Link">
+                    <i class="fas fa-share-nodes"></i>
+                </button>
+            </div>
         </header>
 
-        <!-- Fitur Search Bar -->
-        <div class="search-box">
-            <i class="fas fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" class="search-input" placeholder="Cari karya (website, landing page...)" oninput="handleSearch()">
-        </div>
+        <!-- TAB NAVIGATION (HOME & SERVICE) -->
+        <nav class="tabs-header">
+            <button class="tab-btn active" onclick="switchTab('home-tab', this)">Home</button>
+            <button class="tab-btn" onclick="switchTab('service-tab', this)">Service</button>
+        </nav>
 
-        <!-- Filter Kategori Horizontal -->
-        <div class="categories-scroll" id="categoriesContainer">
-            <button class="cat-btn active" onclick="filterGallery('Semua', this)">Semua</button>
-        </div>
+        <main style="display: flex; flex-direction: column; gap: 16px;">
+            <!-- 1. TAB HOME CONTENT -->
+            <div id="home-tab" class="tab-content active">
+                <!-- Profile Banner Card -->
+                <article class="profile-card">
+                    <div class="avatar-box">
+                        <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Profile">
+                    </div>
+                    <h1>Oink Project <i class="fas fa-check-circle verified-badge"></i></h1>
+                    <p class="tagline">🐣. . business area — here i exist as a trusted and fast response 🪄 design service since 2013. fret not, i'll be open 24 hours daily ⏰✨</p>
+                    
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <div class="stat-val">661+</div>
+                            <div class="stat-lbl">Tugas Selesai</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-val">100%</div>
+                            <div class="stat-lbl">Terselesaikan</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-val">24/7</div>
+                            <div class="stat-lbl">Fast Respon</div>
+                        </div>
+                    </div>
+                </article>
 
-        <!-- GALERI 2 GRID PORTRAIT -->
-        <main class="gallery-2grid" id="galleryGrid">
-            <div class="empty-state">
-                <i class="fas fa-spinner fa-spin"></i>
-                <p>Memuat portofolio...</p>
+                <!-- TULISAN HARGA PROMO (DI ATAS BUTTON WA) -->
+                <article class="promo-price-card">
+                    <div class="promo-text">semua joki start harga</div>
+                    <div class="promo-price-huge"><span>Rp</span>35.000</div>
+                </article>
+
+                <!-- WhatsApp Direct CTA Button (Polos) -->
+                <a href="https://wa.me/6285155091238" target="_blank" class="btn-wa-cta">
+                    <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i>
+                    <span>Hai Kak, Chat aku disini via Whatsapp!!</span>
+                </a>
+
+                <!-- 2 Button Biru Oink Tambahan (Ukuran Sama Persis) -->
+                <a href="#" class="btn-blue-cta">
+                    <i class="fas fa-link" style="font-size: 1.2rem;"></i>
+                    <span>Button Biru 1</span>
+                </a>
+
+                <a href="#" class="btn-blue-cta">
+                    <i class="fas fa-link" style="font-size: 1.2rem;"></i>
+                    <span>Button Biru 2</span>
+                </a>
+
+                <!-- SPESIALISASI, APLIKASI & YANG BISA DIKERJAKAN -->
+                <article class="info-detail-card">
+                    <!-- Spesialisasi -->
+                    <div class="info-block-item">
+                        <div class="info-block-title">
+                            <i class="fas fa-star"></i> Spesialisasi
+                        </div>
+                        <div class="info-block-desc">
+                            Joki tugas DKV, Bisnis Digital, & Digital Marketing
+                        </div>
+                    </div>
+
+                    <!-- Aplikasi yang digunakan -->
+                    <div class="info-block-item">
+                        <div class="info-block-title">
+                            <i class="fas fa-laptop-code"></i> Aplikasi Desain yang Digunakan
+                        </div>
+                        <div class="app-tags-wrapper">
+                            <span class="app-pill">Adobe Illustrator</span>
+                            <span class="app-pill">Adobe Photoshop</span>
+                            <span class="app-pill">Adobe Flash</span>
+                            <span class="app-pill">Adobe After Effect</span>
+                            <span class="app-pill">Adobe Audition</span>
+                            <span class="app-pill">Corel Draw</span>
+                            <span class="app-pill">3D SketchUp</span>
+                            <span class="app-pill">Blender</span>
+                        </div>
+                    </div>
+
+                    <!-- Yang bisa dikerjakan -->
+                    <div class="info-block-item">
+                        <div class="info-block-title">
+                            <i class="fas fa-layer-group"></i> Yang Bisa Aku Kerjakan
+                        </div>
+                        <div class="work-grid">
+                            <div class="work-item-box">
+                                <div class="work-item-title">Poster</div>
+                                <div class="work-item-sub">Infografis, Isometric</div>
+                            </div>
+                            <div class="work-item-box">
+                                <div class="work-item-title">Booklet</div>
+                                <div class="work-item-sub">GSM, Zine, Portfolio</div>
+                            </div>
+                            <div class="work-item-box">
+                                <div class="work-item-title">Jasa Edit</div>
+                                <div class="work-item-sub">Foto & Dokumen</div>
+                            </div>
+                            <div class="work-item-box">
+                                <div class="work-item-title">Edit Video</div>
+                                <div class="work-item-sub">Premiere, After Effect</div>
+                            </div>
+                            <div class="work-item-box">
+                                <div class="work-item-title">Kemasan</div>
+                                <div class="work-item-sub">Desain & 3D Visual</div>
+                            </div>
+                            <div class="work-item-box">
+                                <div class="work-item-title">Logo</div>
+                                <div class="work-item-sub">Branding & Symbol</div>
+                            </div>
+                            <div class="work-item-box">
+                                <div class="work-item-title">Edit Foto</div>
+                                <div class="work-item-sub">Edit Baju & Adjustment</div>
+                            </div>
+                            <div class="work-item-box">
+                                <div class="work-item-title">Website</div>
+                                <div class="work-item-sub">HTML & Figma</div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Social Media Block -->
+                <article class="section-card">
+                    <div class="section-header">
+                        <h2>Follow aku kak!</h2>
+                    </div>
+                    <div class="social-grid">
+                        <a href="https://www.instagram.com/oink.project" target="_blank" class="social-card instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://www.tiktok.com/@oink.project" target="_blank" class="social-card tiktok">
+                            <i class="fab fa-tiktok"></i>
+                            <span>TikTok</span>
+                        </a>
+                        <a href="https://x.com/oinkproject" target="_blank" class="social-card x-twitter">
+                            <i class="fab fa-x-twitter"></i>
+                            <span>X / Twitter</span>
+                        </a>
+                        <a href="http://youtube.com/@oinkproject" target="_blank" class="social-card youtube">
+                            <i class="fab fa-youtube"></i>
+                            <span>YouTube</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- 2. TAB SERVICE CONTENT (GALERI 2 GRID PORTRAIT DARI GITHUB DOMAIN) -->
+            <div id="service-tab" class="tab-content">
+                <article class="section-card">
+                    <div class="service-portrait-grid" id="servicePortraitContainer">
+                        <!-- Foto dimasukkan otomatis via JavaScript -->
+                    </div>
+                </article>
             </div>
         </main>
     </div>
 
-    <!-- Modal Lightbox Preview -->
-    <div class="modal-overlay" id="imageModal" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
-            <div class="modal-media-container" id="modalMediaContainer">
-                <!-- Preview Foto -->
-            </div>
-            <div class="modal-details">
-                <div>
-                    <span id="modalTag" class="card-tag-badge" style="position: relative; top: 0; left: 0; display: inline-block; margin-bottom: 6px;">Website</span>
-                    <h2 id="modalTitle" class="card-title" style="font-size: 1.1rem; margin-bottom: 4px;">Judul Project</h2>
-                    <p id="modalSubTitle" class="card-desc" style="font-size: 0.82rem; font-weight: 700; color: var(--card-cyan); margin-bottom: 6px;">Sub Judul</p>
-                    <p id="modalDesc" class="card-desc" style="font-size: 0.78rem; white-space: normal; line-height: 1.4; color: var(--text-main);">Deskripsi Project</p>
-                </div>
-                
-                <div class="btn-action-group">
-                    <!-- Tombol 1: Link Demo -->
-                    <a id="modalDemoBtn" href="#" target="_blank" class="btn-demo-link" style="display: none;">
-                        <i class="fas fa-external-link-alt"></i>
-                        <span>Lihat Demo Website</span>
-                    </a>
-                    <!-- Tombol 2: Chat WhatsApp -->
-                    <a id="modalWaBtn" href="#" target="_blank" class="btn-order-wa">
-                        <i class="fab fa-whatsapp"></i>
-                        <span>Pesan Website Seperti Ini</span>
-                    </a>
-                </div>
+    <!-- LIGHTBOX IMAGE VIEWER MODAL -->
+    <div class="modal-overlay" id="imageModalOverlay" onclick="closeImageModal()">
+        <div class="modal-box-img" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeImageModal()" aria-label="Tutup Preview"><i class="fas fa-times"></i></button>
+            <img id="modalPreviewImage" src="" alt="Preview Service Oink Project">
+            <div class="modal-wa-footer">
+                <a id="modalWaLink" href="https://wa.me/6285155091238" target="_blank" class="modal-wa-btn">
+                    <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i>
+                    <span>Pesan Joki Desain via WhatsApp</span>
+                </a>
             </div>
         </div>
     </div>
 
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxJzVJoMeSTfyJ2erOm2dwf-6xAWJLD_a5s-zAvGmaJ33bOny1xYffztVPoVLhsB6PTn_-Nn2Y-Zy_/pub?gid=0&single=true&output=csv';
-        const WHATSAPP_NUMBER = '6285155091238';
+        // DOMAIN BASE PATH GITHUB PRIBADI KAMU
+        const GITHUB_IMAGE_BASE_URL = 'https://oinkproject.my.id/images/';
+        const PHONE_NUMBER = '6285155091238';
 
-        let portfolioItems = [];
-        let currentActiveCategory = "Semua";
+        // DAFTAR NAMA FOTO WEBP DI FOLDER IMAGES GITHUB
+        const serviceImagesList = [
+            '001.webp', '002.webp', '003.webp', '004.webp', 
+            '005.webp', '006.webp', '007.webp', '008.webp', 
+            '009.webp', '010.webp', '011.webp', '012.webp'
+        ];
 
-        function parseCSV(str) {
-            const arr = [];
-            let quote = false, col = '', row = [];
-            for (let i = 0; i < str.length; i++) {
-                let cc = str[i], nc = str[i+1];
-                if (cc === '"') {
-                    if (quote && nc === '"') { col += '"'; i++; }
-                    else { quote = !quote; }
-                } else if (cc === ',' && !quote) {
-                    row.push(col.trim()); col = '';
-                } else if ((cc === '\r' || cc === '\n') && !quote) {
-                    if (cc === '\r' && nc === '\n') { i++; }
-                    row.push(col.trim());
-                    if (row.length > 1 || row[0] !== '') arr.push(row);
-                    row = []; col = '';
-                } else { col += cc; }
-            }
-            if (col || row.length) { row.push(col.trim()); arr.push(row); }
-            return arr;
+        /* ==========================================================================
+           1. TAB SWITCHING LOGIC
+           ========================================================================== */
+        function switchTab(tabId, btnElement) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            if (btnElement) btnElement.classList.add('active');
+            const targetContent = document.getElementById(tabId);
+            if (targetContent) targetContent.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        async function loadSheetData() {
-            try {
-                const response = await fetch(GOOGLE_SHEET_CSV_URL);
-                const csvText = await response.text();
-                const rows = parseCSV(csvText);
+        /* ==========================================================================
+           2. HELPER GENERATE LINK WHATSAPP (MURNI POLOS)
+           ========================================================================== */
+        function getPlainWaUrl() {
+            return `https://wa.me/${PHONE_NUMBER}`;
+        }
 
-                if (rows.length < 2) {
-                    renderEmpty("Data portofolio kosong.");
-                    return;
-                }
+        /* ==========================================================================
+           3. RENDER SERVICE GALERI PORTRAIT (2-GRID) DARI FOLDER GITHUB
+           ========================================================================== */
+        function renderServiceImages() {
+            const container = document.getElementById('servicePortraitContainer');
+            container.innerHTML = '';
+            const waUrl = getPlainWaUrl();
 
-                const headers = rows[0].map(h => h.toLowerCase().trim());
+            serviceImagesList.forEach(fileName => {
+                const imgFullUrl = `${GITHUB_IMAGE_BASE_URL}${fileName}`;
                 
-                // Pembacaan kolom eksplisit: judul, sub judul, deskripsi, foto, link demo
-                const idxJudul = headers.findIndex(h => h === 'judul' || (h.includes('judul') && !h.includes('sub')));
-                const idxSubJudul = headers.findIndex(h => h.includes('sub'));
-                const idxDeskripsi = headers.findIndex(h => h.includes('deskripsi') || h.includes('desc'));
-                const idxFoto = headers.findIndex(h => h.includes('foto') || h.includes('gambar') || h.includes('image'));
-                const idxLinkDemo = headers.findIndex(h => h.includes('demo') || h.includes('link'));
+                const card = document.createElement('div');
+                card.className = 'service-portrait-card';
+                card.onclick = () => openImageModal(imgFullUrl);
 
-                portfolioItems = rows.slice(1).map((row, index) => {
-                    const judul = idxJudul !== -1 && row[idxJudul] ? row[idxJudul] : 'Project Website';
-                    const subJudul = idxSubJudul !== -1 && row[idxSubJudul] ? row[idxSubJudul] : '';
-                    const deskripsi = idxDeskripsi !== -1 && row[idxDeskripsi] ? row[idxDeskripsi] : '';
-                    
-                    let rawFoto = idxFoto !== -1 && row[idxFoto] ? row[idxFoto] : '';
-                    let photos = rawFoto.split(',').map(img => img.trim()).filter(img => img.length > 0);
-                    if (photos.length === 0) {
-                        photos = ['https://via.placeholder.com/600x800?text=No+Image'];
-                    }
-
-                    const linkDemo = idxLinkDemo !== -1 && row[idxLinkDemo] ? row[idxLinkDemo] : '';
-
-                    return {
-                        id: index,
-                        judul: judul,
-                        subJudul: subJudul,
-                        deskripsi: deskripsi,
-                        photos: photos,
-                        mainPhoto: photos[0],
-                        linkDemo: linkDemo
-                    };
-                });
-
-                renderCategories();
-                renderGallery(portfolioItems);
-
-            } catch (error) {
-                console.error("Gagal memuat data Google Sheet:", error);
-                renderEmpty("Gagal memuat data portofolio. Pastikan Google Sheet dipublikasikan ke web.");
-            }
-        }
-
-        function renderCategories() {
-            const container = document.getElementById('categoriesContainer');
-            const categories = [...new Set(portfolioItems.map(item => item.subJudul).filter(Boolean))];
-            
-            let html = `<button class="cat-btn active" onclick="filterGallery('Semua', this)">Semua</button>`;
-            categories.forEach(cat => {
-                html += `<button class="cat-btn" onclick="filterGallery('${cat}', this)">${cat}</button>`;
-            });
-            container.innerHTML = html;
-        }
-
-        function renderGallery(items) {
-            const grid = document.getElementById('galleryGrid');
-            if (items.length === 0) {
-                renderEmpty("Tidak ada portofolio yang cocok.");
-                return;
-            }
-
-            let html = '';
-            items.forEach(item => {
-                html += `
-                    <div class="portfolio-card" onclick="openModal(${item.id})">
-                        <div class="card-img-wrapper">
-                            <span class="card-tag-badge">${item.subJudul || 'Website'}</span>
-                            <img src="${item.mainPhoto}" alt="${item.judul}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x800?text=Image+Error'">
-                        </div>
-                        <div class="card-info">
-                            <h3 class="card-title">${item.judul}</h3>
-                            <p class="card-desc">${item.deskripsi || item.subJudul}</p>
-                        </div>
-                    </div>
+                card.innerHTML = `
+                    <img src="${imgFullUrl}" alt="Service Oink Project" loading="lazy" onerror="this.parentElement.style.display='none'">
+                    <a href="${waUrl}" target="_blank" onclick="event.stopPropagation()" class="card-wa-btn" title="Pesan via WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
                 `;
+                container.appendChild(card);
             });
-            grid.innerHTML = html;
         }
 
-        function renderEmpty(msg) {
-            document.getElementById('galleryGrid').innerHTML = `
-                <div class="empty-state">
-                    <i class="fas fa-folder-open"></i>
-                    <p>${msg}</p>
-                </div>
-            `;
+        /* ==========================================================================
+           4. LIGHTBOX IMAGE PREVIEW MODAL
+           ========================================================================== */
+        function openImageModal(imgUrl) {
+            const modal = document.getElementById('imageModalOverlay');
+            const previewImg = document.getElementById('modalPreviewImage');
+            const waLink = document.getElementById('modalWaLink');
+
+            previewImg.src = imgUrl;
+            waLink.href = getPlainWaUrl();
+
+            modal.classList.add('active');
         }
 
-        function filterGallery(category, btn) {
-            currentActiveCategory = category;
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            if(btn) btn.classList.add('active');
-
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            applyFilterAndSearch(category, query);
+        function closeImageModal() {
+            const modal = document.getElementById('imageModalOverlay');
+            modal.classList.remove('active');
         }
 
-        function handleSearch() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            applyFilterAndSearch(currentActiveCategory, query);
-        }
-
-        function applyFilterAndSearch(category, query) {
-            const filtered = portfolioItems.filter(item => {
-                const matchCat = category === "Semua" || item.subJudul === category;
-                const matchQuery = item.judul.toLowerCase().includes(query) || 
-                                   item.subJudul.toLowerCase().includes(query) || 
-                                   item.deskripsi.toLowerCase().includes(query);
-                return matchCat && matchQuery;
-            });
-            renderGallery(filtered);
-        }
-
-        function openModal(id) {
-            const item = portfolioItems.find(p => p.id === id);
-            if (!item) return;
-
-            const mediaContainer = document.getElementById('modalMediaContainer');
-            const tag = document.getElementById('modalTag');
-            const title = document.getElementById('modalTitle');
-            const subTitle = document.getElementById('modalSubTitle');
-            const desc = document.getElementById('modalDesc');
-            const waBtn = document.getElementById('modalWaBtn');
-            const demoBtn = document.getElementById('modalDemoBtn');
-
-            tag.innerText = item.subJudul || 'Website';
-            title.innerText = item.judul;
-            
-            if (item.subJudul) {
-                subTitle.innerText = item.subJudul;
-                subTitle.style.display = 'block';
-            } else {
-                subTitle.style.display = 'none';
-            }
-
-            desc.innerText = item.deskripsi || '-';
-
-            // Preview Gambar & Galeri Thumbnail
-            let mediaHtml = `<img id="mainModalImg" src="${item.photos[0]}" alt="${item.judul}">`;
-            
-            if (item.photos.length > 1) {
-                mediaHtml += `<div class="modal-thumbs">`;
-                item.photos.forEach((photo, idx) => {
-                    mediaHtml += `<img src="${photo}" class="thumb-item ${idx === 0 ? 'active' : ''}" onclick="switchModalImage('${photo}', this)">`;
-                });
-                mediaHtml += `</div>`;
-            }
-            
-            mediaContainer.innerHTML = mediaHtml;
-
-            // Tombol 1: Link Demo
-            if (item.linkDemo && item.linkDemo.startsWith('http')) {
-                demoBtn.href = item.linkDemo;
-                demoBtn.style.display = 'flex';
-            } else {
-                demoBtn.style.display = 'none';
-            }
-
-            // Tombol 2: Chat WhatsApp
-            const waText = encodeURIComponent(`Halo, saya tertarik pesan website seperti: ${item.judul}`);
-            waBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
-
-            document.getElementById('imageModal').classList.add('active');
-        }
-
-        function switchModalImage(src, thumbEl) {
-            const mainImg = document.getElementById('mainModalImg');
-            if (mainImg) mainImg.src = src;
-            document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
-            if (thumbEl) thumbEl.classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('imageModal').classList.remove('active');
-        }
-
-        function copyCurrentCategoryLink() {
+        /* ==========================================================================
+           5. COMMON APP LOGIC
+           ========================================================================== */
+        function copyShareLink() {
             navigator.clipboard.writeText(window.location.href).then(() => {
-                showToast("Link portofolio berhasil disalin!");
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2500);
             });
         }
 
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.innerText = msg;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2500);
-        }
-
-        document.addEventListener('DOMContentLoaded', loadSheetData);
+        // Initial Load App
+        document.addEventListener('DOMContentLoaded', () => {
+            renderServiceImages();
+        });
     </script>
 </body>
 </html>
