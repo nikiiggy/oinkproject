@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#09070d">
+  <title>Untuk Kamu ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header Banner Order Oink Project -->
+  <div class="oink-banner">
+    <span>Order website ultah hanya di <strong>Oink Project</strong></span>
+    <a href="https://wa.me/6285155091238?text=Halo%20Oink%20Project,%20mau%20order%20website%20ultah%20dong" target="_blank" class="wa-btn">💬 WhatsApp Us</a>
+  </div>
+
+  <div id="progress"><i></i></div>
+  <div id="flash"></div>
+  <canvas id="fx"></canvas>
+  <div id="hearts"></div>
+  <div id="confetti"></div>
+
+  <main class="app">
+    <div class="orbs"><i></i><i></i><i></i></div>
+    
+    <section id="opening" class="screen active">
+      <div class="stars"></div>
+      <div class="intro-content">
+        <div class="tiny">A LITTLE SOMETHING FOR YOU</div>
+        <div class="heart-orbit"><span>♥</span></div>
+        <p class="eyebrow">Ada sesuatu yang ingin aku kasih...</p>
+        <h1>Untuk<br><em class="user-name">kamu.</em></h1>
+        <p class="muted">Sebuah pesan hangat kecil untuk merayakan hari spesialmu.</p>
+        <button type="button" class="primary" id="startBtn">Buka Kadonya <span>♥</span></button>
+        <p class="hint">headphones recommended 🎧</p>
+      </div>
+    </section>
+
+    <section id="welcome" class="screen">
+      <div class="chapter">01 / 09</div>
+      <div class="center">
+        <p class="eyebrow">HAPPY BIRTHDAY!</p>
+        <h2>Happy Birthday,<br><em class="user-name">Kamu</em> 🎂</h2>
+        <p>Hari ini adalah hari istimewa untuk merayakan bertambahnya usiamu dan semua kebaikan yang kamu bawa ke dunia ini.</p>
+        <button class="primary next">Lanjut →</button>
+      </div>
+    </section>
+
+    <section id="story" class="screen">
+      <div class="chapter">02 / 09</div>
+      <div class="section-head">
+        <p class="eyebrow">OUR LITTLE STORY</p>
+        <h2>Perjalanan & Proses</h2>
+        <p>Setiap orang punya alurnya masing-masing, dan setiap langkah adalah bagian dari cerita berharga.</p>
+      </div>
+      <div class="timeline">
+        <article><span>01</span><div><small>THE BEGINNING</small><h3>Awal Langkah</h3><p>Setiap hari baru dan usia baru adalah lembaran bersih untuk memulai petualangan indah yang belum pernah ada sebelumnya.</p></div></article>
+        <article><span>02</span><div><small>THE PROCESS</small><h3>Tumbuh & Belajar</h3><p>Segala proses, suka, dan duka yang telah dilewati membentuk dirimu menjadi sosok yang makin kuat dan bijaksana.</p></div></article>
+        <article><span>03</span><div><small>THE MOMENT</small><h3>Momen Berharga</h3><p>Banyak kenangan kecil dan tawa manis yang mewarnai perjalanan hingga kamu sampai di titik hari ini.</p></div></article>
+        <article><span>04</span><div><small>THE FUTURE</small><h3>Langkah ke Depan</h3><p>Semoga setiap impian dan harapan baik yang kamu simpan bisa terwujud satu per satu di masa mendatang.</p></div></article>
+      </div>
+      <button class="primary next">Aku masih punya sesuatu →</button>
+    </section>
+
+    <section id="gallery" class="screen">
+      <div class="chapter">03 / 09</div>
+      <div class="section-head">
+        <p class="eyebrow">OUR MEMORIES</p>
+        <h2>Beberapa momen<br>yang kusimpan ❤️</h2>
+      </div>
+      
+      <!-- Grid Gallery -->
+      <div class="gallery-grid">
+        <figure class="photo-card" data-src="images/001.jpg" data-caption="Momen spesial">
+          <img src="images/001.jpg" alt="Foto 1" class="photo-img">
+          <figcaption>Momen Spesial</figcaption>
+        </figure>
+
+        <figure class="photo-card" data-src="images/002.jpg" data-caption="Senyuman manis">
+          <img src="images/002.jpg" alt="Foto 2" class="photo-img">
+          <figcaption>Kebersamaan</figcaption>
+        </figure>
+
+        <figure class="photo-card" data-src="images/003.jpg" data-caption="Hari yang menyenangkan">
+          <img src="images/003.jpg" alt="Foto 3" class="photo-img">
+          <figcaption>Hari Cerah</figcaption>
+        </figure>
+
+        <figure class="photo-card" data-src="images/004.png" data-caption="Kenangan indah">
+          <img src="images/004.png" alt="Foto 4" class="photo-img">
+          <figcaption>Kenangan Indah</figcaption>
+        </figure>
+      </div>
+
+      <p class="hint">Klik foto untuk melihat ukuran penuh ✨</p>
+      <button class="primary next">Ada 10 alasan →</button>
+    </section>
+
+    <section id="reasons" class="screen">
+      <div class="chapter">04 / 09</div>
+      <div class="section-head">
+        <p class="eyebrow">10 LITTLE THINGS</p>
+        <h2>10 hal baik tentang<br>dirimu.</h2>
+      </div>
+      <div class="reasons">
+        <button class="reason"><b>01</b><span>Senyuman hangatmu.</span></button>
+        <button class="reason"><b>02</b><span>Kebaikan hatimu kepada orang lain.</span></button>
+        <button class="reason"><b>03</b><span>Semangatmu pantang menyerah.</span></button>
+        <button class="reason"><b>04</b><span>Tawamu yang menular dan menyenangkan.</span></button>
+        <button class="reason"><b>05</b><span>Cara kamu mengapresiasi hal-hal kecil.</span></button>
+        <button class="reason"><b>06</b><span>Kehadiranmu yang membawa kehangatan.</span></button>
+        <button class="reason"><b>07</b><span>Sifat pantang menyerah yang kamu miliki.</span></button>
+        <button class="reason"><b>08</b><span>Ketulusan dalam setiap ucapanmu.</span></button>
+        <button class="reason"><b>09</b><span>Dirimu yang unik dan apa adanya.</span></button>
+        <button class="reason special"><b>10</b><span>Dan fakta bahwa kamu layak mendapatkan semua kebahagiaan. ❤️</span></button>
+      </div>
+      <p class="hint" id="reasonHint">Tap setiap alasan untuk membukanya 👆</p>
+      <button class="primary next">Tapi sekarang... main dulu 🎮</button>
+    </section>
+
+    <section id="game" class="screen">
+      <div class="chapter">05 / 09</div>
+      <div class="game-card">
+        <p class="eyebrow">A VERY SERIOUS QUESTION</p>
+        <h2>Seberapa besar<br>harapan kebahagiaan untukmu?</h2>
+        <div class="answers">
+          <button class="answer">10% 😌</button>
+          <button class="answer">100% ❤️</button>
+          <button class="answer">1000% 🥹</button>
+          <button class="answer">1000000% 🫶</button>
+        </div>
+        <p id="gameResult" class="game-result"></p>
+      </div>
+      <button class="primary next">Aku punya satu kejutan lagi →</button>
+    </section>
+
+    <section id="cake" class="screen">
+      <div class="chapter">06 / 09</div>
+      <div class="center">
+        <p class="eyebrow">MAKE A WISH</p>
+        <h2>Waktunya tiup lilin 🎂</h2>
+        <div class="cake-wrap" id="cakeWrap">
+          <div class="flame" id="flame">🔥</div>
+          <div class="cake"><div class="icing"></div><div class="cake-body"></div></div>
+        </div>
+        <p id="wishText">Tekan tombolnya dan buat satu permintaan.</p>
+        <button class="primary" id="wishBtn">Tiup Lilinnya ✨</button>
+        <br>
+        <button class="primary" id="micBtn" style="margin-top:12px">🎤 Atau tiup beneran pakai mic</button>
+        <br><br>
+        <button class="primary next">Lanjut ke surat →</button>
+      </div>
+    </section>
+
+    <section id="letter" class="screen">
+      <div class="chapter">07 / 09</div>
+      <div class="center">
+        <p class="eyebrow">A LETTER FOR YOU</p>
+        <h2>Ada sesuatu<br>yang ingin aku bilang.</h2>
+        
+        <div class="envelope" id="envelope">
+          <div class="flap"></div>
+          <div class="letter-paper">
+            <p>Untuk <span class="user-name">Kamu</span>,</p>
+            <p>Selamat ulang tahun! Semoga di usiamu yang baru ini, langkahmu dipermudah dan hari-harimu dipenuhi berkah.</p>
+            <p>Terima kasih sudah bertahan dan berjuang sampai sejauh ini. Semoga sehat selalu dan makin bahagia.</p>
+            <p>Di hari spesialmu ini, doa terbaik selalu menyertaimu:</p>
+            <p><strong>Semoga senyum kebahagiaan selalu menyertai setiap langkahmu ke depan.</strong></p>
+            <p>Happy birthday! ❤️</p>
+          </div>
+          <div class="pocket"></div>
+        </div>
+
+        <button class="primary" id="openLetter">Buka Surat 💌</button>
+        <br>
+        <button class="primary next" id="letterNextBtn" style="margin-top: 15px; display: none;">Lanjut ke Rahasia →</button>
+      </div>
+    </section>
+
+    <section id="secret" class="screen">
+      <div class="chapter">08 / 09</div>
+      <div class="center">
+        <p class="eyebrow">ONE LAST SECRET</p>
+        <h2>Kalau kamu sampai di sini...</h2>
+        <p>Berarti kamu memang penasaran. Jadi aku kasih satu rahasia kecil.</p>
+        <button class="secret-heart" id="secretHeart">♥</button>
+        <p id="secretText" class="secret-text">Tekan hatinya 5 kali...</p>
+        <button class="primary" id="finalBtn" disabled>Aku siap →</button>
+      </div>
+    </section>
+
+    <section id="final" class="screen final-screen">
+      <div class="fireworks"></div>
+      <div class="center">
+        <p class="eyebrow">09 / 09 · THE END, BUT NOT REALLY</p>
+        <div class="big-heart">♥</div>
+        <h2>Happy Birthday,<br><em class="user-name">Kamu</em></h2>
+        <p class="final-message">Semoga tahun ini membawa banyak hal baik, banyak tawa, dan banyak alasan untuk bahagia.</p>
+        <h3>BEST WISHES FOR YOU! ❤️</h3>
+        <button class="primary" id="restartBtn">Ulangi dari awal ↻</button>
+      </div>
+    </section>
+
+    <div class="music-player" id="player">
+      <div class="disc" id="disc">♪</div>
+      <div class="track">
+        <strong>Birthday Special Song</strong>
+        <small>untuk <span class="user-name">kamu</span> ❤️</small>
+      </div>
+      <button id="playBtn" aria-label="Play music">▶</button>
+      <audio id="audio" loop preload="metadata">
+        <source src="music/lagu.ogg" type="audio/mpeg">
+      </audio>
+    </div>
+  </main>
+
+  <!-- Modal Lightbox Preview Foto -->
+  <div id="imageModal" class="modal">
+    <span class="modal-close">&times;</span>
+    <div class="modal-content-wrap">
+      <div id="modalImageContainer"></div>
+      <p id="modalCaption" class="modal-caption"></p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
