@@ -252,50 +252,16 @@
             transform: translateY(-1px);
         }
 
-        /* Filter & Search Bar Section */
+        /* Filter Controls Card */
         .filter-controls-card {
             background: var(--card-white);
-            padding: 12px;
+            padding: 14px;
             border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-sm);
             display: flex;
             flex-direction: column;
-            gap: 10px;
-        }
-
-        /* Search Input */
-        .search-box {
-            position: relative;
-            width: 100%;
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 14px 12px 40px;
-            background: #f8fafc;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--text-main);
-            outline: none;
-            transition: var(--transition);
-        }
-
-        .search-input:focus {
-            background: #ffffff;
-            border-color: var(--card-cyan);
-            box-shadow: 0 0 0 3px rgba(5, 187, 192, 0.15);
+            gap: 12px;
         }
 
         /* Dropdown Kategori / Tag Modern */
@@ -347,7 +313,107 @@
             box-shadow: 0 0 0 3px rgba(5, 187, 192, 0.15);
         }
 
-        /* Info Item Count */
+        /* Search Input */
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 14px 12px 40px;
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-main);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            background: #ffffff;
+            border-color: var(--card-cyan);
+            box-shadow: 0 0 0 3px rgba(5, 187, 192, 0.15);
+        }
+
+        /* Preset Software Buttons (Horizontal Scrolling) */
+        .software-chips-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .chips-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .software-chips {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .software-chips::-webkit-scrollbar {
+            display: none;
+        }
+
+        .chip-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: var(--text-main);
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .chip-btn i {
+            font-size: 0.85rem;
+            color: var(--card-cyan);
+        }
+
+        .chip-btn:hover {
+            border-color: var(--card-cyan);
+            background: #ffffff;
+        }
+
+        .chip-btn.active {
+            background: var(--card-cyan);
+            color: #ffffff;
+            border-color: var(--card-cyan);
+            box-shadow: 0 4px 10px rgba(5, 187, 192, 0.3);
+        }
+
+        .chip-btn.active i {
+            color: #ffffff;
+        }
+
+        /* Results Meta Info */
         .results-meta {
             display: flex;
             justify-content: space-between;
@@ -461,7 +527,7 @@
             display: block;
         }
 
-        /* Lightbox Preview Modal */
+        /* LIGHTBOX PREVIEW MODAL TERSTRUKTUR (TIDAK BERTUMPUK) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -469,7 +535,7 @@
             width: 100%;
             height: 100%;
             background: rgba(15, 23, 42, 0.92);
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -477,92 +543,153 @@
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
-            padding: 16px;
+            padding: 14px;
         }
 
         .modal-overlay.active { opacity: 1; visibility: visible; }
 
         .modal-content {
             width: 100%;
-            max-width: 420px;
+            max-width: 440px;
             background: var(--card-white);
             border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
             position: relative;
-            max-height: 90vh;
-        }
-
-        .modal-media-container {
-            width: 100%;
-            aspect-ratio: 1080 / 1440;
-            background: #0f172a;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .modal-media-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .modal-thumbs {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            display: flex;
-            gap: 6px;
-            padding: 8px;
-            background: rgba(0, 0, 0, 0.65);
-            width: 100%;
-            justify-content: center;
-            overflow-x: auto;
-        }
-
-        .thumb-item {
-            width: 42px;
-            height: 42px;
-            border-radius: 6px;
-            object-fit: cover;
-            cursor: pointer;
-            opacity: 0.6;
-            border: 2px solid transparent;
-            flex-shrink: 0;
-        }
-
-        .thumb-item.active { opacity: 1; border-color: var(--card-cyan); }
-
-        .modal-details {
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            overflow-y: auto;
+            max-height: 92vh;
         }
 
         .modal-close-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 34px;
-            height: 34px;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15, 23, 42, 0.75);
             color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            z-index: 20;
+            transition: var(--transition);
+        }
+
+        .modal-close-btn:hover {
+            background: #000000;
+            transform: scale(1.05);
+        }
+
+        /* Area Tampilan Foto Bersih */
+        .modal-viewport {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1080 / 1200;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .modal-viewport img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            user-select: none;
+        }
+
+        /* Tombol Navigasi Panah Kiri Kanan */
+        .modal-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.65);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
             z-index: 10;
+        }
+
+        .modal-nav-btn:hover {
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .modal-nav-prev { left: 10px; }
+        .modal-nav-next { right: 10px; }
+
+        /* Counter Nomor Gambar (1/3) */
+        .modal-img-counter {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.65);
+            color: #ffffff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 12px;
+            backdrop-filter: blur(4px);
+            z-index: 5;
+        }
+
+        /* Galeri Strip Thumbnail Terpisah (Tidak Menutupi Gambar) */
+        .modal-thumbs-strip {
+            display: flex;
+            gap: 8px;
+            padding: 10px 14px;
+            background: #f1f5f9;
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+
+        .modal-thumb-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            flex-shrink: 0;
+            opacity: 0.55;
+            transition: var(--transition);
+            background: #cbd5e1;
+        }
+
+        .modal-thumb-box.active {
+            border-color: var(--card-cyan);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .modal-thumb-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Detail Teks dan Tombol Modal */
+        .modal-details {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            overflow-y: auto;
+            max-height: 38vh;
         }
 
         .btn-action-group {
@@ -666,13 +793,13 @@
                 </div>
                 <p class="promo-subtitle">Proses cepat, terjangkau & tugasmu aman!</p>
             </div>
-            <a href="https://wa.me/6285155091238?text=Halo%20Oink%20Project,%20saya%20mau%20tanya%20jasa%20pembuatan%20website" target="_blank" class="btn-promo-wa">
+            <a href="https://wa.me/6285155091238?text=Halo%20Oink%20Project,%20saya%20mau%20tanya%20jasa%20desain%20dan%20website" target="_blank" class="btn-promo-wa">
                 <i class="fab fa-whatsapp"></i>
                 <span>Konsultasi / Order via WhatsApp</span>
             </a>
         </div>
 
-        <!-- Filter & Search Controls (Dropdown & Input) -->
+        <!-- Filter Controls Card -->
         <div class="filter-controls-card">
             <!-- Dropdown Pilihan Kategori / Tag -->
             <div class="dropdown-box">
@@ -686,13 +813,47 @@
             <!-- Input Pencarian -->
             <div class="search-box">
                 <i class="fas fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" class="search-input" placeholder="Ketik kata kunci karya..." oninput="handleSearch()">
+                <input type="text" id="searchInput" class="search-input" placeholder="Cari karya desain / website..." oninput="handleSearch()">
+            </div>
+
+            <!-- Tombol Tag Software Preset -->
+            <div class="software-chips-wrapper">
+                <span class="chips-label">Software & Tools:</span>
+                <div class="software-chips" id="softwareChipsContainer">
+                    <button class="chip-btn active" data-tag="Semua" onclick="handleChipFilter('Semua', this)">
+                        <i class="fas fa-border-all"></i> Semua
+                    </button>
+                    <button class="chip-btn" data-tag="illustrator" onclick="handleChipFilter('illustrator', this)">
+                        <i class="fas fa-pen-nib"></i> Adobe Illustrator
+                    </button>
+                    <button class="chip-btn" data-tag="photoshop" onclick="handleChipFilter('photoshop', this)">
+                        <i class="fas fa-image"></i> Adobe Photoshop
+                    </button>
+                    <button class="chip-btn" data-tag="flash" onclick="handleChipFilter('flash', this)">
+                        <i class="fas fa-bolt"></i> Adobe Flash
+                    </button>
+                    <button class="chip-btn" data-tag="after" onclick="handleChipFilter('after', this)">
+                        <i class="fas fa-film"></i> Adobe After Effect
+                    </button>
+                    <button class="chip-btn" data-tag="audition" onclick="handleChipFilter('audition', this)">
+                        <i class="fas fa-waveform-lines"></i> Adobe Audition
+                    </button>
+                    <button class="chip-btn" data-tag="corel" onclick="handleChipFilter('corel', this)">
+                        <i class="fas fa-draw-polygon"></i> Corel Draw
+                    </button>
+                    <button class="chip-btn" data-tag="sketchup" onclick="handleChipFilter('sketchup', this)">
+                        <i class="fas fa-cubes"></i> 3D SketchUp
+                    </button>
+                    <button class="chip-btn" data-tag="blender" onclick="handleChipFilter('blender', this)">
+                        <i class="fas fa-shapes"></i> Blender
+                    </button>
+                </div>
             </div>
 
             <!-- Total Item Ditemukan -->
             <div class="results-meta">
                 <span id="resultsCount">Menampilkan portofolio</span>
-                <span id="activeCategoryBadge" style="color: var(--card-cyan);">Kategori: Semua</span>
+                <span id="activeCategoryBadge" style="color: var(--card-cyan);">Filter: Semua</span>
             </div>
         </div>
 
@@ -705,23 +866,42 @@
         </main>
     </div>
 
-    <!-- Modal Lightbox Preview -->
+    <!-- MODAL LIGHTBOX PREVIEW -->
     <div class="modal-overlay" id="imageModal" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
-            <div class="modal-media-container" id="modalMediaContainer"></div>
+            <!-- Tombol Tutup Silang -->
+            <button class="modal-close-btn" onclick="closeModal()" title="Tutup">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <!-- 1. Viewport Foto Utama -->
+            <div class="modal-viewport">
+                <img id="mainModalImg" src="" alt="Preview Portofolio">
+                <button class="modal-nav-btn modal-nav-prev" id="modalPrevBtn" onclick="navigateModalImage(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="modal-nav-btn modal-nav-next" id="modalNextBtn" onclick="navigateModalImage(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="modal-img-counter" id="modalImgCounter">1 / 1</div>
+            </div>
+
+            <!-- 2. Galeri Strip Thumbnail (Dipisah di Bawah Foto) -->
+            <div class="modal-thumbs-strip" id="modalThumbsStrip" style="display: none;"></div>
+
+            <!-- 3. Detail Teks & Tombol Aksi -->
             <div class="modal-details">
                 <div>
-                    <span id="modalTag" class="card-tag-badge" style="position: relative; top: 0; left: 0; display: inline-block; margin-bottom: 6px;">Website</span>
+                    <span id="modalTag" class="card-tag-badge" style="position: relative; top: 0; left: 0; display: inline-block; margin-bottom: 6px;">Category</span>
                     <h2 id="modalTitle" style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; color: var(--text-main);">Judul Project</h2>
                     <p id="modalSubTitle" style="font-size: 0.88rem; font-weight: 800; color: var(--card-cyan); margin-bottom: 8px;">Sub Judul</p>
-                    <p id="modalDesc" style="font-size: 0.82rem; white-space: pre-line; line-height: 1.45; color: var(--text-muted);">Deskripsi Project</p>
+                    <p id="modalDesc" style="font-size: 0.82rem; white-space: pre-line; line-height: 1.5; color: var(--text-muted);">Deskripsi Project</p>
                 </div>
                 
                 <div class="btn-action-group">
                     <a id="modalDemoBtn" href="#" target="_blank" class="btn-demo-link" style="display: none;">
                         <i class="fas fa-external-link-alt"></i>
-                        <span>Buka di Blogspot</span>
+                        <span>Buka Postingan Asli</span>
                     </a>
                     <a id="modalWaBtn" href="#" target="_blank" class="btn-order-wa">
                         <i class="fab fa-whatsapp"></i>
@@ -737,7 +917,11 @@
 
         let portfolioItems = [];
         let allCategories = [];
-        let currentActiveCategory = "Semua";
+        let currentFilter = "Semua";
+
+        // State Modal Aktif
+        let currentModalItem = null;
+        let currentModalImageIndex = 0;
 
         // Callback JSONP Resmi dari Blogger (Bebas Masalah CORS)
         function onBloggerFeedLoaded(data) {
@@ -817,7 +1001,6 @@
         function populateDropdownCategories() {
             const select = document.getElementById('categorySelect');
             
-            // Kumpulkan seluruh tags/label unik dari semua postingan
             const tagsSet = new Set();
             portfolioItems.forEach(item => {
                 if (item.allTags && Array.isArray(item.allTags)) {
@@ -833,7 +1016,7 @@
             
             allCategories.forEach(tag => {
                 const count = portfolioItems.filter(item => 
-                    item.allTags.includes(tag) || item.kategori === tag
+                    item.allTags.some(t => t.toLowerCase() === tag.toLowerCase())
                 ).length;
                 optionsHtml += `<option value="${tag}">${tag} (${count})</option>`;
             });
@@ -883,38 +1066,79 @@
             `;
         }
 
-        // Handler saat user memilih dari dropdown
-        function handleDropdownFilter(selectedCategory) {
-            currentActiveCategory = selectedCategory;
-            const badge = document.getElementById('activeCategoryBadge');
-            if (badge) {
-                badge.innerText = `Kategori: ${selectedCategory}`;
+        // Handler saat user mengklik Tombol Preset Software
+        function handleChipFilter(tagKey, btnElement) {
+            currentFilter = tagKey;
+            
+            // Update status aktif tombol chip
+            document.querySelectorAll('.chip-btn').forEach(btn => btn.classList.remove('active'));
+            if (btnElement) btnElement.classList.add('active');
+
+            // Sinkronkan ke Dropdown jika ada opsi yang cocok
+            const select = document.getElementById('categorySelect');
+            let matchedOption = false;
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value.toLowerCase().includes(tagKey.toLowerCase())) {
+                    select.selectedIndex = i;
+                    matchedOption = true;
+                    break;
+                }
             }
+            if (!matchedOption && tagKey === 'Semua') {
+                select.selectedIndex = 0;
+            }
+
+            updateFilterBadge(tagKey);
             applyFilterAndSearch();
         }
 
-        // Handler saat user mengetik di search bar
+        // Handler saat user memilih dari dropdown
+        function handleDropdownFilter(selectedValue) {
+            currentFilter = selectedValue;
+
+            // Sinkronkan ke chip jika cocok
+            document.querySelectorAll('.chip-btn').forEach(btn => {
+                const chipTag = btn.getAttribute('data-tag');
+                if (selectedValue.toLowerCase().includes(chipTag.toLowerCase()) || (selectedValue === "Semua" && chipTag === "Semua")) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            updateFilterBadge(selectedValue);
+            applyFilterAndSearch();
+        }
+
+        function updateFilterBadge(title) {
+            const badge = document.getElementById('activeCategoryBadge');
+            if (badge) {
+                badge.innerText = `Filter: ${title}`;
+            }
+        }
+
         function handleSearch() {
             applyFilterAndSearch();
         }
 
-        // Filter gabungan (Dropdown Kategori + Search Query)
+        // Pencocokan Filter Gabungan (Case-Insensitive untuk Software Preset)
         function applyFilterAndSearch() {
             const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+            const filterKey = currentFilter.toLowerCase().trim();
             
             const filtered = portfolioItems.filter(item => {
-                // Pencocokan kategori dari dropdown
-                const matchCategory = (currentActiveCategory === "Semua") || 
-                    (item.allTags && item.allTags.includes(currentActiveCategory)) || 
-                    (item.kategori === currentActiveCategory);
+                // Pencocokan Kategori (Support substring & case-insensitive)
+                const matchCategory = (filterKey === "semua") || 
+                    item.allTags.some(t => t.toLowerCase().includes(filterKey)) ||
+                    item.kategori.toLowerCase().includes(filterKey);
 
-                // Pencocokan teks kata kunci
+                // Pencocokan Kata Kunci Pencarian
                 const matchQuery = !query || 
                     item.judul.toLowerCase().includes(query) || 
                     item.subJudul.toLowerCase().includes(query) || 
                     item.kategori.toLowerCase().includes(query) || 
                     item.deskripsi.toLowerCase().includes(query) ||
-                    (item.allTags && item.allTags.some(t => t.toLowerCase().includes(query)));
+                    item.allTags.some(t => t.toLowerCase().includes(query));
 
                 return matchCategory && matchQuery;
             });
@@ -922,12 +1146,14 @@
             renderGallery(filtered);
         }
 
-        // Modal Lightbox Preview
+        // MODAL LIGHTBOX PREVIEW BERSIH TANPA MENUTUPI FOTO
         function openModal(id) {
             const item = portfolioItems.find(p => p.id === id);
             if (!item) return;
 
-            const mediaContainer = document.getElementById('modalMediaContainer');
+            currentModalItem = item;
+            currentModalImageIndex = 0;
+
             const tag = document.getElementById('modalTag');
             const title = document.getElementById('modalTitle');
             const subTitle = document.getElementById('modalSubTitle');
@@ -947,20 +1173,34 @@
 
             desc.innerText = item.deskripsi || '-';
 
-            // Preview Foto Utama & Thumbnail
-            let mediaHtml = `<img id="mainModalImg" src="${item.photos[0]}" alt="${item.judul}">`;
-            
-            if (item.photos.length > 1) {
-                mediaHtml += `<div class="modal-thumbs">`;
-                item.photos.forEach((photo, idx) => {
-                    mediaHtml += `<img src="${photo}" class="thumb-item ${idx === 0 ? 'active' : ''}" onclick="switchModalImage('${photo}', this)">`;
-                });
-                mediaHtml += `</div>`;
-            }
-            
-            mediaContainer.innerHTML = mediaHtml;
+            // Siapkan Galeri Thumbnail di Area Bawah Foto
+            const thumbsStrip = document.getElementById('modalThumbsStrip');
+            const prevBtn = document.getElementById('modalPrevBtn');
+            const nextBtn = document.getElementById('modalNextBtn');
 
-            // Tombol Tautan ke Blogspot
+            if (item.photos.length > 1) {
+                thumbsStrip.style.display = 'flex';
+                prevBtn.style.display = 'flex';
+                nextBtn.style.display = 'flex';
+
+                let thumbsHtml = '';
+                item.photos.forEach((photo, idx) => {
+                    thumbsHtml += `
+                        <div class="modal-thumb-box ${idx === 0 ? 'active' : ''}" onclick="selectModalImage(${idx})">
+                            <img src="${photo}" alt="Thumbnail ${idx + 1}">
+                        </div>
+                    `;
+                });
+                thumbsStrip.innerHTML = thumbsHtml;
+            } else {
+                thumbsStrip.style.display = 'none';
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            }
+
+            updateModalImageView();
+
+            // Link Demo / Blogspot
             if (item.linkDemo && item.linkDemo.length > 5 && item.linkDemo !== '#') {
                 demoBtn.href = item.linkDemo;
                 demoBtn.style.display = 'flex';
@@ -968,18 +1208,50 @@
                 demoBtn.style.display = 'none';
             }
 
-            // Tombol Order WhatsApp
+            // WhatsApp Button
             const waText = encodeURIComponent(`Halo Oink Project, saya tertarik pesan desain/website seperti: ${item.judul}`);
             waBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 
             document.getElementById('imageModal').classList.add('active');
         }
 
-        function switchModalImage(src, thumbEl) {
+        function updateModalImageView() {
+            if (!currentModalItem) return;
+
             const mainImg = document.getElementById('mainModalImg');
-            if (mainImg) mainImg.src = src;
-            document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
-            if (thumbEl) thumbEl.classList.add('active');
+            const counter = document.getElementById('modalImgCounter');
+            
+            mainImg.src = currentModalItem.photos[currentModalImageIndex];
+            counter.innerText = `${currentModalImageIndex + 1} / ${currentModalItem.photos.length}`;
+
+            // Perbarui status aktif thumbnail
+            const thumbBoxes = document.querySelectorAll('.modal-thumb-box');
+            thumbBoxes.forEach((box, idx) => {
+                if (idx === currentModalImageIndex) {
+                    box.classList.add('active');
+                    box.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                } else {
+                    box.classList.remove('active');
+                }
+            });
+        }
+
+        function selectModalImage(index) {
+            currentModalImageIndex = index;
+            updateModalImageView();
+        }
+
+        function navigateModalImage(direction) {
+            if (!currentModalItem || currentModalItem.photos.length <= 1) return;
+            
+            currentModalImageIndex += direction;
+            if (currentModalImageIndex < 0) {
+                currentModalImageIndex = currentModalItem.photos.length - 1;
+            } else if (currentModalImageIndex >= currentModalItem.photos.length) {
+                currentModalImageIndex = 0;
+            }
+
+            updateModalImageView();
         }
 
         function closeModal() {
@@ -987,9 +1259,13 @@
         }
 
         function copyCurrentCategoryLink() {
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                showToast("Link portofolio berhasil disalin!");
-            });
+            const dummy = document.createElement('input');
+            document.body.appendChild(dummy);
+            dummy.value = window.location.href;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            showToast("Link portofolio berhasil disalin!");
         }
 
         function showToast(msg) {
@@ -999,7 +1275,15 @@
             setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
-        // Jalankan pengambilan data Blogger saat dokumen siap
+        // Listener Keyboard untuk navigasi modal (Arrow & Esc)
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('imageModal').classList.contains('active')) return;
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowLeft') navigateModalImage(-1);
+            if (e.key === 'ArrowRight') navigateModalImage(1);
+        });
+
+        // Jalankan pemuatan data saat DOM siap
         document.addEventListener('DOMContentLoaded', loadBlogspotFeed);
     </script>
 </body>
