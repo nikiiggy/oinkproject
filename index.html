@@ -16,9 +16,7 @@
     <meta property="og:description" content="Joki tugas DKV hanya di oink, Terpercaya, Hasil Maksimal, Bisa Nego, Fast response 24 Jam.">
     <meta property="og:type" content="website">
 
-    <!-- Preconnect: buka koneksi lebih awal biar spreadsheet & foto lebih cepat -->
-    <link rel="preconnect" href="https://docs.google.com" crossorigin>
-    <link rel="preconnect" href="https://doc-14-as-sheets.googleusercontent.com" crossorigin>
+    <!-- Preconnect: optimasi aset foto -->
     <link rel="preconnect" href="https://i.ibb.co.com" crossorigin>
     <link rel="dns-prefetch" href="https://i.ibb.co.com">
 
@@ -155,51 +153,9 @@
             transition: var(--transition);
         }
 
-        .btn-icon:hover { border-color: var(--accent); color: var(--accent); }
-
-        /* TAB NAVIGATION HEADER */
-        .tabs-header {
-            display: flex;
-            background: var(--card-white);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 4px;
-            gap: 6px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .tab-btn {
-            flex: 1;
-            background: transparent;
-            border: none;
-            font-size: 0.9rem;
-            font-weight: 800;
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: 10px 0;
-            border-radius: var(--radius-sm);
-            transition: var(--transition);
-            text-align: center;
-        }
-
-        .tab-btn.active {
-            background: var(--card-cyan);
-            color: #ffffff;
-            box-shadow: 0 4px 10px rgba(5, 187, 192, 0.3);
-        }
-
-        .tab-content {
-            display: none;
-            flex-direction: column;
-            gap: 16px;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .tab-content.active { display: flex; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
+        .btn-icon:hover { 
+            border-color: var(--accent); 
+            color: var(--accent); 
         }
 
         .section-card {
@@ -221,11 +177,19 @@
             font-size: 1.1rem;
             font-weight: 800;
             color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-header h2 i {
+            color: var(--card-cyan);
+            font-size: 1rem;
         }
 
         /* Profile Banner Card */
         .profile-card {
-            background: linear-gradient(135deg, rgba(5, 187, 192, 0.85), rgba(17, 24, 39, 0.75)), 
+            background: linear-gradient(135deg, rgba(5, 187, 192, 0.88), rgba(17, 24, 39, 0.78)), 
                         url('https://i.ibb.co.com/g1pGhgk/FASILITAS-TOKO-01-21.webp') center/cover no-repeat;
             border-radius: var(--radius-lg);
             padding: 24px 20px;
@@ -290,7 +254,7 @@
         .stat-val { font-size: 0.95rem; font-weight: 800; }
         .stat-lbl { font-size: 0.68rem; opacity: 0.9; text-transform: uppercase; }
 
-        /* PROMO PRICE CARD (BESAR) */
+        /* PROMO PRICE CARD */
         .promo-price-card {
             background: var(--card-white);
             border-radius: var(--radius-md);
@@ -344,9 +308,12 @@
             cursor: pointer;
         }
 
-        .btn-wa-cta:hover { background: var(--wa-hover); transform: translateY(-2px); }
+        .btn-wa-cta:hover { 
+            background: var(--wa-hover); 
+            transform: translateY(-2px); 
+        }
 
-        /* Custom Blue Buttons (Oink Theme) */
+        /* Custom Blue Button (Oink Theme) */
         .btn-blue-cta {
             display: flex;
             align-items: center;
@@ -366,7 +333,10 @@
             cursor: pointer;
         }
 
-        .btn-blue-cta:hover { background: var(--card-cyan-hover); transform: translateY(-2px); }
+        .btn-blue-cta:hover { 
+            background: var(--card-cyan-hover); 
+            transform: translateY(-2px); 
+        }
 
         /* DETAIL KEAHLIAN & SPESIALISASI CARD */
         .info-detail-card {
@@ -450,12 +420,85 @@
             font-weight: 600;
         }
 
+        /* SECTION TESTIMONI DAN PROOF: GRID 2 GAMBAR PORTRAIT 1080x1440 (3:4) */
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .proof-card {
+            aspect-ratio: 3 / 4; /* Rasio Portrait 1080x1440 */
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: #e2e8f0;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .proof-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--card-cyan);
+            box-shadow: var(--shadow-md);
+        }
+
+        .proof-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .proof-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .proof-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(4px);
+            color: #ffffff;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        .proof-zoom-icon {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 32px;
+            height: 32px;
+            background: rgba(5, 187, 192, 0.9);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+            transition: var(--transition);
+        }
+
+        .proof-card:hover .proof-zoom-icon {
+            background: var(--card-coral);
+            transform: scale(1.1);
+        }
+
         /* Social Grid */
         .social-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            margin-top: 8px;
+            margin-top: 4px;
         }
 
         .social-card {
@@ -480,151 +523,7 @@
         .social-card i { font-size: 1.3rem; }
         .social-card span { font-size: 0.68rem; font-weight: 700; }
 
-        /* TAB SERVICE: GALERI 2 GRID PORTRAIT */
-        .service-portrait-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        .service-portrait-card {
-            aspect-ratio: 3 / 4; /* Rasio 1080 x 1440 px Portrait */
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            background: #e2e8f0;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .service-portrait-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--card-cyan);
-            box-shadow: var(--shadow-md);
-        }
-
-        .service-portrait-card img {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            opacity: 0;
-            transition: opacity 0.35s ease;
-        }
-
-        .service-portrait-card img.loaded { opacity: 1; }
-
-        /* Skeleton shimmer (pengganti kotak kosong saat loading) */
-        .service-portrait-card.skeleton { cursor: default; pointer-events: none; }
-        .sk-shimmer {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(100deg, #e8edf3 30%, #f6f9fc 50%, #e8edf3 70%);
-            background-size: 200% 100%;
-            animation: shimmer 1.2s infinite linear;
-        }
-        @keyframes shimmer { to { background-position: -200% 0; } }
-
-        /* Fallback kalau foto gagal dimuat: tampil judul, bukan kotak kosong */
-        .card-fallback {
-            position: absolute;
-            inset: 0;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 16px;
-            text-align: center;
-            background: linear-gradient(135deg, #e6f9fa, #fff3ee);
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            font-weight: 800;
-        }
-        .card-fallback i { font-size: 1.6rem; color: var(--card-cyan); }
-        .service-portrait-card.failed .card-fallback { display: flex; }
-        .service-portrait-card.failed img { display: none; }
-
-        /* Label kategori & judul di kartu */
-        .card-cat {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 4;
-            background: rgba(17, 24, 39, 0.7);
-            backdrop-filter: blur(4px);
-            color: #fff;
-            font-size: 0.6rem;
-            font-weight: 800;
-            letter-spacing: 0.4px;
-            padding: 4px 8px;
-            border-radius: 20px;
-        }
-
-        .card-info {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 3;
-            padding: 28px 58px 12px 12px;
-            background: linear-gradient(to top, rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0));
-            color: #fff;
-            pointer-events: none;
-        }
-        .card-info b { display: block; font-size: 0.8rem; font-weight: 800; line-height: 1.25; }
-        .card-info small { display: block; font-size: 0.66rem; opacity: 0.85; margin-top: 2px; font-weight: 600; }
-
-        .service-empty {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 24px 12px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-weight: 700;
-        }
-        .service-empty button {
-            margin-top: 10px;
-            background: var(--card-cyan);
-            color: #fff;
-            border: none;
-            border-radius: var(--radius-sm);
-            padding: 10px 18px;
-            font-weight: 800;
-            cursor: pointer;
-        }
-
-        /* OVERLAY WHATSAPP BUTTON ON GALLERY CARD */
-        .card-wa-btn {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: var(--wa-color);
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            text-decoration: none;
-            transition: var(--transition);
-            z-index: 5;
-            border: 2px solid #ffffff;
-        }
-
-        .card-wa-btn:hover {
-            background: var(--wa-hover);
-            transform: scale(1.1);
-        }
-
-        /* LIGHTBOX MODAL IMAGE VIEWER WITH WA CTA */
+        /* LIGHTBOX IMAGE VIEWER MODAL */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -647,10 +546,9 @@
 
         .modal-box-img {
             max-width: 95%;
-            max-height: 88vh;
+            max-height: 90vh;
             border-radius: var(--radius-md);
-            overflow-x: hidden;
-            overflow-y: auto;
+            overflow: hidden;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             background: #1e293b;
@@ -661,8 +559,9 @@
         }
 
         .modal-box-img img {
-            width: 100%;
-            max-height: 55vh;
+            width: auto;
+            max-width: 100%;
+            max-height: 80vh;
             object-fit: contain;
             display: block;
         }
@@ -693,58 +592,6 @@
             border-color: var(--card-coral);
             transform: scale(1.05);
         }
-
-        /* WA Action inside Modal */
-        .modal-info { width: 100%; padding: 14px 16px 4px; background: #0f172a; color: #fff; }
-        .modal-info .modal-cat { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.5px; color: var(--card-cyan); }
-        .modal-info h3 { font-size: 1rem; font-weight: 800; margin-top: 2px; }
-        .modal-info p { font-size: 0.8rem; opacity: 0.8; margin-top: 4px; line-height: 1.45; }
-        .modal-info:empty { display: none; }
-
-        .modal-demo-btn {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 12px 16px;
-            background: var(--card-cyan);
-            color: #fff;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 0.88rem;
-            border-radius: var(--radius-sm);
-        }
-        .modal-demo-btn.show { display: flex; }
-
-        .modal-wa-footer {
-            width: 100%;
-            padding: 12px 16px;
-            background: #0f172a;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            justify-content: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .modal-wa-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 12px 16px;
-            background: var(--wa-color);
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 0.88rem;
-            border-radius: var(--radius-sm);
-            transition: var(--transition);
-        }
-
-        .modal-wa-btn:hover { background: var(--wa-hover); }
 
         .toast {
             position: fixed;
@@ -786,458 +633,181 @@
             </div>
         </header>
 
-        <!-- TAB NAVIGATION (HOME & SERVICE) -->
-        <nav class="tabs-header">
-            <button class="tab-btn active" onclick="switchTab('home-tab', this)">Home</button>
-            <button class="tab-btn" onclick="switchTab('service-tab', this)">Service</button>
-        </nav>
-
         <main style="display: flex; flex-direction: column; gap: 16px;">
-            <!-- 1. TAB HOME CONTENT -->
-            <div id="home-tab" class="tab-content active">
-                <!-- Profile Banner Card -->
-                <article class="profile-card">
-                    <div class="avatar-box">
-                        <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Profile">
+            <!-- Profile Banner Card -->
+            <article class="profile-card">
+                <div class="avatar-box">
+                    <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Profile">
+                </div>
+                <h1>Oink Project <i class="fas fa-check-circle verified-badge"></i></h1>
+                <p class="tagline">🐣. . business area — here i exist as a trusted and fast response 🪄 design service since 2013. fret not, i'll be open 24 hours daily ⏰✨</p>
+                
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-val">661+</div>
+                        <div class="stat-lbl">Tugas Selesai</div>
                     </div>
-                    <h1>Oink Project <i class="fas fa-check-circle verified-badge"></i></h1>
-                    <p class="tagline">🐣. . business area — here i exist as a trusted and fast response 🪄 design service since 2013. fret not, i'll be open 24 hours daily ⏰✨</p>
-                    
-                    <div class="stats-row">
-                        <div class="stat-item">
-                            <div class="stat-val">661+</div>
-                            <div class="stat-lbl">Tugas Selesai</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-val">100%</div>
-                            <div class="stat-lbl">Terselesaikan</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-val">24/7</div>
-                            <div class="stat-lbl">Fast Respon</div>
-                        </div>
+                    <div class="stat-item">
+                        <div class="stat-val">100%</div>
+                        <div class="stat-lbl">Terselesaikan</div>
                     </div>
-                </article>
+                    <div class="stat-item">
+                        <div class="stat-val">24/7</div>
+                        <div class="stat-lbl">Fast Respon</div>
+                    </div>
+                </div>
+            </article>
 
-                <!-- TULISAN HARGA PROMO (DI ATAS BUTTON WA) -->
-                <article class="promo-price-card">
-                    <div class="promo-text">semua jasa start harga</div>
-                    <div class="promo-price-huge"><span>Rp</span>35.000</div>
-                </article>
+            <!-- TULISAN HARGA PROMO -->
+            <article class="promo-price-card">
+                <div class="promo-text">semua jasa start harga</div>
+                <div class="promo-price-huge"><span>Rp</span>35.000</div>
+            </article>
 
-                <!-- WhatsApp Direct CTA Button (Polos) -->
-                <a href="https://wa.me/6285155091238" target="_blank" class="btn-wa-cta">
-                    <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i>
-                    <span>Hai Kak, Chat aku disini via Whatsapp!!</span>
-                </a>
+            <!-- WhatsApp Direct CTA Button -->
+            <a href="https://wa.me/6285155091238" target="_blank" class="btn-wa-cta">
+                <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i>
+                <span>Hai Kak, Chat aku disini via Whatsapp!!</span>
+            </a>
 
-                <!-- 2 Button Biru Oink Tambahan (Ukuran Sama Persis) -->
-                <a href="porto-web/" class="btn-blue-cta">
-                    <i class="fas fa-link" style="font-size: 1.2rem;"></i>
-                    <span>Website Portfolio</span>
-                </a>
-                <!-- SPESIALISASI, APLIKASI & YANG BISA DIKERJAKAN -->
-                <article class="info-detail-card">
-                    <!-- Spesialisasi -->
-                    <div class="info-block-item">
-                        <div class="info-block-title">
-                            <i class="fas fa-star"></i> Spesialisasi
+            <!-- Button Portofolio Website -->
+            <a href="porto-web/" class="btn-blue-cta">
+                <i class="fas fa-link" style="font-size: 1.2rem;"></i>
+                <span>Website Portfolio</span>
+            </a>
+
+            <!-- SPESIALISASI, APLIKASI & YANG BISA DIKERJAKAN -->
+            <article class="info-detail-card">
+                <!-- Spesialisasi -->
+                <div class="info-block-item">
+                    <div class="info-block-title">
+                        <i class="fas fa-star"></i> Spesialisasi
+                    </div>
+                    <div class="info-block-desc">
+                        Joki tugas DKV, Bisnis Digital, & Digital Marketing
+                    </div>
+                </div>
+
+                <!-- Aplikasi yang digunakan -->
+                <div class="info-block-item">
+                    <div class="info-block-title">
+                        <i class="fas fa-laptop-code"></i> Aplikasi Desain yang Digunakan
+                    </div>
+                    <div class="app-tags-wrapper">
+                        <span class="app-pill">Adobe Illustrator</span>
+                        <span class="app-pill">Adobe Photoshop</span>
+                        <span class="app-pill">Adobe Flash</span>
+                        <span class="app-pill">Adobe After Effect</span>
+                        <span class="app-pill">Adobe Audition</span>
+                        <span class="app-pill">Corel Draw</span>
+                        <span class="app-pill">3D SketchUp</span>
+                        <span class="app-pill">Blender</span>
+                    </div>
+                </div>
+
+                <!-- Yang bisa dikerjakan -->
+                <div class="info-block-item">
+                    <div class="info-block-title">
+                        <i class="fas fa-layer-group"></i> Yang Bisa Aku Kerjakan
+                    </div>
+                    <div class="work-grid">
+                        <div class="work-item-box">
+                            <div class="work-item-title">Poster</div>
+                            <div class="work-item-sub">Infografis, Isometric</div>
                         </div>
-                        <div class="info-block-desc">
-                            Joki tugas DKV, Bisnis Digital, & Digital Marketing
+                        <div class="work-item-box">
+                            <div class="work-item-title">Booklet</div>
+                            <div class="work-item-sub">GSM, Zine, Portfolio</div>
+                        </div>
+                        <div class="work-item-box">
+                            <div class="work-item-title">Jasa Edit</div>
+                            <div class="work-item-sub">Foto & Dokumen</div>
+                        </div>
+                        <div class="work-item-box">
+                            <div class="work-item-title">Edit Video</div>
+                            <div class="work-item-sub">Premiere, After Effect</div>
+                        </div>
+                        <div class="work-item-box">
+                            <div class="work-item-title">Kemasan</div>
+                            <div class="work-item-sub">Desain & 3D Visual</div>
+                        </div>
+                        <div class="work-item-box">
+                            <div class="work-item-title">Logo</div>
+                            <div class="work-item-sub">Branding & Symbol</div>
+                        </div>
+                        <div class="work-item-box">
+                            <div class="work-item-title">Edit Foto</div>
+                            <div class="work-item-sub">Edit Baju & Adjustment</div>
+                        </div>
+                        <div class="work-item-box">
+                            <div class="work-item-title">Website</div>
+                            <div class="work-item-sub">HTML & Figma</div>
                         </div>
                     </div>
+                </div>
+            </article>
 
-                    <!-- Aplikasi yang digunakan -->
-                    <div class="info-block-item">
-                        <div class="info-block-title">
-                            <i class="fas fa-laptop-code"></i> Aplikasi Desain yang Digunakan
-                        </div>
-                        <div class="app-tags-wrapper">
-                            <span class="app-pill">Adobe Illustrator</span>
-                            <span class="app-pill">Adobe Photoshop</span>
-                            <span class="app-pill">Adobe Flash</span>
-                            <span class="app-pill">Adobe After Effect</span>
-                            <span class="app-pill">Adobe Audition</span>
-                            <span class="app-pill">Corel Draw</span>
-                            <span class="app-pill">3D SketchUp</span>
-                            <span class="app-pill">Blender</span>
-                        </div>
+            <!-- SECTION BARU: TESTIMONI DAN PROOF (2 Grid Galeri Rasio 1080x1440 Portrait) -->
+            <article class="section-card">
+                <div class="section-header">
+                    <h2><i class="fas fa-certificate"></i> Testimoni dan Proof</h2>
+                </div>
+                <div class="proof-grid">
+                    <!-- Proof 1 -->
+                    <div class="proof-card" onclick="openPreviewModal('https://i.ibb.co.com/zWzZhXVV/00.webp', 'Testimoni & Proof 01')">
+                        <img src="https://i.ibb.co.com/zWzZhXVV/00.webp" alt="Testimoni dan Proof Oink Project 01" loading="lazy">
                     </div>
+                    <!-- Proof 2 -->
+                    <div class="proof-card" onclick="openPreviewModal('https://i.ibb.co.com/Kz69DJCp/002.jpg', 'Testimoni & Proof 02')">
+                        <img src="https://i.ibb.co.com/Kz69DJCp/002.jpg" alt="Testimoni dan Proof Oink Project 02" loading="lazy">
+                    </div>
+                </div>
+            </article>
 
-                    <!-- Yang bisa dikerjakan -->
-                    <div class="info-block-item">
-                        <div class="info-block-title">
-                            <i class="fas fa-layer-group"></i> Yang Bisa Aku Kerjakan
-                        </div>
-                        <div class="work-grid">
-                            <div class="work-item-box">
-                                <div class="work-item-title">Poster</div>
-                                <div class="work-item-sub">Infografis, Isometric</div>
-                            </div>
-                            <div class="work-item-box">
-                                <div class="work-item-title">Booklet</div>
-                                <div class="work-item-sub">GSM, Zine, Portfolio</div>
-                            </div>
-                            <div class="work-item-box">
-                                <div class="work-item-title">Jasa Edit</div>
-                                <div class="work-item-sub">Foto & Dokumen</div>
-                            </div>
-                            <div class="work-item-box">
-                                <div class="work-item-title">Edit Video</div>
-                                <div class="work-item-sub">Premiere, After Effect</div>
-                            </div>
-                            <div class="work-item-box">
-                                <div class="work-item-title">Kemasan</div>
-                                <div class="work-item-sub">Desain & 3D Visual</div>
-                            </div>
-                            <div class="work-item-box">
-                                <div class="work-item-title">Logo</div>
-                                <div class="work-item-sub">Branding & Symbol</div>
-                            </div>
-                            <div class="work-item-box">
-                                <div class="work-item-title">Edit Foto</div>
-                                <div class="work-item-sub">Edit Baju & Adjustment</div>
-                            </div>
-                            <div class="work-item-box">
-                                <div class="work-item-title">Website</div>
-                                <div class="work-item-sub">HTML & Figma</div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Social Media Block -->
-                <article class="section-card">
-                    <div class="section-header">
-                        <h2>Follow aku kak!</h2>
-                    </div>
-                    <div class="social-grid">
-                        <a href="https://www.instagram.com/oink.project" target="_blank" class="social-card instagram">
-                            <i class="fab fa-instagram"></i>
-                            <span>Instagram</span>
-                        </a>
-                        <a href="https://www.tiktok.com/@oink.project" target="_blank" class="social-card tiktok">
-                            <i class="fab fa-tiktok"></i>
-                            <span>TikTok</span>
-                        </a>
-                        <a href="https://x.com/oinkproject" target="_blank" class="social-card x-twitter">
-                            <i class="fab fa-x-twitter"></i>
-                            <span>X / Twitter</span>
-                        </a>
-                        <a href="http://youtube.com/@oinkproject" target="_blank" class="social-card youtube">
-                            <i class="fab fa-youtube"></i>
-                            <span>YouTube</span>
-                        </a>
-                    </div>
-                </article>
-            </div>
-
-            <!-- 2. TAB SERVICE CONTENT (GALERI 2 GRID PORTRAIT DARI GITHUB DOMAIN) -->
-            <div id="service-tab" class="tab-content">
-                <article class="section-card">
-                    <div class="service-portrait-grid" id="servicePortraitContainer">
-                        <!-- Foto dimasukkan otomatis via JavaScript -->
-                    </div>
-                </article>
-            </div>
+            <!-- Social Media Block (Follow aku kak!) -->
+            <article class="section-card">
+                <div class="section-header">
+                    <h2>Follow aku kak!</h2>
+                </div>
+                <div class="social-grid">
+                    <a href="https://www.instagram.com/oink.project" target="_blank" class="social-card instagram" rel="noopener">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@oink.project" target="_blank" class="social-card tiktok" rel="noopener">
+                        <i class="fab fa-tiktok"></i>
+                        <span>TikTok</span>
+                    </a>
+                    <a href="https://x.com/oinkproject" target="_blank" class="social-card x-twitter" rel="noopener">
+                        <i class="fab fa-x-twitter"></i>
+                        <span>X / Twitter</span>
+                    </a>
+                    <a href="http://youtube.com/@oinkproject" target="_blank" class="social-card youtube" rel="noopener">
+                        <i class="fab fa-youtube"></i>
+                        <span>YouTube</span>
+                    </a>
+                </div>
+            </article>
         </main>
     </div>
 
     <!-- LIGHTBOX IMAGE VIEWER MODAL -->
     <div class="modal-overlay" id="imageModalOverlay" onclick="closeImageModal()">
         <div class="modal-box-img" onclick="event.stopPropagation()">
-            <button class="modal-close-btn" onclick="closeImageModal()" aria-label="Tutup Preview"><i class="fas fa-times"></i></button>
-            <img id="modalPreviewImage" src="" alt="Preview Service Oink Project">
-            <div class="modal-info" id="modalInfo">
-                <div class="modal-cat" id="modalCat"></div>
-                <h3 id="modalTitle"></h3>
-                <p id="modalDesc"></p>
-            </div>
-            <div class="modal-wa-footer">
-                <a id="modalDemoLink" href="#" target="_blank" rel="noopener" class="modal-demo-btn">
-                    <i class="fas fa-arrow-up-right-from-square"></i>
-                    <span>Lihat Demo</span>
-                </a>
-                <a id="modalWaLink" href="https://wa.me/6285155091238" target="_blank" class="modal-wa-btn">
-                    <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i>
-                    <span>Pesan Joki Desain via WhatsApp</span>
-                </a>
-            </div>
+            <button class="modal-close-btn" onclick="closeImageModal()" aria-label="Tutup Preview">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="modalPreviewImage" src="" alt="Preview Bukti Testimoni Oink Project">
         </div>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        const PHONE_NUMBER = '6285155091238';
-
-        // SUMBER DATA SERVICE: Google Sheets (publish to web, format CSV)
-        // Kolom: JUDUL, SUB JUDUL, KATEGORI, DESKRIPSI, FOTO, DEMO
-        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxJzVJoMeSTfyJ2erOm2dwf-6xAWJLD_a5s-zAvGmaJ33bOny1xYffztVPoVLhsB6PTn_-Nn2Y-Zy_/pub?gid=0&single=true&output=csv';
-        const CACHE_KEY = 'oink_services_v1';
-        const FETCH_TIMEOUT_MS = 8000;
-        const FETCH_RETRIES = 2;
-
-        // Cadangan terakhir kalau spreadsheet gagal diakses & belum ada cache
-        const FALLBACK_SERVICES = [
-            { title: 'CV Online', sub: 'Lamar kerja jadi ringkas', cat: 'CV ONLINE', desc: 'bisa download PDF', img: 'https://i.ibb.co.com/ntL7vPn/FEED-WEBSITE-01.webp', demo: 'https://oinkproject.my.id/porto-web/cv-online.html' },
-            { title: 'Bio Link Affiliator', sub: '', cat: 'BIOLINK', desc: 'Sudah ada nomor link bikin affiliate makin gampang', img: 'https://i.ibb.co.com/QvwJNBNm/FEED-WEBSITE-02.webp', demo: 'https://oinkproject.my.id/porto-web/alex-affiliator.html' },
-            { title: 'Bio Link Toko Retail', sub: '', cat: 'BIOLINK', desc: 'Bisa lihat katalog produk langsung', img: 'https://i.ibb.co.com/ycgFfc65/FEED-WEBSITE-03.webp', demo: 'https://oinkproject.my.id/porto-web/apex-store.html' },
-            { title: 'Bio Link Bisnis', sub: '', cat: 'BIOLINK', desc: 'Bisa lihat katalog produk langsung', img: 'https://i.ibb.co.com/WvPLRpw8/FEED-WEBSITE-04.webp', demo: 'https://oinkproject.my.id/porto-web/aura-gift.html' }
-        ];
-
-        let currentServices = [];
-
-        /* ==========================================================================
-           1. TAB SWITCHING LOGIC
-           ========================================================================== */
-        function switchTab(tabId, btnElement) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-            if (btnElement) btnElement.classList.add('active');
-            const targetContent = document.getElementById(tabId);
-            if (targetContent) targetContent.classList.add('active');
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        /* ==========================================================================
-           2. HELPER GENERATE LINK WHATSAPP (MURNI POLOS)
-           ========================================================================== */
-        function getPlainWaUrl() {
-            return `https://wa.me/${PHONE_NUMBER}`;
-        }
-
-        /* ==========================================================================
-           3. AMBIL & OLAH DATA SPREADSHEET
-           ========================================================================== */
-        // Parser CSV yang benar (tahan koma & enter di dalam tanda kutip)
-        function parseCSV(text) {
-            const rows = [];
-            let row = [], field = '', inQuotes = false;
-            text = text.replace(/^\uFEFF/, '');
-            for (let i = 0; i < text.length; i++) {
-                const c = text[i];
-                if (inQuotes) {
-                    if (c === '"') {
-                        if (text[i + 1] === '"') { field += '"'; i++; }
-                        else inQuotes = false;
-                    } else field += c;
-                } else if (c === '"') inQuotes = true;
-                else if (c === ',') { row.push(field); field = ''; }
-                else if (c === '\n' || c === '\r') {
-                    if (c === '\r' && text[i + 1] === '\n') i++;
-                    row.push(field); field = '';
-                    rows.push(row); row = [];
-                } else field += c;
-            }
-            if (field !== '' || row.length) { row.push(field); rows.push(row); }
-            return rows;
-        }
-
-        function normalizeUrl(u) {
-            u = (u || '').trim();
-            if (!u) return '';
-            return /^https?:\/\//i.test(u) ? u : 'https://' + u.replace(/^\/+/, '');
-        }
-
-        function csvToServices(text) {
-            const rows = parseCSV(text).filter(r => r.some(c => c.trim() !== ''));
-            if (rows.length < 2) return [];
-            const header = rows[0].map(h => h.trim().toUpperCase());
-            const col = name => header.indexOf(name);
-            const iTitle = col('JUDUL'), iSub = col('SUB JUDUL'), iCat = col('KATEGORI'),
-                  iDesc = col('DESKRIPSI'), iImg = col('FOTO'), iDemo = col('DEMO');
-            const get = (r, i) => (i >= 0 && r[i] ? r[i].trim() : '');
-
-            return rows.slice(1)
-                .map(r => ({
-                    title: get(r, iTitle),
-                    sub: get(r, iSub),
-                    cat: get(r, iCat),
-                    desc: get(r, iDesc),
-                    img: normalizeUrl(get(r, iImg)),
-                    demo: normalizeUrl(get(r, iDemo))
-                }))
-                .filter(s => s.img); // baris tanpa foto dilewati
-        }
-
-        async function fetchWithTimeout(url, ms) {
-            const ctrl = new AbortController();
-            const timer = setTimeout(() => ctrl.abort(), ms);
-            try {
-                const res = await fetch(url, { signal: ctrl.signal });
-                if (!res.ok) throw new Error('HTTP ' + res.status);
-                return await res.text();
-            } finally {
-                clearTimeout(timer);
-            }
-        }
-
-        async function fetchServices() {
-            let lastErr;
-            for (let attempt = 0; attempt <= FETCH_RETRIES; attempt++) {
-                try {
-                    const text = await fetchWithTimeout(SHEET_CSV_URL, FETCH_TIMEOUT_MS);
-                    const list = csvToServices(text);
-                    if (!list.length) throw new Error('Data kosong');
-                    return list;
-                } catch (e) {
-                    lastErr = e;
-                    await new Promise(r => setTimeout(r, 600 * (attempt + 1)));
-                }
-            }
-            throw lastErr;
-        }
-
-        function readCache() {
-            try { return JSON.parse(localStorage.getItem(CACHE_KEY)) || null; } catch (e) { return null; }
-        }
-        function writeCache(list) {
-            try { localStorage.setItem(CACHE_KEY, JSON.stringify(list)); } catch (e) {}
-        }
-
-        /* ==========================================================================
-           4. RENDER GALERI SERVICE
-           ========================================================================== */
-        function renderSkeleton(count = 4) {
-            const container = document.getElementById('servicePortraitContainer');
-            container.innerHTML = '';
-            for (let i = 0; i < count; i++) {
-                const sk = document.createElement('div');
-                sk.className = 'service-portrait-card skeleton';
-                sk.innerHTML = '<div class="sk-shimmer"></div>';
-                container.appendChild(sk);
-            }
-        }
-
-        function renderError() {
-            const container = document.getElementById('servicePortraitContainer');
-            container.innerHTML = '';
-            const box = document.createElement('div');
-            box.className = 'service-empty';
-            box.innerHTML = 'Service belum bisa dimuat. Cek koneksi internet kamu ya.<br><button type="button">Coba Lagi</button>';
-            box.querySelector('button').onclick = () => loadServices();
-            container.appendChild(box);
-        }
-
-        function buildCard(s, index) {
-            const card = document.createElement('div');
-            card.className = 'service-portrait-card';
-            card.onclick = () => openServiceModal(s);
-
-            // Skeleton tampil sampai foto selesai dimuat
-            const shimmer = document.createElement('div');
-            shimmer.className = 'sk-shimmer';
-            card.appendChild(shimmer);
-
-            const img = document.createElement('img');
-            img.alt = s.title || 'Service Oink Project';
-            img.decoding = 'async';
-            // eager: tab Service tersembunyi saat awal, lazy-loading bikin foto tidak pernah dimuat (kotak kosong)
-            img.loading = 'eager';
-            if (index < 2) img.fetchPriority = 'high';
-
-            let retried = false;
-            img.onload = () => { img.classList.add('loaded'); shimmer.remove(); };
-            img.onerror = () => {
-                if (!retried) {
-                    retried = true;
-                    setTimeout(() => { img.src = s.img; }, 1200); // coba sekali lagi
-                } else {
-                    shimmer.remove();
-                    card.classList.add('failed'); // tampil judul, bukan kotak kosong
-                }
-            };
-            img.src = s.img;
-            if (img.complete && img.naturalWidth) img.onload();
-            card.appendChild(img);
-
-            const fb = document.createElement('div');
-            fb.className = 'card-fallback';
-            fb.innerHTML = '<i class="fas fa-image"></i>';
-            const fbText = document.createElement('span');
-            fbText.textContent = s.title;
-            fb.appendChild(fbText);
-            card.appendChild(fb);
-
-            if (s.cat) {
-                const cat = document.createElement('span');
-                cat.className = 'card-cat';
-                cat.textContent = s.cat;
-                card.appendChild(cat);
-            }
-
-            if (s.title) {
-                const info = document.createElement('div');
-                info.className = 'card-info';
-                const b = document.createElement('b');
-                b.textContent = s.title;
-                info.appendChild(b);
-                if (s.sub) {
-                    const sm = document.createElement('small');
-                    sm.textContent = s.sub;
-                    info.appendChild(sm);
-                }
-                card.appendChild(info);
-            }
-
-            const wa = document.createElement('a');
-            wa.href = getPlainWaUrl();
-            wa.target = '_blank';
-            wa.rel = 'noopener';
-            wa.className = 'card-wa-btn';
-            wa.title = 'Pesan via WhatsApp';
-            wa.onclick = e => e.stopPropagation();
-            wa.innerHTML = '<i class="fab fa-whatsapp"></i>';
-            card.appendChild(wa);
-
-            return card;
-        }
-
-        function renderServices(list) {
-            currentServices = list;
-            const container = document.getElementById('servicePortraitContainer');
-            container.innerHTML = '';
-            const frag = document.createDocumentFragment();
-            list.forEach((s, i) => frag.appendChild(buildCard(s, i)));
-            container.appendChild(frag);
-        }
-
-        // Stale-while-revalidate: tampilkan cache langsung, lalu update dari spreadsheet di belakang layar
-        async function loadServices() {
-            const cached = readCache();
-            if (cached && cached.length) renderServices(cached);
-            else renderSkeleton(4);
-
-            try {
-                const fresh = await fetchServices();
-                if (JSON.stringify(fresh) !== JSON.stringify(cached)) {
-                    writeCache(fresh);
-                    renderServices(fresh);
-                }
-            } catch (e) {
-                console.warn('Gagal ambil spreadsheet:', e);
-                if (!cached || !cached.length) renderServices(FALLBACK_SERVICES);
-            }
-        }
-
-        /* ==========================================================================
-           5. LIGHTBOX IMAGE PREVIEW MODAL
-           ========================================================================== */
-        function openServiceModal(s) {
+        function openPreviewModal(imgSrc, altText) {
             const modal = document.getElementById('imageModalOverlay');
-            document.getElementById('modalPreviewImage').src = s.img;
-            document.getElementById('modalCat').textContent = s.cat || '';
-            document.getElementById('modalTitle').textContent = [s.title, s.sub].filter(Boolean).join(' - ');
-            document.getElementById('modalDesc').textContent = s.desc || '';
-            document.getElementById('modalWaLink').href = getPlainWaUrl();
-
-            const demo = document.getElementById('modalDemoLink');
-            if (s.demo) { demo.href = s.demo; demo.classList.add('show'); }
-            else demo.classList.remove('show');
-
+            const modalImg = document.getElementById('modalPreviewImage');
+            modalImg.src = imgSrc;
+            modalImg.alt = altText || 'Preview Bukti Testimoni Oink Project';
             modal.classList.add('active');
         }
 
@@ -1245,19 +815,32 @@
             document.getElementById('imageModalOverlay').classList.remove('active');
         }
 
-        /* ==========================================================================
-           6. COMMON APP LOGIC
-           ========================================================================== */
+        // Tutup modal dengan tombol Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeImageModal();
+        });
+
+        // Fitur Salin Link
         function copyShareLink() {
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                const toast = document.getElementById('toast');
-                toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 2500);
-            });
+            const url = window.location.href;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(url).then(showToast);
+            } else {
+                const tempInput = document.createElement('input');
+                tempInput.value = url;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                showToast();
+            }
         }
 
-        // Initial Load App
-        document.addEventListener('DOMContentLoaded', loadServices);
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
     </script>
 </body>
 </html>
