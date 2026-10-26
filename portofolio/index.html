@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Portfolio - Oink Project</title>
+    <meta name="description" content="Portofolio Website dan Desain Grafis oleh Oink Project.">
+    <meta name="author" content="Oink Project">
+    <meta name="robots" content="index, follow">
+
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #eae5e0;
+            --container-bg: #f8f3ee;
+            --card-white: #ffffff;
+            --card-coral: #ff5d39;
+            --card-yellow: #ffc425;
+            --card-cyan: #05bbc0; 
+            --card-green: #25d366;
+            --dark-card: #111827;
+            
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #efe8e1;
+            
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.04);
+            --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.08);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0;
+        }
+
+        @media (min-width: 481px) {
+            body { padding: 20px 0; }
+        }
+
+        /* Container Mobile-Based */
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--container-bg);
+            min-height: 100vh;
+            position: relative;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+            gap: 16px;
+        }
+
+        @media (min-width: 481px) {
+            .container {
+                border-radius: var(--radius-lg);
+                min-height: auto;
+                border: 2px solid #e2dad1;
+            }
+        }
+
+        /* Top Bar Navigation */
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--card-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-back-home {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f1f5f9;
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 800;
+            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+        }
+
+        .btn-back-home:hover {
+            background: var(--card-cyan);
+            color: #ffffff;
+            border-color: var(--card-cyan);
+        }
+
+        .brand-logo-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .brand-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .brand-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .brand-name {
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: #ffffff;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .btn-icon:hover { border-color: var(--card-cyan); color: var(--card-cyan); }
+
+        /* Banner Promo sebelum Galeri */
+        .promo-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #ffffff;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .promo-header {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .promo-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+
+        .promo-price-block {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            margin: 2px 0 4px;
+        }
+
+        .promo-price-prefix {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #cbd5e1;
+        }
+
+        .promo-price-amount {
+            font-size: 1.85rem;
+            font-weight: 900;
+            color: var(--card-yellow);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .promo-subtitle {
+            font-size: 0.78rem;
+            color: #94a3b8;
+            font-weight: 500;
+            line-height: 1.35;
+        }
+
+        .btn-promo-wa {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--card-green);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.9rem;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: var(--transition);
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-promo-wa:hover {
+            background: #1eb856;
+            transform: translateY(-1px);
+        }
+
+        /* Fitur Search Input */
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 13px 14px 13px 42px;
+            background: var(--card-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            outline: none;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            border-color: var(--card-cyan);
+            box-shadow: 0 0 0 3px rgba(5, 187, 192, 0.15);
+        }
+
+        /* Filter Kategori Horizontal Scroll */
+        .categories-scroll {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+
+        .categories-scroll::-webkit-scrollbar { display: none; }
+
+        .cat-btn {
+            background: var(--card-white);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 9px 16px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cat-btn.active {
+            background: var(--card-cyan);
+            color: #ffffff;
+            border-color: var(--card-cyan);
+            box-shadow: 0 4px 12px rgba(5, 187, 192, 0.3);
+        }
+
+        /* GALERI 2 GRID FULL POSTER (3:4) */
+        .gallery-2grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .portfolio-card {
+            background: var(--card-white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 2px solid #ffffff;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Rasio Poster 1080x1440px (3:4) */
+        .card-img-wrapper {
+            position: relative;
+            aspect-ratio: 1080 / 1440;
+            width: 100%;
+            background: #cbd5e1;
+            overflow: hidden;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Tombol WhatsApp Melayang di Sudut Poster */
+        .card-wa-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--card-green);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+            border: 2px solid #ffffff;
+            transition: var(--transition);
+            z-index: 5;
+            text-decoration: none;
+        }
+
+        .card-wa-btn:hover {
+            transform: scale(1.12);
+            background: #1eb856;
+        }
+
+        /* State Kosong */
+        .empty-state {
+            grid-column: span 2;
+            text-align: center;
+            padding: 40px 16px;
+            background: var(--card-white);
+            border-radius: var(--radius-md);
+            border: 1px dashed var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            font-weight: 700;
+        }
+
+        .empty-state i {
+            font-size: 2.2rem;
+            color: var(--card-cyan);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Lightbox Preview Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            padding: 16px;
+        }
+
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+
+        .modal-content {
+            width: 100%;
+            max-width: 420px;
+            background: var(--card-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            max-height: 90vh;
+        }
+
+        .modal-media-container {
+            width: 100%;
+            aspect-ratio: 1080 / 1440;
+            background: #0f172a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-media-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .modal-thumbs {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            gap: 6px;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.65);
+            width: 100%;
+            justify-content: center;
+            overflow-x: auto;
+        }
+
+        .thumb-item {
+            width: 42px;
+            height: 42px;
+            border-radius: 6px;
+            object-fit: cover;
+            cursor: pointer;
+            opacity: 0.6;
+            border: 2px solid transparent;
+            flex-shrink: 0;
+        }
+
+        .thumb-item.active { opacity: 1; border-color: var(--card-cyan); }
+
+        .modal-details {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            overflow-y: auto;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.8);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            z-index: 10;
+        }
+
+        .btn-action-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-order-wa {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            background: var(--card-green);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.9rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-order-wa:hover {
+            background: #1eb856;
+        }
+
+        .btn-demo-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            background: #0284c7;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.88rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-demo-link:hover {
+            background: #0369a1;
+        }
+
+        .card-tag-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+            color: #ffffff;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 6px;
+            z-index: 2;
+            letter-spacing: 0.02em;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--dark-card);
+            color: #ffffff;
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            transition: var(--transition);
+            z-index: 2000;
+            opacity: 0;
+        }
+
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Toast Notification -->
+        <div id="toast" class="toast">Link portofolio berhasil disalin!</div>
+
+        <!-- Top Navigation Bar -->
+        <header class="nav-bar">
+            <a href="https://oinkproject.my.id/" class="btn-back-home" title="Kembali ke Halaman Utama">
+                <i class="fas fa-arrow-left"></i>
+                <span>Home</span>
+            </a>
+
+            <a href="#" class="brand-logo-nav">
+                <div class="brand-icon">
+                    <img src="https://i.ibb.co.com/QFDVtrm8/FASILITAS-TOKO-01-20.webp" alt="Oink Project Logo">
+                </div>
+                <span class="brand-name">Portfolio</span>
+            </a>
+
+            <button class="btn-icon" onclick="copyCurrentCategoryLink()" title="Bagikan Link">
+                <i class="fas fa-share-nodes"></i>
+            </button>
+        </header>
+
+        <!-- Banner Promo Sebelum Galeri -->
+        <div class="promo-banner">
+            <div class="promo-header">
+                <span class="promo-label">Order Sekarang, Nongkrong Sekarang</span>
+                <div class="promo-title">Joki Tugas DKV di Oink Project</div>
+                <div class="promo-price-block">
+                    <span class="promo-price-prefix">Mulai</span>
+                    <span class="promo-price-amount">Rp 35.000</span>
+                </div>
+                <p class="promo-subtitle">Proses cepat, terjangkau & tugasmu aman!</p>
+            </div>
+            <a href="https://wa.me/6285155091238?text=Halo%20Oink%20Project,%20saya%20mau%20tanya%20jasa%20pembuatan%20website" target="_blank" class="btn-promo-wa">
+                <i class="fab fa-whatsapp"></i>
+                <span>Konsultasi / Order via WhatsApp</span>
+            </a>
+        </div>
+
+        <!-- Fitur Search Bar -->
+        <div class="search-box">
+            <i class="fas fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="Cari karya (website, landing page, branding...)" oninput="handleSearch()">
+        </div>
+
+        <!-- Filter Kategori Horizontal -->
+        <div class="categories-scroll" id="categoriesContainer">
+            <button class="cat-btn active" onclick="filterGallery('Semua', this)">Semua</button>
+        </div>
+
+        <!-- GALERI 2 GRID FULL POSTER -->
+        <main class="gallery-2grid" id="galleryGrid">
+            <div class="empty-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Memuat portofolio dari Blogspot...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Lightbox Preview -->
+    <div class="modal-overlay" id="imageModal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-media-container" id="modalMediaContainer"></div>
+            <div class="modal-details">
+                <div>
+                    <span id="modalTag" class="card-tag-badge" style="position: relative; top: 0; left: 0; display: inline-block; margin-bottom: 6px;">Website</span>
+                    <h2 id="modalTitle" style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; color: var(--text-main);">Judul Project</h2>
+                    <p id="modalSubTitle" style="font-size: 0.88rem; font-weight: 800; color: var(--card-cyan); margin-bottom: 8px;">Sub Judul</p>
+                    <p id="modalDesc" style="font-size: 0.82rem; white-space: pre-line; line-height: 1.45; color: var(--text-muted);">Deskripsi Project</p>
+                </div>
+                
+                <div class="btn-action-group">
+                    <a id="modalDemoBtn" href="#" target="_blank" class="btn-demo-link" style="display: none;">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>Buka di Blogspot</span>
+                    </a>
+                    <a id="modalWaBtn" href="#" target="_blank" class="btn-order-wa">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Pesan Desain Seperti Ini</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Endpoint JSON Feed Blogspot Oink Project
+        const BLOGSPOT_FEED_URL = 'https://oinkproject.blogspot.com/feeds/posts/default?alt=json&max-results=50';
+        const WHATSAPP_NUMBER = '6285155091238';
+
+        let portfolioItems = [];
+        let currentActiveCategory = "Semua";
+
+        async function loadBlogspotData() {
+            try {
+                const response = await fetch(BLOGSPOT_FEED_URL);
+                if (!response.ok) throw new Error('HTTP error ' + response.status);
+                
+                const data = await response.json();
+                const entries = data.feed.entry || [];
+
+                if (entries.length === 0) {
+                    renderEmpty("Belum ada portofolio yang dipublikasikan.");
+                    return;
+                }
+
+                portfolioItems = entries.map((entry, index) => {
+                    const judul = entry.title && entry.title.$t ? entry.title.$t : 'Project Portofolio';
+                    
+                    // Ambil Label / Kategori
+                    const labels = entry.category ? entry.category.map(c => c.term) : ['Portfolio'];
+                    const kategori = labels[0] || 'Portfolio';
+                    const subJudul = labels.slice(1).join(', ');
+
+                    // Ambil isi HTML postingan
+                    const htmlContent = entry.content ? entry.content.$t : (entry.summary ? entry.summary.$t : '');
+
+                    // Parse gambar & teks dari HTML
+                    const parserDiv = document.createElement('div');
+                    parserDiv.innerHTML = htmlContent;
+
+                    // Ekstrak semua URL gambar di dalam postingan
+                    const imgElements = Array.from(parserDiv.querySelectorAll('img'));
+                    let photos = imgElements.map(img => {
+                        let src = img.src || '';
+                        // Ubah thumbnail Blogger ke ukuran HD jika ada
+                        if (src.includes('/s72-c/') || src.includes('/w72-h72-p-k-no-nu/')) {
+                            src = src.replace(/\/s72-c\/|\/w72-h72-p-k-no-nu\//, '/s1600/');
+                        }
+                        return src;
+                    }).filter(src => src.length > 0);
+
+                    // Placeholder jika postingan belum ada gambar
+                    if (photos.length === 0) {
+                        photos = ['https://via.placeholder.com/1080x1440?text=No+Image'];
+                    }
+
+                    // Ekstrak teks murni untuk deskripsi
+                    const deskripsi = parserDiv.textContent.trim() || '';
+
+                    // Ambil link artikel Blogspot
+                    const permalink = (entry.link.find(l => l.rel === 'alternate') || {}).href || '#';
+
+                    return {
+                        id: index,
+                        judul: judul,
+                        subJudul: subJudul,
+                        kategori: kategori,
+                        deskripsi: deskripsi,
+                        photos: photos,
+                        mainPhoto: photos[0],
+                        linkDemo: permalink
+                    };
+                });
+
+                renderCategories();
+                renderGallery(portfolioItems);
+
+            } catch (error) {
+                console.error("Gagal memuat feed Blogspot:", error);
+                renderEmpty("Gagal memuat portofolio dari Blogspot. Pastikan blog sudah berstatus publik.");
+            }
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('categoriesContainer');
+            const categories = [...new Set(portfolioItems.map(item => item.kategori).filter(Boolean))];
+            
+            let html = `<button class="cat-btn active" onclick="filterGallery('Semua', this)">Semua</button>`;
+            categories.forEach(cat => {
+                html += `<button class="cat-btn" onclick="filterGallery('${cat}', this)">${cat}</button>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderGallery(items) {
+            const grid = document.getElementById('galleryGrid');
+            if (items.length === 0) {
+                renderEmpty("Tidak ada portofolio yang cocok.");
+                return;
+            }
+
+            let html = '';
+            items.forEach(item => {
+                const waText = encodeURIComponent(`Halo Oink Project, saya tertarik order karya seperti: ${item.judul}`);
+                const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
+
+                html += `
+                    <div class="portfolio-card" onclick="openModal(${item.id})">
+                        <div class="card-img-wrapper">
+                            <img src="${item.mainPhoto}" alt="${item.judul}" loading="lazy" onerror="this.src='https://via.placeholder.com/1080x1440?text=Image+Error'">
+                            <a href="${waUrl}" target="_blank" onclick="event.stopPropagation()" class="card-wa-btn" title="Pesan via WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+        }
+
+        function renderEmpty(msg) {
+            document.getElementById('galleryGrid').innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-folder-open"></i>
+                    <p>${msg}</p>
+                </div>
+            `;
+        }
+
+        function filterGallery(category, btn) {
+            currentActiveCategory = category;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            applyFilterAndSearch(category, query);
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            applyFilterAndSearch(currentActiveCategory, query);
+        }
+
+        function applyFilterAndSearch(category, query) {
+            const filtered = portfolioItems.filter(item => {
+                const matchCat = category === "Semua" || item.kategori === category;
+                const matchQuery = item.judul.toLowerCase().includes(query) || 
+                                   item.subJudul.toLowerCase().includes(query) || 
+                                   item.kategori.toLowerCase().includes(query) || 
+                                   item.deskripsi.toLowerCase().includes(query);
+                return matchCat && matchQuery;
+            });
+            renderGallery(filtered);
+        }
+
+        function openModal(id) {
+            const item = portfolioItems.find(p => p.id === id);
+            if (!item) return;
+
+            const mediaContainer = document.getElementById('modalMediaContainer');
+            const tag = document.getElementById('modalTag');
+            const title = document.getElementById('modalTitle');
+            const subTitle = document.getElementById('modalSubTitle');
+            const desc = document.getElementById('modalDesc');
+            const waBtn = document.getElementById('modalWaBtn');
+            const demoBtn = document.getElementById('modalDemoBtn');
+
+            tag.innerText = item.kategori;
+            title.innerText = item.judul;
+            
+            if (item.subJudul) {
+                subTitle.innerText = item.subJudul;
+                subTitle.style.display = 'block';
+            } else {
+                subTitle.style.display = 'none';
+            }
+
+            desc.innerText = item.deskripsi || '-';
+
+            // Preview Foto Utama & Thumbnail jika lebih dari 1
+            let mediaHtml = `<img id="mainModalImg" src="${item.photos[0]}" alt="${item.judul}">`;
+            
+            if (item.photos.length > 1) {
+                mediaHtml += `<div class="modal-thumbs">`;
+                item.photos.forEach((photo, idx) => {
+                    mediaHtml += `<img src="${photo}" class="thumb-item ${idx === 0 ? 'active' : ''}" onclick="switchModalImage('${photo}', this)">`;
+                });
+                mediaHtml += `</div>`;
+            }
+            
+            mediaContainer.innerHTML = mediaHtml;
+
+            // Tombol Tautan ke Blogspot
+            if (item.linkDemo && item.linkDemo.length > 5 && item.linkDemo !== '#') {
+                demoBtn.href = item.linkDemo;
+                demoBtn.style.display = 'flex';
+            } else {
+                demoBtn.style.display = 'none';
+            }
+
+            // Tombol Order WhatsApp
+            const waText = encodeURIComponent(`Halo Oink Project, saya tertarik pesan karya seperti: ${item.judul}`);
+            waBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
+
+            document.getElementById('imageModal').classList.add('active');
+        }
+
+        function switchModalImage(src, thumbEl) {
+            const mainImg = document.getElementById('mainModalImg');
+            if (mainImg) mainImg.src = src;
+            document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+            if (thumbEl) thumbEl.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+
+        function copyCurrentCategoryLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast("Link portofolio berhasil disalin!");
+            });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // Jalankan fetch feed blogspot saat halaman siap
+        document.addEventListener('DOMContentLoaded', loadBlogspotData);
+    </script>
+</body>
+</html>
