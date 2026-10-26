@@ -677,235 +677,231 @@
         </div>
     </div>
 
-    <script>
-        // Endpoint JSON Feed Blogspot Oink Project
-        const BLOGSPOT_FEED_URL = 'https://oinkproject.blogspot.com/feeds/posts/default?alt=json&max-results=50';
-        const WHATSAPP_NUMBER = '6285155091238';
+<script>
+    const WHATSAPP_NUMBER = '6285155091238';
 
-        let portfolioItems = [];
-        let currentActiveCategory = "Semua";
+    let portfolioItems = [];
+    let currentActiveCategory = "Semua";
 
-        async function loadBlogspotData() {
-            try {
-                const response = await fetch(BLOGSPOT_FEED_URL);
-                if (!response.ok) throw new Error('HTTP error ' + response.status);
-                
-                const data = await response.json();
-                const entries = data.feed.entry || [];
+    // Callback resmi JSONP dari Blogger (Kebal CORS)
+    function onBloggerFeedLoaded(data) {
+        try {
+            const entries = data.feed.entry || [];
 
-                if (entries.length === 0) {
-                    renderEmpty("Belum ada portofolio yang dipublikasikan.");
-                    return;
-                }
-
-                portfolioItems = entries.map((entry, index) => {
-                    const judul = entry.title && entry.title.$t ? entry.title.$t : 'Project Portofolio';
-                    
-                    // Ambil Label / Kategori
-                    const labels = entry.category ? entry.category.map(c => c.term) : ['Portfolio'];
-                    const kategori = labels[0] || 'Portfolio';
-                    const subJudul = labels.slice(1).join(', ');
-
-                    // Ambil isi HTML postingan
-                    const htmlContent = entry.content ? entry.content.$t : (entry.summary ? entry.summary.$t : '');
-
-                    // Parse gambar & teks dari HTML
-                    const parserDiv = document.createElement('div');
-                    parserDiv.innerHTML = htmlContent;
-
-                    // Ekstrak semua URL gambar di dalam postingan
-                    const imgElements = Array.from(parserDiv.querySelectorAll('img'));
-                    let photos = imgElements.map(img => {
-                        let src = img.src || '';
-                        // Ubah thumbnail Blogger ke ukuran HD jika ada
-                        if (src.includes('/s72-c/') || src.includes('/w72-h72-p-k-no-nu/')) {
-                            src = src.replace(/\/s72-c\/|\/w72-h72-p-k-no-nu\//, '/s1600/');
-                        }
-                        return src;
-                    }).filter(src => src.length > 0);
-
-                    // Placeholder jika postingan belum ada gambar
-                    if (photos.length === 0) {
-                        photos = ['https://via.placeholder.com/1080x1440?text=No+Image'];
-                    }
-
-                    // Ekstrak teks murni untuk deskripsi
-                    const deskripsi = parserDiv.textContent.trim() || '';
-
-                    // Ambil link artikel Blogspot
-                    const permalink = (entry.link.find(l => l.rel === 'alternate') || {}).href || '#';
-
-                    return {
-                        id: index,
-                        judul: judul,
-                        subJudul: subJudul,
-                        kategori: kategori,
-                        deskripsi: deskripsi,
-                        photos: photos,
-                        mainPhoto: photos[0],
-                        linkDemo: permalink
-                    };
-                });
-
-                renderCategories();
-                renderGallery(portfolioItems);
-
-            } catch (error) {
-                console.error("Gagal memuat feed Blogspot:", error);
-                renderEmpty("Gagal memuat portofolio dari Blogspot. Pastikan blog sudah berstatus publik.");
-            }
-        }
-
-        function renderCategories() {
-            const container = document.getElementById('categoriesContainer');
-            const categories = [...new Set(portfolioItems.map(item => item.kategori).filter(Boolean))];
-            
-            let html = `<button class="cat-btn active" onclick="filterGallery('Semua', this)">Semua</button>`;
-            categories.forEach(cat => {
-                html += `<button class="cat-btn" onclick="filterGallery('${cat}', this)">${cat}</button>`;
-            });
-            container.innerHTML = html;
-        }
-
-        function renderGallery(items) {
-            const grid = document.getElementById('galleryGrid');
-            if (items.length === 0) {
-                renderEmpty("Tidak ada portofolio yang cocok.");
+            if (entries.length === 0) {
+                renderEmpty("Belum ada portofolio yang dipublikasikan.");
                 return;
             }
 
-            let html = '';
-            items.forEach(item => {
-                const waText = encodeURIComponent(`Halo Oink Project, saya tertarik order karya seperti: ${item.judul}`);
-                const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
+            portfolioItems = entries.map((entry, index) => {
+                const judul = entry.title && entry.title.$t ? entry.title.$t : 'Project Portofolio';
+                
+                // Ambil Kategori / Label
+                const labels = entry.category ? entry.category.map(c => c.term) : ['Portfolio'];
+                const kategori = labels[0] || 'Portfolio';
+                const subJudul = labels.slice(1).join(', ');
 
-                html += `
-                    <div class="portfolio-card" onclick="openModal(${item.id})">
-                        <div class="card-img-wrapper">
-                            <img src="${item.mainPhoto}" alt="${item.judul}" loading="lazy" onerror="this.src='https://via.placeholder.com/1080x1440?text=Image+Error'">
-                            <a href="${waUrl}" target="_blank" onclick="event.stopPropagation()" class="card-wa-btn" title="Pesan via WhatsApp">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                        </div>
-                    </div>
-                `;
+                // Ambil HTML konten
+                const htmlContent = entry.content ? entry.content.$t : (entry.summary ? entry.summary.$t : '');
+
+                // Parsing Gambar & Teks
+                const parserDiv = document.createElement('div');
+                parserDiv.innerHTML = htmlContent;
+
+                const imgElements = Array.from(parserDiv.querySelectorAll('img'));
+                let photos = imgElements.map(img => {
+                    let src = img.src || '';
+                    if (src.includes('/s72-c/') || src.includes('/w72-h72-p-k-no-nu/')) {
+                        src = src.replace(/\/s72-c\/|\/w72-h72-p-k-no-nu\//, '/s1600/');
+                    }
+                    return src;
+                }).filter(src => src.length > 0);
+
+                if (photos.length === 0) {
+                    photos = ['https://via.placeholder.com/1080x1440?text=No+Image'];
+                }
+
+                const deskripsi = parserDiv.textContent.trim() || '';
+                const permalink = (entry.link.find(l => l.rel === 'alternate') || {}).href || '#';
+
+                return {
+                    id: index,
+                    judul: judul,
+                    subJudul: subJudul,
+                    kategori: kategori,
+                    deskripsi: deskripsi,
+                    photos: photos,
+                    mainPhoto: photos[0],
+                    linkDemo: permalink
+                };
             });
-            grid.innerHTML = html;
+
+            renderCategories();
+            renderGallery(portfolioItems);
+
+        } catch (error) {
+            console.error("Gagal memproses data:", error);
+            renderEmpty("Format postingan belum sesuai atau terjadi kesalahan data.");
+        }
+    }
+
+    function loadBlogspotFeed() {
+        // Panggil feed via JSONP agar terhindar dari CORS error
+        const script = document.createElement('script');
+        script.src = 'https://oinkproject.blogspot.com/feeds/posts/default?alt=json-in-script&callback=onBloggerFeedLoaded&max-results=50';
+        script.onerror = function() {
+            renderEmpty("Gagal memuat portofolio. Pastikan alamat blogspot benar dan sudah ada postingan yang dipublikasikan.");
+        };
+        document.body.appendChild(script);
+    }
+
+    function renderCategories() {
+        const container = document.getElementById('categoriesContainer');
+        const categories = [...new Set(portfolioItems.map(item => item.kategori).filter(Boolean))];
+        
+        let html = `<button class="cat-btn active" onclick="filterGallery('Semua', this)">Semua</button>`;
+        categories.forEach(cat => {
+            html += `<button class="cat-btn" onclick="filterGallery('${cat}', this)">${cat}</button>`;
+        });
+        container.innerHTML = html;
+    }
+
+    function renderGallery(items) {
+        const grid = document.getElementById('galleryGrid');
+        if (items.length === 0) {
+            renderEmpty("Tidak ada portofolio yang cocok.");
+            return;
         }
 
-        function renderEmpty(msg) {
-            document.getElementById('galleryGrid').innerHTML = `
-                <div class="empty-state">
-                    <i class="fas fa-folder-open"></i>
-                    <p>${msg}</p>
+        let html = '';
+        items.forEach(item => {
+            const waText = encodeURIComponent(`Halo Oink Project, saya tertarik pesan desain/website seperti: ${item.judul}`);
+            const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
+
+            html += `
+                <div class="portfolio-card" onclick="openModal(${item.id})">
+                    <div class="card-img-wrapper">
+                        <img src="${item.mainPhoto}" alt="${item.judul}" loading="lazy" onerror="this.src='https://via.placeholder.com/1080x1440?text=Image+Error'">
+                        <a href="${waUrl}" target="_blank" onclick="event.stopPropagation()" class="card-wa-btn" title="Pesan via WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
                 </div>
             `;
+        });
+        grid.innerHTML = html;
+    }
+
+    function renderEmpty(msg) {
+        document.getElementById('galleryGrid').innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-folder-open"></i>
+                <p>${msg}</p>
+            </div>
+        `;
+    }
+
+    function filterGallery(category, btn) {
+        currentActiveCategory = category;
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        if(btn) btn.classList.add('active');
+
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        applyFilterAndSearch(category, query);
+    }
+
+    function handleSearch() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        applyFilterAndSearch(currentActiveCategory, query);
+    }
+
+    function applyFilterAndSearch(category, query) {
+        const filtered = portfolioItems.filter(item => {
+            const matchCat = category === "Semua" || item.kategori === category;
+            const matchQuery = item.judul.toLowerCase().includes(query) || 
+                               item.subJudul.toLowerCase().includes(query) || 
+                               item.kategori.toLowerCase().includes(query) || 
+                               item.deskripsi.toLowerCase().includes(query);
+            return matchCat && matchQuery;
+        });
+        renderGallery(filtered);
+    }
+
+    function openModal(id) {
+        const item = portfolioItems.find(p => p.id === id);
+        if (!item) return;
+
+        const mediaContainer = document.getElementById('modalMediaContainer');
+        const tag = document.getElementById('modalTag');
+        const title = document.getElementById('modalTitle');
+        const subTitle = document.getElementById('modalSubTitle');
+        const desc = document.getElementById('modalDesc');
+        const waBtn = document.getElementById('modalWaBtn');
+        const demoBtn = document.getElementById('modalDemoBtn');
+
+        tag.innerText = item.kategori;
+        title.innerText = item.judul;
+        
+        if (item.subJudul) {
+            subTitle.innerText = item.subJudul;
+            subTitle.style.display = 'block';
+        } else {
+            subTitle.style.display = 'none';
         }
 
-        function filterGallery(category, btn) {
-            currentActiveCategory = category;
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            if(btn) btn.classList.add('active');
+        desc.innerText = item.deskripsi || '-';
 
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            applyFilterAndSearch(category, query);
-        }
-
-        function handleSearch() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            applyFilterAndSearch(currentActiveCategory, query);
-        }
-
-        function applyFilterAndSearch(category, query) {
-            const filtered = portfolioItems.filter(item => {
-                const matchCat = category === "Semua" || item.kategori === category;
-                const matchQuery = item.judul.toLowerCase().includes(query) || 
-                                   item.subJudul.toLowerCase().includes(query) || 
-                                   item.kategori.toLowerCase().includes(query) || 
-                                   item.deskripsi.toLowerCase().includes(query);
-                return matchCat && matchQuery;
+        let mediaHtml = `<img id="mainModalImg" src="${item.photos[0]}" alt="${item.judul}">`;
+        
+        if (item.photos.length > 1) {
+            mediaHtml += `<div class="modal-thumbs">`;
+            item.photos.forEach((photo, idx) => {
+                mediaHtml += `<img src="${photo}" class="thumb-item ${idx === 0 ? 'active' : ''}" onclick="switchModalImage('${photo}', this)">`;
             });
-            renderGallery(filtered);
+            mediaHtml += `</div>`;
+        }
+        
+        mediaContainer.innerHTML = mediaHtml;
+
+        if (item.linkDemo && item.linkDemo.length > 5 && item.linkDemo !== '#') {
+            demoBtn.href = item.linkDemo;
+            demoBtn.style.display = 'flex';
+        } else {
+            demoBtn.style.display = 'none';
         }
 
-        function openModal(id) {
-            const item = portfolioItems.find(p => p.id === id);
-            if (!item) return;
+        const waText = encodeURIComponent(`Halo Oink Project, saya tertarik pesan seperti: ${item.judul}`);
+        waBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 
-            const mediaContainer = document.getElementById('modalMediaContainer');
-            const tag = document.getElementById('modalTag');
-            const title = document.getElementById('modalTitle');
-            const subTitle = document.getElementById('modalSubTitle');
-            const desc = document.getElementById('modalDesc');
-            const waBtn = document.getElementById('modalWaBtn');
-            const demoBtn = document.getElementById('modalDemoBtn');
+        document.getElementById('imageModal').classList.add('active');
+    }
 
-            tag.innerText = item.kategori;
-            title.innerText = item.judul;
-            
-            if (item.subJudul) {
-                subTitle.innerText = item.subJudul;
-                subTitle.style.display = 'block';
-            } else {
-                subTitle.style.display = 'none';
-            }
+    function switchModalImage(src, thumbEl) {
+        const mainImg = document.getElementById('mainModalImg');
+        if (mainImg) mainImg.src = src;
+        document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+        if (thumbEl) thumbEl.classList.add('active');
+    }
 
-            desc.innerText = item.deskripsi || '-';
+    function closeModal() {
+        document.getElementById('imageModal').classList.remove('active');
+    }
 
-            // Preview Foto Utama & Thumbnail jika lebih dari 1
-            let mediaHtml = `<img id="mainModalImg" src="${item.photos[0]}" alt="${item.judul}">`;
-            
-            if (item.photos.length > 1) {
-                mediaHtml += `<div class="modal-thumbs">`;
-                item.photos.forEach((photo, idx) => {
-                    mediaHtml += `<img src="${photo}" class="thumb-item ${idx === 0 ? 'active' : ''}" onclick="switchModalImage('${photo}', this)">`;
-                });
-                mediaHtml += `</div>`;
-            }
-            
-            mediaContainer.innerHTML = mediaHtml;
+    function copyCurrentCategoryLink() {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            showToast("Link portofolio berhasil disalin!");
+        });
+    }
 
-            // Tombol Tautan ke Blogspot
-            if (item.linkDemo && item.linkDemo.length > 5 && item.linkDemo !== '#') {
-                demoBtn.href = item.linkDemo;
-                demoBtn.style.display = 'flex';
-            } else {
-                demoBtn.style.display = 'none';
-            }
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.innerText = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    }
 
-            // Tombol Order WhatsApp
-            const waText = encodeURIComponent(`Halo Oink Project, saya tertarik pesan karya seperti: ${item.judul}`);
-            waBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
-
-            document.getElementById('imageModal').classList.add('active');
-        }
-
-        function switchModalImage(src, thumbEl) {
-            const mainImg = document.getElementById('mainModalImg');
-            if (mainImg) mainImg.src = src;
-            document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
-            if (thumbEl) thumbEl.classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('imageModal').classList.remove('active');
-        }
-
-        function copyCurrentCategoryLink() {
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                showToast("Link portofolio berhasil disalin!");
-            });
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.innerText = msg;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2500);
-        }
-
-        // Jalankan fetch feed blogspot saat halaman siap
-        document.addEventListener('DOMContentLoaded', loadBlogspotData);
-    </script>
+    // Eksekusi fungsi feed
+    document.addEventListener('DOMContentLoaded', loadBlogspotFeed);
+</script>
 </body>
 </html>

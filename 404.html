@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Halaman Tidak Ditemukan | Oink Project</title>
+    <meta name="robots" content="noindex, follow">
+
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #eae5e0;
+            --container-bg: #f8f3ee;
+            --card-white: #ffffff;
+            --card-cyan: #05bbc0; 
+            --card-green: #25d366;
+            --card-yellow: #ffc425;
+            --dark-card: #111827;
+            
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #efe8e1;
+            
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            
+            --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.08);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+
+        @media (min-width: 481px) {
+            body { padding: 20px 0; }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--container-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 32px 24px;
+            text-align: center;
+            gap: 20px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        @media (min-width: 481px) {
+            .container {
+                border-radius: var(--radius-lg);
+                min-height: auto;
+                border: 2px solid #e2dad1;
+                padding: 48px 28px;
+            }
+        }
+
+        /* Badge Icon Ilustrasi */
+        .error-badge {
+            width: 96px;
+            height: 96px;
+            background: var(--card-white);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--card-cyan);
+            box-shadow: 0 8px 20px rgba(5, 187, 192, 0.15);
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Tipografi Kode 404 */
+        .error-code {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            color: var(--dark-card);
+        }
+
+        .error-code span {
+            color: var(--card-cyan);
+        }
+
+        .error-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-top: -6px;
+        }
+
+        .error-desc {
+            font-size: 0.88rem;
+            font-weight: 500;
+            line-height: 1.5;
+            color: var(--text-muted);
+            max-width: 320px;
+        }
+
+        /* Tombol Aksi */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--card-cyan);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.92rem;
+            padding: 13px 20px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 14px rgba(5, 187, 192, 0.25);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.92;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--card-white);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 12px 20px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--card-cyan);
+            color: var(--card-cyan);
+            background: #ffffff;
+        }
+
+        .btn-wa-help {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--card-green);
+            text-decoration: none;
+            margin-top: 6px;
+        }
+
+        .btn-wa-help:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Ikon Error -->
+        <div class="error-badge">
+            <i class="fas fa-ghost"></i>
+        </div>
+
+        <!-- Teks 404 -->
+        <div class="error-code">4<span>0</span>4</div>
+        <h1 class="error-title">Halaman Tidak Ditemukan</h1>
+        <p class="error-desc">
+            Waduh, halaman atau karya yang kamu cari sepertinya sudah dipindah atau tautannya kurang tepat.
+        </p>
+
+        <!-- Tombol Aksi Navigasi -->
+        <div class="btn-group">
+            <a href="https://oinkproject.my.id/" class="btn-primary">
+                <i class="fas fa-arrow-left"></i>
+                <span>Kembali ke Beranda</span>
+            </a>
+
+            <a href="javascript:history.back()" class="btn-secondary">
+                <i class="fas fa-rotate-left"></i>
+                <span>Halaman Sebelumnya</span>
+            </a>
+
+            <a href="https://wa.me/6285155091238?text=Halo%20Oink%20Project,%20saya%20menemukan%20link%20error%20di%20website" target="_blank" class="btn-wa-help">
+                <i class="fab fa-whatsapp"></i>
+                <span>Laporkan link rusak via WhatsApp</span>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
