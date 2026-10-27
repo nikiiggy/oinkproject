@@ -66,7 +66,7 @@
       </div>
     </header>
 
-    <!-- Calendar Section -->
+    <!-- Calendar Section (Clean 7 Columns) -->
     <section id="calendarSection" class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80 transition-all">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div class="flex items-center gap-3">
@@ -88,20 +88,19 @@
       </div>
 
       <div class="overflow-x-auto">
-        <div class="min-w-[620px]">
-          <!-- Header Hari & Kolom Minggu -->
-          <div class="grid grid-cols-[56px_repeat(7,1fr)] gap-2 text-center text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wider">
-            <div class="text-indigo-500 font-mono">Minggu</div>
+        <div class="min-w-[560px]">
+          <!-- Header Hari: Senin sampai Minggu -->
+          <div class="grid grid-cols-7 gap-2 text-center text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wider">
             <div>Sen</div>
             <div>Sel</div>
             <div>Rab</div>
             <div>Kam</div>
             <div>Jum</div>
             <div>Sab</div>
-            <div>Min</div>
+            <div class="text-rose-500 font-bold">Min</div>
           </div>
-          <!-- Grid Tanggal -->
-          <div id="calendarGrid" class="grid grid-cols-[56px_repeat(7,1fr)] gap-2"></div>
+          <!-- Grid 7 Kolom Tanggal -->
+          <div id="calendarGrid" class="grid grid-cols-7 gap-2"></div>
         </div>
       </div>
     </section>
@@ -157,7 +156,6 @@
         <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-lg">✕</button>
       </div>
       <form id="taskForm" class="space-y-4">
-        <!-- Hidden input untuk menampung Task ID saat edit -->
         <input type="hidden" id="editTaskId" value="" />
 
         <div>
@@ -221,7 +219,6 @@
       doc 
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    // Konfigurasi Firebase kanbanoink
     const firebaseConfig = {
       apiKey: "AIzaSyBqRKq7bDLzWGTWjZ2b8xaZnjeWI5K38xo",
       authDomain: "kanbanoink.firebaseapp.com",
@@ -239,7 +236,6 @@
     let selectedFilterDate = null;
     let calendarDate = new Date();
 
-    // Dengarkan Real-time Database
     onSnapshot(tasksCol, (snapshot) => {
       allTasks = [];
       snapshot.forEach(docSnap => {
@@ -248,10 +244,8 @@
       renderAll();
     }, (error) => {
       console.error("Firebase Error:", error);
-      alert("Koneksi Firebase gagal! Cek status internet atau rules database.");
     });
 
-    // Form Submit (Bisa Tambah Baru atau Update Pekerjaan yang Ada)
     document.getElementById('taskForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const editId = document.getElementById('editTaskId').value;
@@ -268,7 +262,6 @@
 
       try {
         if (editId) {
-          // Mode Update/Edit
           await updateDoc(doc(db, "tasks", editId), {
             title,
             deadlineDate: date,
@@ -280,7 +273,6 @@
             updatedAt: Date.now()
           });
         } else {
-          // Mode Tambah Baru
           await addDoc(tasksCol, {
             title,
             deadlineDate: date,
@@ -298,7 +290,6 @@
       }
     });
 
-    // Buka Modal Edit dengan Data Terisi
     window.openEditModal = function(id) {
       const task = allTasks.find(t => t.id === id);
       if (!task) return;
@@ -317,7 +308,6 @@
       document.getElementById('taskModal').classList.remove('hidden');
     };
 
-    // Update Status Kolom secara Cepat
     window.updateTaskStatus = async function(id, newStatus) {
       try {
         await updateDoc(doc(db, "tasks", id), { status: newStatus });
@@ -326,7 +316,6 @@
       }
     };
 
-    // Hapus Task
     window.deleteTask = async function(id) {
       if (confirm("Hapus pekerjaan ini secara permanen?")) {
         try {
@@ -342,7 +331,6 @@
       renderCalendar();
     }
 
-    // Render Kanban (Deadline terdekat selalu paling atas)
     function renderKanban() {
       const colTodo = document.getElementById('col-todo');
       const colProgress = document.getElementById('col-progress');
@@ -435,7 +423,6 @@
           <span class="bg-slate-50 border border-slate-200 px-1.5 py-0.5 rounded text-[11px] text-slate-600 font-medium">${escapeHtml(task.tag || 'General')}</span>
         </div>
 
-        <!-- Action Buttons (Pindah Status, Edit & Hapus) -->
         <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
           <div class="flex items-center gap-1">
             ${task.status !== 'todo' ? `
@@ -453,11 +440,9 @@
           </div>
 
           <div class="flex items-center gap-1">
-            <!-- Tombol Edit -->
             <button onclick="openEditModal('${task.id}')" class="text-slate-400 hover:text-indigo-600 transition p-1" title="Edit Task">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
             </button>
-            <!-- Tombol Hapus -->
             <button onclick="deleteTask('${task.id}')" class="text-slate-400 hover:text-rose-500 transition p-1" title="Hapus Task">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
             </button>
@@ -467,7 +452,7 @@
       return card;
     }
 
-    // Render Visual Kalender
+    // Render Kalender Bersih (7 Kolom Presisi)
     function renderCalendar() {
       const year = calendarDate.getFullYear();
       const month = calendarDate.getMonth();
@@ -477,85 +462,60 @@
       const grid = document.getElementById('calendarGrid');
       grid.innerHTML = '';
 
+      // Tentukan hari pertama bulan ini (0 = Minggu, 1 = Senin, dst.)
       const firstDayOfMonth = new Date(year, month, 1);
       const lastDayOfMonth = new Date(year, month + 1, 0);
-      let startingDay = firstDayOfMonth.getDay();
-      startingDay = startingDay === 0 ? 6 : startingDay - 1;
+      
+      // Standar Senin sebagai kolom pertama (Senin = 0, ..., Minggu = 6)
+      let startingDay = firstDayOfMonth.getDay() - 1;
+      if (startingDay === -1) startingDay = 6;
 
-      const daysInMonth = lastDayOfMonth.getDate();
+      const totalDays = lastDayOfMonth.getDate();
       const today = new Date();
       const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
-      let currentDay = 1;
-      let finished = false;
-
-      while (!finished) {
-        const weekStartDate = new Date(year, month, currentDay - startingDay);
-        const weekNumber = getISOWeekNumber(weekStartDate);
-
-        const weekCell = document.createElement('div');
-        weekCell.className = "flex items-center justify-center font-mono text-[11px] font-bold text-indigo-500 bg-indigo-50/60 rounded-lg border border-indigo-100/70 select-none";
-        weekCell.textContent = `W${weekNumber}`;
-        grid.appendChild(weekCell);
-
-        for (let d = 0; d < 7; d++) {
-          if ((grid.children.length % 8 === 1 && currentDay === 1 && d < startingDay) || currentDay > daysInMonth) {
-            const emptyCell = document.createElement('div');
-            emptyCell.className = "min-h-[50px] sm:min-h-[64px] rounded-lg bg-slate-50/40 border border-slate-100";
-            grid.appendChild(emptyCell);
-          } else {
-            const thisDateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(currentDay).padStart(2, '0')}`;
-            const isToday = thisDateStr === todayStr;
-            const isSelected = thisDateStr === selectedFilterDate;
-
-            const dayTasks = allTasks.filter(t => t.deadlineDate === thisDateStr);
-            const hasTodo = dayTasks.some(t => t.status === 'todo');
-            const hasProgress = dayTasks.some(t => t.status === 'progress');
-            const hasDone = dayTasks.some(t => t.status === 'done');
-
-            const dayCell = document.createElement('div');
-            dayCell.onclick = () => filterByDate(thisDateStr);
-            dayCell.className = `min-h-[50px] sm:min-h-[64px] p-1.5 rounded-lg border transition cursor-pointer flex flex-col justify-between ${
-              isSelected 
-                ? 'bg-indigo-50 border-indigo-400 ring-2 ring-indigo-200' 
-                : isToday 
-                  ? 'bg-white border-indigo-400 ring-1 ring-indigo-300' 
-                  : 'bg-white border-slate-200 hover:border-slate-300'
-            }`;
-
-            dayCell.innerHTML = `
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-semibold ${isToday ? 'text-indigo-600 font-bold' : 'text-slate-700'}">${currentDay}</span>
-                ${dayTasks.length > 0 ? `<span class="text-[10px] font-bold font-mono text-slate-500">${dayTasks.length}</span>` : ''}
-              </div>
-              <div class="flex items-center gap-1 mt-1">
-                ${hasTodo ? '<span class="w-1.5 h-1.5 rounded-full bg-rose-500" title="Ada To Do"></span>' : ''}
-                ${hasProgress ? '<span class="w-1.5 h-1.5 rounded-full bg-indigo-500" title="Ada In Progress"></span>' : ''}
-                ${hasDone ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500" title="Ada Selesai"></span>' : ''}
-              </div>
-            `;
-
-            grid.appendChild(dayCell);
-            currentDay++;
-          }
-        }
-
-        if (currentDay > daysInMonth) {
-          finished = true;
-        }
+      // Kotak kosong sebelum tanggal 1
+      for (let i = 0; i < startingDay; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.className = "min-h-[52px] sm:min-h-[64px] rounded-lg bg-slate-50/50 border border-slate-100";
+        grid.appendChild(emptyCell);
       }
-    }
 
-    function getISOWeekNumber(d) {
-      const target = new Date(d.valueOf());
-      const dayNr = (d.getDay() + 6) % 7;
-      target.setDate(target.getDate() - dayNr + 3);
-      const firstThursday = target.valueOf();
-      target.setMonth(0, 1);
-      if (target.getDay() !== 4) {
-        target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);
+      // Isi tanggal 1 sampai selesai
+      for (let day = 1; day <= totalDays; day++) {
+        const thisDateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const isToday = thisDateStr === todayStr;
+        const isSelected = thisDateStr === selectedFilterDate;
+
+        const dayTasks = allTasks.filter(t => t.deadlineDate === thisDateStr);
+        const hasTodo = dayTasks.some(t => t.status === 'todo');
+        const hasProgress = dayTasks.some(t => t.status === 'progress');
+        const hasDone = dayTasks.some(t => t.status === 'done');
+
+        const dayCell = document.createElement('div');
+        dayCell.onclick = () => filterByDate(thisDateStr);
+        dayCell.className = `min-h-[52px] sm:min-h-[64px] p-2 rounded-xl border transition cursor-pointer flex flex-col justify-between ${
+          isSelected 
+            ? 'bg-indigo-50 border-indigo-400 ring-2 ring-indigo-200' 
+            : isToday 
+              ? 'bg-white border-indigo-500 ring-2 ring-indigo-200 shadow-sm' 
+              : 'bg-white border-slate-200/90 hover:border-slate-300'
+        }`;
+
+        dayCell.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold ${isToday ? 'text-indigo-600 font-bold' : 'text-slate-700'}">${day}</span>
+            ${dayTasks.length > 0 ? `<span class="text-[10px] font-bold font-mono text-slate-500">${dayTasks.length}</span>` : ''}
+          </div>
+          <div class="flex items-center gap-1 mt-1">
+            ${hasTodo ? '<span class="w-1.5 h-1.5 rounded-full bg-rose-500" title="Ada To Do"></span>' : ''}
+            ${hasProgress ? '<span class="w-1.5 h-1.5 rounded-full bg-indigo-500" title="Ada In Progress"></span>' : ''}
+            ${hasDone ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500" title="Ada Selesai"></span>' : ''}
+          </div>
+        `;
+
+        grid.appendChild(dayCell);
       }
-      return 1 + Math.ceil((firstThursday - target) / 604800000);
     }
 
     window.filterByDate = function(dateStr) {
@@ -599,7 +559,7 @@
     }
   </script>
 
-  <!-- Script Jam & UI Modal Interaktif -->
+  <!-- Script Jam & Modal -->
   <script>
     function updateClock() {
       const now = new Date();
@@ -626,7 +586,6 @@
       }
     }
 
-    // Modal Buka Tambah Baru
     function openModal() {
       document.getElementById('taskForm').reset();
       document.getElementById('editTaskId').value = '';
