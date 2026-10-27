@@ -6,7 +6,7 @@
   <title>Task & Deadline Tracker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -20,205 +20,303 @@
       }
     }
   </script>
+  <style>
+    html { font-size: 16px; }
+    body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    .hidden-init { display: none; }
+    :focus-visible { outline: 2px solid #4f46e5; outline-offset: 2px; }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen p-4 md:p-8 font-sans antialiased selection:bg-indigo-100 selection:text-indigo-900">
-  
-  <div class="max-w-7xl mx-auto space-y-6">
-    
-    <!-- Top Header -->
-    <header class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
-      <div>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-lg shadow-sm">
-            ✓
+<body class="bg-slate-100 text-slate-900 min-h-screen font-sans">
+
+  <!-- ===================== LOGIN ===================== -->
+  <div id="loginScreen" class="hidden-init min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-sm bg-white rounded-2xl shadow-lg border border-slate-300 p-7">
+      <div class="flex flex-col items-center text-center mb-6">
+        <div class="w-14 h-14 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-2xl font-bold shadow-md mb-4">✓</div>
+        <h1 class="text-xl font-extrabold text-slate-900">Task & Deadline Tracker</h1>
+        <p class="text-sm text-slate-600 mt-1">Masukkan password untuk melanjutkan</p>
+      </div>
+
+      <form id="loginForm" class="space-y-4" autocomplete="off">
+        <div>
+          <label for="loginPassword" class="block text-sm font-semibold text-slate-800 mb-1.5">Password</label>
+          <div class="relative">
+            <input type="password" id="loginPassword" required autofocus
+              class="w-full bg-white border-2 border-slate-300 rounded-xl pl-4 pr-16 py-3 text-base text-slate-900 focus:outline-none focus:border-indigo-600 transition" />
+            <button type="button" id="togglePwd" class="absolute right-2 top-1/2 -translate-y-1/2 px-2.5 py-1 text-xs font-semibold text-slate-600 hover:text-indigo-700 rounded-lg hover:bg-slate-100">Lihat</button>
           </div>
+          <p id="loginError" class="hidden mt-2 text-sm font-semibold text-rose-700">Password salah. Coba lagi.</p>
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] text-white font-bold py-3 rounded-xl text-base shadow-sm transition">Masuk</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== APP ===================== -->
+  <div id="appRoot" class="hidden-init p-4 md:p-8">
+    <div class="max-w-7xl mx-auto space-y-5">
+
+      <!-- Header -->
+      <header class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-300 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-xl shadow-sm">✓</div>
           <div>
-            <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">Task & Deadline Tracker</h1>
-            <p class="text-xs sm:text-sm text-slate-500 font-normal">Sinkronisasi Cloud Real-time • HP, PC Kantor & Rumah</p>
+            <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 leading-tight">Task & Deadline Tracker</h1>
+            <p class="text-sm text-slate-600 font-medium">Tersinkron otomatis di HP dan PC</p>
           </div>
         </div>
-      </div>
 
-      <div class="flex flex-wrap items-center gap-3">
-        <!-- Live Clock & Status -->
-        <div class="bg-slate-50 border border-slate-200/80 rounded-xl px-3.5 py-2 flex items-center gap-3">
-          <div class="text-right">
-            <div id="liveClock" class="font-mono font-bold text-slate-900 text-sm tracking-tight leading-none">00:00:00 WIB</div>
-            <div id="liveDate" class="text-[11px] text-slate-500 font-medium mt-1 leading-none">Memuat tanggal...</div>
+        <div class="flex flex-wrap items-center gap-2.5">
+          <div class="bg-slate-100 border border-slate-300 rounded-xl px-3.5 py-2 flex items-center gap-3">
+            <div class="text-right">
+              <div id="liveClock" class="font-mono font-bold text-slate-900 text-base leading-none">00:00:00</div>
+              <div id="liveDate" class="text-xs text-slate-700 font-semibold mt-1 leading-none">Memuat…</div>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
+              <span class="w-2 h-2 rounded-full bg-emerald-600"></span>Cloud
+            </span>
           </div>
-          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            Cloud
-          </span>
-        </div>
 
-        <!-- Tombol Toggle Kalender -->
-        <button id="toggleCalendarBtn" onclick="toggleCalendar()" class="inline-flex items-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-semibold px-3.5 py-2.5 rounded-xl text-xs sm:text-sm shadow-sm transition active:scale-95">
-          <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          <span id="calendarBtnText">Sembunyikan Kalender</span>
-        </button>
-
-        <!-- Tombol Tambah Task -->
-        <button onclick="openModal()" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2.5 rounded-xl text-xs sm:text-sm shadow-sm transition active:scale-95">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-          Pekerjaan Baru
-        </button>
-      </div>
-    </header>
-
-    <!-- Calendar Section (Clean 7 Columns) -->
-    <section id="calendarSection" class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80 transition-all">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-        <div class="flex items-center gap-3">
-          <h2 id="calendarMonthYear" class="text-base sm:text-lg font-bold text-slate-900 capitalize">Bulan Tahun</h2>
-          <span id="calendarFilterIndicator" class="hidden text-xs bg-indigo-50 text-indigo-700 font-semibold px-2.5 py-1 rounded-full border border-indigo-200 items-center gap-1.5">
-            Filter: <span id="selectedDateLabel"></span>
-            <button onclick="clearDateFilter()" class="hover:text-indigo-950 font-bold ml-1">✕</button>
-          </span>
-        </div>
-        <div class="flex items-center gap-2">
-          <button onclick="prevMonth()" class="p-2 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 transition" title="Bulan sebelumnya">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          <button id="toggleCalendarBtn" onclick="toggleCalendar()" class="inline-flex items-center gap-2 bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-semibold px-4 py-2.5 rounded-xl text-sm transition active:scale-95">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <span id="calendarBtnText">Sembunyikan Kalender</span>
           </button>
-          <button onclick="goToToday()" class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition">Hari Ini</button>
-          <button onclick="nextMonth()" class="p-2 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 transition" title="Bulan berikutnya">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+
+          <button onclick="openModal()" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow-sm transition active:scale-95">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+            Pekerjaan Baru
+          </button>
+
+          <button onclick="logout()" class="inline-flex items-center gap-2 bg-white hover:bg-rose-50 border border-slate-300 hover:border-rose-300 text-slate-700 hover:text-rose-700 font-semibold px-3.5 py-2.5 rounded-xl text-sm transition active:scale-95" title="Keluar">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            Keluar
           </button>
         </div>
-      </div>
+      </header>
 
-      <div class="overflow-x-auto">
-        <div class="min-w-[560px]">
-          <!-- Header Hari: Senin sampai Minggu -->
-          <div class="grid grid-cols-7 gap-2 text-center text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wider">
-            <div>Sen</div>
-            <div>Sel</div>
-            <div>Rab</div>
-            <div>Kam</div>
-            <div>Jum</div>
-            <div>Sab</div>
-            <div class="text-rose-500 font-bold">Min</div>
-          </div>
-          <!-- Grid 7 Kolom Tanggal -->
-          <div id="calendarGrid" class="grid grid-cols-7 gap-2"></div>
+      <!-- Ringkasan -->
+      <section class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-white rounded-xl border border-slate-300 p-4">
+          <div class="text-sm font-semibold text-slate-700">Belum selesai</div>
+          <div id="stat-active" class="text-3xl font-extrabold text-slate-900 mt-1 font-mono">0</div>
         </div>
-      </div>
-    </section>
+        <div class="bg-white rounded-xl border border-amber-300 p-4">
+          <div class="text-sm font-semibold text-amber-800">Mepet (≤ 24 jam)</div>
+          <div id="stat-soon" class="text-3xl font-extrabold text-amber-700 mt-1 font-mono">0</div>
+        </div>
+        <div class="bg-white rounded-xl border border-rose-300 p-4">
+          <div class="text-sm font-semibold text-rose-800">Terlambat</div>
+          <div id="stat-late" class="text-3xl font-extrabold text-rose-700 mt-1 font-mono">0</div>
+        </div>
+        <div class="bg-white rounded-xl border border-emerald-300 p-4">
+          <div class="text-sm font-semibold text-emerald-800">Selesai</div>
+          <div id="stat-done" class="text-3xl font-extrabold text-emerald-700 mt-1 font-mono">0</div>
+        </div>
+      </section>
 
-    <!-- Kanban Board (3 Columns) -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      
-      <!-- Kolom: To Do -->
-      <div class="bg-slate-100/70 border border-slate-200/80 rounded-2xl p-4 flex flex-col">
-        <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-200">
+      <!-- Kalender -->
+      <section id="calendarSection" class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-300">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+          <div class="flex flex-wrap items-center gap-3">
+            <h2 id="calendarMonthYear" class="text-lg font-extrabold text-slate-900">Bulan Tahun</h2>
+            <span id="calendarFilterIndicator" class="hidden text-sm bg-indigo-100 text-indigo-900 font-semibold px-3 py-1 rounded-full border border-indigo-300 items-center gap-2">
+              Filter: <span id="selectedDateLabel"></span>
+              <button onclick="clearDateFilter()" class="font-bold hover:text-indigo-700" title="Hapus filter">✕</button>
+            </span>
+          </div>
           <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
-            <h3 class="font-bold text-sm text-slate-800">Antrean (To Do)</h3>
+            <button onclick="prevMonth()" class="p-2 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 transition" title="Bulan sebelumnya">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button onclick="goToToday()" class="px-3.5 py-2 rounded-lg border border-slate-300 hover:bg-slate-100 text-sm font-semibold text-slate-800 transition">Hari Ini</button>
+            <button onclick="nextMonth()" class="p-2 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 transition" title="Bulan berikutnya">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+            </button>
           </div>
-          <span id="count-todo" class="text-xs font-semibold bg-white text-slate-600 px-2 py-0.5 rounded-md border border-slate-200 font-mono">0</span>
         </div>
-        <div id="col-todo" class="space-y-3 flex-1 min-h-[160px]"></div>
-      </div>
 
-      <!-- Kolom: In Progress -->
-      <div class="bg-indigo-50/40 border border-indigo-100 rounded-2xl p-4 flex flex-col">
-        <div class="flex items-center justify-between pb-3 mb-3 border-b border-indigo-100">
-          <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
-            <h3 class="font-bold text-sm text-slate-800">Sedang Dikerjakan</h3>
+        <div class="overflow-x-auto">
+          <div class="min-w-[520px]">
+            <div class="grid grid-cols-7 gap-1.5 text-center text-xs font-bold text-slate-700 mb-2 uppercase tracking-wide">
+              <div>Sen</div><div>Sel</div><div>Rab</div><div>Kam</div><div>Jum</div><div>Sab</div>
+              <div class="text-rose-700">Min</div>
+            </div>
+            <div id="calendarGrid" class="grid grid-cols-7 gap-1.5"></div>
           </div>
-          <span id="count-progress" class="text-xs font-semibold bg-white text-indigo-700 px-2 py-0.5 rounded-md border border-indigo-200 font-mono">0</span>
         </div>
-        <div id="col-progress" class="space-y-3 flex-1 min-h-[160px]"></div>
-      </div>
 
-      <!-- Kolom: Done -->
-      <div class="bg-emerald-50/30 border border-emerald-100 rounded-2xl p-4 flex flex-col">
-        <div class="flex items-center justify-between pb-3 mb-3 border-b border-emerald-100">
-          <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-            <h3 class="font-bold text-sm text-slate-800">Selesai (Done)</h3>
-          </div>
-          <span id="count-done" class="text-xs font-semibold bg-white text-emerald-700 px-2 py-0.5 rounded-md border border-emerald-200 font-mono">0</span>
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-1 mt-4 text-sm text-slate-700 font-medium">
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-rose-600"></span>Antrean</span>
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>Dikerjakan</span>
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>Selesai</span>
         </div>
-        <div id="col-done" class="space-y-3 flex-1 min-h-[160px]"></div>
+      </section>
+
+      <!-- Kanban -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-slate-200/70 border border-slate-300 rounded-2xl p-4 flex flex-col">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-300">
+            <div class="flex items-center gap-2.5">
+              <span class="w-3 h-3 rounded-full bg-slate-600"></span>
+              <h3 class="font-extrabold text-base text-slate-900">Antrean</h3>
+            </div>
+            <span id="count-todo" class="text-sm font-bold bg-white text-slate-800 px-2.5 py-0.5 rounded-md border border-slate-300 font-mono">0</span>
+          </div>
+          <div id="col-todo" class="space-y-3 flex-1 min-h-[160px]"></div>
+        </div>
+
+        <div class="bg-indigo-100/70 border border-indigo-300 rounded-2xl p-4 flex flex-col">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-indigo-300">
+            <div class="flex items-center gap-2.5">
+              <span class="w-3 h-3 rounded-full bg-indigo-600"></span>
+              <h3 class="font-extrabold text-base text-slate-900">Sedang Dikerjakan</h3>
+            </div>
+            <span id="count-progress" class="text-sm font-bold bg-white text-indigo-800 px-2.5 py-0.5 rounded-md border border-indigo-300 font-mono">0</span>
+          </div>
+          <div id="col-progress" class="space-y-3 flex-1 min-h-[160px]"></div>
+        </div>
+
+        <div class="bg-emerald-100/70 border border-emerald-300 rounded-2xl p-4 flex flex-col">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-emerald-300">
+            <div class="flex items-center gap-2.5">
+              <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+              <h3 class="font-extrabold text-base text-slate-900">Selesai</h3>
+            </div>
+            <span id="count-done" class="text-sm font-bold bg-white text-emerald-800 px-2.5 py-0.5 rounded-md border border-emerald-300 font-mono">0</span>
+          </div>
+          <div id="col-done" class="space-y-3 flex-1 min-h-[160px]"></div>
+        </div>
       </div>
 
     </div>
-
   </div>
 
-  <!-- Modal Tambah / Edit Task -->
-  <div id="taskModal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 transform transition-all">
-      <div class="flex justify-between items-center pb-3 border-b border-slate-100 mb-4">
-        <h3 id="modalTitle" class="font-bold text-base text-slate-900">Tambah Pekerjaan Baru</h3>
-        <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-lg">✕</button>
+  <!-- ===================== MODAL ===================== -->
+  <div id="taskModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-300 my-auto">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200 mb-4">
+        <h3 id="modalTitle" class="font-extrabold text-lg text-slate-900">Tambah Pekerjaan Baru</h3>
+        <button type="button" onclick="closeModal()" class="text-slate-500 hover:text-slate-900 text-xl leading-none p-1" title="Tutup">✕</button>
       </div>
       <form id="taskForm" class="space-y-4">
         <input type="hidden" id="editTaskId" value="" />
 
         <div>
-          <label class="block text-xs font-semibold text-slate-600 mb-1">Judul Pekerjaan</label>
-          <input type="text" id="taskTitle" required placeholder="Contoh: Desain Banner Promo" 
-            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition" />
+          <label for="taskTitle" class="block text-sm font-semibold text-slate-800 mb-1.5">Judul Pekerjaan</label>
+          <input type="text" id="taskTitle" required placeholder="Contoh: Desain Banner Promo"
+            class="w-full bg-white border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-600 transition" />
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-semibold text-slate-600 mb-1">Tanggal Deadline</label>
-            <input type="date" id="taskDate" required 
-              class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition" />
+            <label for="taskDate" class="block text-sm font-semibold text-slate-800 mb-1.5">Tanggal Deadline</label>
+            <input type="date" id="taskDate" required
+              class="w-full bg-white border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-base text-slate-900 focus:outline-none focus:border-indigo-600 transition" />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-600 mb-1">Jam Deadline</label>
-            <input type="time" id="taskTime" value="17:00" required 
-              class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition" />
+            <label for="taskTime" class="block text-sm font-semibold text-slate-800 mb-1.5">Jam Deadline</label>
+            <input type="time" id="taskTime" value="17:00" required
+              class="w-full bg-white border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-base text-slate-900 focus:outline-none focus:border-indigo-600 transition" />
           </div>
         </div>
-        <div class="grid grid-cols-2 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-semibold text-slate-600 mb-1">Prioritas</label>
-            <select id="taskPriority" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition">
+            <label for="taskPriority" class="block text-sm font-semibold text-slate-800 mb-1.5">Prioritas</label>
+            <select id="taskPriority" class="w-full bg-white border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-base text-slate-900 focus:outline-none focus:border-indigo-600 transition">
               <option value="Tinggi">Tinggi</option>
               <option value="Sedang" selected>Sedang</option>
               <option value="Rendah">Rendah</option>
             </select>
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-600 mb-1">Kategori / Label</label>
-            <input type="text" id="taskTag" placeholder="Contoh: Desain, Web, Konten" 
-              class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition" />
+            <label for="taskTag" class="block text-sm font-semibold text-slate-800 mb-1.5">Kategori</label>
+            <input type="text" id="taskTag" placeholder="Desain, Web, Konten"
+              class="w-full bg-white border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-600 transition" />
           </div>
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-600 mb-1">Status</label>
-          <select id="taskStatus" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition">
-            <option value="todo">Antrean (To Do)</option>
+          <label for="taskStatus" class="block text-sm font-semibold text-slate-800 mb-1.5">Status</label>
+          <select id="taskStatus" class="w-full bg-white border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-base text-slate-900 focus:outline-none focus:border-indigo-600 transition">
+            <option value="todo">Antrean</option>
             <option value="progress">Sedang Dikerjakan</option>
-            <option value="done">Selesai (Done)</option>
+            <option value="done">Selesai</option>
           </select>
         </div>
-        <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
-          <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">Batal</button>
-          <button type="submit" id="submitBtn" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition">Simpan Task</button>
+        <div class="flex justify-end gap-2 pt-4 border-t border-slate-200">
+          <button type="button" onclick="closeModal()" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 border border-slate-300 transition">Batal</button>
+          <button type="submit" id="submitBtn" class="px-5 py-2.5 rounded-xl text-sm font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition">Simpan Task</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Firebase Modular SDK via CDN -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { 
-      getFirestore, 
-      collection, 
-      addDoc, 
-      onSnapshot, 
-      updateDoc, 
-      deleteDoc, 
-      doc 
+    import {
+      getFirestore, collection, addDoc, onSnapshot, updateDoc, deleteDoc, doc
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+    /* ---------- Login ---------- */
+    // Hash SHA-256 dari password (password asli tidak disimpan di kode)
+    const PASS_HASH = "2cf50ade196681a978c021c587c479273d28a2725734a7eeeee39db68040b0c3";
+    const AUTH_KEY = "tracker_auth";
+
+    async function sha256(text) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    function isAuthed() {
+      try { return localStorage.getItem(AUTH_KEY) === PASS_HASH; } catch { return false; }
+    }
+
+    function showLogin() {
+      document.getElementById("appRoot").style.display = "none";
+      document.getElementById("loginScreen").style.display = "flex";
+      document.getElementById("loginPassword").value = "";
+      setTimeout(() => document.getElementById("loginPassword").focus(), 50);
+    }
+
+    function showApp() {
+      document.getElementById("loginScreen").style.display = "none";
+      document.getElementById("appRoot").style.display = "block";
+      startData();
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const err = document.getElementById("loginError");
+      const input = document.getElementById("loginPassword");
+      try {
+        const hash = await sha256(input.value);
+        if (hash === PASS_HASH) {
+          err.classList.add("hidden");
+          try { localStorage.setItem(AUTH_KEY, PASS_HASH); } catch {}
+          showApp();
+        } else {
+          err.textContent = "Password salah. Coba lagi.";
+          err.classList.remove("hidden");
+          input.select();
+        }
+      } catch {
+        err.textContent = "Buka lewat https:// agar login berfungsi.";
+        err.classList.remove("hidden");
+      }
+    });
+
+    document.getElementById("togglePwd").addEventListener("click", (e) => {
+      const input = document.getElementById("loginPassword");
+      const show = input.type === "password";
+      input.type = show ? "text" : "password";
+      e.target.textContent = show ? "Sembunyi" : "Lihat";
+    });
+
+    window.logout = function () {
+      try { localStorage.removeItem(AUTH_KEY); } catch {}
+      location.reload();
+    };
+
+    /* ---------- Firebase ---------- */
     const firebaseConfig = {
       apiKey: "AIzaSyBqRKq7bDLzWGTWjZ2b8xaZnjeWI5K38xo",
       authDomain: "kanbanoink.firebaseapp.com",
@@ -235,216 +333,205 @@
     let allTasks = [];
     let selectedFilterDate = null;
     let calendarDate = new Date();
+    let started = false;
+    let loaded = false;
 
-    onSnapshot(tasksCol, (snapshot) => {
-      allTasks = [];
-      snapshot.forEach(docSnap => {
-        allTasks.push({ id: docSnap.id, ...docSnap.data() });
-      });
+    function startData() {
+      if (started) return;
+      started = true;
       renderAll();
-    }, (error) => {
-      console.error("Firebase Error:", error);
-    });
+      onSnapshot(tasksCol, (snapshot) => {
+        allTasks = [];
+        snapshot.forEach(d => allTasks.push({ id: d.id, ...d.data() }));
+        loaded = true;
+        renderAll();
+      }, (error) => {
+        console.error("Firebase Error:", error);
+        alert("Gagal memuat data dari cloud: " + error.message);
+      });
+      // Segarkan badge deadline tiap menit
+      setInterval(() => { renderKanban(); renderStats(); }, 60000);
+    }
 
-    document.getElementById('taskForm').addEventListener('submit', async (e) => {
+    /* ---------- Simpan / Edit ---------- */
+    document.getElementById("taskForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const editId = document.getElementById('editTaskId').value;
-      const title = document.getElementById('taskTitle').value.trim();
-      const date = document.getElementById('taskDate').value;
-      const time = document.getElementById('taskTime').value;
-      const priority = document.getElementById('taskPriority').value;
-      const tag = document.getElementById('taskTag').value.trim() || 'General';
-      const status = document.getElementById('taskStatus').value;
-
+      const editId = document.getElementById("editTaskId").value;
+      const title = document.getElementById("taskTitle").value.trim();
+      const date = document.getElementById("taskDate").value;
+      const time = document.getElementById("taskTime").value;
+      const priority = document.getElementById("taskPriority").value;
+      const tag = document.getElementById("taskTag").value.trim() || "General";
+      const status = document.getElementById("taskStatus").value;
       if (!title || !date || !time) return;
 
-      const deadlineTimestamp = new Date(`${date}T${time}`).getTime();
+      const data = {
+        title, deadlineDate: date, deadlineTime: time,
+        deadline: new Date(`${date}T${time}`).getTime(),
+        priority, tag, status
+      };
 
+      const btn = document.getElementById("submitBtn");
+      btn.disabled = true;
       try {
         if (editId) {
-          await updateDoc(doc(db, "tasks", editId), {
-            title,
-            deadlineDate: date,
-            deadlineTime: time,
-            deadline: deadlineTimestamp,
-            priority,
-            tag,
-            status,
-            updatedAt: Date.now()
-          });
+          await updateDoc(doc(db, "tasks", editId), { ...data, updatedAt: Date.now() });
         } else {
-          await addDoc(tasksCol, {
-            title,
-            deadlineDate: date,
-            deadlineTime: time,
-            deadline: deadlineTimestamp,
-            priority,
-            tag,
-            status,
-            createdAt: Date.now()
-          });
+          await addDoc(tasksCol, { ...data, createdAt: Date.now() });
         }
         closeModal();
       } catch (err) {
         alert("Gagal menyimpan task: " + err.message);
+      } finally {
+        btn.disabled = false;
       }
     });
 
-    window.openEditModal = function(id) {
+    window.openEditModal = function (id) {
       const task = allTasks.find(t => t.id === id);
       if (!task) return;
-
-      document.getElementById('editTaskId').value = task.id;
-      document.getElementById('taskTitle').value = task.title || '';
-      document.getElementById('taskDate').value = task.deadlineDate || '';
-      document.getElementById('taskTime').value = task.deadlineTime || '17:00';
-      document.getElementById('taskPriority').value = task.priority || 'Sedang';
-      document.getElementById('taskTag').value = task.tag || '';
-      document.getElementById('taskStatus').value = task.status || 'todo';
-
-      document.getElementById('modalTitle').textContent = 'Edit Pekerjaan';
-      document.getElementById('submitBtn').textContent = 'Simpan Perubahan';
-
-      document.getElementById('taskModal').classList.remove('hidden');
+      document.getElementById("editTaskId").value = task.id;
+      document.getElementById("taskTitle").value = task.title || "";
+      document.getElementById("taskDate").value = task.deadlineDate || "";
+      document.getElementById("taskTime").value = task.deadlineTime || "17:00";
+      document.getElementById("taskPriority").value = task.priority || "Sedang";
+      document.getElementById("taskTag").value = task.tag || "";
+      document.getElementById("taskStatus").value = task.status || "todo";
+      document.getElementById("modalTitle").textContent = "Edit Pekerjaan";
+      document.getElementById("submitBtn").textContent = "Simpan Perubahan";
+      document.getElementById("taskModal").classList.remove("hidden");
+      document.getElementById("taskTitle").focus();
     };
 
-    window.updateTaskStatus = async function(id, newStatus) {
+    window.updateTaskStatus = async function (id, newStatus) {
       try {
-        await updateDoc(doc(db, "tasks", id), { status: newStatus });
+        await updateDoc(doc(db, "tasks", id), { status: newStatus, updatedAt: Date.now() });
       } catch (err) {
         alert("Gagal update status: " + err.message);
       }
     };
 
-    window.deleteTask = async function(id) {
-      if (confirm("Hapus pekerjaan ini secara permanen?")) {
-        try {
-          await deleteDoc(doc(db, "tasks", id));
-        } catch (err) {
-          alert("Gagal menghapus task: " + err.message);
-        }
+    window.deleteTask = async function (id) {
+      if (!confirm("Hapus pekerjaan ini secara permanen?")) return;
+      try {
+        await deleteDoc(doc(db, "tasks", id));
+      } catch (err) {
+        alert("Gagal menghapus task: " + err.message);
       }
     };
 
+    /* ---------- Render ---------- */
     function renderAll() {
+      renderStats();
       renderKanban();
       renderCalendar();
     }
 
-    function renderKanban() {
-      const colTodo = document.getElementById('col-todo');
-      const colProgress = document.getElementById('col-progress');
-      const colDone = document.getElementById('col-done');
-
-      colTodo.innerHTML = '';
-      colProgress.innerHTML = '';
-      colDone.innerHTML = '';
-
-      let filtered = allTasks;
-      if (selectedFilterDate) {
-        filtered = filtered.filter(t => t.deadlineDate === selectedFilterDate);
-      }
-
-      filtered.sort((a, b) => a.deadline - b.deadline);
-
-      let countTodo = 0, countProgress = 0, countDone = 0;
+    function renderStats() {
       const now = Date.now();
-
-      filtered.forEach(task => {
-        const card = createCardElement(task, now);
-        if (task.status === 'progress') {
-          colProgress.appendChild(card);
-          countProgress++;
-        } else if (task.status === 'done') {
-          colDone.appendChild(card);
-          countDone++;
-        } else {
-          colTodo.appendChild(card);
-          countTodo++;
-        }
-      });
-
-      document.getElementById('count-todo').textContent = countTodo;
-      document.getElementById('count-progress').textContent = countProgress;
-      document.getElementById('count-done').textContent = countDone;
-
-      checkEmpty(colTodo, "Tidak ada antrean");
-      checkEmpty(colProgress, "Belum ada yang dikerjakan");
-      checkEmpty(colDone, "Belum ada yang selesai");
+      const active = allTasks.filter(t => t.status !== "done");
+      document.getElementById("stat-active").textContent = active.length;
+      document.getElementById("stat-late").textContent = active.filter(t => t.deadline < now).length;
+      document.getElementById("stat-soon").textContent = active.filter(t => t.deadline >= now && t.deadline - now <= 86400000).length;
+      document.getElementById("stat-done").textContent = allTasks.length - active.length;
     }
 
-    function checkEmpty(col, msg) {
-      if (col.children.length === 0) {
-        col.innerHTML = `
-          <div class="h-32 rounded-xl border border-dashed border-slate-200/90 flex items-center justify-center text-xs text-slate-400 bg-white/40 font-medium">
-            ${msg}
-          </div>`;
+    function renderKanban() {
+      const cols = {
+        todo: document.getElementById("col-todo"),
+        progress: document.getElementById("col-progress"),
+        done: document.getElementById("col-done")
+      };
+      Object.values(cols).forEach(c => c.innerHTML = "");
+
+      let list = allTasks.slice();
+      if (selectedFilterDate) list = list.filter(t => t.deadlineDate === selectedFilterDate);
+      list.sort((a, b) => (a.deadline || 0) - (b.deadline || 0));
+
+      const counts = { todo: 0, progress: 0, done: 0 };
+      const now = Date.now();
+
+      list.forEach(task => {
+        const key = task.status === "progress" || task.status === "done" ? task.status : "todo";
+        cols[key].appendChild(createCardElement(task, now));
+        counts[key]++;
+      });
+
+      document.getElementById("count-todo").textContent = counts.todo;
+      document.getElementById("count-progress").textContent = counts.progress;
+      document.getElementById("count-done").textContent = counts.done;
+
+      const msgs = {
+        todo: loaded ? "Tidak ada antrean" : "Memuat data…",
+        progress: loaded ? "Belum ada yang dikerjakan" : "Memuat data…",
+        done: loaded ? "Belum ada yang selesai" : "Memuat data…"
+      };
+      Object.keys(cols).forEach(k => {
+        if (cols[k].children.length === 0) {
+          cols[k].innerHTML = `<div class="h-32 rounded-xl border-2 border-dashed border-slate-400/60 flex items-center justify-center text-sm text-slate-600 bg-white/50 font-semibold">${msgs[k]}</div>`;
+        }
+      });
+    }
+
+    function badgeFor(task, now) {
+      const diffHours = (task.deadline - now) / 3600000;
+      const base = "text-xs font-bold px-2 py-1 rounded-md border whitespace-nowrap";
+      if (task.status === "done") {
+        return `<span class="${base} text-emerald-900 bg-emerald-100 border-emerald-300">Selesai</span>`;
       }
+      if (diffHours < 0) {
+        return `<span class="${base} text-rose-900 bg-rose-100 border-rose-300">Terlambat</span>`;
+      }
+      if (diffHours <= 24) {
+        const label = diffHours < 1 ? "< 1 jam lagi" : `${Math.ceil(diffHours)} jam lagi`;
+        return `<span class="${base} text-amber-900 bg-amber-100 border-amber-300">Mepet · ${label}</span>`;
+      }
+      const days = Math.ceil(diffHours / 24);
+      return `<span class="${base} text-slate-800 bg-slate-100 border-slate-300">${days} hari lagi</span>`;
+    }
+
+    function formatDate(str) {
+      if (!str) return "-";
+      const [y, m, d] = str.split("-").map(Number);
+      return new Date(y, m - 1, d).toLocaleDateString("id-ID", { weekday: "short", day: "numeric", month: "short", year: "numeric" });
     }
 
     function createCardElement(task, now) {
-      const diffHours = (task.deadline - now) / (1000 * 60 * 60);
-      let badgeHtml = '';
+      const prio = task.priority || "Sedang";
+      const prioStyle = {
+        Tinggi: { badge: "bg-rose-600 text-white border-rose-600", bar: "border-l-rose-600" },
+        Sedang: { badge: "bg-amber-500 text-slate-900 border-amber-500", bar: "border-l-amber-500" },
+        Rendah: { badge: "bg-emerald-600 text-white border-emerald-600", bar: "border-l-emerald-600" }
+      }[prio] || { badge: "bg-amber-500 text-slate-900 border-amber-500", bar: "border-l-amber-500" };
 
-      if (task.status === 'done') {
-        badgeHtml = `<span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">Selesai</span>`;
-      } else if (diffHours < 0) {
-        badgeHtml = `<span class="text-[11px] font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200 animate-pulse">Terlambat!</span>`;
-      } else if (diffHours <= 24) {
-        const hrs = Math.ceil(diffHours);
-        badgeHtml = `<span class="text-[11px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">Mepet! (${hrs}j lagi)</span>`;
-      } else {
-        const days = Math.ceil(diffHours / 24);
-        badgeHtml = `<span class="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">${days} hari lagi</span>`;
-      }
-
-      const priorityColors = {
-        'Tinggi': 'bg-rose-50 text-rose-700 border-rose-200',
-        'Sedang': 'bg-amber-50 text-amber-700 border-amber-200',
-        'Rendah': 'bg-emerald-50 text-emerald-700 border-emerald-200'
-      };
-
-      const card = document.createElement('div');
-      card.className = "bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm hover:shadow transition-all space-y-2.5";
+      const isDone = task.status === "done";
+      const card = document.createElement("div");
+      card.className = `bg-white p-4 rounded-xl border border-slate-300 border-l-4 ${prioStyle.bar} shadow-sm hover:shadow-md transition space-y-3`;
       card.innerHTML = `
-        <div class="flex items-center justify-between gap-2">
-          <span class="text-[10px] font-bold px-2 py-0.5 rounded border ${priorityColors[task.priority] || priorityColors['Sedang']} uppercase tracking-wider">
-            ${task.priority || 'Sedang'}
-          </span>
-          ${badgeHtml}
+        <div class="flex items-center justify-between gap-2 flex-wrap">
+          <span class="text-xs font-bold px-2 py-1 rounded-md border ${prioStyle.badge} uppercase tracking-wide">${escapeHtml(prio)}</span>
+          ${badgeFor(task, now)}
         </div>
 
-        <h4 class="font-bold text-slate-800 text-sm leading-snug break-words ${task.status === 'done' ? 'line-through text-slate-400 font-normal' : ''}">
-          ${escapeHtml(task.title)}
-        </h4>
+        <h4 class="font-bold text-base leading-snug break-words ${isDone ? "line-through text-slate-500" : "text-slate-900"}">${escapeHtml(task.title)}</h4>
 
-        <div class="flex items-center justify-between text-xs text-slate-500 pt-1">
-          <span class="font-mono text-[11px] text-slate-600 font-medium">📅 ${task.deadlineDate} • ${task.deadlineTime}</span>
-          <span class="bg-slate-50 border border-slate-200 px-1.5 py-0.5 rounded text-[11px] text-slate-600 font-medium">${escapeHtml(task.tag || 'General')}</span>
+        <div class="flex items-center justify-between gap-2 flex-wrap text-sm">
+          <span class="font-mono text-xs font-semibold text-slate-800">📅 ${formatDate(task.deadlineDate)} · ${escapeHtml(task.deadlineTime || "")}</span>
+          <span class="bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-md text-xs text-slate-800 font-semibold">${escapeHtml(task.tag || "General")}</span>
         </div>
 
-        <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
-          <div class="flex items-center gap-1">
-            ${task.status !== 'todo' ? `
-              <button onclick="updateTaskStatus('${task.id}', 'todo')" class="p-1 rounded hover:bg-slate-100 text-slate-500 hover:text-slate-800" title="Pindah ke To Do">
-                ←
-              </button>` : ''}
-            ${task.status !== 'progress' ? `
-              <button onclick="updateTaskStatus('${task.id}', 'progress')" class="px-2 py-1 rounded bg-slate-50 hover:bg-indigo-50 text-slate-600 hover:text-indigo-600 font-semibold text-[11px] border border-slate-200" title="Pindah ke Sedang Dikerjakan">
-                Kerjakan
-              </button>` : ''}
-            ${task.status !== 'done' ? `
-              <button onclick="updateTaskStatus('${task.id}', 'done')" class="px-2 py-1 rounded bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold text-[11px] border border-emerald-200" title="Tandai Selesai">
-                ✓ Selesai
-              </button>` : ''}
+        <div class="flex items-center justify-between gap-2 pt-3 border-t border-slate-200">
+          <div class="flex items-center gap-1.5 flex-wrap">
+            ${task.status !== "todo" ? `<button onclick="updateTaskStatus('${task.id}', 'todo')" class="px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-800 font-semibold text-xs border border-slate-300" title="Kembalikan ke Antrean">← Antrean</button>` : ""}
+            ${task.status !== "progress" ? `<button onclick="updateTaskStatus('${task.id}', 'progress')" class="px-2.5 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-900 font-semibold text-xs border border-indigo-300" title="Pindah ke Sedang Dikerjakan">Kerjakan</button>` : ""}
+            ${task.status !== "done" ? `<button onclick="updateTaskStatus('${task.id}', 'done')" class="px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs border border-emerald-700" title="Tandai Selesai">✓ Selesai</button>` : ""}
           </div>
-
-          <div class="flex items-center gap-1">
-            <button onclick="openEditModal('${task.id}')" class="text-slate-400 hover:text-indigo-600 transition p-1" title="Edit Task">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+          <div class="flex items-center">
+            <button onclick="openEditModal('${task.id}')" class="text-slate-600 hover:text-indigo-700 hover:bg-indigo-50 rounded-lg transition p-1.5" title="Edit">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
             </button>
-            <button onclick="deleteTask('${task.id}')" class="text-slate-400 hover:text-rose-500 transition p-1" title="Hapus Task">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            <button onclick="deleteTask('${task.id}')" class="text-slate-600 hover:text-rose-700 hover:bg-rose-50 rounded-lg transition p-1.5" title="Hapus">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
             </button>
           </div>
         </div>
@@ -452,156 +539,127 @@
       return card;
     }
 
-    // Render Kalender Bersih (7 Kolom Presisi)
     function renderCalendar() {
       const year = calendarDate.getFullYear();
       const month = calendarDate.getMonth();
       const monthNames = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-      document.getElementById('calendarMonthYear').textContent = `${monthNames[month]} ${year}`;
+      document.getElementById("calendarMonthYear").textContent = `${monthNames[month]} ${year}`;
 
-      const grid = document.getElementById('calendarGrid');
-      grid.innerHTML = '';
+      const grid = document.getElementById("calendarGrid");
+      grid.innerHTML = "";
 
-      // Tentukan hari pertama bulan ini (0 = Minggu, 1 = Senin, dst.)
-      const firstDayOfMonth = new Date(year, month, 1);
-      const lastDayOfMonth = new Date(year, month + 1, 0);
-      
-      // Standar Senin sebagai kolom pertama (Senin = 0, ..., Minggu = 6)
-      let startingDay = firstDayOfMonth.getDay() - 1;
+      let startingDay = new Date(year, month, 1).getDay() - 1; // Senin = 0
       if (startingDay === -1) startingDay = 6;
+      const totalDays = new Date(year, month + 1, 0).getDate();
+      const t = new Date();
+      const todayStr = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, "0")}-${String(t.getDate()).padStart(2, "0")}`;
 
-      const totalDays = lastDayOfMonth.getDate();
-      const today = new Date();
-      const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-
-      // Kotak kosong sebelum tanggal 1
       for (let i = 0; i < startingDay; i++) {
-        const emptyCell = document.createElement('div');
-        emptyCell.className = "min-h-[52px] sm:min-h-[64px] rounded-lg bg-slate-50/50 border border-slate-100";
-        grid.appendChild(emptyCell);
+        const empty = document.createElement("div");
+        empty.className = "min-h-[56px] sm:min-h-[68px] rounded-lg bg-slate-100 border border-slate-200";
+        grid.appendChild(empty);
       }
 
-      // Isi tanggal 1 sampai selesai
       for (let day = 1; day <= totalDays; day++) {
-        const thisDateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const isToday = thisDateStr === todayStr;
-        const isSelected = thisDateStr === selectedFilterDate;
+        const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+        const isToday = dateStr === todayStr;
+        const isSelected = dateStr === selectedFilterDate;
+        const dayTasks = allTasks.filter(x => x.deadlineDate === dateStr);
+        const hasTodo = dayTasks.some(x => x.status !== "progress" && x.status !== "done");
+        const hasProgress = dayTasks.some(x => x.status === "progress");
+        const hasDone = dayTasks.some(x => x.status === "done");
 
-        const dayTasks = allTasks.filter(t => t.deadlineDate === thisDateStr);
-        const hasTodo = dayTasks.some(t => t.status === 'todo');
-        const hasProgress = dayTasks.some(t => t.status === 'progress');
-        const hasDone = dayTasks.some(t => t.status === 'done');
-
-        const dayCell = document.createElement('div');
-        dayCell.onclick = () => filterByDate(thisDateStr);
-        dayCell.className = `min-h-[52px] sm:min-h-[64px] p-2 rounded-xl border transition cursor-pointer flex flex-col justify-between ${
-          isSelected 
-            ? 'bg-indigo-50 border-indigo-400 ring-2 ring-indigo-200' 
-            : isToday 
-              ? 'bg-white border-indigo-500 ring-2 ring-indigo-200 shadow-sm' 
-              : 'bg-white border-slate-200/90 hover:border-slate-300'
+        const cell = document.createElement("div");
+        cell.onclick = () => window.filterByDate(dateStr);
+        cell.className = `min-h-[56px] sm:min-h-[68px] p-2 rounded-xl border-2 transition cursor-pointer flex flex-col justify-between ${
+          isSelected ? "bg-indigo-100 border-indigo-600"
+          : "bg-white border-slate-300 hover:border-indigo-400 hover:bg-indigo-50/50"
         }`;
 
-        dayCell.innerHTML = `
+        cell.innerHTML = `
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold ${isToday ? 'text-indigo-600 font-bold' : 'text-slate-700'}">${day}</span>
-            ${dayTasks.length > 0 ? `<span class="text-[10px] font-bold font-mono text-slate-500">${dayTasks.length}</span>` : ''}
+            <span class="${isToday ? "bg-indigo-600 text-white w-7 h-7 rounded-full flex items-center justify-center font-bold" : "text-slate-900 font-semibold"} text-sm">${day}</span>
+            ${dayTasks.length ? `<span class="text-xs font-bold font-mono text-slate-800">${dayTasks.length}</span>` : ""}
           </div>
           <div class="flex items-center gap-1 mt-1">
-            ${hasTodo ? '<span class="w-1.5 h-1.5 rounded-full bg-rose-500" title="Ada To Do"></span>' : ''}
-            ${hasProgress ? '<span class="w-1.5 h-1.5 rounded-full bg-indigo-500" title="Ada In Progress"></span>' : ''}
-            ${hasDone ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500" title="Ada Selesai"></span>' : ''}
+            ${hasTodo ? '<span class="w-2 h-2 rounded-full bg-rose-600"></span>' : ""}
+            ${hasProgress ? '<span class="w-2 h-2 rounded-full bg-indigo-600"></span>' : ""}
+            ${hasDone ? '<span class="w-2 h-2 rounded-full bg-emerald-600"></span>' : ""}
           </div>
         `;
-
-        grid.appendChild(dayCell);
+        grid.appendChild(cell);
       }
     }
 
-    window.filterByDate = function(dateStr) {
-      if (selectedFilterDate === dateStr) {
-        clearDateFilter();
-      } else {
-        selectedFilterDate = dateStr;
-        document.getElementById('calendarFilterIndicator').classList.remove('hidden');
-        document.getElementById('calendarFilterIndicator').classList.add('inline-flex');
-        document.getElementById('selectedDateLabel').textContent = dateStr;
-        renderAll();
-      }
-    };
-
-    window.clearDateFilter = function() {
-      selectedFilterDate = null;
-      document.getElementById('calendarFilterIndicator').classList.add('hidden');
-      document.getElementById('calendarFilterIndicator').classList.remove('inline-flex');
+    window.filterByDate = function (dateStr) {
+      if (selectedFilterDate === dateStr) return window.clearDateFilter();
+      selectedFilterDate = dateStr;
+      const ind = document.getElementById("calendarFilterIndicator");
+      ind.classList.remove("hidden");
+      ind.classList.add("inline-flex");
+      document.getElementById("selectedDateLabel").textContent = formatDate(dateStr);
       renderAll();
     };
 
-    window.prevMonth = function() {
-      calendarDate.setMonth(calendarDate.getMonth() - 1);
-      renderCalendar();
+    window.clearDateFilter = function () {
+      selectedFilterDate = null;
+      const ind = document.getElementById("calendarFilterIndicator");
+      ind.classList.add("hidden");
+      ind.classList.remove("inline-flex");
+      renderAll();
     };
 
-    window.nextMonth = function() {
-      calendarDate.setMonth(calendarDate.getMonth() + 1);
-      renderCalendar();
-    };
-
-    window.goToToday = function() {
-      calendarDate = new Date();
-      renderCalendar();
-    };
+    window.prevMonth = function () { calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() - 1, 1); renderCalendar(); };
+    window.nextMonth = function () { calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() + 1, 1); renderCalendar(); };
+    window.goToToday = function () { calendarDate = new Date(); renderCalendar(); };
 
     function escapeHtml(str) {
-      return (str || '').replace(/[&<>'"]/g, tag => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
-      }[tag] || tag));
+      return String(str ?? "").replace(/[&<>'"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[c]));
     }
-  </script>
 
-  <!-- Script Jam & Modal -->
-  <script>
+    /* ---------- Jam, kalender toggle, modal ---------- */
     function updateClock() {
       const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById('liveClock').textContent = `${hours}:${minutes}:${seconds} WIB`;
-
-      const options = { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' };
-      document.getElementById('liveDate').textContent = now.toLocaleDateString('id-ID', options);
+      const p = n => String(n).padStart(2, "0");
+      document.getElementById("liveClock").textContent = `${p(now.getHours())}:${p(now.getMinutes())}:${p(now.getSeconds())} WIB`;
+      document.getElementById("liveDate").textContent = now.toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "short", year: "numeric" });
     }
     setInterval(updateClock, 1000);
     updateClock();
 
-    function toggleCalendar() {
-      const section = document.getElementById('calendarSection');
-      const text = document.getElementById('calendarBtnText');
-      if (section.classList.contains('hidden')) {
-        section.classList.remove('hidden');
-        text.textContent = 'Sembunyikan Kalender';
-      } else {
-        section.classList.add('hidden');
-        text.textContent = 'Buka Kalender';
-      }
-    }
+    window.toggleCalendar = function () {
+      const section = document.getElementById("calendarSection");
+      const text = document.getElementById("calendarBtnText");
+      const hidden = section.classList.toggle("hidden");
+      text.textContent = hidden ? "Buka Kalender" : "Sembunyikan Kalender";
+    };
 
-    function openModal() {
-      document.getElementById('taskForm').reset();
-      document.getElementById('editTaskId').value = '';
-      document.getElementById('modalTitle').textContent = 'Tambah Pekerjaan Baru';
-      document.getElementById('submitBtn').textContent = 'Simpan Task';
+    window.openModal = function () {
+      document.getElementById("taskForm").reset();
+      document.getElementById("editTaskId").value = "";
+      document.getElementById("modalTitle").textContent = "Tambah Pekerjaan Baru";
+      document.getElementById("submitBtn").textContent = "Simpan Task";
+      const t = new Date();
+      document.getElementById("taskDate").value = selectedFilterDate ||
+        `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, "0")}-${String(t.getDate()).padStart(2, "0")}`;
+      document.getElementById("taskTime").value = "17:00";
+      document.getElementById("taskModal").classList.remove("hidden");
+      document.getElementById("taskTitle").focus();
+    };
 
-      const today = new Date();
-      document.getElementById('taskDate').value = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-      document.getElementById('taskTime').value = "17:00";
+    window.closeModal = function () {
+      document.getElementById("taskModal").classList.add("hidden");
+    };
 
-      document.getElementById('taskModal').classList.remove('hidden');
-    }
+    document.getElementById("taskModal").addEventListener("click", (e) => {
+      if (e.target.id === "taskModal") window.closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") window.closeModal();
+    });
 
-    function closeModal() {
-      document.getElementById('taskModal').classList.add('hidden');
-    }
+    /* ---------- Mulai ---------- */
+    if (isAuthed()) showApp(); else showLogin();
   </script>
 </body>
 </html>
