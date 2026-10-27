@@ -149,14 +149,17 @@
 
   </div>
 
-  <!-- Modal Tambah Task -->
+  <!-- Modal Tambah / Edit Task -->
   <div id="taskModal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 transform transition-all">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100 mb-4">
-        <h3 class="font-bold text-base text-slate-900">Tambah Pekerjaan Baru</h3>
+        <h3 id="modalTitle" class="font-bold text-base text-slate-900">Tambah Pekerjaan Baru</h3>
         <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-lg">✕</button>
       </div>
       <form id="taskForm" class="space-y-4">
+        <!-- Hidden input untuk menampung Task ID saat edit -->
+        <input type="hidden" id="editTaskId" value="" />
+
         <div>
           <label class="block text-xs font-semibold text-slate-600 mb-1">Judul Pekerjaan</label>
           <input type="text" id="taskTitle" required placeholder="Contoh: Desain Banner Promo" 
@@ -190,7 +193,7 @@
           </div>
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-600 mb-1">Status Awal</label>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Status</label>
           <select id="taskStatus" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition">
             <option value="todo">Antrean (To Do)</option>
             <option value="progress">Sedang Dikerjakan</option>
@@ -199,7 +202,7 @@
         </div>
         <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
           <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">Batal</button>
-          <button type="submit" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition">Simpan Task</button>
+          <button type="submit" id="submitBtn" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition">Simpan Task</button>
         </div>
       </form>
     </div>
@@ -218,7 +221,7 @@
       doc 
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    // ✅ KONFIGURASI FIREBASE KANBANOINK SUDAH TERTANAM LANGSUNG
+    // Konfigurasi Firebase kanbanoink
     const firebaseConfig = {
       apiKey: "AIzaSyBqRKq7bDLzWGTWjZ2b8xaZnjeWI5K38xo",
       authDomain: "kanbanoink.firebaseapp.com",
@@ -228,7 +231,6 @@
       appId: "1:197531303753:web:ca47bbfbd9911fca8d6498"
     };
 
-    // Inisialisasi Firebase & Firestore
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const tasksCol = collection(db, "tasks");
@@ -237,7 +239,7 @@
     let selectedFilterDate = null;
     let calendarDate = new Date();
 
-    // Dengarkan Real-time Database dari HP, PC Kantor & Rumah
+    // Dengarkan Real-time Database
     onSnapshot(tasksCol, (snapshot) => {
       allTasks = [];
       snapshot.forEach(docSnap => {
@@ -246,12 +248,13 @@
       renderAll();
     }, (error) => {
       console.error("Firebase Error:", error);
-      alert("Koneksi Firebase gagal! Pastikan Rules di Firebase Console sudah diset allow read, write: if true.");
+      alert("Koneksi Firebase gagal! Cek status internet atau rules database.");
     });
 
-    // Form Submit Task Baru
+    // Form Submit (Bisa Tambah Baru atau Update Pekerjaan yang Ada)
     document.getElementById('taskForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+      const editId = document.getElementById('editTaskId').value;
       const title = document.getElementById('taskTitle').value.trim();
       const date = document.getElementById('taskDate').value;
       const time = document.getElementById('taskTime').value;
@@ -264,25 +267,57 @@
       const deadlineTimestamp = new Date(`${date}T${time}`).getTime();
 
       try {
-        await addDoc(tasksCol, {
-          title,
-          deadlineDate: date,
-          deadlineTime: time,
-          deadline: deadlineTimestamp,
-          priority,
-          tag,
-          status,
-          createdAt: Date.now()
-        });
+        if (editId) {
+          // Mode Update/Edit
+          await updateDoc(doc(db, "tasks", editId), {
+            title,
+            deadlineDate: date,
+            deadlineTime: time,
+            deadline: deadlineTimestamp,
+            priority,
+            tag,
+            status,
+            updatedAt: Date.now()
+          });
+        } else {
+          // Mode Tambah Baru
+          await addDoc(tasksCol, {
+            title,
+            deadlineDate: date,
+            deadlineTime: time,
+            deadline: deadlineTimestamp,
+            priority,
+            tag,
+            status,
+            createdAt: Date.now()
+          });
+        }
         closeModal();
-        e.target.reset();
-        document.getElementById('taskTime').value = "17:00";
       } catch (err) {
-        alert("Gagal menambahkan task: " + err.message);
+        alert("Gagal menyimpan task: " + err.message);
       }
     });
 
-    // Update Status Kolom
+    // Buka Modal Edit dengan Data Terisi
+    window.openEditModal = function(id) {
+      const task = allTasks.find(t => t.id === id);
+      if (!task) return;
+
+      document.getElementById('editTaskId').value = task.id;
+      document.getElementById('taskTitle').value = task.title || '';
+      document.getElementById('taskDate').value = task.deadlineDate || '';
+      document.getElementById('taskTime').value = task.deadlineTime || '17:00';
+      document.getElementById('taskPriority').value = task.priority || 'Sedang';
+      document.getElementById('taskTag').value = task.tag || '';
+      document.getElementById('taskStatus').value = task.status || 'todo';
+
+      document.getElementById('modalTitle').textContent = 'Edit Pekerjaan';
+      document.getElementById('submitBtn').textContent = 'Simpan Perubahan';
+
+      document.getElementById('taskModal').classList.remove('hidden');
+    };
+
+    // Update Status Kolom secara Cepat
     window.updateTaskStatus = async function(id, newStatus) {
       try {
         await updateDoc(doc(db, "tasks", id), { status: newStatus });
@@ -302,13 +337,12 @@
       }
     };
 
-    // Render Utama
     function renderAll() {
       renderKanban();
       renderCalendar();
     }
 
-    // Render Kanban (Pengurutan Paling Mepet di Atas)
+    // Render Kanban (Deadline terdekat selalu paling atas)
     function renderKanban() {
       const colTodo = document.getElementById('col-todo');
       const colProgress = document.getElementById('col-progress');
@@ -318,13 +352,11 @@
       colProgress.innerHTML = '';
       colDone.innerHTML = '';
 
-      // Filter jika tanggal kalender diklik
       let filtered = allTasks;
       if (selectedFilterDate) {
         filtered = filtered.filter(t => t.deadlineDate === selectedFilterDate);
       }
 
-      // Urutkan paling mepet tanggal di paling atas
       filtered.sort((a, b) => a.deadline - b.deadline);
 
       let countTodo = 0, countProgress = 0, countDone = 0;
@@ -403,7 +435,7 @@
           <span class="bg-slate-50 border border-slate-200 px-1.5 py-0.5 rounded text-[11px] text-slate-600 font-medium">${escapeHtml(task.tag || 'General')}</span>
         </div>
 
-        <!-- Action Buttons -->
+        <!-- Action Buttons (Pindah Status, Edit & Hapus) -->
         <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
           <div class="flex items-center gap-1">
             ${task.status !== 'todo' ? `
@@ -419,15 +451,23 @@
                 ✓ Selesai
               </button>` : ''}
           </div>
-          <button onclick="deleteTask('${task.id}')" class="text-slate-400 hover:text-rose-500 transition p-1" title="Hapus Task">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-          </button>
+
+          <div class="flex items-center gap-1">
+            <!-- Tombol Edit -->
+            <button onclick="openEditModal('${task.id}')" class="text-slate-400 hover:text-indigo-600 transition p-1" title="Edit Task">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+            </button>
+            <!-- Tombol Hapus -->
+            <button onclick="deleteTask('${task.id}')" class="text-slate-400 hover:text-rose-500 transition p-1" title="Hapus Task">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            </button>
+          </div>
         </div>
       `;
       return card;
     }
 
-    // Render Visual Kalender dengan Nomor Minggu (W1, W2, dst.)
+    // Render Visual Kalender
     function renderCalendar() {
       const year = calendarDate.getFullYear();
       const month = calendarDate.getMonth();
@@ -440,7 +480,7 @@
       const firstDayOfMonth = new Date(year, month, 1);
       const lastDayOfMonth = new Date(year, month + 1, 0);
       let startingDay = firstDayOfMonth.getDay();
-      startingDay = startingDay === 0 ? 6 : startingDay - 1; // Senin = 0
+      startingDay = startingDay === 0 ? 6 : startingDay - 1;
 
       const daysInMonth = lastDayOfMonth.getDate();
       const today = new Date();
@@ -453,7 +493,6 @@
         const weekStartDate = new Date(year, month, currentDay - startingDay);
         const weekNumber = getISOWeekNumber(weekStartDate);
 
-        // Kolom Nomor Minggu
         const weekCell = document.createElement('div');
         weekCell.className = "flex items-center justify-center font-mono text-[11px] font-bold text-indigo-500 bg-indigo-50/60 rounded-lg border border-indigo-100/70 select-none";
         weekCell.textContent = `W${weekNumber}`;
@@ -587,11 +626,18 @@
       }
     }
 
+    // Modal Buka Tambah Baru
     function openModal() {
-      const modal = document.getElementById('taskModal');
-      modal.classList.remove('hidden');
+      document.getElementById('taskForm').reset();
+      document.getElementById('editTaskId').value = '';
+      document.getElementById('modalTitle').textContent = 'Tambah Pekerjaan Baru';
+      document.getElementById('submitBtn').textContent = 'Simpan Task';
+
       const today = new Date();
       document.getElementById('taskDate').value = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+      document.getElementById('taskTime').value = "17:00";
+
+      document.getElementById('taskModal').classList.remove('hidden');
     }
 
     function closeModal() {
