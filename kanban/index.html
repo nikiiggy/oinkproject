@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task & Deadline Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen p-4 md:p-8 font-sans antialiased selection:bg-indigo-100 selection:text-indigo-900">
+  
+  <div class="max-w-7xl mx-auto space-y-6">
+    
+    <!-- Top Header -->
+    <header class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-lg shadow-sm">
+            ✓
+          </div>
+          <div>
+            <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">Task & Deadline Tracker</h1>
+            <p class="text-xs sm:text-sm text-slate-500 font-normal">Sinkronisasi Cloud Real-time • HP, PC Kantor & Rumah</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <!-- Live Clock & Status -->
+        <div class="bg-slate-50 border border-slate-200/80 rounded-xl px-3.5 py-2 flex items-center gap-3">
+          <div class="text-right">
+            <div id="liveClock" class="font-mono font-bold text-slate-900 text-sm tracking-tight leading-none">00:00:00 WIB</div>
+            <div id="liveDate" class="text-[11px] text-slate-500 font-medium mt-1 leading-none">Memuat tanggal...</div>
+          </div>
+          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Cloud
+          </span>
+        </div>
+
+        <!-- Tombol Toggle Kalender -->
+        <button id="toggleCalendarBtn" onclick="toggleCalendar()" class="inline-flex items-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-semibold px-3.5 py-2.5 rounded-xl text-xs sm:text-sm shadow-sm transition active:scale-95">
+          <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span id="calendarBtnText">Sembunyikan Kalender</span>
+        </button>
+
+        <!-- Tombol Tambah Task -->
+        <button onclick="openModal()" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2.5 rounded-xl text-xs sm:text-sm shadow-sm transition active:scale-95">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          Pekerjaan Baru
+        </button>
+      </div>
+    </header>
+
+    <!-- Calendar Section -->
+    <section id="calendarSection" class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80 transition-all">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+        <div class="flex items-center gap-3">
+          <h2 id="calendarMonthYear" class="text-base sm:text-lg font-bold text-slate-900 capitalize">Bulan Tahun</h2>
+          <span id="calendarFilterIndicator" class="hidden text-xs bg-indigo-50 text-indigo-700 font-semibold px-2.5 py-1 rounded-full border border-indigo-200 items-center gap-1.5">
+            Filter: <span id="selectedDateLabel"></span>
+            <button onclick="clearDateFilter()" class="hover:text-indigo-950 font-bold ml-1">✕</button>
+          </span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="prevMonth()" class="p-2 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 transition" title="Bulan sebelumnya">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button onclick="goToToday()" class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition">Hari Ini</button>
+          <button onclick="nextMonth()" class="p-2 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 transition" title="Bulan berikutnya">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <div class="min-w-[620px]">
+          <!-- Header Hari & Kolom Minggu -->
+          <div class="grid grid-cols-[56px_repeat(7,1fr)] gap-2 text-center text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wider">
+            <div class="text-indigo-500 font-mono">Minggu</div>
+            <div>Sen</div>
+            <div>Sel</div>
+            <div>Rab</div>
+            <div>Kam</div>
+            <div>Jum</div>
+            <div>Sab</div>
+            <div>Min</div>
+          </div>
+          <!-- Grid Tanggal -->
+          <div id="calendarGrid" class="grid grid-cols-[56px_repeat(7,1fr)] gap-2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kanban Board (3 Columns) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      
+      <!-- Kolom: To Do -->
+      <div class="bg-slate-100/70 border border-slate-200/80 rounded-2xl p-4 flex flex-col">
+        <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-200">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
+            <h3 class="font-bold text-sm text-slate-800">Antrean (To Do)</h3>
+          </div>
+          <span id="count-todo" class="text-xs font-semibold bg-white text-slate-600 px-2 py-0.5 rounded-md border border-slate-200 font-mono">0</span>
+        </div>
+        <div id="col-todo" class="space-y-3 flex-1 min-h-[160px]"></div>
+      </div>
+
+      <!-- Kolom: In Progress -->
+      <div class="bg-indigo-50/40 border border-indigo-100 rounded-2xl p-4 flex flex-col">
+        <div class="flex items-center justify-between pb-3 mb-3 border-b border-indigo-100">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+            <h3 class="font-bold text-sm text-slate-800">Sedang Dikerjakan</h3>
+          </div>
+          <span id="count-progress" class="text-xs font-semibold bg-white text-indigo-700 px-2 py-0.5 rounded-md border border-indigo-200 font-mono">0</span>
+        </div>
+        <div id="col-progress" class="space-y-3 flex-1 min-h-[160px]"></div>
+      </div>
+
+      <!-- Kolom: Done -->
+      <div class="bg-emerald-50/30 border border-emerald-100 rounded-2xl p-4 flex flex-col">
+        <div class="flex items-center justify-between pb-3 mb-3 border-b border-emerald-100">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            <h3 class="font-bold text-sm text-slate-800">Selesai (Done)</h3>
+          </div>
+          <span id="count-done" class="text-xs font-semibold bg-white text-emerald-700 px-2 py-0.5 rounded-md border border-emerald-200 font-mono">0</span>
+        </div>
+        <div id="col-done" class="space-y-3 flex-1 min-h-[160px]"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Modal Tambah Task -->
+  <div id="taskModal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 transform transition-all">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-100 mb-4">
+        <h3 class="font-bold text-base text-slate-900">Tambah Pekerjaan Baru</h3>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-lg">✕</button>
+      </div>
+      <form id="taskForm" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Judul Pekerjaan</label>
+          <input type="text" id="taskTitle" required placeholder="Contoh: Desain Banner Promo" 
+            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition" />
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Tanggal Deadline</label>
+            <input type="date" id="taskDate" required 
+              class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Jam Deadline</label>
+            <input type="time" id="taskTime" value="17:00" required 
+              class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition" />
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Prioritas</label>
+            <select id="taskPriority" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition">
+              <option value="Tinggi">Tinggi</option>
+              <option value="Sedang" selected>Sedang</option>
+              <option value="Rendah">Rendah</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Kategori / Label</label>
+            <input type="text" id="taskTag" placeholder="Contoh: Desain, Web, Konten" 
+              class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Status Awal</label>
+          <select id="taskStatus" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition">
+            <option value="todo">Antrean (To Do)</option>
+            <option value="progress">Sedang Dikerjakan</option>
+            <option value="done">Selesai (Done)</option>
+          </select>
+        </div>
+        <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
+          <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">Batal</button>
+          <button type="submit" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition">Simpan Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Firebase Modular SDK via CDN -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getFirestore, 
+      collection, 
+      addDoc, 
+      onSnapshot, 
+      updateDoc, 
+      deleteDoc, 
+      doc 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // ✅ KONFIGURASI FIREBASE KANBANOINK SUDAH TERTANAM LANGSUNG
+    const firebaseConfig = {
+      apiKey: "AIzaSyBqRKq7bDLzWGTWjZ2b8xaZnjeWI5K38xo",
+      authDomain: "kanbanoink.firebaseapp.com",
+      projectId: "kanbanoink",
+      storageBucket: "kanbanoink.firebasestorage.app",
+      messagingSenderId: "197531303753",
+      appId: "1:197531303753:web:ca47bbfbd9911fca8d6498"
+    };
+
+    // Inisialisasi Firebase & Firestore
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const tasksCol = collection(db, "tasks");
+
+    let allTasks = [];
+    let selectedFilterDate = null;
+    let calendarDate = new Date();
+
+    // Dengarkan Real-time Database dari HP, PC Kantor & Rumah
+    onSnapshot(tasksCol, (snapshot) => {
+      allTasks = [];
+      snapshot.forEach(docSnap => {
+        allTasks.push({ id: docSnap.id, ...docSnap.data() });
+      });
+      renderAll();
+    }, (error) => {
+      console.error("Firebase Error:", error);
+      alert("Koneksi Firebase gagal! Pastikan Rules di Firebase Console sudah diset allow read, write: if true.");
+    });
+
+    // Form Submit Task Baru
+    document.getElementById('taskForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('taskTitle').value.trim();
+      const date = document.getElementById('taskDate').value;
+      const time = document.getElementById('taskTime').value;
+      const priority = document.getElementById('taskPriority').value;
+      const tag = document.getElementById('taskTag').value.trim() || 'General';
+      const status = document.getElementById('taskStatus').value;
+
+      if (!title || !date || !time) return;
+
+      const deadlineTimestamp = new Date(`${date}T${time}`).getTime();
+
+      try {
+        await addDoc(tasksCol, {
+          title,
+          deadlineDate: date,
+          deadlineTime: time,
+          deadline: deadlineTimestamp,
+          priority,
+          tag,
+          status,
+          createdAt: Date.now()
+        });
+        closeModal();
+        e.target.reset();
+        document.getElementById('taskTime').value = "17:00";
+      } catch (err) {
+        alert("Gagal menambahkan task: " + err.message);
+      }
+    });
+
+    // Update Status Kolom
+    window.updateTaskStatus = async function(id, newStatus) {
+      try {
+        await updateDoc(doc(db, "tasks", id), { status: newStatus });
+      } catch (err) {
+        alert("Gagal update status: " + err.message);
+      }
+    };
+
+    // Hapus Task
+    window.deleteTask = async function(id) {
+      if (confirm("Hapus pekerjaan ini secara permanen?")) {
+        try {
+          await deleteDoc(doc(db, "tasks", id));
+        } catch (err) {
+          alert("Gagal menghapus task: " + err.message);
+        }
+      }
+    };
+
+    // Render Utama
+    function renderAll() {
+      renderKanban();
+      renderCalendar();
+    }
+
+    // Render Kanban (Pengurutan Paling Mepet di Atas)
+    function renderKanban() {
+      const colTodo = document.getElementById('col-todo');
+      const colProgress = document.getElementById('col-progress');
+      const colDone = document.getElementById('col-done');
+
+      colTodo.innerHTML = '';
+      colProgress.innerHTML = '';
+      colDone.innerHTML = '';
+
+      // Filter jika tanggal kalender diklik
+      let filtered = allTasks;
+      if (selectedFilterDate) {
+        filtered = filtered.filter(t => t.deadlineDate === selectedFilterDate);
+      }
+
+      // Urutkan paling mepet tanggal di paling atas
+      filtered.sort((a, b) => a.deadline - b.deadline);
+
+      let countTodo = 0, countProgress = 0, countDone = 0;
+      const now = Date.now();
+
+      filtered.forEach(task => {
+        const card = createCardElement(task, now);
+        if (task.status === 'progress') {
+          colProgress.appendChild(card);
+          countProgress++;
+        } else if (task.status === 'done') {
+          colDone.appendChild(card);
+          countDone++;
+        } else {
+          colTodo.appendChild(card);
+          countTodo++;
+        }
+      });
+
+      document.getElementById('count-todo').textContent = countTodo;
+      document.getElementById('count-progress').textContent = countProgress;
+      document.getElementById('count-done').textContent = countDone;
+
+      checkEmpty(colTodo, "Tidak ada antrean");
+      checkEmpty(colProgress, "Belum ada yang dikerjakan");
+      checkEmpty(colDone, "Belum ada yang selesai");
+    }
+
+    function checkEmpty(col, msg) {
+      if (col.children.length === 0) {
+        col.innerHTML = `
+          <div class="h-32 rounded-xl border border-dashed border-slate-200/90 flex items-center justify-center text-xs text-slate-400 bg-white/40 font-medium">
+            ${msg}
+          </div>`;
+      }
+    }
+
+    function createCardElement(task, now) {
+      const diffHours = (task.deadline - now) / (1000 * 60 * 60);
+      let badgeHtml = '';
+
+      if (task.status === 'done') {
+        badgeHtml = `<span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">Selesai</span>`;
+      } else if (diffHours < 0) {
+        badgeHtml = `<span class="text-[11px] font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200 animate-pulse">Terlambat!</span>`;
+      } else if (diffHours <= 24) {
+        const hrs = Math.ceil(diffHours);
+        badgeHtml = `<span class="text-[11px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">Mepet! (${hrs}j lagi)</span>`;
+      } else {
+        const days = Math.ceil(diffHours / 24);
+        badgeHtml = `<span class="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">${days} hari lagi</span>`;
+      }
+
+      const priorityColors = {
+        'Tinggi': 'bg-rose-50 text-rose-700 border-rose-200',
+        'Sedang': 'bg-amber-50 text-amber-700 border-amber-200',
+        'Rendah': 'bg-emerald-50 text-emerald-700 border-emerald-200'
+      };
+
+      const card = document.createElement('div');
+      card.className = "bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm hover:shadow transition-all space-y-2.5";
+      card.innerHTML = `
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded border ${priorityColors[task.priority] || priorityColors['Sedang']} uppercase tracking-wider">
+            ${task.priority || 'Sedang'}
+          </span>
+          ${badgeHtml}
+        </div>
+
+        <h4 class="font-bold text-slate-800 text-sm leading-snug break-words ${task.status === 'done' ? 'line-through text-slate-400 font-normal' : ''}">
+          ${escapeHtml(task.title)}
+        </h4>
+
+        <div class="flex items-center justify-between text-xs text-slate-500 pt-1">
+          <span class="font-mono text-[11px] text-slate-600 font-medium">📅 ${task.deadlineDate} • ${task.deadlineTime}</span>
+          <span class="bg-slate-50 border border-slate-200 px-1.5 py-0.5 rounded text-[11px] text-slate-600 font-medium">${escapeHtml(task.tag || 'General')}</span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+          <div class="flex items-center gap-1">
+            ${task.status !== 'todo' ? `
+              <button onclick="updateTaskStatus('${task.id}', 'todo')" class="p-1 rounded hover:bg-slate-100 text-slate-500 hover:text-slate-800" title="Pindah ke To Do">
+                ←
+              </button>` : ''}
+            ${task.status !== 'progress' ? `
+              <button onclick="updateTaskStatus('${task.id}', 'progress')" class="px-2 py-1 rounded bg-slate-50 hover:bg-indigo-50 text-slate-600 hover:text-indigo-600 font-semibold text-[11px] border border-slate-200" title="Pindah ke Sedang Dikerjakan">
+                Kerjakan
+              </button>` : ''}
+            ${task.status !== 'done' ? `
+              <button onclick="updateTaskStatus('${task.id}', 'done')" class="px-2 py-1 rounded bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold text-[11px] border border-emerald-200" title="Tandai Selesai">
+                ✓ Selesai
+              </button>` : ''}
+          </div>
+          <button onclick="deleteTask('${task.id}')" class="text-slate-400 hover:text-rose-500 transition p-1" title="Hapus Task">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+          </button>
+        </div>
+      `;
+      return card;
+    }
+
+    // Render Visual Kalender dengan Nomor Minggu (W1, W2, dst.)
+    function renderCalendar() {
+      const year = calendarDate.getFullYear();
+      const month = calendarDate.getMonth();
+      const monthNames = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+      document.getElementById('calendarMonthYear').textContent = `${monthNames[month]} ${year}`;
+
+      const grid = document.getElementById('calendarGrid');
+      grid.innerHTML = '';
+
+      const firstDayOfMonth = new Date(year, month, 1);
+      const lastDayOfMonth = new Date(year, month + 1, 0);
+      let startingDay = firstDayOfMonth.getDay();
+      startingDay = startingDay === 0 ? 6 : startingDay - 1; // Senin = 0
+
+      const daysInMonth = lastDayOfMonth.getDate();
+      const today = new Date();
+      const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+      let currentDay = 1;
+      let finished = false;
+
+      while (!finished) {
+        const weekStartDate = new Date(year, month, currentDay - startingDay);
+        const weekNumber = getISOWeekNumber(weekStartDate);
+
+        // Kolom Nomor Minggu
+        const weekCell = document.createElement('div');
+        weekCell.className = "flex items-center justify-center font-mono text-[11px] font-bold text-indigo-500 bg-indigo-50/60 rounded-lg border border-indigo-100/70 select-none";
+        weekCell.textContent = `W${weekNumber}`;
+        grid.appendChild(weekCell);
+
+        for (let d = 0; d < 7; d++) {
+          if ((grid.children.length % 8 === 1 && currentDay === 1 && d < startingDay) || currentDay > daysInMonth) {
+            const emptyCell = document.createElement('div');
+            emptyCell.className = "min-h-[50px] sm:min-h-[64px] rounded-lg bg-slate-50/40 border border-slate-100";
+            grid.appendChild(emptyCell);
+          } else {
+            const thisDateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(currentDay).padStart(2, '0')}`;
+            const isToday = thisDateStr === todayStr;
+            const isSelected = thisDateStr === selectedFilterDate;
+
+            const dayTasks = allTasks.filter(t => t.deadlineDate === thisDateStr);
+            const hasTodo = dayTasks.some(t => t.status === 'todo');
+            const hasProgress = dayTasks.some(t => t.status === 'progress');
+            const hasDone = dayTasks.some(t => t.status === 'done');
+
+            const dayCell = document.createElement('div');
+            dayCell.onclick = () => filterByDate(thisDateStr);
+            dayCell.className = `min-h-[50px] sm:min-h-[64px] p-1.5 rounded-lg border transition cursor-pointer flex flex-col justify-between ${
+              isSelected 
+                ? 'bg-indigo-50 border-indigo-400 ring-2 ring-indigo-200' 
+                : isToday 
+                  ? 'bg-white border-indigo-400 ring-1 ring-indigo-300' 
+                  : 'bg-white border-slate-200 hover:border-slate-300'
+            }`;
+
+            dayCell.innerHTML = `
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold ${isToday ? 'text-indigo-600 font-bold' : 'text-slate-700'}">${currentDay}</span>
+                ${dayTasks.length > 0 ? `<span class="text-[10px] font-bold font-mono text-slate-500">${dayTasks.length}</span>` : ''}
+              </div>
+              <div class="flex items-center gap-1 mt-1">
+                ${hasTodo ? '<span class="w-1.5 h-1.5 rounded-full bg-rose-500" title="Ada To Do"></span>' : ''}
+                ${hasProgress ? '<span class="w-1.5 h-1.5 rounded-full bg-indigo-500" title="Ada In Progress"></span>' : ''}
+                ${hasDone ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500" title="Ada Selesai"></span>' : ''}
+              </div>
+            `;
+
+            grid.appendChild(dayCell);
+            currentDay++;
+          }
+        }
+
+        if (currentDay > daysInMonth) {
+          finished = true;
+        }
+      }
+    }
+
+    function getISOWeekNumber(d) {
+      const target = new Date(d.valueOf());
+      const dayNr = (d.getDay() + 6) % 7;
+      target.setDate(target.getDate() - dayNr + 3);
+      const firstThursday = target.valueOf();
+      target.setMonth(0, 1);
+      if (target.getDay() !== 4) {
+        target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);
+      }
+      return 1 + Math.ceil((firstThursday - target) / 604800000);
+    }
+
+    window.filterByDate = function(dateStr) {
+      if (selectedFilterDate === dateStr) {
+        clearDateFilter();
+      } else {
+        selectedFilterDate = dateStr;
+        document.getElementById('calendarFilterIndicator').classList.remove('hidden');
+        document.getElementById('calendarFilterIndicator').classList.add('inline-flex');
+        document.getElementById('selectedDateLabel').textContent = dateStr;
+        renderAll();
+      }
+    };
+
+    window.clearDateFilter = function() {
+      selectedFilterDate = null;
+      document.getElementById('calendarFilterIndicator').classList.add('hidden');
+      document.getElementById('calendarFilterIndicator').classList.remove('inline-flex');
+      renderAll();
+    };
+
+    window.prevMonth = function() {
+      calendarDate.setMonth(calendarDate.getMonth() - 1);
+      renderCalendar();
+    };
+
+    window.nextMonth = function() {
+      calendarDate.setMonth(calendarDate.getMonth() + 1);
+      renderCalendar();
+    };
+
+    window.goToToday = function() {
+      calendarDate = new Date();
+      renderCalendar();
+    };
+
+    function escapeHtml(str) {
+      return (str || '').replace(/[&<>'"]/g, tag => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+      }[tag] || tag));
+    }
+  </script>
+
+  <!-- Script Jam & UI Modal Interaktif -->
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('liveClock').textContent = `${hours}:${minutes}:${seconds} WIB`;
+
+      const options = { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' };
+      document.getElementById('liveDate').textContent = now.toLocaleDateString('id-ID', options);
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function toggleCalendar() {
+      const section = document.getElementById('calendarSection');
+      const text = document.getElementById('calendarBtnText');
+      if (section.classList.contains('hidden')) {
+        section.classList.remove('hidden');
+        text.textContent = 'Sembunyikan Kalender';
+      } else {
+        section.classList.add('hidden');
+        text.textContent = 'Buka Kalender';
+      }
+    }
+
+    function openModal() {
+      const modal = document.getElementById('taskModal');
+      modal.classList.remove('hidden');
+      const today = new Date();
+      document.getElementById('taskDate').value = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    }
+
+    function closeModal() {
+      document.getElementById('taskModal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
