@@ -6,7 +6,7 @@
     
     <!-- SEO Meta Tags -->
     <title>Portfolio - Oink Project</title>
-    <meta name="description" content="Portofolio Website dan Desain Grafis oleh Oink Project.">
+    <meta name="description" content="Portofolio Website, Desain Grafis, dan Video oleh Oink Project.">
     <meta name="author" content="Oink Project">
     <meta name="robots" content="index, follow">
 
@@ -23,6 +23,7 @@
             --card-yellow: #ffc425;
             --card-cyan: #05bbc0; 
             --card-green: #25d366;
+            --card-red: #ef4444;
             --dark-card: #111827;
             
             --text-main: #0f172a;
@@ -252,68 +253,13 @@
             transform: translateY(-1px);
         }
 
-        /* Filter Controls Card */
-        .filter-controls-card {
-            background: var(--card-white);
-            padding: 14px;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
+        /* Filter Controls */
+        .filter-section {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
-        /* Dropdown Kategori / Tag Modern */
-        .dropdown-box {
-            position: relative;
-            width: 100%;
-        }
-
-        .dropdown-box .category-icon {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--card-cyan);
-            font-size: 0.95rem;
-            pointer-events: none;
-        }
-
-        .dropdown-box .chevron-icon {
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            pointer-events: none;
-            transition: var(--transition);
-        }
-
-        .category-select {
-            width: 100%;
-            padding: 12px 38px 12px 40px;
-            background: #f8fafc;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: var(--text-main);
-            outline: none;
-            cursor: pointer;
-            appearance: none;
-            -webkit-appearance: none;
-            transition: var(--transition);
-        }
-
-        .category-select:focus {
-            background: #ffffff;
-            border-color: var(--card-cyan);
-            box-shadow: 0 0 0 3px rgba(5, 187, 192, 0.15);
-        }
-
-        /* Search Input */
         .search-box {
             position: relative;
             width: 100%;
@@ -330,58 +276,74 @@
 
         .search-input {
             width: 100%;
-            padding: 12px 14px 12px 40px;
-            background: #f8fafc;
+            padding: 12px 14px 12px 42px;
+            background: var(--card-white);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius-md);
             font-size: 0.88rem;
             font-weight: 600;
             color: var(--text-main);
             outline: none;
+            box-shadow: var(--shadow-sm);
             transition: var(--transition);
         }
 
         .search-input:focus {
-            background: #ffffff;
             border-color: var(--card-cyan);
             box-shadow: 0 0 0 3px rgba(5, 187, 192, 0.15);
         }
 
-        /* Preset Software Buttons (Horizontal Scrolling) */
-        .software-chips-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
+        /* Dropdown Tag */
+        .tag-select-wrapper {
+            position: relative;
+            width: 100%;
         }
 
-        .chips-label {
-            font-size: 0.72rem;
-            font-weight: 800;
+        .tag-select {
+            width: 100%;
+            appearance: none;
+            background: var(--card-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 12px 38px 12px 14px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            outline: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .tag-select:focus {
+            border-color: var(--card-cyan);
+            box-shadow: 0 0 0 3px rgba(5, 187, 192, 0.15);
+        }
+
+        .tag-select-icon {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
             color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
+            font-size: 0.85rem;
         }
 
-        .software-chips {
+        /* Software Tag Chips Scroll */
+        .software-chips-scroll {
             display: flex;
             gap: 6px;
             overflow-x: auto;
             padding-bottom: 4px;
             scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
         }
-
-        .software-chips::-webkit-scrollbar {
-            display: none;
-        }
+        .software-chips-scroll::-webkit-scrollbar { display: none; }
 
         .chip-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            color: var(--text-main);
+            background: var(--card-white);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
             padding: 7px 12px;
             border-radius: 20px;
             font-size: 0.76rem;
@@ -389,42 +351,19 @@
             white-space: nowrap;
             cursor: pointer;
             transition: var(--transition);
-            flex-shrink: 0;
-        }
-
-        .chip-btn i {
-            font-size: 0.85rem;
-            color: var(--card-cyan);
-        }
-
-        .chip-btn:hover {
-            border-color: var(--card-cyan);
-            background: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .chip-btn.active {
             background: var(--card-cyan);
             color: #ffffff;
             border-color: var(--card-cyan);
-            box-shadow: 0 4px 10px rgba(5, 187, 192, 0.3);
+            box-shadow: 0 3px 10px rgba(5, 187, 192, 0.3);
         }
 
-        .chip-btn.active i {
-            color: #ffffff;
-        }
-
-        /* Results Meta Info */
-        .results-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 4px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: var(--text-muted);
-        }
-
-        /* GALERI 2 GRID FULL POSTER (3:4) */
+        /* GALERI 2 GRID POSTER */
         .gallery-2grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -449,7 +388,6 @@
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
         }
 
-        /* Rasio Poster 1080x1440px (3:4) */
         .card-img-wrapper {
             position: relative;
             aspect-ratio: 1080 / 1440;
@@ -465,23 +403,25 @@
             display: block;
         }
 
-        /* Tag badge di sudut foto */
-        .card-tag-badge {
+        /* Badge Penanda Video di Poster */
+        .card-video-badge {
             position: absolute;
             top: 8px;
             left: 8px;
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(4px);
+            background: rgba(239, 68, 68, 0.9);
             color: #ffffff;
             font-size: 0.65rem;
             font-weight: 800;
             padding: 4px 8px;
             border-radius: 6px;
-            z-index: 2;
+            z-index: 3;
             letter-spacing: 0.02em;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
         }
 
-        /* Tombol WhatsApp Melayang di Sudut Poster */
         .card-wa-btn {
             position: absolute;
             bottom: 10px;
@@ -507,7 +447,6 @@
             background: #1eb856;
         }
 
-        /* State Kosong */
         .empty-state {
             grid-column: span 2;
             text-align: center;
@@ -527,7 +466,7 @@
             display: block;
         }
 
-        /* LIGHTBOX PREVIEW MODAL TERSTRUKTUR (TIDAK BERTUMPUK) */
+        /* Modal Lightbox Preview */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -535,7 +474,7 @@
             width: 100%;
             height: 100%;
             background: rgba(15, 23, 42, 0.92);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(6px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -543,153 +482,149 @@
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
-            padding: 14px;
+            padding: 16px;
         }
 
         .modal-overlay.active { opacity: 1; visibility: visible; }
 
         .modal-content {
             width: 100%;
-            max-width: 440px;
+            max-width: 420px;
             background: var(--card-white);
             border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
             display: flex;
             flex-direction: column;
             position: relative;
-            max-height: 92vh;
+            max-height: 90vh;
+        }
+
+        /* Frame Media Utama */
+        .modal-media-wrapper {
+            width: 100%;
+            background: #0f172a;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-img-container {
+            width: 100%;
+            aspect-ratio: 1080 / 1440;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Responsive Video Iframe YouTube (16:9) */
+        .modal-video-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
+
+        .modal-video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Thumbnail Galeri Terpisah Di Bawah Media */
+        .modal-thumbs-bar {
+            background: #1e293b;
+            padding: 8px 12px;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .modal-thumbs-bar::-webkit-scrollbar { display: none; }
+
+        .thumb-preview-item {
+            width: 48px;
+            height: 48px;
+            border-radius: 6px;
+            object-fit: cover;
+            cursor: pointer;
+            opacity: 0.6;
+            border: 2px solid transparent;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .thumb-preview-item.active {
+            opacity: 1;
+            border-color: var(--card-cyan);
+            transform: scale(1.05);
+        }
+
+        .thumb-video-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 6px;
+            background: #ef4444;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0.7;
+            font-size: 1.1rem;
+            border: 2px solid transparent;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .thumb-video-icon.active {
+            opacity: 1;
+            border-color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .modal-details {
+            padding: 16px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
         }
 
         .modal-close-btn {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 36px;
-            height: 36px;
+            top: 10px;
+            right: 10px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            background: rgba(15, 23, 42, 0.75);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            z-index: 20;
-            transition: var(--transition);
-        }
-
-        .modal-close-btn:hover {
-            background: #000000;
-            transform: scale(1.05);
-        }
-
-        /* Area Tampilan Foto Bersih */
-        .modal-viewport {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1080 / 1200;
-            background: #0f172a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .modal-viewport img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            user-select: none;
-        }
-
-        /* Tombol Navigasi Panah Kiri Kanan */
-        .modal-nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(15, 23, 42, 0.65);
+            background: rgba(15, 23, 42, 0.8);
             color: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
+            font-size: 0.95rem;
             z-index: 10;
         }
 
-        .modal-nav-btn:hover {
-            background: rgba(15, 23, 42, 0.95);
-        }
-
-        .modal-nav-prev { left: 10px; }
-        .modal-nav-next { right: 10px; }
-
-        /* Counter Nomor Gambar (1/3) */
-        .modal-img-counter {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.65);
+        .card-tag-badge {
+            display: inline-block;
+            background: rgba(15, 23, 42, 0.85);
             color: #ffffff;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 12px;
-            backdrop-filter: blur(4px);
-            z-index: 5;
-        }
-
-        /* Galeri Strip Thumbnail Terpisah (Tidak Menutupi Gambar) */
-        .modal-thumbs-strip {
-            display: flex;
-            gap: 8px;
-            padding: 10px 14px;
-            background: #f1f5f9;
-            border-bottom: 1px solid var(--border-color);
-            overflow-x: auto;
-            scrollbar-width: thin;
-        }
-
-        .modal-thumb-box {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 2px solid transparent;
-            cursor: pointer;
-            flex-shrink: 0;
-            opacity: 0.55;
-            transition: var(--transition);
-            background: #cbd5e1;
-        }
-
-        .modal-thumb-box.active {
-            border-color: var(--card-cyan);
-            opacity: 1;
-            transform: scale(1.05);
-        }
-
-        .modal-thumb-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Detail Teks dan Tombol Modal */
-        .modal-details {
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            overflow-y: auto;
-            max-height: 38vh;
+            padding: 4px 8px;
+            border-radius: 6px;
+            letter-spacing: 0.02em;
         }
 
         .btn-action-group {
@@ -793,115 +728,74 @@
                 </div>
                 <p class="promo-subtitle">Proses cepat, terjangkau & tugasmu aman!</p>
             </div>
-            <a href="https://wa.me/6285155091238?text=Halo%20Oink%20Project,%20saya%20mau%20tanya%20jasa%20desain%20dan%20website" target="_blank" class="btn-promo-wa">
+            <a href="https://wa.me/6285155091238?text=Halo%20Oink%20Project,%20saya%20mau%20tanya%20jasa%20tugas%20desain%20dan%20website" target="_blank" class="btn-promo-wa">
                 <i class="fab fa-whatsapp"></i>
                 <span>Konsultasi / Order via WhatsApp</span>
             </a>
         </div>
 
-        <!-- Filter Controls Card -->
-        <div class="filter-controls-card">
-            <!-- Dropdown Pilihan Kategori / Tag -->
-            <div class="dropdown-box">
-                <i class="fas fa-layer-group category-icon"></i>
-                <select id="categorySelect" class="category-select" onchange="handleDropdownFilter(this.value)">
-                    <option value="Semua">Semua Kategori (Memuat...)</option>
-                </select>
-                <i class="fas fa-chevron-down chevron-icon"></i>
-            </div>
-
-            <!-- Input Pencarian -->
+        <!-- Area Filter & Pencarian -->
+        <div class="filter-section">
+            <!-- Search Bar -->
             <div class="search-box">
                 <i class="fas fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" class="search-input" placeholder="Cari karya desain / website..." oninput="handleSearch()">
+                <input type="text" id="searchInput" class="search-input" placeholder="Cari karya (website, poster, video, 3D...)" oninput="handleSearch()">
             </div>
 
-            <!-- Tombol Tag Software Preset -->
-            <div class="software-chips-wrapper">
-                <span class="chips-label">Software & Tools:</span>
-                <div class="software-chips" id="softwareChipsContainer">
-                    <button class="chip-btn active" data-tag="Semua" onclick="handleChipFilter('Semua', this)">
-                        <i class="fas fa-border-all"></i> Semua
-                    </button>
-                    <button class="chip-btn" data-tag="illustrator" onclick="handleChipFilter('illustrator', this)">
-                        <i class="fas fa-pen-nib"></i> Adobe Illustrator
-                    </button>
-                    <button class="chip-btn" data-tag="photoshop" onclick="handleChipFilter('photoshop', this)">
-                        <i class="fas fa-image"></i> Adobe Photoshop
-                    </button>
-                    <button class="chip-btn" data-tag="flash" onclick="handleChipFilter('flash', this)">
-                        <i class="fas fa-bolt"></i> Adobe Flash
-                    </button>
-                    <button class="chip-btn" data-tag="after" onclick="handleChipFilter('after', this)">
-                        <i class="fas fa-film"></i> Adobe After Effect
-                    </button>
-                    <button class="chip-btn" data-tag="audition" onclick="handleChipFilter('audition', this)">
-                        <i class="fas fa-waveform-lines"></i> Adobe Audition
-                    </button>
-                    <button class="chip-btn" data-tag="corel" onclick="handleChipFilter('corel', this)">
-                        <i class="fas fa-draw-polygon"></i> Corel Draw
-                    </button>
-                    <button class="chip-btn" data-tag="sketchup" onclick="handleChipFilter('sketchup', this)">
-                        <i class="fas fa-cubes"></i> 3D SketchUp
-                    </button>
-                    <button class="chip-btn" data-tag="blender" onclick="handleChipFilter('blender', this)">
-                        <i class="fas fa-shapes"></i> Blender
-                    </button>
-                </div>
+            <!-- Dropdown Filter Tag Dinamis -->
+            <div class="tag-select-wrapper">
+                <select id="tagDropdown" class="tag-select" onchange="handleDropdownFilter(this.value)">
+                    <option value="Semua">Semua Kategori (Memuat...)</option>
+                </select>
+                <i class="fas fa-chevron-down tag-select-icon"></i>
             </div>
 
-            <!-- Total Item Ditemukan -->
-            <div class="results-meta">
-                <span id="resultsCount">Menampilkan portofolio</span>
-                <span id="activeCategoryBadge" style="color: var(--card-cyan);">Filter: Semua</span>
+            <!-- Tombol Cepat Tag Software -->
+            <div class="software-chips-scroll" id="softwareChips">
+                <button class="chip-btn active" onclick="handleChipFilter('', this)"><i class="fas fa-layer-group"></i> Semua</button>
+                <button class="chip-btn" onclick="handleChipFilter('illustrator', this)"><i class="fas fa-pen-nib"></i> Illustrator</button>
+                <button class="chip-btn" onclick="handleChipFilter('photoshop', this)"><i class="fas fa-image"></i> Photoshop</button>
+                <button class="chip-btn" onclick="handleChipFilter('after', this)"><i class="fas fa-film"></i> After Effects</button>
+                <button class="chip-btn" onclick="handleChipFilter('corel', this)"><i class="fas fa-bezier-curve"></i> Corel Draw</button>
+                <button class="chip-btn" onclick="handleChipFilter('sketchup', this)"><i class="fas fa-cube"></i> SketchUp</button>
+                <button class="chip-btn" onclick="handleChipFilter('blender', this)"><i class="fas fa-cubes"></i> Blender</button>
+                <button class="chip-btn" onclick="handleChipFilter('flash', this)"><i class="fas fa-bolt"></i> Flash</button>
+                <button class="chip-btn" onclick="handleChipFilter('audition', this)"><i class="fas fa-waveform"></i> Audition</button>
             </div>
         </div>
 
-        <!-- GALERI 2 GRID FULL POSTER -->
+        <!-- GALERI 2 GRID POSTER -->
         <main class="gallery-2grid" id="galleryGrid">
             <div class="empty-state">
                 <i class="fas fa-spinner fa-spin"></i>
-                <p>Memuat portofolio dari Blogspot...</p>
+                <p>Memuat portofolio...</p>
             </div>
         </main>
     </div>
 
-    <!-- MODAL LIGHTBOX PREVIEW -->
+    <!-- Modal Lightbox Preview -->
     <div class="modal-overlay" id="imageModal" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <!-- Tombol Tutup Silang -->
-            <button class="modal-close-btn" onclick="closeModal()" title="Tutup">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="modal-close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            
+            <!-- Tempat Media Utama (Foto / Player YouTube) -->
+            <div class="modal-media-wrapper" id="modalMediaWrapper"></div>
+            
+            <!-- Bilah Thumbnail Gambar & Video (Di Bawah Media, Tidak Menutupi Foto) -->
+            <div class="modal-thumbs-bar" id="modalThumbsBar" style="display: none;"></div>
 
-            <!-- 1. Viewport Foto Utama -->
-            <div class="modal-viewport">
-                <img id="mainModalImg" src="" alt="Preview Portofolio">
-                <button class="modal-nav-btn modal-nav-prev" id="modalPrevBtn" onclick="navigateModalImage(-1)">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="modal-nav-btn modal-nav-next" id="modalNextBtn" onclick="navigateModalImage(1)">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-                <div class="modal-img-counter" id="modalImgCounter">1 / 1</div>
-            </div>
-
-            <!-- 2. Galeri Strip Thumbnail (Dipisah di Bawah Foto) -->
-            <div class="modal-thumbs-strip" id="modalThumbsStrip" style="display: none;"></div>
-
-            <!-- 3. Detail Teks & Tombol Aksi -->
             <div class="modal-details">
                 <div>
-                    <span id="modalTag" class="card-tag-badge" style="position: relative; top: 0; left: 0; display: inline-block; margin-bottom: 6px;">Category</span>
-                    <h2 id="modalTitle" style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; color: var(--text-main);">Judul Project</h2>
+                    <span id="modalTag" class="card-tag-badge">Website</span>
+                    <h2 id="modalTitle" style="font-size: 1.15rem; font-weight: 800; margin-top: 6px; margin-bottom: 4px; color: var(--text-main);">Judul Project</h2>
                     <p id="modalSubTitle" style="font-size: 0.88rem; font-weight: 800; color: var(--card-cyan); margin-bottom: 8px;">Sub Judul</p>
-                    <p id="modalDesc" style="font-size: 0.82rem; white-space: pre-line; line-height: 1.5; color: var(--text-muted);">Deskripsi Project</p>
+                    <p id="modalDesc" style="font-size: 0.82rem; white-space: pre-line; line-height: 1.45; color: var(--text-muted);">Deskripsi Project</p>
                 </div>
                 
                 <div class="btn-action-group">
                     <a id="modalDemoBtn" href="#" target="_blank" class="btn-demo-link" style="display: none;">
                         <i class="fas fa-external-link-alt"></i>
-                        <span>Buka Postingan Asli</span>
+                        <span>Buka Halaman Artikel</span>
                     </a>
                     <a id="modalWaBtn" href="#" target="_blank" class="btn-order-wa">
                         <i class="fab fa-whatsapp"></i>
@@ -916,14 +810,24 @@
         const WHATSAPP_NUMBER = '6285155091238';
 
         let portfolioItems = [];
-        let allCategories = [];
-        let currentFilter = "Semua";
+        let currentSelectedCategory = "Semua";
+        let currentChipSoftware = "";
 
-        // State Modal Aktif
-        let currentModalItem = null;
-        let currentModalImageIndex = 0;
+        // Fungsi ekstrak ID YouTube dari link biasa atau iframe
+        function extractYouTubeId(htmlText) {
+            if (!htmlText) return null;
+            // 1. Cek iframe src youtube
+            const iframeMatch = htmlText.match(/src=["'](?:https?:)?\/\/(?:www\.)?(?:youtube\.com\/(?:embed\/|watch\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
+            if (iframeMatch && iframeMatch[1]) return iframeMatch[1];
 
-        // Callback JSONP Resmi dari Blogger (Bebas Masalah CORS)
+            // 2. Cek link youtube biasa
+            const urlMatch = htmlText.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
+            if (urlMatch && urlMatch[1]) return urlMatch[1];
+
+            return null;
+        }
+
+        // Callback resmi JSONP dari Blogger (Bebas CORS)
         function onBloggerFeedLoaded(data) {
             try {
                 const entries = data.feed.entry || [];
@@ -936,32 +840,35 @@
                 portfolioItems = entries.map((entry, index) => {
                     const judul = entry.title && entry.title.$t ? entry.title.$t : 'Project Portofolio';
                     
-                    // Ambil Semua Label / Kategori
-                    const labels = entry.category ? entry.category.map(c => c.term.trim()) : ['Portfolio'];
+                    const labels = entry.category ? entry.category.map(c => c.term) : ['Portfolio'];
                     const kategori = labels[0] || 'Portfolio';
                     const subJudul = labels.slice(1).join(', ');
 
-                    // Parsing HTML Konten Blogspot
                     const htmlContent = entry.content ? entry.content.$t : (entry.summary ? entry.summary.$t : '');
+
+                    // Deteksi Video YouTube
+                    const youtubeId = extractYouTubeId(htmlContent);
+
+                    // Parsing Foto
                     const parserDiv = document.createElement('div');
                     parserDiv.innerHTML = htmlContent;
 
-                    // Ekstrak Semua Foto
                     const imgElements = Array.from(parserDiv.querySelectorAll('img'));
                     let photos = imgElements.map(img => {
                         let src = img.src || '';
-                        // Konversi thumbnail bawaan blogger ke resolusi asli
                         if (src.includes('/s72-c/') || src.includes('/w72-h72-p-k-no-nu/')) {
                             src = src.replace(/\/s72-c\/|\/w72-h72-p-k-no-nu\//, '/s1600/');
                         }
                         return src;
                     }).filter(src => src.length > 0);
 
-                    if (photos.length === 0) {
+                    // Jika tidak ada gambar tapi ada video YouTube, gunakan thumbnail HQ YouTube
+                    if (photos.length === 0 && youtubeId) {
+                        photos = [`https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`];
+                    } else if (photos.length === 0) {
                         photos = ['https://via.placeholder.com/1080x1440?text=No+Image'];
                     }
 
-                    // Teks deskripsi bersih
                     const deskripsi = parserDiv.textContent.trim() || '';
                     const permalink = (entry.link.find(l => l.rel === 'alternate') || {}).href || '#';
 
@@ -969,83 +876,76 @@
                         id: index,
                         judul: judul,
                         subJudul: subJudul,
+                        labels: labels,
                         kategori: kategori,
-                        allTags: labels,
                         deskripsi: deskripsi,
                         photos: photos,
                         mainPhoto: photos[0],
+                        youtubeId: youtubeId,
                         linkDemo: permalink
                     };
                 });
 
-                populateDropdownCategories();
-                applyFilterAndSearch();
+                populateTagDropdown();
+                applyAllFilters();
 
             } catch (error) {
-                console.error("Gagal memproses feed Blogspot:", error);
+                console.error("Gagal memproses data feed:", error);
                 renderEmpty("Terjadi kesalahan saat memproses data portofolio.");
             }
         }
 
-        // Memuat Feed via JSONP
         function loadBlogspotFeed() {
             const script = document.createElement('script');
             script.src = 'https://oinkproject.blogspot.com/feeds/posts/default?alt=json-in-script&callback=onBloggerFeedLoaded&max-results=50';
             script.onerror = function() {
-                renderEmpty("Gagal memuat feed portofolio. Pastikan blogspot aktif dan sudah ada artikel yang terbit.");
+                renderEmpty("Gagal memuat feed portofolio. Pastikan alamat blogspot benar dan sudah ada postingan.");
             };
             document.body.appendChild(script);
         }
 
-        // Isi Opsi Dropdown Kategori Berdasarkan Tag Blogspot
-        function populateDropdownCategories() {
-            const select = document.getElementById('categorySelect');
-            
-            const tagsSet = new Set();
+        // Isi Dropdown Tag Otomatis dari Label Blogspot
+        function populateTagDropdown() {
+            const dropdown = document.getElementById('tagDropdown');
+            const tagCounts = {};
+
             portfolioItems.forEach(item => {
-                if (item.allTags && Array.isArray(item.allTags)) {
-                    item.allTags.forEach(tag => tagsSet.add(tag));
-                } else if (item.kategori) {
-                    tagsSet.add(item.kategori);
-                }
+                item.labels.forEach(lbl => {
+                    const cleanLabel = lbl.trim();
+                    if (!cleanLabel) return;
+                    tagCounts[cleanLabel] = (tagCounts[cleanLabel] || 0) + 1;
+                });
             });
 
-            allCategories = Array.from(tagsSet).sort();
+            const uniqueTags = Object.keys(tagCounts).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
 
-            let optionsHtml = `<option value="Semua">Semua Kategori (${portfolioItems.length} Karya)</option>`;
-            
-            allCategories.forEach(tag => {
-                const count = portfolioItems.filter(item => 
-                    item.allTags.some(t => t.toLowerCase() === tag.toLowerCase())
-                ).length;
-                optionsHtml += `<option value="${tag}">${tag} (${count})</option>`;
+            let optionsHtml = `<option value="Semua">Semua Kategori (${portfolioItems.length})</option>`;
+            uniqueTags.forEach(tag => {
+                optionsHtml += `<option value="${tag}">${tag} (${tagCounts[tag]})</option>`;
             });
 
-            select.innerHTML = optionsHtml;
+            dropdown.innerHTML = optionsHtml;
         }
 
         function renderGallery(items) {
             const grid = document.getElementById('galleryGrid');
-            const countEl = document.getElementById('resultsCount');
-            
-            if (countEl) {
-                countEl.innerText = `Ditemukan: ${items.length} karya`;
-            }
-
             if (items.length === 0) {
-                renderEmpty("Tidak ada portofolio yang cocok dengan pencarian.");
+                renderEmpty("Tidak ada portofolio yang cocok dengan pencarian / kategori.");
                 return;
             }
 
             let html = '';
             items.forEach(item => {
-                const waText = encodeURIComponent(`Halo Oink Project, saya tertarik pesan desain/website seperti: ${item.judul}`);
+                const waText = encodeURIComponent(`Halo Oink Project, saya tertarik order karya seperti: ${item.judul}`);
                 const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
+
+                // Badge video jika ada YouTube
+                const videoBadge = item.youtubeId ? `<span class="card-video-badge"><i class="fas fa-play"></i> Video</span>` : '';
 
                 html += `
                     <div class="portfolio-card" onclick="openModal(${item.id})">
                         <div class="card-img-wrapper">
-                            <span class="card-tag-badge">${item.kategori}</span>
+                            ${videoBadge}
                             <img src="${item.mainPhoto}" alt="${item.judul}" loading="lazy" onerror="this.src='https://via.placeholder.com/1080x1440?text=Image+Error'">
                             <a href="${waUrl}" target="_blank" onclick="event.stopPropagation()" class="card-wa-btn" title="Pesan via WhatsApp">
                                 <i class="fab fa-whatsapp"></i>
@@ -1066,93 +966,70 @@
             `;
         }
 
-        // Handler saat user mengklik Tombol Preset Software
-        function handleChipFilter(tagKey, btnElement) {
-            currentFilter = tagKey;
-            
-            // Update status aktif tombol chip
+        function handleDropdownFilter(category) {
+            currentSelectedCategory = category;
+            applyAllFilters();
+        }
+
+        function handleChipFilter(softwareTag, btnEl) {
+            currentChipSoftware = softwareTag.toLowerCase();
             document.querySelectorAll('.chip-btn').forEach(btn => btn.classList.remove('active'));
-            if (btnElement) btnElement.classList.add('active');
-
-            // Sinkronkan ke Dropdown jika ada opsi yang cocok
-            const select = document.getElementById('categorySelect');
-            let matchedOption = false;
-            for (let i = 0; i < select.options.length; i++) {
-                if (select.options[i].value.toLowerCase().includes(tagKey.toLowerCase())) {
-                    select.selectedIndex = i;
-                    matchedOption = true;
-                    break;
-                }
-            }
-            if (!matchedOption && tagKey === 'Semua') {
-                select.selectedIndex = 0;
-            }
-
-            updateFilterBadge(tagKey);
-            applyFilterAndSearch();
-        }
-
-        // Handler saat user memilih dari dropdown
-        function handleDropdownFilter(selectedValue) {
-            currentFilter = selectedValue;
-
-            // Sinkronkan ke chip jika cocok
-            document.querySelectorAll('.chip-btn').forEach(btn => {
-                const chipTag = btn.getAttribute('data-tag');
-                if (selectedValue.toLowerCase().includes(chipTag.toLowerCase()) || (selectedValue === "Semua" && chipTag === "Semua")) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-
-            updateFilterBadge(selectedValue);
-            applyFilterAndSearch();
-        }
-
-        function updateFilterBadge(title) {
-            const badge = document.getElementById('activeCategoryBadge');
-            if (badge) {
-                badge.innerText = `Filter: ${title}`;
-            }
+            if (btnEl) btnEl.classList.add('active');
+            applyAllFilters();
         }
 
         function handleSearch() {
-            applyFilterAndSearch();
+            applyAllFilters();
         }
 
-        // Pencocokan Filter Gabungan (Case-Insensitive untuk Software Preset)
-        function applyFilterAndSearch() {
-            const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
-            const filterKey = currentFilter.toLowerCase().trim();
-            
-            const filtered = portfolioItems.filter(item => {
-                // Pencocokan Kategori (Support substring & case-insensitive)
-                const matchCategory = (filterKey === "semua") || 
-                    item.allTags.some(t => t.toLowerCase().includes(filterKey)) ||
-                    item.kategori.toLowerCase().includes(filterKey);
+        function applyAllFilters() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
 
-                // Pencocokan Kata Kunci Pencarian
-                const matchQuery = !query || 
+            const filtered = portfolioItems.filter(item => {
+                // 1. Cocokkan Dropdown Kategori
+                const matchDropdown = (currentSelectedCategory === "Semua") || 
+                    item.labels.some(l => l.toLowerCase() === currentSelectedCategory.toLowerCase());
+
+                // 2. Cocokkan Tombol Chip Software
+                const matchChip = (!currentChipSoftware) || 
+                    item.labels.some(l => l.toLowerCase().includes(currentChipSoftware)) ||
+                    item.judul.toLowerCase().includes(currentChipSoftware) ||
+                    item.deskripsi.toLowerCase().includes(currentChipSoftware);
+
+                // 3. Cocokkan Kolom Pencarian
+                const matchQuery = (!query) ||
                     item.judul.toLowerCase().includes(query) || 
                     item.subJudul.toLowerCase().includes(query) || 
-                    item.kategori.toLowerCase().includes(query) || 
                     item.deskripsi.toLowerCase().includes(query) ||
-                    item.allTags.some(t => t.toLowerCase().includes(query));
+                    item.labels.some(l => l.toLowerCase().includes(query));
 
-                return matchCategory && matchQuery;
+                return matchDropdown && matchChip && matchQuery;
             });
 
             renderGallery(filtered);
         }
 
-        // MODAL LIGHTBOX PREVIEW BERSIH TANPA MENUTUPI FOTO
+        // Tampilkan Media Utama di Modal (Bisa Video YouTube atau Foto)
+        function showModalMedia(type, source) {
+            const wrapper = document.getElementById('modalMediaWrapper');
+            if (type === 'video') {
+                wrapper.innerHTML = `
+                    <div class="modal-video-container">
+                        <iframe src="https://www.youtube.com/embed/${source}?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                `;
+            } else {
+                wrapper.innerHTML = `
+                    <div class="modal-img-container">
+                        <img id="mainModalImg" src="${source}" alt="Preview Foto">
+                    </div>
+                `;
+            }
+        }
+
         function openModal(id) {
             const item = portfolioItems.find(p => p.id === id);
             if (!item) return;
-
-            currentModalItem = item;
-            currentModalImageIndex = 0;
 
             const tag = document.getElementById('modalTag');
             const title = document.getElementById('modalTitle');
@@ -1160,6 +1037,7 @@
             const desc = document.getElementById('modalDesc');
             const waBtn = document.getElementById('modalWaBtn');
             const demoBtn = document.getElementById('modalDemoBtn');
+            const thumbsBar = document.getElementById('modalThumbsBar');
 
             tag.innerText = item.kategori;
             title.innerText = item.judul;
@@ -1173,34 +1051,40 @@
 
             desc.innerText = item.deskripsi || '-';
 
-            // Siapkan Galeri Thumbnail di Area Bawah Foto
-            const thumbsStrip = document.getElementById('modalThumbsStrip');
-            const prevBtn = document.getElementById('modalPrevBtn');
-            const nextBtn = document.getElementById('modalNextBtn');
-
-            if (item.photos.length > 1) {
-                thumbsStrip.style.display = 'flex';
-                prevBtn.style.display = 'flex';
-                nextBtn.style.display = 'flex';
-
-                let thumbsHtml = '';
-                item.photos.forEach((photo, idx) => {
-                    thumbsHtml += `
-                        <div class="modal-thumb-box ${idx === 0 ? 'active' : ''}" onclick="selectModalImage(${idx})">
-                            <img src="${photo}" alt="Thumbnail ${idx + 1}">
-                        </div>
-                    `;
-                });
-                thumbsStrip.innerHTML = thumbsHtml;
+            // Jika ada YouTube, tampilkan player YouTube secara default
+            if (item.youtubeId) {
+                showModalMedia('video', item.youtubeId);
             } else {
-                thumbsStrip.style.display = 'none';
-                prevBtn.style.display = 'none';
-                nextBtn.style.display = 'none';
+                showModalMedia('image', item.photos[0]);
             }
 
-            updateModalImageView();
+            // Susun Thumbnail Galeri (Foto & Icon Video YouTube)
+            let thumbsHtml = '';
+            
+            if (item.youtubeId) {
+                thumbsHtml += `
+                    <div class="thumb-video-icon active" onclick="switchMediaTab('video', '${item.youtubeId}', this)" title="Putar Video YouTube">
+                        <i class="fas fa-play"></i>
+                    </div>
+                `;
+            }
 
-            // Link Demo / Blogspot
+            item.photos.forEach((photo, idx) => {
+                const isActive = (!item.youtubeId && idx === 0) ? 'active' : '';
+                thumbsHtml += `
+                    <img src="${photo}" class="thumb-preview-item ${isActive}" onclick="switchMediaTab('image', '${photo}', this)" alt="Thumbnail ${idx + 1}">
+                `;
+            });
+
+            // Tampilkan thumbs bar jika ada video + gambar, atau lebih dari 1 gambar
+            const totalMediaCount = (item.youtubeId ? 1 : 0) + item.photos.length;
+            if (totalMediaCount > 1) {
+                thumbsBar.innerHTML = thumbsHtml;
+                thumbsBar.style.display = 'flex';
+            } else {
+                thumbsBar.style.display = 'none';
+            }
+
             if (item.linkDemo && item.linkDemo.length > 5 && item.linkDemo !== '#') {
                 demoBtn.href = item.linkDemo;
                 demoBtn.style.display = 'flex';
@@ -1208,64 +1092,29 @@
                 demoBtn.style.display = 'none';
             }
 
-            // WhatsApp Button
-            const waText = encodeURIComponent(`Halo Oink Project, saya tertarik pesan desain/website seperti: ${item.judul}`);
+            const waText = encodeURIComponent(`Halo Oink Project, saya tertarik pesan desain/video seperti: ${item.judul}`);
             waBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 
             document.getElementById('imageModal').classList.add('active');
         }
 
-        function updateModalImageView() {
-            if (!currentModalItem) return;
-
-            const mainImg = document.getElementById('mainModalImg');
-            const counter = document.getElementById('modalImgCounter');
-            
-            mainImg.src = currentModalItem.photos[currentModalImageIndex];
-            counter.innerText = `${currentModalImageIndex + 1} / ${currentModalItem.photos.length}`;
-
-            // Perbarui status aktif thumbnail
-            const thumbBoxes = document.querySelectorAll('.modal-thumb-box');
-            thumbBoxes.forEach((box, idx) => {
-                if (idx === currentModalImageIndex) {
-                    box.classList.add('active');
-                    box.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                } else {
-                    box.classList.remove('active');
-                }
-            });
-        }
-
-        function selectModalImage(index) {
-            currentModalImageIndex = index;
-            updateModalImageView();
-        }
-
-        function navigateModalImage(direction) {
-            if (!currentModalItem || currentModalItem.photos.length <= 1) return;
-            
-            currentModalImageIndex += direction;
-            if (currentModalImageIndex < 0) {
-                currentModalImageIndex = currentModalItem.photos.length - 1;
-            } else if (currentModalImageIndex >= currentModalItem.photos.length) {
-                currentModalImageIndex = 0;
-            }
-
-            updateModalImageView();
+        function switchMediaTab(type, source, el) {
+            showModalMedia(type, source);
+            document.querySelectorAll('.thumb-preview-item, .thumb-video-icon').forEach(t => t.classList.remove('active'));
+            if (el) el.classList.add('active');
         }
 
         function closeModal() {
-            document.getElementById('imageModal').classList.remove('active');
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            // Hentikan video saat modal ditutup
+            document.getElementById('modalMediaWrapper').innerHTML = '';
         }
 
         function copyCurrentCategoryLink() {
-            const dummy = document.createElement('input');
-            document.body.appendChild(dummy);
-            dummy.value = window.location.href;
-            dummy.select();
-            document.execCommand('copy');
-            document.body.removeChild(dummy);
-            showToast("Link portofolio berhasil disalin!");
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast("Link portofolio berhasil disalin!");
+            });
         }
 
         function showToast(msg) {
@@ -1275,15 +1124,6 @@
             setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
-        // Listener Keyboard untuk navigasi modal (Arrow & Esc)
-        document.addEventListener('keydown', (e) => {
-            if (!document.getElementById('imageModal').classList.contains('active')) return;
-            if (e.key === 'Escape') closeModal();
-            if (e.key === 'ArrowLeft') navigateModalImage(-1);
-            if (e.key === 'ArrowRight') navigateModalImage(1);
-        });
-
-        // Jalankan pemuatan data saat DOM siap
         document.addEventListener('DOMContentLoaded', loadBlogspotFeed);
     </script>
 </body>
